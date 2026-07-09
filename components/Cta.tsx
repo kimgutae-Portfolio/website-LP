@@ -53,6 +53,16 @@ export function Cta() {
             <ContactForm />
           </div>
         </div>
+
+        <p className="mt-8 text-center text-sm text-white/80">
+          メールでのご相談も受け付けています:{" "}
+          <a
+            href={`mailto:${contact.email}`}
+            className="font-bold text-white underline underline-offset-4"
+          >
+            {contact.email}
+          </a>
+        </p>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { siteConfig } from "@/site.config";
 import { LineIcon } from "./icons";
+import { Logo } from "./Logo";
 
 const navItems = [
   { href: "#price", label: "料金" },
@@ -11,8 +12,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <a href="#top" className="text-lg font-bold text-primary">
-          {siteConfig.meta.siteName}
+        <a href="#top" aria-label={siteConfig.meta.siteName}>
+          <Logo />
         </a>
         <div className="flex items-center gap-6">
           <nav className="hidden items-center gap-6 md:flex" aria-label="ページ内リンク">

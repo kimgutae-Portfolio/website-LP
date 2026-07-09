@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 /**
  * デモA: 介護施設 — 安心・信頼パターン
- * やわらかい配色・大きな文字・情報を整理して伝えるレイアウト
+ * 左寄せ2カラムのヒーロー、カード中心の「情報整理型」レイアウト
  */
 
 const news = [
@@ -50,13 +50,15 @@ const overview = [
   ["電話", "072-000-0000"],
 ];
 
+const chips = ["送迎あり", "入浴・機能訓練", "見学いつでも歓迎"];
+
 export default function NozomiDemo() {
   return (
     <DemoShell>
       <div className="bg-white text-slate-800" style={{ fontSize: "17px" }}>
         {/* ヘッダー */}
         <header className="border-b border-sky-100 bg-white">
-          <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-4">
+          <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
             <p className="text-lg font-bold text-sky-700">デイサービスのぞみ</p>
             <a
               href="#contact"
@@ -67,22 +69,40 @@ export default function NozomiDemo() {
           </div>
         </header>
 
-        {/* ヒーロー */}
+        {/* ヒーロー: 左寄せ2カラム */}
         <section className="bg-sky-50">
-          <div className="mx-auto max-w-4xl px-5 py-14 text-center sm:py-20">
-            <p className="mb-3 text-sm font-bold tracking-widest text-sky-600">
-              堺市の通所介護（デイサービス）
-            </p>
-            <h1 className="text-3xl font-bold leading-snug text-slate-900 sm:text-4xl">
-              家族のように、
-              <br className="sm:hidden" />
-              あたたかく。
-            </h1>
-            <p className="mx-auto mt-5 max-w-xl leading-relaxed text-slate-600">
-              デイサービスのぞみは、ご利用者さまの「できること」を大切にする、
-              定員25名の小さなデイサービスです。見学はいつでも歓迎です。
-            </p>
-            <NozomiHeroIllust className="mx-auto mt-8 block h-52 w-full max-w-2xl rounded-2xl sm:h-64" />
+          <div className="mx-auto grid max-w-5xl items-center gap-10 px-5 py-14 sm:grid-cols-[1.1fr_1fr] sm:py-20">
+            <div>
+              <p className="mb-3 text-sm font-bold tracking-widest text-sky-600">
+                堺市の通所介護（デイサービス）
+              </p>
+              <h1 className="text-3xl font-bold leading-snug text-slate-900 sm:text-4xl">
+                家族のように、
+                <br />
+                あたたかく。
+              </h1>
+              <p className="mt-5 max-w-xl leading-relaxed text-slate-600">
+                デイサービスのぞみは、ご利用者さまの「できること」を大切にする、
+                定員25名の小さなデイサービスです。
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {chips.map((chip) => (
+                  <span
+                    key={chip}
+                    className="rounded-full border border-sky-200 bg-white px-4 py-1.5 text-sm font-bold text-sky-700"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+              <a
+                href="#contact"
+                className="mt-8 inline-block rounded-full bg-sky-600 px-8 py-4 text-lg font-bold text-white shadow-md transition hover:bg-sky-700"
+              >
+                見学のご予約はこちら
+              </a>
+            </div>
+            <NozomiHeroIllust className="block h-56 w-full rounded-2xl sm:h-72" />
           </div>
         </section>
 

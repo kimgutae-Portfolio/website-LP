@@ -149,7 +149,7 @@ export function LuceStylistIllust({ className = "" }: IllustProps) {
 }
 
 /* ------------------------------------------------------------
- * まる田（飲食店）: 생선구이 정식 + 젓가락 + 술병
+ * 吉田（飲食店）: 생선구이 정식 + 젓가락 + 술병
  * ---------------------------------------------------------- */
 export function MarutaHeroIllust({ className = "" }: IllustProps) {
   return (
@@ -198,7 +198,7 @@ export function MarutaHeroIllust({ className = "" }: IllustProps) {
   );
 }
 
-/* まる田: 메뉴 카드용 요리 일러스트 3종 */
+/* 吉田: 메뉴 카드용 요리 일러스트 3종 */
 export function MarutaDishIllust({
   dish,
   className = "",
@@ -257,7 +257,7 @@ export function MarutaDishIllust({
   );
 }
 
-/* まる田: 점주 아바타 (원형, 하치마키) */
+/* 吉田: 점주 아바타 (원형, 하치마키) */
 export function MarutaOwnerIllust({ className = "" }: IllustProps) {
   return (
     <svg viewBox="0 0 200 200" className={className} {...svgProps}>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Noto_Serif_JP } from "next/font/google";
 import { DemoShell } from "@/components/demo/DemoShell";
 import {
   LuceHeroIllust,
@@ -13,8 +14,14 @@ export const metadata: Metadata = {
 
 /**
  * デモB: 美容室 — 上品・洗練パターン
- * 余白を活かした落ち着いたトーン・メニューと料金が主役のレイアウト
+ * 明朝体（Noto Serif JP）×余白のエディトリアル型レイアウト。
+ * 全面写真の上に名刺カードを重ねるヒーローで、他パターンと構造を変えている。
  */
+const serif = Noto_Serif_JP({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  display: "swap",
+});
 
 const news = [
   ["2026.07.05", "夏季休業のお知らせ：8月13日（木）〜15日（土）はお休みをいただきます。"],
@@ -40,25 +47,30 @@ const info = [
 export default function LuceDemo() {
   return (
     <DemoShell>
-      <div className="bg-[#faf7f2] text-stone-800" style={{ fontSize: "17px" }}>
-        {/* ヒーロー */}
-        <section className="px-5 pb-14 pt-16 text-center sm:pb-20 sm:pt-24">
-          <p className="mb-4 text-xs font-bold tracking-[0.35em] text-rose-400">
-            HAIR SALON
-          </p>
-          <h1 className="text-4xl font-light tracking-[0.25em] text-stone-900 sm:text-5xl">
-            LUCE
-          </h1>
-          <p className="mx-auto mt-6 max-w-md leading-loose text-stone-500">
-            髪を整えると、気持ちも整う。
-            <br />
-            堺の小さな隠れ家サロンです。
-          </p>
-          <LuceHeroIllust className="mx-auto mt-10 block h-56 w-full max-w-3xl sm:h-72" />
+      <div
+        className={`${serif.className} bg-[#faf7f2] text-stone-800`}
+        style={{ fontSize: "17px" }}
+      >
+        {/* ヒーロー: 全面イラスト + 重なる名刺カード */}
+        <section className="pb-14 sm:pb-16">
+          <LuceHeroIllust className="block h-64 w-full sm:h-80" />
+          <div className="relative mx-auto -mt-16 max-w-md border border-stone-200 bg-white px-8 py-9 text-center shadow-sm">
+            <p className="text-xs font-bold tracking-[0.35em] text-rose-400">
+              HAIR SALON
+            </p>
+            <h1 className="mt-3 text-4xl font-light tracking-[0.3em] text-stone-900">
+              LUCE
+            </h1>
+            <p className="mt-5 text-sm leading-loose text-stone-500">
+              髪を整えると、気持ちも整う。
+              <br />
+              堺の小さな隠れ家サロンです。
+            </p>
+          </div>
         </section>
 
         {/* お知らせ */}
-        <section className="bg-white py-14 sm:py-16">
+        <section className="pb-14 sm:pb-16">
           <div className="mx-auto max-w-xl px-5">
             <h2 className="mb-8 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
               NEWS
@@ -80,20 +92,22 @@ export default function LuceDemo() {
         </section>
 
         {/* コンセプト */}
-        <section className="mx-auto max-w-2xl px-5 py-14 text-center sm:py-16">
-          <h2 className="mb-6 text-sm font-bold tracking-[0.3em] text-rose-400">
-            CONCEPT
-          </h2>
-          <p className="leading-loose text-stone-600">
-            マンツーマンの完全予約制。
-            周りを気にせず、ゆっくりと過ごしていただけます。
-            骨格と髪質に合わせた「扱いやすいスタイル」で、
-            毎朝のセットを楽にします。
-          </p>
+        <section className="bg-white py-14 sm:py-20">
+          <div className="mx-auto max-w-2xl px-5 text-center">
+            <h2 className="mb-6 text-sm font-bold tracking-[0.3em] text-rose-400">
+              CONCEPT
+            </h2>
+            <p className="leading-loose text-stone-600">
+              マンツーマンの完全予約制。
+              周りを気にせず、ゆっくりと過ごしていただけます。
+              骨格と髪質に合わせた「扱いやすいスタイル」で、
+              毎朝のセットを楽にします。
+            </p>
+          </div>
         </section>
 
         {/* メニュー */}
-        <section className="bg-white py-14 sm:py-20">
+        <section className="py-14 sm:py-20">
           <div className="mx-auto max-w-xl px-5">
             <h2 className="mb-10 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
               MENU
@@ -115,21 +129,28 @@ export default function LuceDemo() {
           </div>
         </section>
 
-        {/* スタイリスト */}
-        <section className="mx-auto max-w-2xl px-5 py-14 text-center sm:py-20">
-          <h2 className="mb-10 text-sm font-bold tracking-[0.3em] text-rose-400">
-            STYLIST
-          </h2>
-          <LuceStylistIllust className="mx-auto block h-36 w-36 rounded-full" />
-          <p className="mt-5 font-bold text-stone-900">store owner / 佐藤 ひかり</p>
-          <p className="mx-auto mt-3 max-w-md text-[15px] leading-loose text-stone-500">
-            都内サロンで10年勤務ののち、地元の堺で開業。
-            「おまかせ」も大歓迎です。なりたい雰囲気を一緒に見つけましょう。
-          </p>
+        {/* スタイリスト: 横並びカード */}
+        <section className="bg-white py-14 sm:py-20">
+          <div className="mx-auto max-w-2xl px-5">
+            <h2 className="mb-10 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
+              STYLIST
+            </h2>
+            <div className="flex flex-col items-center gap-8 border border-stone-200 bg-[#faf7f2] p-8 text-center sm:flex-row sm:p-10 sm:text-left">
+              <LuceStylistIllust className="block h-36 w-36 shrink-0 rounded-full" />
+              <div>
+                <p className="text-xs tracking-[0.25em] text-rose-400">OWNER STYLIST</p>
+                <p className="mt-1 text-lg font-bold text-stone-900">佐藤 ひかり</p>
+                <p className="mt-3 text-[15px] leading-loose text-stone-500">
+                  都内サロンで10年勤務ののち、地元の堺で開業。
+                  「おまかせ」も大歓迎です。なりたい雰囲気を一緒に見つけましょう。
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* 店舗情報 */}
-        <section className="bg-white py-14 sm:py-20">
+        <section className="py-14 sm:py-20">
           <div className="mx-auto max-w-xl px-5">
             <h2 className="mb-10 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
               INFORMATION
@@ -159,7 +180,7 @@ export default function LuceDemo() {
         </section>
 
         {/* CTA */}
-        <section className="py-14 text-center sm:py-16">
+        <section className="bg-white py-14 text-center sm:py-16">
           <div className="mx-auto max-w-xl px-5">
             <h2 className="text-xl font-bold text-stone-900">
               ご予約は、LINEでどうぞ

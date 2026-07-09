@@ -8,13 +8,13 @@ import {
 import { MapEmbed } from "@/components/MapEmbed";
 
 export const metadata: Metadata = {
-  title: "お食事処 まる田（デモサイト）",
+  title: "お食事処 吉田（デモサイト）",
   robots: { index: false },
 };
 
 /**
  * デモC: 飲食店 — 個性・こだわりパターン
- * 濃色ベース×力強い見出しで、料理と店主のこだわりを主役にするレイアウト
+ * 縦書きの見出し×判子マーク×左罫線見出しの「日本の老舗」型レイアウト
  */
 
 const news = [
@@ -22,6 +22,8 @@ const news = [
   ["2026.07.02", "7月の定休日は毎週水曜です。祝前日は満席になりやすいため、ご予約をおすすめします。"],
   ["2026.06.25", "お持ち帰り（出汁巻き・炊き込みご飯）はじめました。お電話でご予約ください。"],
 ];
+
+const kanjiNumbers = ["壱", "弐", "参"];
 
 const recommends = [
   {
@@ -31,7 +33,7 @@ const recommends = [
     dish: "fish",
   },
   {
-    name: "まる田の出汁巻き",
+    name: "吉田の出汁巻き",
     price: "¥660",
     text: "注文を受けてから一本ずつ巻く、名物の出汁巻き玉子。",
     dish: "tamago",
@@ -52,32 +54,52 @@ const info = [
   ["電話", "072-000-0000"],
 ];
 
+/* 左罫線つき見出し (このデモ共通の見出しスタイル) */
+function BarHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="mb-8 border-l-4 border-amber-400 pl-4 text-2xl font-black text-stone-100">
+      {children}
+    </h2>
+  );
+}
+
 export default function MarutaDemo() {
   return (
     <DemoShell>
       <div className="bg-stone-900 text-stone-100" style={{ fontSize: "17px" }}>
-        {/* ヒーロー */}
-        <section className="px-5 pb-14 pt-16 text-center sm:pb-20 sm:pt-24">
-          <p className="mb-4 text-sm font-bold tracking-[0.3em] text-amber-400">
-            堺・炭火と季節料理
-          </p>
-          <h1 className="text-4xl font-black leading-tight sm:text-5xl">
-            炭火と、
-            <br className="sm:hidden" />
-            季節のさかな。
-          </h1>
-          <p className="mx-auto mt-6 max-w-md leading-loose text-stone-300">
-            お食事処 まる田は、カウンター8席の小さな店です。
-            その日いちばんの魚と、あたたかい家庭の味を。
-          </p>
-          <MarutaHeroIllust className="mx-auto mt-10 block h-56 w-full max-w-3xl rounded-2xl sm:h-72" />
+        {/* ヒーロー: 縦書きの見出し + 判子マーク */}
+        <section className="px-5 pb-14 pt-12 sm:pb-20 sm:pt-16">
+          <div className="mx-auto grid max-w-4xl grid-cols-[1fr_auto] items-start gap-7 sm:gap-14">
+            <div>
+              <p className="mb-4 text-sm font-bold tracking-[0.3em] text-amber-400">
+                堺・炭火と季節料理
+              </p>
+              <MarutaHeroIllust className="block h-52 w-full rounded-2xl sm:h-72" />
+              <p className="mt-6 max-w-xl leading-loose text-stone-300">
+                お食事処 吉田は、カウンター8席の小さな店です。
+                その日いちばんの魚と、あたたかい家庭の味を。
+              </p>
+            </div>
+            <div className="flex flex-col items-center gap-6 pt-1">
+              <h1
+                style={{ writingMode: "vertical-rl" }}
+                className="text-3xl font-black leading-snug tracking-[0.18em] sm:text-5xl"
+              >
+                炭火と、季節のさかな。
+              </h1>
+              <span
+                style={{ writingMode: "vertical-rl" }}
+                className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-red-600/90 text-xl font-black tracking-widest text-red-500"
+              >
+                吉田
+              </span>
+            </div>
+          </div>
         </section>
 
         {/* お知らせ */}
         <section className="mx-auto max-w-2xl px-5 py-14 sm:py-16">
-          <h2 className="mb-8 text-center text-2xl font-black text-amber-400">
-            お知らせ
-          </h2>
+          <BarHeading>お知らせ</BarHeading>
           <ul>
             {news.map(([date, text]) => (
               <li
@@ -96,12 +118,13 @@ export default function MarutaDemo() {
         {/* おすすめ */}
         <section className="bg-stone-950 py-14 sm:py-20">
           <div className="mx-auto max-w-4xl px-5">
-            <h2 className="mb-10 text-center text-2xl font-black text-amber-400">
-              おすすめの一品
-            </h2>
+            <BarHeading>おすすめの一品</BarHeading>
             <div className="grid gap-5 sm:grid-cols-3">
-              {recommends.map((item) => (
-                <div key={item.name} className="overflow-hidden rounded-2xl bg-stone-800">
+              {recommends.map((item, i) => (
+                <div key={item.name} className="relative overflow-hidden rounded-2xl bg-stone-800">
+                  <span className="absolute left-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-amber-400 text-lg font-black text-stone-900">
+                    {kanjiNumbers[i]}
+                  </span>
                   <MarutaDishIllust dish={item.dish} className="block h-36 w-full" />
                   <div className="p-5">
                     <div className="mb-2 flex items-baseline justify-between gap-2">
@@ -121,23 +144,25 @@ export default function MarutaDemo() {
           </div>
         </section>
 
-        {/* こだわり */}
-        <section className="mx-auto max-w-2xl px-5 py-14 text-center sm:py-20">
-          <h2 className="mb-6 text-2xl font-black text-amber-400">店主のこだわり</h2>
-          <MarutaOwnerIllust className="mx-auto block h-32 w-32 rounded-full" />
-          <p className="mt-6 leading-loose text-stone-300">
-            派手なことはできませんが、出汁と炭火だけは誰にも負けません。
-            一人でやっている小さな店です。ゆっくり飲みに来てください。
-          </p>
-          <p className="mt-4 text-sm font-bold text-stone-400">店主・丸田 健一</p>
+        {/* こだわり: 横並び */}
+        <section className="mx-auto max-w-3xl px-5 py-14 sm:py-20">
+          <BarHeading>店主のこだわり</BarHeading>
+          <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start">
+            <MarutaOwnerIllust className="block h-32 w-32 shrink-0 rounded-full" />
+            <div className="text-center sm:text-left">
+              <p className="leading-loose text-stone-300">
+                派手なことはできませんが、出汁と炭火だけは誰にも負けません。
+                一人でやっている小さな店です。ゆっくり飲みに来てください。
+              </p>
+              <p className="mt-4 text-sm font-bold text-stone-400">店主・吉田 健一</p>
+            </div>
+          </div>
         </section>
 
         {/* 店舗情報 */}
         <section className="bg-stone-950 py-14 sm:py-20">
           <div className="mx-auto max-w-xl px-5">
-            <h2 className="mb-10 text-center text-2xl font-black text-amber-400">
-              店舗情報
-            </h2>
+            <BarHeading>店舗情報</BarHeading>
             <dl>
               {info.map(([label, value]) => (
                 <div
@@ -153,7 +178,7 @@ export default function MarutaDemo() {
             </dl>
             <MapEmbed
               query="大阪府堺市"
-              title="お食事処 まる田周辺の地図"
+              title="お食事処 吉田周辺の地図"
               className="mt-6 block h-56 w-full rounded-2xl"
             />
             <p className="mt-2 text-xs text-stone-500">
@@ -176,7 +201,7 @@ export default function MarutaDemo() {
         </section>
 
         <footer className="border-t border-stone-800 py-6 text-center text-sm text-stone-500">
-          © 2026 お食事処 まる田（架空の店舗）
+          © 2026 お食事処 吉田（架空の店舗）
         </footer>
       </div>
     </DemoShell>
