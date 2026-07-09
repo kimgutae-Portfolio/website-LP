@@ -17,6 +17,12 @@ export const metadata: Metadata = {
  * 濃色ベース×力強い見出しで、料理と店主のこだわりを主役にするレイアウト
  */
 
+const news = [
+  ["2026.07.07", "鱧（はも）の湯引き、はじめました。夏の間だけのお楽しみです。"],
+  ["2026.07.02", "7月の定休日は毎週水曜です。祝前日は満席になりやすいため、ご予約をおすすめします。"],
+  ["2026.06.25", "お持ち帰り（出汁巻き・炊き込みご飯）はじめました。お電話でご予約ください。"],
+];
+
 const recommends = [
   {
     name: "炭火焼き 本日の魚",
@@ -65,6 +71,26 @@ export default function MarutaDemo() {
             その日いちばんの魚と、あたたかい家庭の味を。
           </p>
           <MarutaHeroIllust className="mx-auto mt-10 block h-56 w-full max-w-3xl rounded-2xl sm:h-72" />
+        </section>
+
+        {/* お知らせ */}
+        <section className="mx-auto max-w-2xl px-5 py-14 sm:py-16">
+          <h2 className="mb-8 text-center text-2xl font-black text-amber-400">
+            お知らせ
+          </h2>
+          <ul>
+            {news.map(([date, text]) => (
+              <li
+                key={date}
+                className="flex flex-col gap-1 border-b border-stone-800 py-4 last:border-b-0 sm:flex-row sm:gap-6"
+              >
+                <time className="shrink-0 text-sm font-bold tracking-wider text-amber-400">
+                  {date}
+                </time>
+                <p className="text-[15px] leading-relaxed text-stone-300">{text}</p>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* おすすめ */}

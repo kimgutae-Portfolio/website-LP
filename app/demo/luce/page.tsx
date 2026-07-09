@@ -16,6 +16,12 @@ export const metadata: Metadata = {
  * 余白を活かした落ち着いたトーン・メニューと料金が主役のレイアウト
  */
 
+const news = [
+  ["2026.07.05", "夏季休業のお知らせ：8月13日（木）〜15日（土）はお休みをいただきます。"],
+  ["2026.06.20", "7月限定でヘッドスパが¥2,200に。ご予約時に「HPを見た」とお伝えください。"],
+  ["2026.06.01", "ホームページを公開しました。ご予約はLINEからどうぞ。"],
+];
+
 const menu = [
   ["カット", "¥4,400"],
   ["カット + カラー", "¥9,900"],
@@ -49,6 +55,28 @@ export default function LuceDemo() {
             堺の小さな隠れ家サロンです。
           </p>
           <LuceHeroIllust className="mx-auto mt-10 block h-56 w-full max-w-3xl sm:h-72" />
+        </section>
+
+        {/* お知らせ */}
+        <section className="bg-white py-14 sm:py-16">
+          <div className="mx-auto max-w-xl px-5">
+            <h2 className="mb-8 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
+              NEWS
+            </h2>
+            <ul>
+              {news.map(([date, text]) => (
+                <li
+                  key={date}
+                  className="flex flex-col gap-1 border-b border-dotted border-stone-300 py-4 last:border-b-0 sm:flex-row sm:gap-6"
+                >
+                  <time className="shrink-0 text-sm font-bold tracking-wider text-rose-400">
+                    {date}
+                  </time>
+                  <p className="text-[15px] leading-relaxed text-stone-600">{text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         {/* コンセプト */}

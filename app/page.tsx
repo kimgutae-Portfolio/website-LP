@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Pain } from "@/components/Pain";
+import { Promises } from "@/components/Promises";
 import { Demo } from "@/components/Demo";
 import { Pricing } from "@/components/Pricing";
 import { Flow } from "@/components/Flow";
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <Pain />
+        <Promises />
         <Demo />
         <Pricing />
         <Flow />

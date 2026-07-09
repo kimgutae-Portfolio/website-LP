@@ -13,6 +13,12 @@ export const metadata: Metadata = {
  * やわらかい配色・大きな文字・情報を整理して伝えるレイアウト
  */
 
+const news = [
+  ["2026.07.01", "お知らせ", "7月の営業日のご案内。祝日（7/20 海の日）も通常どおり営業します。"],
+  ["2026.06.16", "イベント", "夏祭りレクリエーションを開催しました。写真を掲示板に貼り出しています。"],
+  ["2026.06.02", "お知らせ", "見学は随時受け付けています。お電話でお気軽にご予約ください。"],
+];
+
 const features = [
   {
     title: "送迎つきで安心",
@@ -78,6 +84,29 @@ export default function NozomiDemo() {
             </p>
             <NozomiHeroIllust className="mx-auto mt-8 block h-52 w-full max-w-2xl rounded-2xl sm:h-64" />
           </div>
+        </section>
+
+        {/* お知らせ */}
+        <section className="mx-auto max-w-3xl px-5 py-14 sm:py-16">
+          <h2 className="mb-6 text-center text-2xl font-bold text-slate-900">
+            お知らせ
+          </h2>
+          <ul className="overflow-hidden rounded-2xl border border-slate-200">
+            {news.map(([date, tag, text]) => (
+              <li
+                key={date}
+                className="flex flex-col gap-1.5 border-b border-slate-200 p-5 last:border-b-0 sm:flex-row sm:items-center sm:gap-4"
+              >
+                <span className="flex shrink-0 items-center gap-3">
+                  <time className="text-sm font-bold text-sky-600">{date}</time>
+                  <span className="rounded-full bg-sky-50 px-3 py-0.5 text-xs font-bold text-sky-700">
+                    {tag}
+                  </span>
+                </span>
+                <p className="text-[15px] leading-relaxed text-slate-700">{text}</p>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* 特徴 */}

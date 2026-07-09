@@ -27,6 +27,25 @@ export function ExternalIcon({ className = "h-4 w-4" }: { className?: string }) 
   );
 }
 
+export function ChartIcon({ className = "h-6 w-6" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M3 21h18" />
+      <path d="M7 17V9" />
+      <path d="M12 17V4" />
+      <path d="M17 17v-6" />
+    </svg>
+  );
+}
+
+export function BoltIcon({ className = "h-6 w-6" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
+    </svg>
+  );
+}
+
 export function PersonIcon({ className = "h-12 w-12" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
