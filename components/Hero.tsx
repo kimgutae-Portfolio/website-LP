@@ -1,6 +1,7 @@
 import { siteConfig } from "@/site.config";
 import { LineCta } from "./LineCta";
 import { CheckIcon } from "./icons";
+import { jaPhrases } from "./jaText";
 
 // 히어로 우측: 스마트폰 목업 (이미지 없이 CSS로 구성 — "스마트폰에서 완벽"의 시각화)
 function PhoneMockup() {
@@ -53,11 +54,13 @@ export function Hero() {
             ))}
           </div>
           <h1 className="text-3xl font-bold leading-snug text-slate-900 sm:text-4xl sm:leading-snug">
-            <span className="mb-1 block text-primary">{hero.catchTop}</span>
-            {hero.catchMain}
+            <span className="mb-1 block text-primary">
+              {jaPhrases(hero.catchTop)}
+            </span>
+            {jaPhrases(hero.catchMain)}
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-slate-600">
-            {hero.sub}
+            {jaPhrases(hero.sub, 17)}
           </p>
           <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <LineCta />
@@ -69,9 +72,9 @@ export function Hero() {
             </a>
           </div>
           <p className="mt-5 text-sm text-slate-500">
-            月額5,500円（税込）・初期費用0円。
+            {jaPhrases("月額5,500円（税込）・初期費用0円。", 20)}
             {siteConfig.pricing.campaign.enabled && (
-              <span className="font-bold text-accent">
+              <span className="inline-block font-bold text-accent">
                 {" "}
                 {siteConfig.pricing.campaign.label}
               </span>

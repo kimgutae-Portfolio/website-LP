@@ -52,11 +52,13 @@ export function Pricing() {
           </div>
         </div>
 
-        {/* 화살표 연결 표시 */}
+        {/* 화살표 연결 표시 (장식선은 모바일에서 숨겨 줄바꿈 깨짐 방지) */}
         <div className="mx-auto my-6 flex max-w-2xl items-center justify-center gap-2 text-slate-400">
-          <span className="h-px w-10 bg-slate-300" />
-          <span className="text-sm font-medium">ページを増やしたい・機能を追加したい方へ</span>
-          <span className="h-px w-10 bg-slate-300" />
+          <span className="hidden h-px w-10 bg-slate-300 sm:block" />
+          <span className="text-center text-sm font-medium">
+            ページを増やしたい・機能を追加したい方へ
+          </span>
+          <span className="hidden h-px w-10 bg-slate-300 sm:block" />
         </div>
 
         {/* 2단계 플랜 카드 (초기비용 청구형) */}
@@ -67,8 +69,11 @@ export function Pricing() {
           <h3 className="mb-6 text-center text-xl font-bold text-slate-900">
             {secondPlan.name}
           </h3>
+          {/* 라벨을 위로 분리 — 모바일 폭에서 가격 행이 밀려 깨지는 것 방지 */}
+          <p className="mb-1 text-center text-lg font-bold text-slate-600">
+            初期費用
+          </p>
           <div className="mb-1 flex items-end justify-center gap-1.5">
-            <span className="text-lg font-bold text-slate-600">初期費用</span>
             <span className="text-5xl font-black tracking-tight text-slate-800 sm:text-6xl">
               {secondPlan.initialCost}
             </span>

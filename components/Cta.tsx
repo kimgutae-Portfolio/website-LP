@@ -55,7 +55,7 @@ export function Cta() {
         </div>
 
         <p className="mt-8 text-center text-sm text-white/80">
-          メールでのご相談も受け付けています:{" "}
+          メールでのご相談も受け付けています：{" "}
           <a
             href={`mailto:${contact.email}`}
             className="font-bold text-white underline underline-offset-4"
