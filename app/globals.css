@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/*
+ * 색은 layout.tsx에서 site.config.ts의 theme 값을
+ * CSS 변수(--sc-*)로 주입 → 여기서 Tailwind 유틸리티에 연결.
+ * config만 바꾸면 사이트 전체 색이 바뀐다.
+ */
+@theme inline {
+  --color-primary: var(--sc-primary);
+  --color-primary-dark: var(--sc-primary-dark);
+  --color-primary-light: var(--sc-primary-light);
+  --color-accent: var(--sc-accent);
+  --color-line: #06c755;
+  --color-line-dark: #05b04b;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* 앵커 이동 시 sticky 헤더에 가리지 않도록 */
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  /* 40~60대 열람자 상정: 기본 글자를 한 단계 크게 */
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--sc-primary);
+  color: #fff;
+}
+
+/* FAQ 아코디언(details) 기본 마커 제거 */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
