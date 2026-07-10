@@ -33,6 +33,12 @@ export const siteConfig = {
     description:
       "初期費用0円・月額5,500円（税込）。堺市の店舗・事業所のホームページを、制作から更新・管理までまるごとサポート。予約・LINE・業務システムまで対応する、堺の事業者の「IT担当」です。",
     url: "https://machinowebs.com",
+    /**
+     * Google Search Console「HTMLタグ」인증 코드.
+     * content="..." 안의 값만 붙여넣기 (예: "AbCdEf123...")
+     * 빈 문자열이면 메타태그 미출력.
+     */
+    googleSiteVerification: "",
   },
 
   /* ---------------------------------------------------------

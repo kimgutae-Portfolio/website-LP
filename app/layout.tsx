@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     type: "website",
   },
+  ...(siteConfig.meta.googleSiteVerification
+    ? { verification: { google: siteConfig.meta.googleSiteVerification } }
+    : {}),
 };
 
 export default function RootLayout({
