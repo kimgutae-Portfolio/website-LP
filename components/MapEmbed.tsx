@@ -25,8 +25,9 @@ export function MapEmbed({
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "");
-  // hl=ja: 열람자의 브라우저 언어와 무관하게 지도 표기를 일본어로 고정
-  const src = `https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1z${encoded}!6i${zoom}&hl=ja`;
+  // !5m2!1sja!2sjp: 열람자의 브라우저 언어와 무관하게 지도 표기를 일본어로 고정
+  // (?hl= 파라미터는 pb 형식 embed에서 무시되므로 pb 내부 언어 필드를 사용)
+  const src = `https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1z${encoded}!6i${zoom}!5m2!1sja!2sjp`;
 
   return (
     <iframe

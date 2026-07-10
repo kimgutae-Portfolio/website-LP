@@ -16,6 +16,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "invalid json" }, { status: 400 });
   }
 
+  // 허니팟: 봇만 채우는 숨은 필드 — 채워져 있으면 메일을 보내지 않고 성공으로 응답
+  if (typeof body.website === "string" && body.website.trim() !== "") {
+    return NextResponse.json({ ok: true });
+  }
+
   const name = typeof body.name === "string" ? body.name.trim() : "";
   const contact = typeof body.contact === "string" ? body.contact.trim() : "";
   const company = typeof body.company === "string" ? body.company.trim() : "";

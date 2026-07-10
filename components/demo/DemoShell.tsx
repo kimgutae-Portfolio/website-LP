@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FloatingLine } from "@/components/FloatingLine";
+import { FacebookIcon, InstagramIcon } from "@/components/icons";
 
 /**
  * 데모 사이트 공통 셸
@@ -23,6 +24,35 @@ export function DemoShell({ children }: { children: React.ReactNode }) {
       {children}
       <FloatingLine />
     </>
+  );
+}
+
+/**
+ * 데모 푸터용 SNS 아이콘 (고객 사이트 기본 탑재 사양의 견본)
+ * 색은 부모 요소의 text 색을 따라가므로 데모별 팔레트에 자동으로 맞음.
+ */
+export function DemoSocialLinks({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex items-center justify-center gap-5 ${className}`}>
+      <a
+        href="https://www.instagram.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+        className="transition hover:opacity-70"
+      >
+        <InstagramIcon />
+      </a>
+      <a
+        href="https://www.facebook.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Facebook"
+        className="transition hover:opacity-70"
+      >
+        <FacebookIcon />
+      </a>
+    </div>
   );
 }
 

@@ -42,6 +42,11 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* 허니팟(스팸 봇 대책): 사람 눈에는 보이지 않는 필드. 채워져 있으면 서버가 조용히 무시 */}
+      <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div>
         <label htmlFor="name" className="mb-1.5 block text-sm font-bold text-slate-700">
           お名前 <span className="text-accent">必須</span>
