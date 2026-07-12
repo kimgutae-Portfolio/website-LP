@@ -1,4 +1,5 @@
 import { siteConfig } from "@/site.config";
+import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 
 export function Faq() {
@@ -6,7 +7,7 @@ export function Faq() {
     <section id="faq" className="bg-slate-50 py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-5">
         <SectionHeading label="FAQ" title="よくある質問" />
-        <div className="space-y-3">
+        <Reveal className="space-y-3">
           {siteConfig.faq.map((item) => (
             <details
               key={item.q}
@@ -30,7 +31,7 @@ export function Faq() {
               </div>
             </details>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

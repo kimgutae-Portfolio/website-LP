@@ -6,6 +6,7 @@ import {
   LuceStylistIllust,
 } from "@/components/demo/illustrations";
 import { MapEmbed } from "@/components/MapEmbed";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "hair salon LUCE（デモサイト）",
@@ -53,8 +54,11 @@ export default function LuceDemo() {
       >
         {/* ヒーロー: 全面イラスト + 重なる名刺カード */}
         <section className="pb-14 sm:pb-16">
-          <LuceHeroIllust className="block h-64 w-full sm:h-80" />
-          <div className="relative mx-auto -mt-16 max-w-md border border-stone-200 bg-white px-8 py-9 text-center shadow-sm">
+          <LuceHeroIllust className="animate-fade-up block h-64 w-full sm:h-80" />
+          <div
+            className="animate-fade-up relative mx-auto -mt-16 max-w-md border border-stone-200 bg-white px-8 py-9 text-center shadow-sm"
+            style={{ animationDelay: "200ms" }}
+          >
             <p className="text-xs font-bold tracking-[0.35em] text-rose-400">
               HAIR SALON
             </p>
@@ -71,7 +75,7 @@ export default function LuceDemo() {
 
         {/* お知らせ */}
         <section className="pb-14 sm:pb-16">
-          <div className="mx-auto max-w-xl px-5">
+          <Reveal className="mx-auto max-w-xl px-5">
             <h2 className="mb-8 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
               NEWS
             </h2>
@@ -88,12 +92,12 @@ export default function LuceDemo() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </section>
 
         {/* コンセプト */}
         <section className="bg-white py-14 sm:py-20">
-          <div className="mx-auto max-w-2xl px-5 text-center">
+          <Reveal className="mx-auto max-w-2xl px-5 text-center">
             <h2 className="mb-6 text-sm font-bold tracking-[0.3em] text-rose-400">
               CONCEPT
             </h2>
@@ -103,12 +107,12 @@ export default function LuceDemo() {
               骨格と髪質に合わせた「扱いやすいスタイル」で、
               毎朝のセットを楽にします。
             </p>
-          </div>
+          </Reveal>
         </section>
 
         {/* メニュー */}
         <section className="py-14 sm:py-20">
-          <div className="mx-auto max-w-xl px-5">
+          <Reveal className="mx-auto max-w-xl px-5">
             <h2 className="mb-10 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
               MENU
             </h2>
@@ -126,12 +130,12 @@ export default function LuceDemo() {
             <p className="mt-4 text-right text-xs text-stone-400">
               ※すべて税込価格です
             </p>
-          </div>
+          </Reveal>
         </section>
 
         {/* スタイリスト: 横並びカード */}
         <section className="bg-white py-14 sm:py-20">
-          <div className="mx-auto max-w-2xl px-5">
+          <Reveal className="mx-auto max-w-2xl px-5">
             <h2 className="mb-10 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
               STYLIST
             </h2>
@@ -146,12 +150,12 @@ export default function LuceDemo() {
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* 店舗情報 */}
         <section className="py-14 sm:py-20">
-          <div className="mx-auto max-w-xl px-5">
+          <Reveal className="mx-auto max-w-xl px-5">
             <h2 className="mb-10 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
               INFORMATION
             </h2>
@@ -176,12 +180,12 @@ export default function LuceDemo() {
             <p className="mt-2 text-xs text-stone-400">
               ※デモサイトのため、堺市周辺の地図を表示しています
             </p>
-          </div>
+          </Reveal>
         </section>
 
         {/* CTA */}
         <section className="bg-white py-14 text-center sm:py-16">
-          <div className="mx-auto max-w-xl px-5">
+          <Reveal className="mx-auto max-w-xl px-5">
             <h2 className="text-xl font-bold text-stone-900">
               ご予約は、LINEでどうぞ
             </h2>
@@ -195,7 +199,7 @@ export default function LuceDemo() {
             <p className="mt-3 text-xs text-stone-400">
               ※デモサイトのため、ボタンは動作しません
             </p>
-          </div>
+          </Reveal>
         </section>
 
         <footer className="bg-stone-900 py-8 text-center text-sm text-stone-400">

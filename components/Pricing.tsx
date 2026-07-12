@@ -1,4 +1,5 @@
 import { siteConfig } from "@/site.config";
+import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { CheckIcon } from "./icons";
 import { LineCta } from "./LineCta";
@@ -13,7 +14,7 @@ export function Pricing() {
         <SectionHeading label="料金" title="わかりやすい料金プラン" />
 
         {/* 메인 플랜 카드 */}
-        <div className="relative mx-auto max-w-2xl rounded-3xl border-2 border-primary bg-white p-7 shadow-lg sm:p-10">
+        <Reveal className="relative mx-auto max-w-2xl rounded-3xl border-2 border-primary bg-white p-7 shadow-lg sm:p-10">
           {campaign.enabled && (
             <span className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-accent px-5 py-1.5 text-sm font-bold text-white shadow-md">
               {campaign.label}
@@ -50,19 +51,19 @@ export function Pricing() {
           <div className="text-center">
             <LineCta />
           </div>
-        </div>
+        </Reveal>
 
         {/* 화살표 연결 표시 (장식선은 모바일에서 숨겨 줄바꿈 깨짐 방지) */}
-        <div className="mx-auto my-6 flex max-w-2xl items-center justify-center gap-2 text-slate-400">
+        <Reveal className="mx-auto my-6 flex max-w-2xl items-center justify-center gap-2 text-slate-400">
           <span className="hidden h-px w-10 bg-slate-300 sm:block" />
           <span className="text-center text-sm font-medium">
             ページを増やしたい・機能を追加したい方へ
           </span>
           <span className="hidden h-px w-10 bg-slate-300 sm:block" />
-        </div>
+        </Reveal>
 
         {/* 2단계 플랜 카드 (초기비용 청구형) */}
-        <div className="relative mx-auto max-w-2xl rounded-3xl border-2 border-slate-200 bg-white p-7 shadow-sm sm:p-10">
+        <Reveal className="relative mx-auto max-w-2xl rounded-3xl border-2 border-slate-200 bg-white p-7 shadow-sm sm:p-10">
           <span className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-700 px-5 py-1.5 text-sm font-bold text-white shadow-md">
             {secondPlan.badge}
           </span>
@@ -103,7 +104,7 @@ export function Pricing() {
           <div className="text-center">
             <LineCta />
           </div>
-        </div>
+        </Reveal>
 
         <ul className="mx-auto mt-8 max-w-4xl space-y-1 text-sm text-slate-500">
           {pricing.notes.map((note) => (

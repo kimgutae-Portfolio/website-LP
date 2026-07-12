@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
 import { NozomiHeroIllust } from "@/components/demo/illustrations";
 import { MapEmbed } from "@/components/MapEmbed";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "デイサービスのぞみ（デモサイト）",
@@ -72,7 +73,7 @@ export default function NozomiDemo() {
         {/* ヒーロー: 左寄せ2カラム */}
         <section className="bg-sky-50">
           <div className="mx-auto grid max-w-5xl items-center gap-10 px-5 py-14 sm:grid-cols-[1.1fr_1fr] sm:py-20">
-            <div>
+            <div className="animate-fade-up">
               <p className="mb-3 text-sm font-bold tracking-widest text-sky-600">
                 堺市の通所介護（デイサービス）
               </p>
@@ -102,12 +103,15 @@ export default function NozomiDemo() {
                 見学のご予約はこちら
               </a>
             </div>
-            <NozomiHeroIllust className="block h-56 w-full rounded-2xl sm:h-72" />
+            <div className="animate-fade-up" style={{ animationDelay: "200ms" }}>
+              <NozomiHeroIllust className="block h-56 w-full rounded-2xl sm:h-72" />
+            </div>
           </div>
         </section>
 
         {/* お知らせ */}
         <section className="mx-auto max-w-3xl px-5 py-14 sm:py-16">
+          <Reveal>
           <h2 className="mb-6 text-center text-2xl font-bold text-slate-900">
             お知らせ
           </h2>
@@ -127,22 +131,25 @@ export default function NozomiDemo() {
               </li>
             ))}
           </ul>
+          </Reveal>
         </section>
 
         {/* 特徴 */}
         <section className="mx-auto max-w-4xl px-5 py-14 sm:py-20">
-          <h2 className="mb-8 text-center text-2xl font-bold text-slate-900">
-            のぞみの3つの特徴
-          </h2>
+          <Reveal>
+            <h2 className="mb-8 text-center text-2xl font-bold text-slate-900">
+              のぞみの3つの特徴
+            </h2>
+          </Reveal>
           <div className="grid gap-5 sm:grid-cols-3">
             {features.map((f, i) => (
-              <div key={f.title} className="rounded-2xl bg-sky-50 p-6">
+              <Reveal key={f.title} delay={i * 100} className="rounded-2xl bg-sky-50 p-6">
                 <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-sky-600 font-bold text-white">
                   {i + 1}
                 </span>
                 <h3 className="mb-2 font-bold text-slate-900">{f.title}</h3>
                 <p className="text-[15px] leading-relaxed text-slate-600">{f.text}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -150,6 +157,7 @@ export default function NozomiDemo() {
         {/* 一日の流れ */}
         <section className="bg-sky-50 py-14 sm:py-20">
           <div className="mx-auto max-w-2xl px-5">
+            <Reveal>
             <h2 className="mb-8 text-center text-2xl font-bold text-slate-900">
               一日の流れ
             </h2>
@@ -168,11 +176,13 @@ export default function NozomiDemo() {
                 </li>
               ))}
             </ol>
+            </Reveal>
           </div>
         </section>
 
         {/* 施設概要 */}
         <section className="mx-auto max-w-2xl px-5 py-14 sm:py-20">
+          <Reveal>
           <h2 className="mb-8 text-center text-2xl font-bold text-slate-900">
             施設概要
           </h2>
@@ -196,11 +206,12 @@ export default function NozomiDemo() {
           <p className="mt-2 text-xs text-slate-400">
             ※デモサイトのため、堺市周辺の地図を表示しています
           </p>
+          </Reveal>
         </section>
 
         {/* CTA */}
         <section id="contact" className="bg-sky-600 py-14 text-center sm:py-16">
-          <div className="mx-auto max-w-2xl px-5">
+          <Reveal className="mx-auto max-w-2xl px-5">
             <h2 className="text-2xl font-bold text-white">
               見学・ご相談は、お気軽にどうぞ
             </h2>
@@ -211,7 +222,7 @@ export default function NozomiDemo() {
               072-000-0000
             </p>
             <p className="mt-1 text-sm text-white/75">受付時間 9:00〜17:00（月〜土）</p>
-          </div>
+          </Reveal>
         </section>
 
         <footer className="bg-slate-900 py-8 text-center text-sm text-slate-400">

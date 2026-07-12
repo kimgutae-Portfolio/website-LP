@@ -2,6 +2,7 @@
 import { siteConfig } from "@/site.config";
 import { ContactForm } from "./ContactForm";
 import { LineCta } from "./LineCta";
+import { Reveal } from "./Reveal";
 
 export function Cta() {
   const { contact, line } = siteConfig;
@@ -19,7 +20,7 @@ export function Cta() {
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* LINE 상담 카드 (주요 CTA) */}
-          <div className="flex flex-col items-center justify-center rounded-3xl bg-white p-8 text-center shadow-lg sm:p-10">
+          <Reveal className="flex flex-col items-center justify-center rounded-3xl bg-white p-8 text-center shadow-lg sm:p-10">
             <h3 className="mb-2 text-lg font-bold text-slate-900">
               {contact.lineCardTitle}
             </h3>
@@ -43,15 +44,15 @@ export function Cta() {
               </div>
             )}
             <LineCta label="LINEで友だち追加" />
-          </div>
+          </Reveal>
 
           {/* 문의 폼 카드 */}
-          <div className="rounded-3xl bg-white p-8 shadow-lg sm:p-10">
+          <Reveal delay={120} className="rounded-3xl bg-white p-8 shadow-lg sm:p-10">
             <h3 className="mb-6 text-center text-lg font-bold text-slate-900">
               {contact.formTitle}
             </h3>
             <ContactForm />
-          </div>
+          </Reveal>
         </div>
 
         <p className="mt-8 text-center text-sm text-white/80">

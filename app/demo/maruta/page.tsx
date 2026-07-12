@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
+import { HeroCarousel } from "@/components/HeroCarousel";
 import {
   MarutaDishIllust,
   MarutaHeroIllust,
   MarutaOwnerIllust,
 } from "@/components/demo/illustrations";
 import { MapEmbed } from "@/components/MapEmbed";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "お食事処 吉田（デモサイト）",
@@ -70,17 +72,28 @@ export default function MarutaDemo() {
         {/* ヒーロー: 縦書きの見出し + 判子マーク */}
         <section className="px-5 pb-14 pt-12 sm:pb-20 sm:pt-16">
           <div className="mx-auto grid max-w-4xl grid-cols-[1fr_auto] items-start gap-7 sm:gap-14">
-            <div>
+            <div className="animate-fade-up">
               <p className="mb-4 text-sm font-bold tracking-[0.3em] text-amber-400">
                 堺・炭火と季節料理
               </p>
-              <MarutaHeroIllust className="block h-52 w-full rounded-2xl sm:h-72" />
+              {/* 히어로 배너 캐러셀: 사진 여러 장을 자동 전환하는 견본 */}
+              <HeroCarousel
+                className="h-52 w-full rounded-2xl sm:h-72"
+                slides={[
+                  <MarutaHeroIllust key="sakana" className="h-full w-full" />,
+                  <MarutaDishIllust key="tamago" dish="tamago" className="h-full w-full" />,
+                  <MarutaDishIllust key="rice" dish="rice" className="h-full w-full" />,
+                ]}
+              />
               <p className="mt-6 max-w-xl leading-loose text-stone-300">
                 お食事処 吉田は、カウンター8席の小さな店です。
                 その日いちばんの魚と、あたたかい家庭の味を。
               </p>
             </div>
-            <div className="flex flex-col items-center gap-6 pt-1">
+            <div
+              className="animate-fade-up flex flex-col items-center gap-6 pt-1"
+              style={{ animationDelay: "200ms" }}
+            >
               <h1
                 style={{ writingMode: "vertical-rl" }}
                 className="text-3xl font-black leading-snug tracking-[0.18em] sm:text-5xl"
@@ -99,6 +112,7 @@ export default function MarutaDemo() {
 
         {/* お知らせ */}
         <section className="mx-auto max-w-2xl px-5 py-14 sm:py-16">
+          <Reveal>
           <BarHeading>お知らせ</BarHeading>
           <ul>
             {news.map(([date, text]) => (
@@ -113,15 +127,22 @@ export default function MarutaDemo() {
               </li>
             ))}
           </ul>
+          </Reveal>
         </section>
 
         {/* おすすめ */}
         <section className="bg-stone-950 py-14 sm:py-20">
           <div className="mx-auto max-w-4xl px-5">
-            <BarHeading>おすすめの一品</BarHeading>
+            <Reveal>
+              <BarHeading>おすすめの一品</BarHeading>
+            </Reveal>
             <div className="grid gap-5 sm:grid-cols-3">
               {recommends.map((item, i) => (
-                <div key={item.name} className="relative overflow-hidden rounded-2xl bg-stone-800">
+                <Reveal
+                  key={item.name}
+                  delay={i * 100}
+                  className="relative overflow-hidden rounded-2xl bg-stone-800"
+                >
                   <span className="absolute left-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-amber-400 text-lg font-black text-stone-900">
                     {kanjiNumbers[i]}
                   </span>
@@ -135,7 +156,7 @@ export default function MarutaDemo() {
                     </div>
                     <p className="text-sm leading-relaxed text-stone-400">{item.text}</p>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
             <p className="mt-5 text-center text-xs text-stone-500">
@@ -146,6 +167,7 @@ export default function MarutaDemo() {
 
         {/* こだわり: 横並び */}
         <section className="mx-auto max-w-3xl px-5 py-14 sm:py-20">
+          <Reveal>
           <BarHeading>店主のこだわり</BarHeading>
           <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start">
             <MarutaOwnerIllust className="block h-32 w-32 shrink-0 rounded-full" />
@@ -157,11 +179,12 @@ export default function MarutaDemo() {
               <p className="mt-4 text-sm font-bold text-stone-400">店主・吉田 健一</p>
             </div>
           </div>
+          </Reveal>
         </section>
 
         {/* 店舗情報 */}
         <section className="bg-stone-950 py-14 sm:py-20">
-          <div className="mx-auto max-w-xl px-5">
+          <Reveal className="mx-auto max-w-xl px-5">
             <BarHeading>店舗情報</BarHeading>
             <dl>
               {info.map(([label, value]) => (
@@ -184,12 +207,12 @@ export default function MarutaDemo() {
             <p className="mt-2 text-xs text-stone-500">
               ※デモサイトのため、堺市周辺の地図を表示しています
             </p>
-          </div>
+          </Reveal>
         </section>
 
         {/* CTA */}
         <section className="py-14 text-center sm:py-16">
-          <div className="mx-auto max-w-xl px-5">
+          <Reveal className="mx-auto max-w-xl px-5">
             <h2 className="text-xl font-bold">ご予約・お問い合わせ</h2>
             <p className="mt-4 text-3xl font-black tracking-wide text-amber-400">
               072-000-0000
@@ -197,7 +220,7 @@ export default function MarutaDemo() {
             <p className="mt-2 text-sm text-stone-400">
               営業時間内にお電話ください（水曜定休）
             </p>
-          </div>
+          </Reveal>
         </section>
 
         <footer className="border-t border-stone-800 py-8 text-center text-sm text-stone-500">

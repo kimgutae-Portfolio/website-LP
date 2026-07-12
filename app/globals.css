@@ -39,3 +39,79 @@ details > summary {
 details > summary::-webkit-details-marker {
   display: none;
 }
+
+/* ------------------------------------------------------------
+ * 애니메이션 (디자인 보강)
+ * - animate-fade-up: 히어로 첫 로드 등장용 (1회 재생)
+ * - animate-float  : 폰 목업이 미세하게 떠다니는 움직임
+ * - animate-ping-soft: 플로팅 LINE 버튼의 은은한 펄스 링
+ * - .reveal        : 스크롤 진입 시 나타나는 섹션 요소 (Reveal.tsx와 세트)
+ * ---------------------------------------------------------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes float-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70%,
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease both;
+}
+.animate-float {
+  animation: float-y 3.2s ease-in-out infinite alternate;
+}
+.animate-ping-soft {
+  animation: ping-soft 2.6s ease-out infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 움직임 최소화 설정 사용자는 전부 정지 상태로 */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-float,
+  .animate-ping-soft {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

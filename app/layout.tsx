@@ -42,6 +42,10 @@ export default function RootLayout({
   return (
     <html lang="ja" style={themeVars}>
       <body className={`${notoSansJP.className} bg-white text-slate-800 antialiased`}>
+        {/* JS 미작동 환경에서 스크롤 리빌 요소가 숨겨진 채 남지 않도록 하는 폴백 */}
+        <noscript>
+          <style>{`.reveal{opacity:1 !important;transform:none !important}`}</style>
+        </noscript>
         {children}
         <Analytics />
       </body>

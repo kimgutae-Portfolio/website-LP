@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
+import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { ExternalIcon } from "./icons";
 
@@ -11,21 +12,21 @@ export function Demo() {
         <SectionHeading label="制作イメージ" title="どんなホームページができるの？" />
 
         {/* 이 LP 자체가 실물 견본이라는 소구 포인트 */}
-        <div className="mb-10 rounded-2xl border-2 border-primary/20 bg-primary-light p-6 sm:p-8">
+        <Reveal className="mb-10 rounded-2xl border-2 border-primary/20 bg-primary-light p-6 sm:p-8">
           <p className="leading-relaxed text-slate-800">
             <span className="mb-1 block font-bold text-primary">
               このページが「実物見本」です
             </span>
             {demos.selfSample}
           </p>
-        </div>
+        </Reveal>
 
         <p className="mb-8 text-center leading-relaxed text-slate-600">
           {demos.intro}
         </p>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {demos.items.map((demo) => {
+          {demos.items.map((demo, i) => {
             const isReady = demo.url !== "";
             const card = (
               <div
@@ -59,12 +60,10 @@ export function Demo() {
                 )}
               </div>
             );
-            return isReady ? (
-              <Link key={demo.name} href={demo.url}>
-                {card}
-              </Link>
-            ) : (
-              <div key={demo.name}>{card}</div>
+            return (
+              <Reveal key={demo.name} delay={i * 100}>
+                {isReady ? <Link href={demo.url}>{card}</Link> : card}
+              </Reveal>
             );
           })}
         </div>

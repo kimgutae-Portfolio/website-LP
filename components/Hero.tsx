@@ -6,7 +6,7 @@ import { jaPhrases } from "./jaText";
 // 히어로 우측: 스마트폰 목업 (이미지 없이 CSS로 구성 — "스마트폰에서 완벽"의 시각화)
 function PhoneMockup() {
   return (
-    <div className="relative mx-auto w-[240px] sm:w-[260px]">
+    <div className="animate-float relative mx-auto w-[240px] sm:w-[260px]">
       <div className="rounded-[2.2rem] border-[10px] border-slate-800 bg-white shadow-2xl">
         <div className="overflow-hidden rounded-[1.6rem]">
           {/* 미니 히어로 */}
@@ -42,7 +42,7 @@ export function Hero() {
     <section id="top" className="bg-gradient-to-b from-primary-light to-white">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 pt-14 sm:pb-24 sm:pt-20 lg:grid-cols-[1.2fr_1fr]">
         <div>
-          <div className="mb-5 flex flex-wrap gap-2">
+          <div className="animate-fade-up mb-5 flex flex-wrap gap-2">
             {hero.badges.map((badge) => (
               <span
                 key={badge}
@@ -53,16 +53,25 @@ export function Hero() {
               </span>
             ))}
           </div>
-          <h1 className="text-3xl font-bold leading-snug text-slate-900 sm:text-4xl sm:leading-snug">
+          <h1
+            className="animate-fade-up text-3xl font-bold leading-snug text-slate-900 sm:text-4xl sm:leading-snug"
+            style={{ animationDelay: "100ms" }}
+          >
             <span className="mb-1 block text-primary">
               {jaPhrases(hero.catchTop)}
             </span>
             {jaPhrases(hero.catchMain)}
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-slate-600">
+          <p
+            className="animate-fade-up mt-5 text-lg leading-relaxed text-slate-600"
+            style={{ animationDelay: "200ms" }}
+          >
             {jaPhrases(hero.sub, 17)}
           </p>
-          <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <div
+            className="animate-fade-up mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+            style={{ animationDelay: "300ms" }}
+          >
             <LineCta />
             <a
               href="#price"
@@ -71,7 +80,10 @@ export function Hero() {
               料金を見る
             </a>
           </div>
-          <p className="mt-5 text-sm text-slate-500">
+          <p
+            className="animate-fade-up mt-5 text-sm text-slate-500"
+            style={{ animationDelay: "400ms" }}
+          >
             {jaPhrases("月額5,500円（税込）・初期費用0円。", 20)}
             {siteConfig.pricing.campaign.enabled && (
               <span className="inline-block font-bold text-accent">
@@ -81,7 +93,7 @@ export function Hero() {
             )}
           </p>
         </div>
-        <div className="hidden sm:block">
+        <div className="animate-fade-up hidden sm:block" style={{ animationDelay: "250ms" }}>
           <PhoneMockup />
         </div>
       </div>

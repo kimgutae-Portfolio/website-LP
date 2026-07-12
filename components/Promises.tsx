@@ -1,4 +1,5 @@
 import { siteConfig } from "@/site.config";
+import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { BoltIcon, ChartIcon, LineIcon } from "./icons";
 
@@ -16,11 +17,12 @@ export function Promises() {
       <div className="mx-auto max-w-5xl px-5">
         <SectionHeading label={promises.label} title={promises.title} />
         <div className="grid gap-5 sm:grid-cols-3 sm:gap-6">
-          {promises.items.map((item) => {
+          {promises.items.map((item, i) => {
             const Icon = iconMap[item.icon as keyof typeof iconMap];
             return (
-              <div
+              <Reveal
                 key={item.title}
+                delay={i * 100}
                 className="rounded-2xl bg-white p-7 shadow-sm"
               >
                 <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
@@ -32,7 +34,7 @@ export function Promises() {
                 <p className="text-[15px] leading-relaxed text-slate-600">
                   {item.text}
                 </p>
-              </div>
+              </Reveal>
             );
           })}
         </div>
