@@ -25,6 +25,10 @@ const news = [
   ["2026.06.25", "お持ち帰り（出汁巻き・炊き込みご飯）はじめました。お電話でご予約ください。"],
 ];
 
+// 예약 링크: 실제 고객 사이트에서는 사용 중인 예약 서비스(食べログ・ホットペッパー 등)의
+// 자기 가게 페이지 URL로 교체하는 자리. 데모에서는 예약 사이트 톱으로 연결.
+const reserveUrl = "https://tabelog.com/";
+
 const kanjiNumbers = ["壱", "弐", "参"];
 
 const recommends = [
@@ -89,6 +93,14 @@ export default function MarutaDemo() {
                 お食事処 吉田は、カウンター8席の小さな店です。
                 その日いちばんの魚と、あたたかい家庭の味を。
               </p>
+              <a
+                href={reserveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-7 inline-block rounded-full bg-amber-400 px-8 py-3.5 text-lg font-black text-stone-900 shadow-md transition hover:bg-amber-300"
+              >
+                ご予約はこちらから
+              </a>
             </div>
             <div
               className="animate-fade-up flex flex-col items-center gap-6 pt-1"
@@ -214,7 +226,19 @@ export default function MarutaDemo() {
         <section className="py-14 text-center sm:py-16">
           <Reveal className="mx-auto max-w-xl px-5">
             <h2 className="text-xl font-bold">ご予約・お問い合わせ</h2>
-            <p className="mt-4 text-3xl font-black tracking-wide text-amber-400">
+            <a
+              href={reserveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block rounded-full bg-amber-400 px-10 py-4 text-lg font-black text-stone-900 shadow-md transition hover:bg-amber-300"
+            >
+              ネット予約はこちらから
+            </a>
+            <p className="mt-2 text-xs text-stone-500">
+              ※デモサイトのため、予約サイトのトップページへ移動します
+            </p>
+            <p className="mt-6 text-sm text-stone-400">お電話でのご予約</p>
+            <p className="mt-1 text-3xl font-black tracking-wide text-amber-400">
               072-000-0000
             </p>
             <p className="mt-2 text-sm text-stone-400">
