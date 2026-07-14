@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
+import { DemoCredit, DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
 import { NozomiHeroIllust } from "@/components/demo/illustrations";
 import { MapEmbed } from "@/components/MapEmbed";
 import { Reveal } from "@/components/Reveal";
@@ -228,6 +228,7 @@ export default function NozomiDemo() {
         <footer className="bg-slate-900 py-8 text-center text-sm text-slate-400">
           <DemoSocialLinks className="mb-4" />
           © 2026 デイサービスのぞみ（架空の店舗）
+          <DemoCredit />
         </footer>
       </div>
     </DemoShell>

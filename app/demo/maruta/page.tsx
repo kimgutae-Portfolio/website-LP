@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
+import { DemoCredit, DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import {
   MarutaDishIllust,
@@ -250,6 +250,7 @@ export default function MarutaDemo() {
         <footer className="border-t border-stone-800 py-8 text-center text-sm text-stone-500">
           <DemoSocialLinks className="mb-4" />
           © 2026 お食事処 吉田（架空の店舗）
+          <DemoCredit />
         </footer>
       </div>
     </DemoShell>

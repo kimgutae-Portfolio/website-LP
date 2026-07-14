@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FloatingLine } from "@/components/FloatingLine";
 import { FacebookIcon, InstagramIcon } from "@/components/icons";
+import { siteConfig } from "@/site.config";
 
 /**
  * 데모 사이트 공통 셸
@@ -53,6 +54,22 @@ export function DemoSocialLinks({ className = "" }: { className?: string }) {
         <FacebookIcon />
       </a>
     </div>
+  );
+}
+
+/**
+ * 제작 크레딧 링크 (고객 사이트 템플릿 기본 탑재)
+ * 고객 사이트가 늘어날수록 まちのWeb으로의 지역 백링크가 쌓이는 구조.
+ * 실제 고객 사이트에서는 href를 절대 URL(https://machinowebs.com)로.
+ */
+export function DemoCredit() {
+  return (
+    <p className="mt-3 text-xs opacity-60">
+      制作:{" "}
+      <Link href="/" className="underline underline-offset-2 transition hover:opacity-80">
+        {siteConfig.meta.siteName}
+      </Link>
+    </p>
   );
 }
 

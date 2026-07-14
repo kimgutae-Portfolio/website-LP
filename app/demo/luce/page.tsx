@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Serif_JP } from "next/font/google";
-import { DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
+import { DemoCredit, DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
 import {
   LuceHeroIllust,
   LuceStylistIllust,
@@ -205,6 +205,7 @@ export default function LuceDemo() {
         <footer className="bg-stone-900 py-8 text-center text-sm text-stone-400">
           <DemoSocialLinks className="mb-4" />
           © 2026 hair salon LUCE（架空の店舗）
+          <DemoCredit />
         </footer>
       </div>
     </DemoShell>
