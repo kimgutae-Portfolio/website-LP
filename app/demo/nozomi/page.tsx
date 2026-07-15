@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { DemoCredit, DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
+import {
+  DemoCredit,
+  DemoInstagramGrid,
+  DemoShell,
+  DemoSocialLinks,
+} from "@/components/demo/DemoShell";
 import { NozomiHeroIllust } from "@/components/demo/illustrations";
 import { MapEmbed } from "@/components/MapEmbed";
 import { Reveal } from "@/components/Reveal";
@@ -206,6 +211,20 @@ export default function NozomiDemo() {
           <p className="mt-2 text-xs text-slate-400">
             ※デモサイトのため、堺市周辺の地図を表示しています
           </p>
+          </Reveal>
+        </section>
+
+        {/* Instagram */}
+        <section className="bg-sky-50 px-5 py-14 sm:py-20">
+          <Reveal>
+            <DemoInstagramGrid
+              heading={
+                <h2 className="mb-6 text-center text-2xl font-bold text-slate-900">
+                  Instagram
+                </h2>
+              }
+              tileClassName="bg-gradient-to-br from-sky-100 to-sky-200 text-sky-500"
+            />
           </Reveal>
         </section>
 

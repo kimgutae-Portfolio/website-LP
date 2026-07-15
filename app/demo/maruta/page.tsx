@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { DemoCredit, DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
+import {
+  DemoCredit,
+  DemoInstagramGrid,
+  DemoShell,
+  DemoSocialLinks,
+} from "@/components/demo/DemoShell";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import {
   MarutaDishIllust,
   MarutaHeroIllust,
   MarutaOwnerIllust,
 } from "@/components/demo/illustrations";
+import { LineIcon } from "@/components/icons";
 import { MapEmbed } from "@/components/MapEmbed";
 import { Reveal } from "@/components/Reveal";
 
@@ -25,9 +31,11 @@ const news = [
   ["2026.06.25", "お持ち帰り（出汁巻き・炊き込みご飯）はじめました。お電話でご予約ください。"],
 ];
 
-// 예약 링크: 실제 고객 사이트에서는 사용 중인 예약 서비스(食べログ・ホットペッパー 등)의
+// 予約サイト: 실제 고객 사이트에서는 사용 중인 예약 서비스(食べログ・ホットペッパー 등)의
 // 자기 가게 페이지 URL로 교체하는 자리. 데모에서는 예약 사이트 톱으로 연결.
 const reserveUrl = "https://tabelog.com/";
+// LINE問い合わせ: 실제 고객 사이트에서는 그 점포의 LINE公式アカウント 友だち追加 URL로 교체하는 자리.
+const lineInquiryUrl = "https://line.me/";
 
 const kanjiNumbers = ["壱", "弐", "参"];
 
@@ -222,20 +230,42 @@ export default function MarutaDemo() {
           </Reveal>
         </section>
 
+        {/* Instagram */}
+        <section className="px-5 py-14 sm:py-20">
+          <Reveal>
+            <DemoInstagramGrid
+              heading={<BarHeading>Instagram</BarHeading>}
+              tileClassName="bg-gradient-to-br from-stone-800 to-stone-700 text-amber-400"
+              noteClassName="text-stone-500"
+            />
+          </Reveal>
+        </section>
+
         {/* CTA */}
         <section className="py-14 text-center sm:py-16">
           <Reveal className="mx-auto max-w-xl px-5">
             <h2 className="text-xl font-bold">ご予約・お問い合わせ</h2>
-            <a
-              href={reserveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-block rounded-full bg-amber-400 px-10 py-4 text-lg font-black text-stone-900 shadow-md transition hover:bg-amber-300"
-            >
-              ネット予約はこちらから
-            </a>
-            <p className="mt-2 text-xs text-stone-500">
-              ※デモサイトのため、予約サイトのトップページへ移動します
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <a
+                href={reserveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full bg-amber-400 px-6 py-4 text-base font-black text-stone-900 shadow-md transition hover:bg-amber-300"
+              >
+                予約サイトはこちら
+              </a>
+              <a
+                href={lineInquiryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-line px-6 py-4 text-base font-black text-white shadow-md transition hover:bg-line-dark"
+              >
+                <LineIcon className="h-5 w-5" />
+                LINEで問い合わせ
+              </a>
+            </div>
+            <p className="mt-3 text-xs text-stone-500">
+              ※デモサイトのため、外部サイトのトップページへ移動します
             </p>
             <p className="mt-6 text-sm text-stone-400">お電話でのご予約</p>
             <p className="mt-1 text-3xl font-black tracking-wide text-amber-400">

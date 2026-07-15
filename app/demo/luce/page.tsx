@@ -1,12 +1,24 @@
 import type { Metadata } from "next";
 import { Noto_Serif_JP } from "next/font/google";
-import { DemoCredit, DemoShell, DemoSocialLinks } from "@/components/demo/DemoShell";
+import {
+  DemoCredit,
+  DemoInstagramGrid,
+  DemoShell,
+  DemoSocialLinks,
+} from "@/components/demo/DemoShell";
 import {
   LuceHeroIllust,
   LuceStylistIllust,
 } from "@/components/demo/illustrations";
+import { LineIcon } from "@/components/icons";
 import { MapEmbed } from "@/components/MapEmbed";
 import { Reveal } from "@/components/Reveal";
+
+// 予約サイト: 実際の顧客サイトでは利用中の予約サービス（ホットペッパービューティー等）の
+// 自店ページURLに差し替える場所。デモではサービスのトップページへ接続。
+const reserveUrl = "https://beauty.hotpepper.jp/";
+// LINE問い合わせ: 実際の顧客サイトでは、その店舗のLINE公式アカウント友だち追加URLに差し替える場所。
+const lineInquiryUrl = "https://line.me/";
 
 export const metadata: Metadata = {
   title: "hair salon LUCE（デモサイト）",
@@ -183,21 +195,50 @@ export default function LuceDemo() {
           </Reveal>
         </section>
 
+        {/* Instagram */}
+        <section className="bg-white py-14 sm:py-20">
+          <Reveal className="px-5">
+            <DemoInstagramGrid
+              heading={
+                <h2 className="mb-8 text-center text-sm font-bold tracking-[0.3em] text-rose-400">
+                  INSTAGRAM
+                </h2>
+              }
+              tileClassName="bg-gradient-to-br from-rose-50 to-stone-200 text-rose-300"
+            />
+          </Reveal>
+        </section>
+
         {/* CTA */}
         <section className="bg-white py-14 text-center sm:py-16">
           <Reveal className="mx-auto max-w-xl px-5">
             <h2 className="text-xl font-bold text-stone-900">
-              ご予約は、LINEでどうぞ
+              ご予約・お問い合わせ
             </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-stone-500">
-              メッセージで「希望日時・メニュー」をお送りください。
-              その日のうちにお返事します。
+              いつものご予約サイトから。お急ぎの方はLINEでもどうぞ。
             </p>
-            <span className="mt-6 inline-block rounded-full bg-line px-10 py-4 text-lg font-bold text-white shadow-md">
-              LINEで予約する
-            </span>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <a
+                href={reserveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full border-2 border-stone-800 px-6 py-4 text-base font-bold text-stone-800 transition hover:bg-stone-800 hover:text-white"
+              >
+                予約サイトはこちら
+              </a>
+              <a
+                href={lineInquiryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-line px-6 py-4 text-base font-bold text-white shadow-md transition hover:bg-line-dark"
+              >
+                <LineIcon className="h-5 w-5" />
+                LINEで問い合わせ
+              </a>
+            </div>
             <p className="mt-3 text-xs text-stone-400">
-              ※デモサイトのため、ボタンは動作しません
+              ※デモサイトのため、外部サイトのトップページへ移動します
             </p>
           </Reveal>
         </section>

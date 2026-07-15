@@ -239,6 +239,38 @@ export const siteConfig = {
   ],
 
   /* ---------------------------------------------------------
+   * Instagram 피드 (계정 연동 없이, 게시물 URL을 붙여넣는 방식)
+   * ------------------------------------------------------- */
+  instagram: {
+    label: "Instagram",
+    title: "日々の制作の様子は、Instagramでも",
+    /** 계정 프로필 URL. 빈 문자열이면 팔로우 버튼 숨김 */
+    profileUrl: "",
+    followLabel: "Instagramでフォローする",
+    /**
+     * 피드 타일 목록 (인스타 프로필처럼 정사각 그리드로 표시).
+     * - image: public/ 기준 사진 경로. 게시물 사진을 public/insta/ 에 저장하고 지정
+     *   【要変更】지금은 샘플 이미지 — 실제 게시물 사진으로 교체할 것
+     * - url  : 클릭 시 이동할 게시물 URL
+     * image가 빈 항목은 건너뛰고, 표시할 항목이 없으면 섹션 자체가 숨겨짐.
+     */
+    items: [
+      {
+        image: "/insta/sample-1.svg",
+        url: "https://www.instagram.com/reel/DaQu2LjPIKF/",
+      },
+      {
+        image: "/insta/sample-2.svg",
+        url: "https://www.instagram.com/reel/DaQu2LjPIKF/",
+      },
+      {
+        image: "/insta/sample-3.svg",
+        url: "https://www.instagram.com/reel/DaQu2LjPIKF/",
+      },
+    ] as { image: string; url: string }[],
+  },
+
+  /* ---------------------------------------------------------
    * 운영자 소개
    * ------------------------------------------------------- */
   owner: {

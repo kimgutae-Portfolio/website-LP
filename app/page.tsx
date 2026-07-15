@@ -6,6 +6,7 @@ import { Promises } from "@/components/Promises";
 import { Demo } from "@/components/Demo";
 import { Pricing } from "@/components/Pricing";
 import { Flow } from "@/components/Flow";
+import { InstagramFeed } from "@/components/InstagramFeed";
 import { Faq } from "@/components/Faq";
 import { Cta } from "@/components/Cta";
 import { Footer } from "@/components/Footer";
@@ -62,6 +63,7 @@ export default function Home() {
         <Demo />
         <Pricing />
         <Flow />
+        <InstagramFeed />
         <Faq />
         <Cta />
       </main>

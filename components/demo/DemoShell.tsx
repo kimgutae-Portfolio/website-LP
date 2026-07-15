@@ -73,6 +73,55 @@ export function DemoCredit() {
   );
 }
 
+/**
+ * Instagram 피드 그리드 (데모용)
+ * LP의 InstagramFeed와 같은 "정사각 그리드, 프로필 헤더 없음" 사양의 견본.
+ * 가상 점포라 실제 게시물이 없으므로, 사진 자리를 데모 팔레트 색으로 표시.
+ * 실제 고객 사이트에서는 점포의 게시물 사진이 이 자리에 그대로 들어간다.
+ */
+export function DemoInstagramGrid({
+  heading,
+  tileClassName,
+  noteClassName = "opacity-60",
+}: {
+  /** 각 데모의 타이포 체계에 맞춘 見出し 요소를 그대로 전달 (예: <BarHeading>Instagram</BarHeading>) */
+  heading: React.ReactNode;
+  /** 타일 배경(그라데이션 등) — 데모 팔레트에 맞춰 지정 */
+  tileClassName: string;
+  noteClassName?: string;
+}) {
+  return (
+    <div className="mx-auto max-w-3xl">
+      {heading}
+      <div className="grid grid-cols-3 gap-1.5 overflow-hidden rounded-2xl">
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            className={`flex aspect-square items-center justify-center ${tileClassName}`}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-7 w-7 opacity-70"
+              aria-hidden="true"
+            >
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+          </div>
+        ))}
+      </div>
+      <p className={`mt-3 text-center text-xs ${noteClassName}`}>
+        ※デモのため写真の代わりに表示しています。実際のサイトには、投稿写真がそのまま並びます
+      </p>
+    </div>
+  );
+}
+
 /** 사진 자리 placeholder — 고객이 "내 사진이 여기 들어간다"를 이해하는 용도 */
 export function PhotoPlaceholder({
   label = "写真が入ります",
