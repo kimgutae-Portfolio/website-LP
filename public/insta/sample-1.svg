@@ -1,16 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
   <defs>
-    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0f6d6a"/>
-      <stop offset="1" stop-color="#15938f"/>
+    <linearGradient id="ig1" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#feda75"/>
+      <stop offset="0.3" stop-color="#fa7e1e"/>
+      <stop offset="0.6" stop-color="#d62976"/>
+      <stop offset="0.85" stop-color="#962fbf"/>
+      <stop offset="1" stop-color="#4f5bd5"/>
     </linearGradient>
   </defs>
-  <rect width="600" height="600" fill="url(#g1)"/>
-  <g fill="none" stroke="#ffffff" stroke-width="14" opacity="0.9">
-    <rect x="215" y="230" width="170" height="140" rx="20"/>
-    <circle cx="300" cy="300" r="38"/>
-    <circle cx="358" cy="262" r="9" fill="#ffffff" stroke="none"/>
+  <rect width="600" height="600" fill="url(#ig1)"/>
+  <g fill="none" stroke="#ffffff" stroke-width="20" stroke-linejoin="round">
+    <rect x="165" y="165" width="270" height="270" rx="70"/>
+    <circle cx="300" cy="300" r="70"/>
+    <circle cx="393" cy="207" r="12" fill="#ffffff" stroke="none"/>
   </g>
-  <text x="300" y="450" text-anchor="middle" fill="#ffffff" opacity="0.85" font-size="26" font-family="sans-serif">サンプル画像</text>
-  <text x="300" y="486" text-anchor="middle" fill="#ffffff" opacity="0.65" font-size="20" font-family="sans-serif">投稿の写真に差し替えてください</text>
 </svg>
