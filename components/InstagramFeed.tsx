@@ -34,8 +34,9 @@ export function InstagramFeed() {
               >
                 <img
                   src={item.image}
-                  alt=""
+                  alt={item.alt}
                   loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
                 {/* 호버 시 인스타 아이콘 오버레이 */}

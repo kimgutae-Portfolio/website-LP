@@ -29,7 +29,7 @@ export const siteConfig = {
   meta: {
     siteName: "まちのWeb",
     title:
-      "堺市の店舗・事業所向けホームページ制作｜初期費用0円・月額5,500円（税込）",
+      "堺市のホームページ制作｜初期費用0円・月額5,500円｜まちのWeb",
     description:
       "初期費用0円・月額5,500円（税込）。堺市の店舗・事業所のホームページを、制作から更新・管理までまるごとサポート。予約・LINE・業務システムまで対応する、堺の事業者の「IT担当」です。",
     url: "https://machinowebs.com",
@@ -169,7 +169,7 @@ export const siteConfig = {
   pricing: {
     /** 캠페인 배지 ON/OFF 토글 */
     campaign: {
-      enabled: true,
+      enabled: false,
       label: "開業記念キャンペーン価格",
       note: "※キャンペーンは予告なく終了する場合があります。",
     },
@@ -251,23 +251,14 @@ export const siteConfig = {
      * 피드 타일 목록 (인스타 프로필처럼 정사각 그리드로 표시).
      * - image: public/ 기준 사진 경로. 게시물 사진을 public/insta/ 에 저장하고 지정
      *   【要変更】지금은 샘플 이미지 — 실제 게시물 사진으로 교체할 것
+     * - alt  : 사진의 내용을 설명하는 일본어 문구 (이미지 검색·접근성용)
      * - url  : 클릭 시 이동할 게시물 URL
      * image가 빈 항목은 건너뛰고, 표시할 항목이 없으면 섹션 자체가 숨겨짐.
      */
-    items: [
-      {
-        image: "/insta/sample-1.svg",
-        url: "https://www.instagram.com/reel/DaQu2LjPIKF/",
-      },
-      {
-        image: "/insta/sample-2.svg",
-        url: "https://www.instagram.com/reel/DaQu2LjPIKF/",
-      },
-      {
-        image: "/insta/sample-3.svg",
-        url: "https://www.instagram.com/reel/DaQu2LjPIKF/",
-      },
-    ] as { image: string; url: string }[],
+    // 실제 게시물 사진이 준비되기 전까지는 비워둔다 (플레이스홀더 노출 방지 → 섹션 자동 숨김).
+    // 재개 시: public/insta/ 에 실제 사진을 넣고 아래에 { image, alt, url } 항목을 추가.
+    // 예: { image: "/insta/salon.jpg", alt: "堺市の美容室ホームページ制作事例", url: "https://www.instagram.com/p/.../" }
+    items: [] as { image: string; alt: string; url: string }[],
   },
 
   /* ---------------------------------------------------------

@@ -12,36 +12,34 @@ import { Cta } from "@/components/Cta";
 import { Footer } from "@/components/Footer";
 import { FloatingLine } from "@/components/FloatingLine";
 
-// 구조화 데이터 (Google 검색·비즈니스 프로필과 정보 일치용)
+// 구조화 데이터: 사이트명과 사업 정보를 Google에 일관된 형태로 전달한다.
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: siteConfig.meta.siteName,
-  description: siteConfig.meta.description,
-  url: siteConfig.meta.url,
-  email: siteConfig.contact.email,
-  image: `${siteConfig.meta.url}/opengraph-image`,
-  areaServed: {
-    "@type": "City",
-    name: "堺市",
-    containedInPlace: { "@type": "AdministrativeArea", name: "大阪府" },
-  },
-  priceRange: "月額5,500円〜",
-  founder: { "@type": "Person", name: siteConfig.owner.name },
-};
-
-// FAQ 구조화 데이터: 검색결과에 질문·답변이 펼쳐지는 리치 스니펫용
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: siteConfig.faq.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.a,
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.meta.url}/#website`,
+      url: siteConfig.meta.url,
+      name: siteConfig.meta.siteName,
+      inLanguage: "ja-JP",
     },
-  })),
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": `${siteConfig.meta.url}/#organization`,
+      name: siteConfig.meta.siteName,
+      description: siteConfig.meta.description,
+      url: siteConfig.meta.url,
+      email: siteConfig.contact.email,
+      logo: `${siteConfig.meta.url}/brand/machinowebs-icon-1024.png`,
+      image: `${siteConfig.meta.url}/opengraph-image`,
+      areaServed: {
+        "@type": "City",
+        name: "堺市",
+        containedInPlace: { "@type": "AdministrativeArea", name: "大阪府" },
+      },
+      priceRange: "月額5,500円〜",
+    },
+  ],
 };
 
 export default function Home() {
@@ -50,10 +48,6 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Header />
       <main>

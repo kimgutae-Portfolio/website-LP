@@ -15,11 +15,31 @@ export const metadata: Metadata = {
   description: siteConfig.meta.description,
   metadataBase: new URL(siteConfig.meta.url),
   alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: siteConfig.meta.title,
     description: siteConfig.meta.description,
+    url: siteConfig.meta.url,
+    siteName: siteConfig.meta.siteName,
     locale: "ja_JP",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.meta.siteName}｜堺市のホームページ制作`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.meta.title,
+    description: siteConfig.meta.description,
+    images: ["/opengraph-image"],
   },
   ...(siteConfig.meta.googleSiteVerification
     ? { verification: { google: siteConfig.meta.googleSiteVerification } }
