@@ -1,0 +1,23 @@
+.root { font-family: var(--font-noto-sans-jp),"Noto Sans JP",sans-serif; -webkit-font-smoothing: antialiased; overflow: clip; }
+.root *,.root *::before,.root *::after { box-sizing: border-box; }
+.root a { color: inherit; text-decoration: none; }
+.root button { font: inherit; color: inherit; cursor: pointer; border-radius: 0; }
+.root svg { flex-shrink: 0; }
+.root :is(a,button,summary):focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
+.root[data-motion="true"] [data-demo-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .9s ease,transform 1.1s cubic-bezier(.22,1,.36,1); }
+.root[data-motion="true"] [data-demo-reveal][data-seen="true"] { opacity: 1; transform: translateY(0); }
+.dialog { width: min(940px,calc(100% - 32px)); max-width: none; max-height: calc(100svh - 36px); margin: auto; padding: 0; border: 0; background: #faf9f5; color: #222; overscroll-behavior: contain; }
+.dialog::backdrop { background: #101719d9; backdrop-filter: blur(8px); }
+.dialog[open] { animation: dialogIn .4s cubic-bezier(.22,1,.36,1) both; }
+.dialogTop { position: sticky; top: 0; z-index: 4; display: flex; justify-content: space-between; align-items: center; gap: 15px; min-height: 65px; padding: 12px 25px; background: inherit; border-bottom: 1px solid #8884; font-size: 9px; letter-spacing: .07em; }
+.dialogTop > button { display: flex; align-items: center; gap: 20px; font-size: 9px; min-height: 40px; background: transparent; }
+.dialogTop > button > span { font-size: 28px; line-height: 1; }
+.demoNotice { font-size: 9px; line-height: 2.1; opacity: .65; }
+@keyframes dialogIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width:700px) { .dialogTop { padding-inline: 20px; min-height: 58px; font-size: 8px; } .demoNotice { font-size: 8px; } }
+@media(prefers-reduced-motion:reduce) {
+ .root *,.root *::before,.root *::after { animation: none!important; transition: none!important; scroll-behavior: auto!important; }
+ .root[data-motion] [data-demo-reveal] { opacity: 1!important; transform: none!important; }
+ .root [data-demo-opening] { display: none!important; }
+ .root [data-demo-scene] > img { transform: none!important; }
+}

@@ -11,13 +11,13 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = siteConfig.meta.siteName;
 
-const BADGE = "堺市の店舗・事業所向けホームページ制作";
-const PRICE_LABEL_1 = "初期費用";
-const PRICE_VALUE_1 = "0円";
-const PRICE_LABEL_2 = "・月額";
-const PRICE_VALUE_2 = "5,500円";
-const PRICE_TAX = "（税込）";
-const SUB = "制作から、更新・管理までまるごとおまかせ";
+const BADGE = "お店の「らしさ」が伝わるホームページを。";
+const PRICE_LABEL_1 = "制作初期費用";
+const PRICE_VALUE_1 = `${siteConfig.pricing.initialCost}円〜`;
+const PRICE_LABEL_2 = "月額運用費";
+const PRICE_VALUE_2 = `${siteConfig.pricing.monthlyFrom}円〜`;
+const PRICE_TAX = `（${siteConfig.pricing.priceTaxNote}）`;
+const SUB = "堺市を拠点に。制作も、公開後のことも、ご相談ください。";
 const SITE_NAME = "まちのWeb";
 const DOMAIN = "machinowebs.com";
 
@@ -37,7 +37,7 @@ export default async function OgImage() {
     loadGoogleFont(900, allText),
   ]);
 
-  const { primary, primaryDark, accent } = siteConfig.theme;
+  const { primary } = siteConfig.theme;
 
   return new ImageResponse(
     (
@@ -47,9 +47,9 @@ export default async function OgImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          background: `linear-gradient(135deg, ${primary} 0%, ${primaryDark} 100%)`,
+          justifyContent: "space-between",
+          padding: "52px 64px",
+          background: "#173f3b",
           fontFamily: "NotoSansJP",
           color: "#ffffff",
         }}
@@ -57,12 +57,9 @@ export default async function OgImage() {
         <div
           style={{
             display: "flex",
-            background: accent,
-            borderRadius: 9999,
-            padding: "12px 36px",
-            fontSize: 30,
+            fontSize: 38,
             fontWeight: 700,
-            marginBottom: 44,
+            color: "#f4f6e9",
           }}
         >
           {BADGE}
@@ -70,18 +67,21 @@ export default async function OgImage() {
         <div
           style={{
             display: "flex",
-            alignItems: "baseline",
-            fontWeight: 900,
-            marginBottom: 36,
+            alignItems: "center",
+            gap: 60,
+            padding: "30px 0",
+            borderTop: "1px solid #719189",
+            borderBottom: "1px solid #719189",
           }}
         >
-          <span style={{ fontSize: 56 }}>{PRICE_LABEL_1}</span>
-          <span style={{ fontSize: 110, color: "#ffe27a" }}>{PRICE_VALUE_1}</span>
-          <span style={{ fontSize: 56 }}>{PRICE_LABEL_2}</span>
-          <span style={{ fontSize: 110, color: "#ffe27a" }}>{PRICE_VALUE_2}</span>
-          <span style={{ fontSize: 40 }}>{PRICE_TAX}</span>
+          {[[PRICE_LABEL_1, PRICE_VALUE_1], [PRICE_LABEL_2, PRICE_VALUE_2]].map(([label,value])=>(
+            <div key={label} style={{display:"flex",flexDirection:"column",flex:1}}>
+              <span style={{fontSize:25,color:"#c5d8c5",fontWeight:700}}>{label}</span>
+              <div style={{display:"flex",alignItems:"baseline",marginTop:9,gap:10}}><span style={{fontSize:78,fontWeight:900,letterSpacing:-3,color:"#f5f6ec"}}>{value}</span><span style={{fontSize:17}}>{PRICE_TAX}</span></div>
+            </div>
+          ))}
         </div>
-        <div style={{ display: "flex", fontSize: 40, fontWeight: 700, opacity: 0.95 }}>
+        <div style={{ display: "flex", fontSize: 25, fontWeight: 700, color: "#c5d8c5" }}>
           {SUB}
         </div>
         <div
@@ -89,7 +89,7 @@ export default async function OgImage() {
             display: "flex",
             alignItems: "center",
             gap: 20,
-            marginTop: 64,
+            justifyContent: "space-between",
             fontSize: 34,
             fontWeight: 700,
           }}
@@ -99,8 +99,7 @@ export default async function OgImage() {
               display: "flex",
               background: "#ffffff",
               color: primary,
-              borderRadius: 16,
-              padding: "8px 24px",
+              padding: "8px 20px",
               fontWeight: 900,
             }}
           >

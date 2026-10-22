@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-22",
+  "generator": "Built-in image_gen tool; precise-object-edit",
+  "assets": [
+    {
+      "asset": "kasane/hero",
+      "reference": "/Users/gimgutae/Developer/website-LP/public/demo/kasane/hero.webp",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-b4f6024c-747d-4d3e-bfc3-d8b45016a2b5.png",
+      "output": "public/demo/kasane/hero-no-people.webp",
+      "prompt": "Use case: precise-object-edit\nAsset type: replacement editorial website photograph.\nInput image 1: edit target; keep the recognizable original scene.\nPrimary request: Remove the single small person standing in the back left-center walkway completely, including their cast shadow. Restore the floor and room surfaces behind them. Keep the exact architecture, sunlight, courtyard tree, furnishings, camera position, composition, aspect ratio and natural warm photographic finish. No people or human reflections anywhere.\nConstraints: photorealistic natural texture, no text, logos or watermarks; no redesign or new decorative elements. Remove human presence while retaining the original photographic brand mood."
+    },
+    {
+      "asset": "kasane/craft",
+      "reference": "/Users/gimgutae/Developer/website-LP/public/demo/kasane/craft.webp",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-0d2769f0-7566-49b4-9197-e3e1f633a1a7.png",
+      "output": "public/demo/kasane/craft-no-people.webp",
+      "prompt": "Use case: precise-object-edit\nAsset type: replacement editorial website photograph.\nInput image 1: edit target; keep the recognizable original scene.\nPrimary request: Remove both people entirely: all torsos, clothing, arms, hands and fingers. Restore a natural unoccupied design studio behind the table using its existing shelves and windows. Keep the architecture model, plans, all wood, tile, concrete and fabric samples as the focus. The wood board that was being held should now lie naturally on the tabletop, not float. Preserve the same composition, camera, table, materials, sunlight and color mood. No human presence, silhouettes, reflections or hands.\nConstraints: photorealistic natural texture, no text, logos or watermarks; no redesign or new decorative elements. Remove human presence while retaining the original photographic brand mood."
+    },
+    {
+      "asset": "michiru/hero",
+      "reference": "/Users/gimgutae/Developer/website-LP/public/demo/michiru/hero.webp",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-0f20a194-cb07-400a-9fe4-7802b7c0d702.png",
+      "output": "public/demo/michiru/hero-no-people.webp",
+      "prompt": "Use case: precise-object-edit\nAsset type: replacement editorial website photograph.\nInput image 1: edit target; keep the recognizable original scene.\nPrimary request: Remove every person completely: the teacher and all four children, their bodies, heads, clothing, hands and reflections. Reveal the empty cobalt-blue chairs naturally around the same table; maintain a welcoming small English classroom just before a lesson. Retain the picture cards, pencils, tabletop, globe, map, bookcase, window, plants, camera position, natural daylight and blue-and-wood palette. Keep the same landscape composition. No people, no hands, no faces on books or posters, no ghosting, no extra text.\nConstraints: photorealistic natural texture, no text, logos or watermarks; no redesign or new decorative elements. Remove human presence while retaining the original photographic brand mood."
+    },
+    {
+      "asset": "michiru/activity",
+      "reference": "/Users/gimgutae/Developer/website-LP/public/demo/michiru/activity.webp",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-c1cffbdd-9c24-4257-b561-cd223f26b411.png",
+      "output": "public/demo/michiru/activity-no-people.webp",
+      "prompt": "Use case: precise-object-edit\nAsset type: replacement editorial website photograph.\nInput image 1: edit target; keep the recognizable original scene.\nPrimary request: Remove all human hands, fingers, forearms, torsos and clothing from around this tabletop. Keep the apple, sun and book picture cards in the same positions, with the blue pencil case, open notebook and pencils. Fill removed areas with coherent light wooden table grain. Preserve camera position, lighting, shadows of objects, colors and landscape framing. A tactile lesson-material still life, not an empty blank surface. No people or human body parts anywhere.\nConstraints: photorealistic natural texture, no text, logos or watermarks; no redesign or new decorative elements. Remove human presence while retaining the original photographic brand mood."
+    },
+    {
+      "asset": "michiru/teacher",
+      "reference": "/Users/gimgutae/Developer/website-LP/public/demo/michiru/teacher.webp",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-87b16d89-55b1-42b8-9699-971b3524b278.png",
+      "output": "public/demo/michiru/teacher-no-people.webp",
+      "prompt": "Use case: precise-object-edit\nAsset type: replacement editorial website photograph.\nInput image 1: edit target; keep the recognizable original scene.\nPrimary request: Remove both people completely: the woman teacher and the partial student in the right foreground, including all faces, bodies, clothing, arms and hands. Leave the same blue chair and an open notebook with a simple pen resting naturally on the desk. Restore the classroom bookshelf, globe, plants and daylight behind them. Preserve the camera angle, warm wood, blue accents and natural photographic texture. The result is an inviting quiet lesson-preparation corner. No humans, human shadows, silhouettes, faces on books or reflections.\nConstraints: photorealistic natural texture, no text, logos or watermarks; no redesign or new decorative elements. Remove human presence while retaining the original photographic brand mood."
+    },
+    {
+      "asset": "niwato/care",
+      "reference": "/Users/gimgutae/Developer/website-LP/public/demo/niwato/care.webp",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-a7c4e5fc-6fee-4094-9a99-e378bb5ff002.png",
+      "output": "public/demo/niwato/care-no-people.webp",
+      "prompt": "Use case: precise-object-edit\nAsset type: replacement editorial website photograph.\nInput image 1: edit target; keep the recognizable original scene.\nPrimary request: Remove the gardener entirely, including body, hair, face, arms, hands, legs, boots and personal shadow. Reconstruct the lawn, house, shrubs and fence behind the removed person. Keep the walk-behind lawn mower in the same foreground position, parked safely with engine off and handle upright; it is not autonomously moving. Preserve the exact camera, image framing, natural garden sunlight, house and mower. No people, body parts or human reflections.\nConstraints: photorealistic natural texture, no text, logos or watermarks; no redesign or new decorative elements. Remove human presence while retaining the original photographic brand mood."
+    },
+    {
+      "asset": "sekka/inspection",
+      "reference": "/Users/gimgutae/Developer/website-LP/public/demo/sekka/inspection.webp",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-9ae9d2d1-2817-4593-b67f-5d8a26b5934c.png",
+      "output": "public/demo/sekka/inspection-no-people.webp",
+      "prompt": "Use case: precise-object-edit\nAsset type: replacement editorial website photograph.\nInput image 1: edit target; keep the recognizable original scene.\nPrimary request: Remove all human hands, arms, body and navy clothing. Arrange the same unbranded mechanical micrometer resting naturally on the metal inspection bench alongside the upright machined steel cylinder; the micrometer must be supported by the bench rather than floating. Preserve the existing metal parts, workshop background, shallow depth of field, camera and neutral editorial light. Plausible precision-tool geometry, no invented readable measurements, no people, body parts or reflections.\nConstraints: photorealistic natural texture, no text, logos or watermarks; no redesign or new decorative elements. Remove human presence while retaining the original photographic brand mood."
+    },
+    {
+      "asset": "sumitoki/hero",
+      "reference": "/Users/gimgutae/Developer/website-LP/public/demo/sumitoki/hero.webp",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-2b629f00-c659-4eba-825b-fe190c65931c.png",
+      "output": "public/demo/sumitoki/hero-no-people.webp",
+      "prompt": "Use case: precise-object-edit\nAsset type: replacement editorial website photograph.\nInput image 1: edit target; keep the recognizable original scene.\nPrimary request: Remove the chef's arm, hand, black sleeve and any torso at the upper right, and remove the tongs entirely. Let the mushroom that was held by the tongs rest naturally on the grill grate. Preserve all other mushrooms, leeks, hot charcoal, fire, subtle smoke, restaurant bokeh, dark negative space at left, warm lighting, camera perspective and exact wide framing. The food and charcoal are the sole subject. No people, hands, body parts or human reflections.\nConstraints: photorealistic natural texture, no text, logos or watermarks; no redesign or new decorative elements. Remove human presence while retaining the original photographic brand mood."
+    }
+  ],
+  "films": [
+    {
+      "output": "public/demo/kasane/brand-film-no-people.mp4",
+      "images": [
+        "public/demo/kasane/hero-no-people.webp",
+        "public/demo/kasane/craft-no-people.webp",
+        "public/demo/kasane/workplace.webp",
+        "public/demo/kasane/atelier.webp"
+      ]
+    },
+    {
+      "output": "public/demo/sumitoki/photo-film-no-people.mp4",
+      "images": [
+        "public/demo/sumitoki/hero-no-people.webp",
+        "public/demo/sumitoki/vegetables.webp",
+        "public/demo/sumitoki/interior.webp",
+        "public/demo/sumitoki/dessert.webp"
+      ]
+    }
+  ],
+  "protectedSalonAssets": [
+    {
+      "path": "public/demo/sui/bob.webp",
+      "sha256": "55f51caa449437742d131c6a51aad29924267385bc7d678e91c46ad892eb6848"
+    },
+    {
+      "path": "public/demo/sui/craft.webp",
+      "sha256": "6864b5dd95641a8706fbcde97f0f98ae73b998148cc8ef722dfa8c338bf66376"
+    },
+    {
+      "path": "public/demo/sui/hero.webp",
+      "sha256": "b96cfd979fef8dd7ef78ca445e84ead8d0c67daaa0519bfc9f6edb3475cd74cd"
+    },
+    {
+      "path": "public/demo/sui/interior.webp",
+      "sha256": "c1230364cb873f8fc34bd51c83b681de1eef68ee1948fa2f34239fe6e249eaa3"
+    },
+    {
+      "path": "public/demo/sui/photo-film.mp4",
+      "sha256": "e8baefa00551d17f4d5ab16098ee885fa25bbf1bd75974504e00e0438f1c961e"
+    },
+    {
+      "path": "public/demo/sui/short.webp",
+      "sha256": "ac7e51a6b957f0557a94a4d81b66197dce40f05ec3c3ce7affc41c31e25905a0"
+    },
+    {
+      "path": "public/demo/sui/wave.webp",
+      "sha256": "66a4d65aac897bb2f50bfbf671334e8b34efdf3910ac36665f77733913c7c848"
+    }
+  ]
+}

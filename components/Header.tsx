@@ -1,27 +1,30 @@
 import { siteConfig } from "@/site.config";
 import { LineIcon } from "./icons";
 import { Logo } from "./Logo";
+import styles from "./home/home.module.css";
+import { MobileNavigation } from "./home/MobileNavigation";
 
 const navItems = [
-  { href: "#price", label: "料金" },
+  { href: "#demo", label: "制作見本" },
+  { href: "#price", label: "費用の目安" },
   { href: "#flow", label: "制作の流れ" },
+  { href: "#column", label: "コラム" },
   { href: "#faq", label: "よくある質問" },
 ];
 
-export function Header() {
+export function Header({homeHref=""}:{homeHref?:string}) {
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <a href="#top" aria-label={siteConfig.meta.siteName}>
+    <header className={styles.header}>
+      <div className={styles.headerInner}>
+        <a href={`${homeHref}#top`} aria-label={siteConfig.meta.siteName}>
           <Logo />
         </a>
-        <div className="flex items-center gap-6">
-          <nav className="hidden items-center gap-6 md:flex" aria-label="ページ内リンク">
+        <div className={styles.headerLinks}>
+          <nav className={styles.headerNav} aria-label="ページ内リンク">
             {navItems.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-slate-600 transition hover:text-primary"
+                href={`${homeHref}${item.href}`}
               >
                 {item.label}
               </a>
@@ -31,11 +34,12 @@ export function Header() {
             href={siteConfig.line.addFriendUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full bg-line px-4 py-2 text-sm font-bold text-white transition hover:bg-line-dark"
+            className={styles.headerAction}
           >
-            <LineIcon className="h-4 w-4" />
-            相談する
+            <LineIcon />
+            <span className={styles.desktopAction}>ご相談はこちら</span><span className={styles.mobileAction}>相談</span>
           </a>
+          <MobileNavigation items={navItems} homeHref={homeHref}/>
         </div>
       </div>
     </header>

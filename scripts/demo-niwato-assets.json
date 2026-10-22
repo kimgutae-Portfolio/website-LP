@@ -1,0 +1,30 @@
+{
+  "generator": "Built-in image_gen tool",
+  "assets": [
+    {
+      "name": "hero",
+      "prompt": "Use case: photorealistic-natural\nAsset type: hero photograph for a Japanese monthly lawn care service website.\nPrimary request: a beautifully maintained but believable small residential lawn in Japan, seen from a low standing viewpoint across the vivid green grass toward a modest modern wood-and-white house terrace, one simple outdoor chair, small tree casting dappled shadows, discreet planting borders. No people. Natural late morning sun, fresh feeling, realistic grass blades and imperfect organic detail, editorial outdoor living photography, restrained true colors without HDR. Wide landscape image, lawn occupying lower two thirds, house near the upper edge; center safe for vertical mobile crop. No text, signs, branding, watermark or ornamental topiary.",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-a2088429-d8e6-40c2-a267-880a373d60ed.png",
+      "output": "public/demo/niwato/hero.webp"
+    },
+    {
+      "name": "care",
+      "prompt": "Use case: photorealistic-natural\nAsset type: service detail photograph for Japanese lawn care subscription demo.\nPrimary request: candid professional Japanese gardener mowing a small home's lawn with an unbranded compact walk-behind lawn mower. Adult worker in forest-green work shirt and beige work trousers, closed sturdy boots, protective glasses, gloves and hearing protection, both hands correctly on mower handle, looking at mowing path, no bystanders. Medium-wide 3/4 view, natural daylight, real fabric texture and grass clippings, subtle documentary style, domestic Japanese garden with clean wood fence. Avoid obvious stock pose, glamour retouch, text, logos or watermarks. Landscape format.",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-612978b1-c096-43b6-90a7-b38256ac5bac.png",
+      "output": "public/demo/niwato/care.webp"
+    },
+    {
+      "name": "before",
+      "prompt": "Use case: photorealistic-natural\nAsset type: BEFORE photo for an interactive lawn-maintenance comparison on a fictional Japanese service site.\nPrimary request: a fixed-camera garden scene: a rectangular small Japanese residential lawn with slightly overgrown 12cm grass, uneven edges and a few weeds, light grey rectangular stepping stones along the right edge, low cedar fence at the back, a single small Japanese maple on the left, white house wall with a sliding glass door behind. Eye-level wide lens, calm clear late spring daylight, believable tidy house but neglected lawn. Photorealistic documentary photograph, no people. The exact scene will be reused for an after edit; keep strong stable geometry. No text, no branding, no watermark, landscape format.",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-d9d2028f-031a-49f0-945e-371600429766.png",
+      "output": "public/demo/niwato/before.webp"
+    },
+    {
+      "name": "after",
+      "prompt": "Use case: precise-object-edit\nAsset type: AFTER photo for a lawn-maintenance comparison.\nInput images: Image 1 is the exact edit target, a Japanese residential garden with overgrown lawn.\nPrimary request: edit only the grassy lawn, transforming it into a neatly mown lawn at a realistic 4cm height, remove the broadleaf weeds within the lawn and trim the lawn edges around the stepping stones. Collect loose clippings. Keep natural blade texture, slight tonal imperfections, do not make plastic turf.\nInvariants: preserve the EXACT camera, perspective, crop, house wall, sliding door, all stepping stone positions/shapes, fence, trees, flower borders, sky, sunlight and shadows. Do not add flowers, furniture, people, tools or new features. Only the grass lawn changes. No text, watermark or logos. This is the after image of the same scene, not a redesign.",
+      "reference": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-d9d2028f-031a-49f0-945e-371600429766.png",
+      "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-49284720-8bb7-4db2-91f8-13278cb439ea.png",
+      "output": "public/demo/niwato/after.webp"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "asset": "sekka/hero",
+    "prompt": "Use case: photorealistic-natural. Asset type: editorial hero photograph for a fictional Japanese precision metalworking company website. A real-looking CNC milling machine cutting a compact aluminum workpiece inside its closed machining enclosure, close-up on the tool and clean concentric machining marks, small realistic coolant traces, brushed stainless steel, charcoal machine body. The machine is not branded. Landscape 3:2 composition, precise and tactile industrial magazine photography, controlled cool daylight with a very restrained warm machine-light accent. No people, no sparks, no exaggerated sci-fi glow, no smoke, no text, no logos, no watermarks. The photograph itself, not a web mockup.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-4f7a13c3-eb73-43b2-a597-36ab65c82490.png"
+  },
+  {
+    "asset": "sekka/parts",
+    "prompt": "Use case: product-mockup. Asset type: editorial product photograph for a fictional Japanese metalworking company website. Three different beautifully machined unbranded aluminum and stainless steel components: a turned cylindrical collar, a rectangular milled bracket with two drilled holes, and a stepped disc. Correct plausible solid mechanical geometry, visible fine tool marks and chamfered edges. Objects on a dark graphite matte work surface, generous space, grazing soft studio light revealing material texture, precise modern industrial catalog, horizontal 3:2. Photorealistic, not CGI-looking, no text, no labels, no logos, no watermark, no glowing effects.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-39c325d6-1bbc-41b6-ad4d-8a2ab9928b75.png"
+  },
+  {
+    "asset": "sekka/inspection",
+    "prompt": "Use case: photorealistic-natural. Asset type: industrial editorial photograph. Close view of a skilled adult Japanese machinist's hands using a plain mechanical micrometer to measure a small machined steel cylinder on a clean workbench. Natural anatomically correct hands, navy cotton workwear cuffs, tool-contact geometry credible, fine wear on tools, quiet neutral workshop light. Hands and measuring instrument in lower middle with a blurred metalworking shop behind. Horizontal 3:2, photorealistic, documentary restraint, not posed advertising. No readable digits required, no logos, no text, no watermark, no extra fingers, no PPE safety violation, no operating machinery near bare hands.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-8e98a329-3f7e-4f0d-a57a-2b622a0b72b3.png"
+  },
+  {
+    "asset": "sekka/workshop",
+    "prompt": "Use case: photorealistic-natural. Asset type: wide architectural editorial photograph of a fictional small Japanese precision metalworking workshop. A tidy but lived-in shop with three unbranded compact CNC machining centers, grey industrial floor, overhead fluorescent lights mixed with daylight from high windows, a tool trolley and metal stock racks, no people. Authentic small company atmosphere, not a giant automated factory or showroom, restrained cool grey and deep navy tones, horizontal 3:2 composition with depth. No readable signs, no logos, no watermark, no cyberpunk, no dramatic sparks.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-ed4979aa-0d99-4b8d-b629-691643cd948b.png"
+  },
+  {
+    "asset": "nagi/hero",
+    "prompt": "Use case: photorealistic-natural. Asset type: cinematic editorial hero photograph for a fictional small Japanese garden inn website. View from the shadow of a traditional timber engawa veranda into an intimate Japanese moss garden with a maple tree and stepping stones after a light rain. A weathered wooden veranda in foreground, open shoji frame at the edge, a hint of warm interior, soft late afternoon sunlight on leaves, quiet depth and real timber grain. Horizontal 3:2, generous atmosphere, elegant restrained travel magazine photography, green, warm brown and deep shadow, not oversaturated. No people, no text, no logos, no watermark. Not a famous real inn, not a UI mockup.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-ec0badbc-93a1-49c3-8ec0-45308086d291.png"
+  },
+  {
+    "asset": "nagi/room",
+    "prompt": "Use case: photorealistic-natural. Asset type: editorial guest-room photograph for a fictional Japanese garden inn. A simple refined eight-tatami Japanese guest room with a low dark walnut table, two floor cushions, a tiny ceramic vase holding a single seasonal branch, broad open shoji windows to a small green moss garden. Warm morning daylight, real tatami texture and aged timber, elegant but believable small family inn, no hotel luxury staging. Horizontal 3:2, architecture photography from waist height, natural colors, calm empty room. No people, no text, no logos, no watermarks, no extra decorations.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-1375ab66-ae69-4472-9065-b05835233e4e.png"
+  },
+  {
+    "asset": "nagi/bath",
+    "prompt": "Use case: photorealistic-natural. Asset type: editorial bath photograph for a fictional Japanese garden inn, no claim about natural hot springs. A small indoor hinoki wood soaking bath beside a broad window facing green maple leaves and a quiet courtyard. Clean pale wood grain, soft water ripples, a modest stone floor and one wooden washing stool, fine natural daylight, slightly humid air but no dramatic steam. Horizontal 3:2 travel magazine image, realistic functional scale, intimate and quiet. No people, no text, no logos, no watermark, no branded products, no swimming pool.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-78b14787-853a-40ab-af00-a1c694f6156c.png"
+  },
+  {
+    "asset": "nagi/meal",
+    "prompt": "Use case: photorealistic-natural. Asset type: seasonal dinner photograph for a fictional Japanese garden inn. A restrained Japanese seasonal meal on a dark walnut table: a small ceramic dish of grilled fish, autumn vegetables in an earthen bowl, steamed rice, miso soup and a small pickle dish, carefully but naturally arranged. Warm evening light, handmade ceramic textures, believable modest inn cooking, not extravagant luxury kaiseki, no raw meat. Horizontal 3:2, slightly oblique close overhead editorial food photography, subtle grain, not oversaturated. No people, no text, no logos, no watermark.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-6011c6c3-e6e3-485d-88f2-07025731a5e1.png"
+  },
+  {
+    "asset": "michiru/hero",
+    "prompt": "Use case: photorealistic-natural. Asset type: candid classroom hero photograph for a fictional Japanese neighborhood English school website. Four Japanese children around age nine to eleven with varied natural hairstyles, fully clothed in ordinary modest casual school-day clothing, seated at a shared pale wood table, enjoying a small-group English activity with an adult Japanese woman teacher in her thirties. Children are looking at each other and the teacher, one child smiling while speaking, not all looking at camera. Open blank picture cards and colored pencils on the table, daylight, blue accents in a clean but lived-in classroom. Wide horizontal 3:2 composition with heads and hands fully visible, warm trustworthy documentary editorial photography, realistic skin texture, natural diverse expressions. No readable writing, no text, no logos, no watermarks, no exaggerated stock-photo cheering.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-0dadd9b9-137d-4dd5-b6bc-f105ce81a011.png"
+  },
+  {
+    "asset": "michiru/activity",
+    "prompt": "Use case: photorealistic-natural. Asset type: candid educational detail photograph for a fictional Japanese English school. Overhead oblique view of three fully clothed primary-school-age children's hands and a teacher's hand arranging simple picture cards depicting an apple, a sun and a book on a pale wood classroom desk. Cards have colorful simple drawings but no words or letters. One plain notebook, colored pencils, natural small-group learning activity, soft bright daylight, warm real-world texture, cobalt-blue pencil case as an accent. Horizontal 3:2. Anatomically correct hands and credible card shapes, no faces, no text, no logos, no watermark, not a UI mockup.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-e29b7593-89bd-4984-a187-d2b14da5baeb.png"
+  },
+  {
+    "asset": "michiru/classroom",
+    "prompt": "Use case: photorealistic-natural. Asset type: interior photograph for a fictional small neighborhood English school in Japan. A welcoming modest classroom with one rectangular pale wood table and six cobalt-blue chairs, bookshelves of unbranded books, a plain whiteboard with no writing, sunlight through simple white curtains, a few children's simple drawings pinned neatly on a wall without readable letters. A real small independent classroom, not a kindergarten playground, restrained white, warm wood, blue and yellow accents. Horizontal 3:2 architectural editorial photograph, honest everyday atmosphere, no people, no readable text, no logos, no watermarks.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-8ab58c99-2a5c-49d2-b559-cda1d6d4112a.png"
+  },
+  {
+    "asset": "michiru/teacher",
+    "prompt": "Use case: photorealistic-natural. Asset type: candid teacher image for a fictional Japanese English school website. An adult Japanese woman teacher in her mid-thirties in a simple cream cotton shirt and navy trousers, seated sideways at a classroom table, smiling naturally and listening attentively to a learner just outside the frame. A blank open notebook on table, blue chair and bookcase softly out of focus, natural daylight, real skin texture, genuine thoughtful expression, not a formal corporate headshot. Horizontal 3:2 medium portrait with hands and head fully in frame, photorealistic documentary editorial, no text, no logos, no watermark, no readable certificates or awards.",
+    "source": "/Users/gimgutae/.codex/generated_images/019f6427-6141-7272-a1c1-9dda70b99fb2/exec-2b5175f4-d1e1-43b1-ace0-a46c7c381ca1.png"
+  }
+]

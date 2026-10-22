@@ -13,7 +13,7 @@ npm run build  # 프로덕션 빌드 (Vercel 배포 전 확인용)
 
 ## 커스터마이즈 — `site.config.ts` 하나만 수정
 
-상호 / 가격 / 카피 / 테마 색 / 데모 링크 / 캠페인 배지까지 전부
+상호 / 가격 / 카피 / 테마 색 / 데모 링크를
 [site.config.ts](./site.config.ts) 에서 관리한다.
 고객용 템플릿으로 재사용할 때도 이 파일 + `public/` 이미지만 교체하면 된다.
 
@@ -26,8 +26,8 @@ npm run build  # 프로덕션 빌드 (Vercel 배포 전 확인용)
 | LINE 친구추가 URL | `line.addFriendUrl` |
 | LINE QR 이미지 | `line.qrImage` (`public/`에 이미지 추가 후 경로 지정) |
 | 운영자 이름·사진 | `owner.name`, `owner.photo` |
-| 캠페인 배지 ON/OFF | `pricing.campaign.enabled` |
-| 데모 사이트 링크 | `demos.items[].url` (빈 문자열이면 「準備中」 표시) |
+| 시작 요금 | `pricing.initialCost` / `pricing.monthlyFrom` (모두 세금 포함, 상담 후 견적) |
+| 제작 견본 8종 | `websiteExamples` / `demos` (기존 3개 템플릿은 메인에서 제외, URL은 유지) |
 | 特商法 표기 | [app/tokushoho/page.tsx](./app/tokushoho/page.tsx) 의 準備中 항목 |
 
 ## 구조

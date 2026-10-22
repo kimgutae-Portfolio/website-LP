@@ -11,6 +11,7 @@ import { Faq } from "@/components/Faq";
 import { Cta } from "@/components/Cta";
 import { Footer } from "@/components/Footer";
 import { FloatingLine } from "@/components/FloatingLine";
+import { Columns } from "@/components/Columns";
 
 // 구조화 데이터: 사이트명과 사업 정보를 Google에 일관된 형태로 전달한다.
 const jsonLd = {
@@ -37,7 +38,7 @@ const jsonLd = {
         name: "堺市",
         containedInPlace: { "@type": "AdministrativeArea", name: "大阪府" },
       },
-      priceRange: "月額5,500円〜",
+      priceRange: `制作初期費用${siteConfig.pricing.initialCost}円〜・月額運用費${siteConfig.pricing.monthlyFrom}円〜（${siteConfig.pricing.priceTaxNote}）`,
     },
   ],
 };
@@ -52,17 +53,18 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <Demo />
         <Pain />
         <Promises />
-        <Demo />
         <Pricing />
         <Flow />
+        <Columns />
         <InstagramFeed />
         <Faq />
         <Cta />
       </main>
       <Footer />
-      <FloatingLine />
+      <FloatingLine afterHero />
     </>
   );
 }

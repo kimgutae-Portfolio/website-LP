@@ -21,6 +21,9 @@ export function Footer() {
           aria-label="フッターリンク"
           className="mb-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm"
         >
+          <Link href="/column" className="underline underline-offset-4 transition hover:text-white">
+            お役立ちコラム
+          </Link>
           <Link href="/tokushoho" className="underline underline-offset-4 transition hover:text-white">
             特定商取引法に基づく表記
           </Link>

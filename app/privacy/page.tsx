@@ -80,7 +80,7 @@ export default function PrivacyPage() {
         <p className="mt-10 text-sm text-slate-500">制定日: 2026年7月9日</p>
         <p className="mt-8">
           <Link href="/" className="font-bold text-primary underline underline-offset-4">
-            ← トップページへ戻る
+            トップページへ戻る
           </Link>
         </p>
       </main>

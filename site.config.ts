@@ -3,24 +3,17 @@
  * サイト設定ファイル（site.config.ts）
  * ============================================================
  * 이 파일 하나만 수정하면 상호 / 가격 / 카피 / 색 / 데모 링크 /
- * 캠페인 배지 토글까지 전부 교체 가능.
+ * 제작 견본까지 교체 가능.
  * → 고객용 템플릿으로 재사용할 때는 이 파일과 public/ 의
  *   이미지만 바꾸면 된다는 전제로 설계되어 있음.
  * ============================================================
  */
 
-export interface DemoItem {
-  /** 데모 사이트 이름 (가상 점포명) */
-  name: string;
-  /** 업종 라벨 */
-  category: string;
-  /** 디자인 패턴 라벨 (템플릿 3종 소구용) */
-  pattern: string;
-  /** 링크. 빈 문자열이면 「準備中」 카드로 표시됨 */
-  url: string;
-  /** 카드 한 줄 설명 */
-  description: string;
-}
+const startingPrices = {
+  initialCost: "30,000",
+  monthlyFrom: "5,500",
+  priceTaxNote: "税込",
+} as const;
 
 export const siteConfig = {
   /* ---------------------------------------------------------
@@ -29,9 +22,9 @@ export const siteConfig = {
   meta: {
     siteName: "まちのWeb",
     title:
-      "堺市のホームページ制作｜初期費用0円・月額5,500円｜まちのWeb",
+      `堺市のホームページ制作｜初期費用${startingPrices.initialCost}円〜・月額${startingPrices.monthlyFrom}円〜｜まちのWeb`,
     description:
-      "初期費用0円・月額5,500円（税込）。堺市の店舗・事業所のホームページを、制作から更新・管理までまるごとサポート。予約・LINE・業務システムまで対応する、堺の事業者の「IT担当」です。",
+      `制作初期費用${startingPrices.initialCost}円〜・月額運用費${startingPrices.monthlyFrom}円〜（${startingPrices.priceTaxNote}）。お店や会社のらしさが伝わるホームページを、制作から更新・管理までサポート。8つの制作見本を参考に、必要な内容と費用をご相談いただけます。堺市を拠点に近隣エリアへ直接お伺いします。`,
     url: "https://machinowebs.com",
     /**
      * Google Search Console「HTMLタグ」인증 코드.
@@ -68,12 +61,12 @@ export const siteConfig = {
    * 히어로
    * ------------------------------------------------------- */
   hero: {
-    catchTop: "堺のホームページ制作、初期費用0円・月額5,500円。",
+    catchTop: "そのお店らしさが、",
     catchMain:
-      "古いまま、直せないまま、見つからないまま。堺のお店の悩み、まるごと引き受けます。",
-    sub: "ホームページ制作から、予約・LINE・業務システムまで。堺の事業者の「IT担当」になります。",
+      "ちゃんと伝わる。",
+    sub: "お店や会社の魅力を、写真・ことば・動きで。堺市を拠点に直接お話を伺い、ホームページ制作から日々の更新までお手伝いします。",
     ctaLabel: "LINEで気軽に相談",
-    badges: ["初期費用0円", "堺市を拠点に直接お伺い", "スマホ完全対応"],
+    badges: ["相談・お見積り無料", "堺市を拠点に直接お伺い", "スマホ完全対応"],
   },
 
   /* ---------------------------------------------------------
@@ -129,87 +122,116 @@ export const siteConfig = {
    * 制作イメージ（데모 링크)
    * ------------------------------------------------------- */
   demos: {
-    /** 데모가 아직 없을 때 카드에 표시할 문구 */
-    comingSoonLabel: "準備中",
-    note: "※架空の店舗のデモサイトです。",
-    /** 이 LP 자체가 견본이라는 세일즈 포인트 문구 */
-    selfSample:
-      "実は、いまご覧いただいているこのページ自体が、月額5,500円プランと同じ仕組みで作られた「実物見本」です。表示の速さ、スマホでの見やすさを、そのままお確かめください。",
-    /** 그리드 위에 표시할 안내 문구 */
+    note: "※架空の店舗・企業のデモサイトです。",
     intro:
-      "3つのデザインパターンをご用意しています。デモサイトを実際に開いて、スマホでの見え方までお確かめください。",
-    items: [
+      "写真の見せ方も、文字も、動きも。業種ごとの雰囲気に合わせて制作した8つのサイトです。気になる見本を開いて、スマートフォンでの使い心地までお確かめください。",
+    examplesNote: "掲載見本は仕上がりのイメージです。同等の演出・構成・機能をご希望の場合は、内容に応じて個別にお見積りします。",
+    corporateShowcase: {
+      name: "KASANE｜株式会社かさね",
+      title: "企業の「らしさ」まで、伝わるサイトへ。",
+      description:
+        "写真と映像、余白と文字でブランドの世界観をつくる、企業サイトの制作見本。スマートフォンでも、細部までお確かめください。",
+      label: "ホームページの制作イメージ",
+      image: "/demo/kasane/hero-no-people.webp",
+      imageAlt: "木の温もりと自然光が印象的な、KASANEの企業サイト制作見本",
+      url: "/demo/kasane",
+    },
+    restaurantShowcase: {
+      name: "炭と季｜SUMITOKI",
+      title: "お店の空気まで、おいしく伝わる。",
+      description:
+        "炭火の香りを感じる写真、季節のお品書き、3件のSNS投稿。外部予約サイトへ自然につながる、飲食店のオリジナルデザイン制作見本です。",
+      label: "ホームページの制作イメージ",
+      image: "/demo/sumitoki/hero-no-people.webp",
+      imageAlt: "炭火で季節の野菜を焼く、炭と季の飲食店サイト制作見本",
+      url: "/demo/sumitoki",
+    },
+    clinicShowcase: {
+      name: "こもれび こどもクリニック",
+      title: "ちいさな不安を、やさしい安心へ。",
+      description:
+        "森のともだちが迎える、親しみと信頼感を大切にした小児科サイト。診療案内、初診の流れ、診療時間まで、スマートフォンで迷わず見つかるデザインです。",
+      label: "ホームページの制作イメージ",
+      image: "/demo/komorebi/forest-friends.webp",
+      imageAlt: "くまとうさぎと小鳥が迎える、こもれび こどもクリニックの制作見本",
+      url: "/demo/komorebi",
+    },
+    salonShowcase: {
+      name: "sui hair atelier",
+      title: "感性と、丁寧さが伝わるサロンへ。",
+      description:
+        "ヘアスタイルの写真、似合わせの考え方、明快なメニュー。編集された余白と静かな演出で、サロンの技術と空気感を伝えるオリジナルデザイン制作見本です。",
+      label: "ホームページの制作イメージ",
+      image: "/demo/sui/hero.webp",
+      imageAlt: "自然なレイヤーヘアが印象的な、sui hair atelierのヘアサロンサイト制作見本",
+      url: "/demo/sui",
+    },
+    additionalShowcases: [
       {
-        name: "デイサービスのぞみ",
-        category: "介護施設",
-        pattern: "パターンA：安心・信頼",
-        url: "/demo/nozomi",
-        description: "施設の雰囲気と安心感を伝える、やわらかい配色の構成",
+        name: "SEKKA｜セッカ精工",
+        title: "技術の確かさを、細部から伝える。",
+        description: "金属の質感、加工内容の切り替え、製品サンプル。図面を読み解くような構成と精密な動きで、ものづくりの姿勢を伝える製造業サイトです。",
+        category: "MANUFACTURING WEBSITE",
+        image: "/demo/sekka/hero.webp",
+        imageAlt: "CNC加工の細部が印象的な、SEKKAの製造業サイト制作見本",
+        url: "/demo/sekka",
+        background: "#172025", foreground: "#eef0e9", accent: "#ee9169",
       },
       {
-        name: "hair salon LUCE",
-        category: "美容室",
-        pattern: "パターンB：上品・洗練",
-        url: "/demo/luce",
-        description: "メニューと料金が一目で分かる、落ち着いた大人の構成",
+        name: "旅宿 凪｜NAGI",
+        title: "泊まる前から、旅がはじまる。",
+        description: "庭に向かう視線、朝から夜への光の移ろい、静かなフォトフィルム。客室・食事・宿泊案内から外部予約へつながる、小さな宿の制作見本です。",
+        category: "RYOKAN WEBSITE",
+        image: "/demo/nagi/hero.webp",
+        imageAlt: "縁側と日本庭園が静かに広がる、旅宿 凪の宿泊施設サイト制作見本",
+        url: "/demo/nagi",
+        background: "#e6e8dc", foreground: "#263a3c", accent: "#697e5e",
       },
       {
-        name: "お食事処 吉田",
-        category: "飲食店",
-        pattern: "パターンC：個性・こだわり",
-        url: "/demo/maruta",
-        description: "料理と店主のこだわりを主役にした、力強い構成",
+        name: "みちる英語教室｜MICHIRU",
+        title: "教室の楽しさを、信頼できるかたちに。",
+        description: "明るい教室や教材の写真と、ことばが動く演出。年齢別コース、月謝、時間割、体験案内まで、保護者にも子どもにも伝わる英語教室サイトです。",
+        category: "ENGLISH SCHOOL WEBSITE",
+        image: "/demo/michiru/hero-no-people.webp",
+        imageAlt: "青い椅子と絵カードが並ぶ明るい教室を描いた、みちる英語教室のサイト制作見本",
+        url: "/demo/michiru",
+        background: "#204cc9", foreground: "#fffdf5", accent: "#f5cd52",
       },
-    ] as DemoItem[],
+      {
+        name: "NIWATO｜庭と、暮らしの定期便。",
+        title: "サービスの魅力から、月額のお申し込みまで。",
+        description: "芝生のお手入れを月額サービスに。管理前後の写真比較、面積別のプラン選択、カードによる月額決済のデモまで体験できる、サービス販売サイトの制作見本です。実際の課金はありません。",
+        category: "SUBSCRIPTION SERVICE WEBSITE",
+        image: "/demo/niwato/hero.webp",
+        imageAlt: "明るい芝生の庭が広がる、NIWATOの月額サービス販売サイト制作見本",
+        url: "/demo/niwato",
+        background: "#174b35", foreground: "#fbfcf7", accent: "#ddf288",
+      },
+    ],
   },
 
   /* ---------------------------------------------------------
    * 料金
    * ------------------------------------------------------- */
   pricing: {
-    /** 캠페인 배지 ON/OFF 토글 */
-    campaign: {
-      enabled: false,
-      label: "開業記念キャンペーン価格",
-      note: "※キャンペーンは予告なく終了する場合があります。",
-    },
-    mainPlan: {
-      name: "おまかせホームページプラン",
-      priceMonthly: "5,500",
-      priceTaxNote: "税込",
-      initialCost: "初期費用 0円",
-      features: [
-        "1ページ型ホームページ制作（デザインは3種類のテンプレートから選択）",
-        "お知らせの更新 回数無制限",
-        "月1回のアクセスレポート",
-        "リニューアル更新 年4回（写真・構成の変更／1回3項目まで）",
-        "Google検索への登録（Search Console・サイトマップ設定）",
-        "独自ドメイン取得サポート（お客様所有／無料サブドメインも選択可）",
-        "サーバー・ドメインの管理、SSL（通信の暗号化）対応",
-        "LINE友だち追加ボタン・Googleマップの設置",
-        "スマートフォン完全対応",
-      ],
-      conditions: "最低契約期間3ヶ月（以降はいつでも解約できます）",
-    },
-    // 기본プラン（おまかせホームページプラン）의 다음 단계. 월額이 아닌
-    // 초기비용 청구형 플랜 — 템플릿 커스터마이징 + 복수페이지 + 폼·시스템 연동을 묶음.
-    secondPlan: {
-      name: "カスタムホームページプラン",
-      badge: "デザインも機能も、自由にカスタマイズ",
-      initialCost: "30,000",
-      initialCostNote: "ページ数・カスタマイズ内容によりお見積りします",
-      priceTaxNote: "税込",
-      monthlyNote: "運用月額は基本プランと同じ5,500円（税込）",
-      features: [
-        "基本プランの内容をすべて含む",
-        "複数ページ制作（会社概要・スタッフ紹介・料金ページなど、必要なページを追加）",
-        "テンプレートデザインの自由なカスタマイズ（配色・レイアウト・構成の変更）",
-        "お問い合わせフォームの設置（プライバシーポリシーの作成・設置込み）",
-        "予約システム・請求書の自動作成・業務システムなどの開発・連携",
-      ],
-      conditions:
-        "初期費用は、ご希望の内容をお伺いしたうえで正式にお見積りします（月額料金・契約条件は基本プランと共通）",
-    },
+    ...startingPrices,
+    headline: "必要なものを、一緒に。\n費用も、まずはご相談から。",
+    description: "決まったプランにお店を合わせるのではなく、伝えたいことと必要な機能から。ご希望とご予算を伺い、無理のないかたちをご提案します。",
+    creationFeatures: [
+      "お店・会社の雰囲気に合わせたデザイン・構成",
+      "スマートフォン対応、LINE・Googleマップの設置",
+      "Google Search Console・サイトマップなど、検索のための基本設定",
+      "独自ドメイン取得サポート（お客様所有）／無料サブドメインも選択可",
+    ],
+    operationFeatures: [
+      "お知らせのテキスト更新 回数無制限",
+      "月1回のアクセスレポート",
+      "写真・構成のリニューアル更新 年4回（1回3項目まで）",
+      "サーバー・ドメイン管理、SSL対応",
+    ],
+    optionalFeatures: "お問い合わせフォーム、複数ページ、外部予約・決済との連携、請求書の自動作成、社内システムなども、必要に応じて個別にお見積りします。",
+    estimateNote: "表示価格は最低料金です。制作費はページ数・デザイン・演出・機能、月額費用は更新・運用の内容により異なります。作業範囲と金額を事前にお見積りし、ご確認いただいてから進めます。外部サービス利用料は別途必要になる場合があります。",
+    conditions: "最低契約期間3ヶ月（以降はいつでも解約できます）",
     notes: [
       "価格はすべて税込の総額表示です。",
       "お知らせ更新は、テキストの追加・変更が対象です（原則当日、混み合う場合は翌営業日に反映）。",
@@ -227,14 +249,14 @@ export const siteConfig = {
       text: "お店の雰囲気やこだわりを、お会いして直接伺います。堺市の近隣エリアもお気軽にご相談ください。文章や写真の準備がなくても大丈夫。一緒に作ります。",
     },
     {
-      title: "デザイン選択・原稿確認",
+      title: "デザイン・構成の確認",
       highlight: "",
-      text: "3種類のテンプレートからデザインをお選びいただき、掲載する文章・写真を一緒に確認します。",
+      text: "制作見本を参考に、雰囲気・ページ数・必要な機能を一緒に整理します。制作費・月額費用・公開までの予定をお見積りし、ご納得いただいてから制作に進みます。",
     },
     {
-      title: "公開（最短3日）",
-      highlight: "",
-      text: "確認が済んだら公開です。公開後の管理・更新もそのままおまかせください。",
+      title: "制作・公開",
+      highlight: "公開後も、そのままご相談ください",
+      text: "文章・写真・デザインをご確認いただき、スマートフォンでの見やすさやリンクの動作を確認して公開します。公開後の管理やお知らせ更新も、引き続きおまかせください。",
     },
   ],
 
@@ -280,6 +302,14 @@ export const siteConfig = {
    * FAQ
    * ------------------------------------------------------- */
   faq: [
+    {
+      q: "費用はどのように決まりますか？",
+      a: `制作初期費用は${startingPrices.initialCost}円から、月額運用費は${startingPrices.monthlyFrom}円からです（いずれも${startingPrices.priceTaxNote}）。ページ数・デザイン・演出・必要な機能、公開後の更新内容を伺い、個別にお見積りします。相談・お見積りは無料です。内容と金額にご納得いただいてから進めます。`,
+    },
+    {
+      q: "まだ作りたいものが決まっていなくても相談できますか？",
+      a: "もちろんです。「この見本の雰囲気が好き」「まずはお店の情報を載せたい」といった段階からご相談ください。見本をそのまま選ぶ必要はありません。お店のことやご予算を伺い、必要な内容を一緒に整理します。",
+    },
     {
       q: "最低契約期間はありますか？",
       a: "3ヶ月です。それ以降は、いつでもご解約いただけます。",
@@ -329,3 +359,28 @@ export const siteConfig = {
 } as const;
 
 export type SiteConfig = typeof siteConfig;
+
+export interface WebsiteExample {
+  name: string;
+  category: string;
+  detail: string;
+  image: string;
+  imageAlt: string;
+  url: string;
+  imageMode?: "cover" | "contain";
+  position?: string;
+  background?: string;
+}
+
+// 現行の制作見本。画像・リンクはデモ設定を共有し、差し替え漏れを防ぐ。
+export const websiteExamples: readonly WebsiteExample[] = [
+  { ...siteConfig.demos.corporateShowcase, category: "企業・会社", detail: "写真・映像と、ブランドの世界観。" },
+  { ...siteConfig.demos.restaurantShowcase, category: "飲食店", detail: "お品書きから、外部予約へ。" },
+  { ...siteConfig.demos.salonShowcase, category: "美容室", detail: "スタイルの見せ方と、予約の導線。", position: "70% center" },
+  { ...siteConfig.demos.clinicShowcase, category: "こどもクリニック", detail: "やさしいキャラクターと診療案内。", imageMode: "contain", background: "#e7edda" },
+  ...siteConfig.demos.additionalShowcases.map((example, index) => ({
+    ...example,
+    category: ["製造業", "旅館・宿泊施設", "英語教室", "月額サービス販売"][index],
+    detail: ["製品と加工内容を、わかりやすく。", "空気感が伝わる写真と、滞在案内。", "コース・月謝を、迷わず見つける。", "サービス紹介から、申込体験へ。決済はデモです。"][index],
+  })),
+] satisfies readonly WebsiteExample[];

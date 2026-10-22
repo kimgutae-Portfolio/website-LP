@@ -1,36 +1,23 @@
 import { siteConfig } from "@/site.config";
 import { Reveal } from "./Reveal";
-import { SectionHeading } from "./SectionHeading";
+import styles from "./home/home.module.css";
 
 export function Pain() {
   return (
-    <section className="py-16 sm:py-24">
-      <div className="mx-auto max-w-5xl px-5">
-        <SectionHeading label="お悩み" title="こんなお悩み、ありませんか？" />
-        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+    <section className={styles.problemSection} aria-labelledby="home-problem-heading">
+      <div className={`${styles.contentContainer} ${styles.problemLayout}`}>
+        <Reveal><p className={styles.sectionEyebrow}>FOR YOUR BUSINESS</p><h2 id="home-problem-heading">ホームページのこと、<br/>ひとりで悩まなくて<br/>大丈夫です。</h2><p>{siteConfig.painsClosing}</p></Reveal>
+        <ul className={styles.problemList}>
           {siteConfig.pains.map((pain, i) => (
             <Reveal
               key={pain.title}
               delay={i * 80}
-              className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              as="li"
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center self-start rounded-full bg-primary-light text-lg font-bold text-primary">
-                {i + 1}
-              </span>
-              <div>
-                <h3 className="mb-1.5 font-bold text-slate-900">{pain.title}</h3>
-                <p className="text-[15px] leading-relaxed text-slate-600">
-                  {pain.text}
-                </p>
-              </div>
+              <h3>{pain.title}</h3><p>{pain.text}</p>
             </Reveal>
           ))}
-        </div>
-        <Reveal>
-          <p className="mt-10 text-center text-lg font-bold text-primary">
-            {siteConfig.painsClosing}
-          </p>
-        </Reveal>
+        </ul>
       </div>
     </section>
   );
