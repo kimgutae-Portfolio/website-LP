@@ -1,4 +1,5 @@
-export const CONSENT_STORAGE_KEY = "machinowebs:measurement-consent:v1";
+// Ask again when adding Clarity session replay to the previous GA-only choice.
+export const CONSENT_STORAGE_KEY = "machinowebs:measurement-consent:v2";
 export const CONSENT_MAX_AGE = 90 * 24 * 60 * 60 * 1000;
 export const PREFERENCES_EVENT = "machinowebs:measurement-preferences";
 export type MeasurementConsent = "granted" | "denied";

@@ -14,11 +14,22 @@ GA4: `まちのWeb | machinowebs.com` / stream `まちのWeb ウェブサイト`
 
 ## 同意・検証
 
-同意前はGoogleスクリプトを読み込まない基本同意モード。許可・拒否はブラウザに90日保存。
-拒否するとイベント送信を止め、Google解析Cookieを削除する。フッターから変更可能。
+同意前はGoogle・Clarityスクリプトを読み込まない基本同意モード。許可・拒否はブラウザに90日保存。
+Clarity追加時に同意キーをv2へ変更し、以前のGAのみの許可を流用せず再確認する。
+拒否するとイベント送信とClarityのレコーダーを止め、当サイトのGoogle・Clarity解析Cookieを削除する。フッターから変更可能。
 Google シグナル、広告パーソナライズは無効。許可時のみ解析・広告効果測定の同意を更新する。
 個人情報を送る拡張コンバージョンやリマーケティングは実装しない。
 既存のCookie不要のVercel Analyticsは変更しない。
+
+## Microsoft Clarity
+
+公開プロジェクトID: `z3m9xda0mq`（`analytics.config.ts`）。
+許可後にだけ `https://www.clarity.ms/tag/z3m9xda0mq` を非同期でheadへ追加する。
+`consentv2` は `analytics_Storage: granted` / `ad_Storage: denied`。
+拒否時は `consentv2` を両方deniedにし、Cookieなしの記録も続けないよう `stop` も呼ぶ。
+再許可時は同じタグを再利用して `start` する。App Routerで二重挿入しない。
+入力欄の標準マスキングに加え、問い合わせフォーム全体に `data-clarity-mask="true"` を指定。
+ヒートマップ・セッション再生の利用は同意案内とプライバシーポリシーに明記する。
 
 通常は `machinowebs.com` / `www.machinowebs.com` のみ。localhost・Vercelプレビューは計測しない。
 明示的なQA時のみ `NEXT_PUBLIC_ANALYTICS_DEBUG=true npm run dev -- --port 3001` でlocalhostから

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 import Link from "next/link";
+import { ClarityMeasurement } from "./ClarityMeasurement";
 import { analyticsConfig } from "@/analytics.config";
 import { siteConfig } from "@/site.config";
 import {
@@ -31,7 +32,7 @@ const denied = {
 function clearMeasurementCookies() {
   for (const part of document.cookie.split(";")) {
     const name = part.trim().split("=")[0];
-    if (!/^(_ga(?:_|$)|_gid$|_gat(?:_|$))/.test(name)) continue;
+    if (!/^(_ga(?:_|$)|_gid$|_gat(?:_|$)|_clck$|_clsk$)/.test(name)) continue;
     const hostname = window.location.hostname;
     const parent = new URL(siteConfig.meta.url).hostname;
     for (const domain of ["", `; domain=${hostname}`, `; domain=.${hostname}`, `; domain=.${parent}`]) {
@@ -149,9 +150,10 @@ export function GoogleMeasurement() {
 
   if (!enabled) return null;
   return <>
+    <ClarityMeasurement active={consent === "granted"} />
     {consent === "granted" && id && <Script id="google-measurement" strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${id}`} />}
     {showPreferences && <section className={styles.notice} role="region" aria-label="アクセス解析の設定">
-      <div><h2>サイトの改善に、ご協力ください。</h2><p>Google アナリティクスで閲覧状況とLINEボタンのクリックを計測し、サイト改善・広告効果の確認に利用します。許可しなくても、すべての機能をご利用いただけます。<Link href="/privacy#measurement">詳しく見る</Link></p></div>
+      <div><h2>サイトの改善に、ご協力ください。</h2><p>Google アナリティクスとMicrosoft Clarityで閲覧・クリック・スクロールを計測し、ヒートマップや画面再生でサイト改善・広告効果の確認に利用します。入力内容はマスキングします。許可しなくても、すべての機能をご利用いただけます。<Link href="/privacy#measurement">詳しく見る</Link></p></div>
       <div className={styles.actions}><button type="button" onClick={() => choose("denied")}>許可しない</button><button type="button" onClick={() => choose("granted")}>許可する</button></div>
     </section>}
   </>;

@@ -41,7 +41,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4" data-clarity-mask="true">
       {/* 허니팟(스팸 봇 대책): 사람 눈에는 보이지 않는 필드. 채워져 있으면 서버가 조용히 무시 */}
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="website">Website</label>
