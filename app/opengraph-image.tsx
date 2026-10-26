@@ -11,7 +11,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = siteConfig.meta.siteName;
 
-const BADGE = "「こうしたい」を、自由につくる。";
+const BADGE = `${siteConfig.hero.catchTop}${siteConfig.hero.catchMain}`;
 const PRICE_LABEL_1 = "制作初期費用";
 const PRICE_VALUE_1 = `${siteConfig.pricing.initialCost}円〜`;
 const PRICE_LABEL_2 = "月額運用費";

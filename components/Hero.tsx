@@ -5,13 +5,13 @@ import styles from "./home/hero.module.css";
 
 export function Hero() {
   const { hero, pricing, line } = siteConfig;
-  return <><HeroExperience>
+  return <HeroExperience>
     <div className={styles.main}>
       <div className={styles.copy} data-hero-copy>
-        <p className={styles.eyebrow}>お店に合わせた、ホームページ制作</p>
+        <p className={styles.eyebrow}>集客につながる、ホームページ制作</p>
         <h1 id="home-hero-heading"><span>{hero.catchTop}</span><span>{hero.catchMain}</span></h1>
         <p className={styles.statement}>{hero.statement}</p>
-        <ul className={styles.keywords} aria-label="サービスの特徴"><li>自由なデザイン</li><li>検索の基本設定</li><li>更新サポート</li></ul>
+        <ul className={styles.keywords} aria-label="サービスの特徴">{hero.keywords.map(keyword=><li key={keyword}>{keyword}</li>)}</ul>
       </div>
       <aside className={styles.offer} aria-label="制作と運用の費用の目安" data-hero-copy>
         <p className={styles.offerIntro}>はじめの一歩を、もっと軽く。</p>
@@ -25,13 +25,5 @@ export function Hero() {
         <p className={styles.conditions}>税込表示・最低契約期間3ヶ月 ／ ご相談・お見積り無料</p>
       </aside>
     </div>
-  </HeroExperience>
-  <section className={styles.details} aria-label="まちのWebのホームページ制作の特徴">
-    <div className={styles.detailsInner}>
-      <div className={styles.supportIntro}><p>{hero.sub}</p><p>堺市を拠点に。ご希望の方には、訪問でのご相談も。</p></div>
-      <div className={styles.strengths}>
-        {hero.strengths.map(item => <div className={styles.strength} key={item.label}><p>{item.label}</p><h2>{item.title}</h2><p>{item.text}</p></div>)}
-      </div>
-    </div>
-  </section></>;
+  </HeroExperience>;
 }

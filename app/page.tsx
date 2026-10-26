@@ -1,6 +1,7 @@
 import { siteConfig } from "@/site.config";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { ServiceStrengths } from "@/components/home/ServiceStrengths";
 import { Pain } from "@/components/Pain";
 import { Promises } from "@/components/Promises";
 import { Demo } from "@/components/Demo";
@@ -54,6 +55,7 @@ export default function Home() {
       <main>
         <Hero />
         <Demo />
+        <ServiceStrengths />
         <Pain />
         <Promises />
         <Pricing />
