@@ -9,6 +9,8 @@
  * ============================================================
  */
 
+import { exampleOffers, formatInitialPrice, type ExampleOffer } from "@/lib/example-offers";
+
 const startingPrices = {
   initialCost: "0",
   monthlyFrom: "5,500",
@@ -140,8 +142,8 @@ export const siteConfig = {
   demos: {
     note: "※架空の店舗・企業のデモサイトです。",
     intro:
-      "8つの制作見本から、お店に合う雰囲気を見つけてください。",
-    examplesNote: "掲載見本は仕上がりのイメージです。同等の演出・構成・機能をご希望の場合は、内容に応じて個別にお見積りします。",
+      "初期0円で始められる例と、ページ・機能を追加する例。8つの見本で、できることと費用の違いをご確認ください。",
+    examplesNote: "初期0円は、対象の制作見本を活用した1ページの基本構成の場合です。月額運用費5,500円〜（税込）は別途必要です。追加ページ・新しい演出・フォーム・システム連携は作業前にお見積りします。",
     corporateShowcase: {
       name: "KASANE｜株式会社かさね",
       title: "企業の「らしさ」まで、伝わるサイトへ。",
@@ -206,7 +208,7 @@ export const siteConfig = {
       {
         name: "みちる英語教室｜MICHIRU",
         title: "教室の楽しさを、信頼できるかたちに。",
-        description: "明るい教室や教材の写真と、ことばが動く演出。年齢別コース、月謝、時間割、体験案内まで、保護者にも子どもにも伝わる英語教室サイトです。",
+        description: `教室紹介・コース／月謝・体験／お問い合わせを分けた3ページ構成。フォームの確認・完了まで体験できる、初期制作費${formatInitialPrice(exampleOffers.michiru)}（税込）の制作例です。フォームは送信されません。`,
         category: "ENGLISH SCHOOL WEBSITE",
         image: "/demo/michiru/hero-no-people.webp",
         imageAlt: "青い椅子と絵カードが並ぶ明るい教室を描いた、みちる英語教室のサイト制作見本",
@@ -234,7 +236,7 @@ export const siteConfig = {
     headline: "必要なものを、一緒に。\n費用も、まずはご相談から。",
     description: "まずは基本的なご案内を中心に、小さく始めるホームページから。初期費用0円からご相談いただけます。ご希望のデザイン・ページ数・機能を伺い、必要な追加費用は制作前にお見積りします。",
     creationFeatures: [
-      "お店・会社の魅力が伝わる、オリジナルのデザイン・構成",
+      "制作見本をベースに、事業に合わせた1ページのデザイン・構成",
       "スマートフォン対応、LINE・Googleマップの設置",
       "ページ構成・検索情報・サイトマップ・Search Consoleの基本設定",
       "独自ドメイン取得サポート（お客様所有）／無料サブドメインも選択可",
@@ -245,13 +247,14 @@ export const siteConfig = {
       "写真・構成のリニューアル更新 年4回（1回3項目まで）",
       "サーバー・ドメイン管理、SSL・安全性に配慮した更新管理",
     ],
-    optionalFeatures: "お問い合わせフォーム、複数ページ、外部予約・決済との連携、請求書の自動作成、社内システムなども、必要に応じて個別にお見積りします。",
-    basicScope: "初期費用0円は、基本的なご案内を中心とした構成の場合です。",
-    estimateNote: "初期費用0円は基本構成の場合の開始価格です。追加ページ・独自のデザインや演出・お問い合わせフォーム・システム連携などは、ご希望に応じて初期費用をお見積りします。月額費用も運用範囲により異なります。作業範囲と金額にご納得いただいてから制作を進めます。外部サービス利用料は別途必要になる場合があります。",
+    optionalFeatures: "お問い合わせフォーム、複数ページ、新しい構成・演出、予約・決済システムとの機能連携、請求書の自動作成、社内システムなどは個別にお見積りします。LINE・地図・外部予約サイト・既存の決済ページへのリンク設置は基本範囲です。",
+    basicScope: "初期費用0円は、対象の制作見本を活用した1ページの基本構成の場合です。",
+    estimateNote: `初期費用0円は基本構成の場合の開始価格です。既存の構成・演出を活用し、ご提供いただく写真・原稿で1ページを制作します。追加ページ・新しい構成や演出・お問い合わせフォーム・システム連携は別途お見積りします。英語教室の3ページ＋標準フォームの制作例は初期${formatInitialPrice(exampleOffers.michiru)}（税込）。月額費用は運用範囲により異なります。作業範囲と金額にご納得いただいてから制作を進めます。外部サービス利用料は別途必要になる場合があります。`,
     conditions: "最低契約期間3ヶ月（以降はいつでも解約できます）",
     notes: [
       "価格はすべて税込の総額表示です。",
       "初期費用0円は基本構成の場合です。追加ページ・独自の演出・機能開発などは別途お見積りします。",
+      "写真・原稿はお客様にご提供いただく想定です。撮影・動画・新しいイラストの制作は別途お見積りします。",
       "お知らせ更新は、テキストの追加・変更が対象です（原則当日、混み合う場合は翌営業日に反映）。",
       "写真の差し替えやデザイン・構成の変更は、リニューアル更新（年4回・1回3項目まで）で対応します。超える場合は別途お見積りします。",
     ],
@@ -320,6 +323,14 @@ export const siteConfig = {
    * FAQ
    * ------------------------------------------------------- */
   faq: [
+    {
+      q: "制作見本と同じものが、すべて初期0円で作れますか？",
+      a: `すべてではありません。「初期0円の制作例」は、既存の構成・演出を活用し、ご提供の写真と原稿で基本の1ページを制作する場合が対象です。見本ごとに対象範囲と追加費用が必要な内容を表示しています。英語教室のような3ページ＋お問い合わせフォームの構成は初期0円の対象外で、制作初期費用${formatInitialPrice(exampleOffers.michiru)}（税込）が目安です。月額運用費は別途必要です。`,
+    },
+    {
+      q: "予約サイトやLINEへのリンクにも追加費用がかかりますか？",
+      a: "ご利用中の予約サイト・LINE・地図・決済ページへのリンク設置は、基本の1ページの範囲に含みます。サイト内での予約管理、実際に送信できるお問い合わせフォーム、SNSの自動表示、決済や社内システムとの機能連携は、別途お見積りします。外部サービス自体の利用料や決済手数料は別途必要です。",
+    },
     {
       q: "費用はどのように決まりますか？",
       a: `基本構成の制作初期費用は${startingPrices.initialCost}円から、月額運用費は${startingPrices.monthlyFrom}円からです（いずれも${startingPrices.priceTaxNote}）。追加ページ・独自のデザインや演出・フォーム・システム連携などをご希望の場合は、内容に応じて初期費用をお見積りします。月額費用も更新・運用の範囲により異なります。相談・お見積りは無料です。内容と金額にご納得いただいてから進めます。`,
@@ -408,17 +419,19 @@ export interface WebsiteExample {
   imageMode?: "cover" | "contain";
   position?: string;
   background?: string;
+  offer: ExampleOffer;
 }
 
 // 現行の制作見本。画像・リンクはデモ設定を共有し、差し替え漏れを防ぐ。
 export const websiteExamples: readonly WebsiteExample[] = [
-  { ...siteConfig.demos.corporateShowcase, category: "企業・会社", detail: "写真・映像と、ブランドの世界観。" },
-  { ...siteConfig.demos.restaurantShowcase, category: "飲食店", detail: "お品書きから、外部予約へ。" },
-  { ...siteConfig.demos.salonShowcase, category: "美容室", detail: "スタイルの見せ方と、予約の導線。", position: "70% center" },
-  { ...siteConfig.demos.clinicShowcase, category: "こどもクリニック", detail: "やさしいキャラクターと診療案内。", imageMode: "contain", background: "#e7edda" },
+  { ...siteConfig.demos.restaurantShowcase, category: "飲食店", detail: "お品書きから、外部予約へ。", offer: exampleOffers.sumitoki },
+  { ...siteConfig.demos.salonShowcase, category: "美容室", detail: "スタイルの見せ方と、予約の導線。", position: "70% center", offer: exampleOffers.sui },
+  { ...siteConfig.demos.clinicShowcase, category: "こどもクリニック", detail: "やさしいキャラクターと診療案内。", imageMode: "contain", background: "#e7edda", offer: exampleOffers.komorebi },
+  { ...siteConfig.demos.corporateShowcase, category: "企業・会社", detail: "写真・映像と、ブランドの世界観。", offer: exampleOffers.kasane },
   ...siteConfig.demos.additionalShowcases.map((example, index) => ({
     ...example,
     category: ["製造業", "旅館・宿泊施設", "英語教室", "月額サービス販売"][index],
-    detail: ["製品と加工内容を、わかりやすく。", "空気感が伝わる写真と、滞在案内。", "コース・月謝を、迷わず見つける。", "サービス紹介から、申込体験へ。決済はデモです。"][index],
+    detail: ["製品と加工内容を、わかりやすく。", "空気感が伝わる写真と、滞在案内。", "3ページ＋体験・お問い合わせフォーム。", "サービス紹介から、申込体験へ。決済はデモです。"][index],
+    offer: [exampleOffers.sekka, exampleOffers.nagi, exampleOffers.michiru, exampleOffers.niwato][index],
   })),
 ] satisfies readonly WebsiteExample[];

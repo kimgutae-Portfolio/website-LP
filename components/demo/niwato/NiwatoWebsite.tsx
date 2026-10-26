@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { DemoPriceGuide } from "@/components/pricing/DemoPriceGuide";
 import Link from "next/link";
 import { useState } from "react";
 import { Arrow, DemoDialog, DemoNotice, DemoShell } from "../shared/PremiumDemo";
@@ -23,7 +24,7 @@ export function NiwatoWebsite(){
  const currentSeason=seasons[season];
  return <DemoShell className={styles.site} paused={checkout||menu||report} revision={String(season)}>
    <div className={styles.opening} data-demo-opening aria-hidden="true"><span/><span/><span/><div><Brand/><p>庭のいい日を、毎月。</p></div></div>
-   <div className={styles.demoBar}><span>MONTHLY SERVICE / DESIGN SAMPLE</span><Link href="/#demo">まちのWebへ戻る ↗</Link></div>
+   <div className={styles.demoBar}><a href="#production-scope">この見本の制作費・対応範囲</a><Link href="/#demo">まちのWebへ戻る ↗</Link></div>
    <header className={styles.header}><a href="#niwato-top" aria-label="NIWATO トップへ"><Brand/></a><nav aria-label="メインメニュー">{navigation.map(([href,label])=><a key={href} href={href}>{label}</a>)}</nav><a className={styles.headerCta} href="#niwato-plans">プランを選ぶ<Arrow/></a><button type="button" className={styles.menuTrigger} aria-label="メニューを開く" onClick={()=>setMenu(true)}><span/><span/></button></header>
    <main>
      <section className={styles.hero} id="niwato-top" aria-labelledby="niwato-hero-heading">
@@ -49,7 +50,7 @@ export function NiwatoWebsite(){
      <section className={`${styles.faq} ${styles.container}`} id="niwato-faq" aria-labelledby="niwato-faq-heading"><div><p className={styles.eyebrow}>BEFORE WE GET STARTED.</p><h2 id="niwato-faq-heading">気になること。</h2></div><div>{faqs.map(([question,answer])=><details key={question}><summary>{question}<span aria-hidden="true">＋</span></summary><p>{answer}</p></details>)}</div></section>
      <section className={styles.lastCall}><div className={styles.lastPhoto}><Image src="/demo/niwato/hero.webp" alt="日差しの中に広がる緑の芝生の庭" fill sizes="100vw"/></div><div className={styles.lastCopy} data-demo-reveal><p className={styles.eyebrow}>YOUR WEEKEND IS YOURS AGAIN.</p><h2>次の休日、<br/>庭で何しよう。</h2><a href="#niwato-plans" className={styles.solidButton}>わが家の定期便を選ぶ<Arrow/></a></div></section>
    </main>
-   <footer className={`${styles.footer} ${styles.container}`}><div className={styles.footerTop}><a href="#niwato-top" aria-label="NIWATO トップへ"><Brand/></a><nav aria-label="フッターメニュー">{navigation.map(([href,label])=><a key={href} href={href}>{label}</a>)}</nav><a href="#niwato-top" className={styles.backTop}>TOP ↑</a></div><p className={styles.footerDemo}>このサイトは架空の月額サービスの販売デモです。実際のお申し込み・カード決済・訪問サービスは受け付けていません。</p><DemoNotice/><div className={styles.footerBottom}><Link href="/#demo">DESIGN BY まちのWeb ↗</Link><span>© NIWATO / DESIGN SAMPLE</span></div><div className={styles.footerWord} aria-hidden="true">NIWATO.</div></footer>
+   <footer className={`${styles.footer} ${styles.container}`}><div className={styles.footerTop}><a href="#niwato-top" aria-label="NIWATO トップへ"><Brand/></a><nav aria-label="フッターメニュー">{navigation.map(([href,label])=><a key={href} href={href}>{label}</a>)}</nav><a href="#niwato-top" className={styles.backTop}>TOP ↑</a></div><p className={styles.footerDemo}>このサイトは架空の月額サービスの販売デモです。実際のお申し込み・カード決済・訪問サービスは受け付けていません。</p><DemoPriceGuide slug="niwato"/><DemoNotice/><div className={styles.footerBottom}><Link href="/#demo">DESIGN BY まちのWeb ↗</Link><span>© NIWATO / DESIGN SAMPLE</span></div><div className={styles.footerWord} aria-hidden="true">NIWATO.</div></footer>
    <div className={styles.mobileCta}><div><span>芝生{area}㎡ / 月{quote.visits}回</span><strong>¥{yen(quote.total)}<small>/ 月</small></strong></div><a href="#niwato-plans">プランを選ぶ<Arrow/></a></div>
    <DemoDialog open={menu} onClose={()=>setMenu(false)} label="NIWATO / MENU" className={styles.menuDialog}><Brand/><nav>{navigation.map(([href,label])=><a key={href} href={href} onClick={()=>setMenu(false)}>{label}<Arrow/></a>)}</nav><p>お庭のいい日を、毎月。</p></DemoDialog>
    <DemoDialog open={report} onClose={()=>setReport(false)} label="NIWATO / CARE REPORT SAMPLE"><article className={styles.report}><p className={styles.eyebrow}>YOUR GARDEN, TODAY.</p><h2>お庭、整いました。</h2><p className={styles.reportTag}>作業後のご報告画面の見本</p><div className={styles.reportPhoto}><Image src="/demo/niwato/after.webp" alt="お手入れ後の庭のレポート用生成イメージ" fill sizes="(max-width:700px) 100vw,800px"/></div><dl><div><dt>今回のお手入れ</dt><dd>芝刈り・際の仕上げ・集草</dd></div><div><dt>お庭のようす</dt><dd>芝の伸びを見ながら、高さをそろえて整えました。</dd></div><div><dt>次回の予定</dt><dd>次回訪問前に日程をご相談します。</dd></div></dl><small>架空のレポートです。作業実績・実際の送信機能を示すものではありません。</small></article></DemoDialog>

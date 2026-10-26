@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {readFile,stat} from "node:fs/promises";
 import ts from "typescript";
+import {loadSiteConfig} from "./load-site-config.mjs";
 const read=p=>readFile(new URL(`../${p}`,import.meta.url),"utf8");
 async function moduleAt(p){const source=ts.transpileModule(await read(p),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2020}}).outputText;return import(`data:text/javascript;base64,${Buffer.from(source).toString("base64")}`);}
-const {siteConfig,websiteExamples}=await moduleAt("site.config.ts");
+const {siteConfig,websiteExamples}=await loadSiteConfig();
 const {exampleScrollTarget}=await moduleAt("components/pricing/example-scroll.ts");
 test("one consultation-based offer uses both starting prices and retains the contract",()=>{
  const p=siteConfig.pricing;
@@ -55,4 +56,26 @@ test("zero-start pricing is consistent and qualified across public prices, metad
 test("gallery is native scrolling, keyboard accessible and reduced-motion aware",async()=>{
  const source=await read("components/pricing/WebsiteExamples.tsx"),css=await read("components/pricing/pricing.module.css");
  assert.match(source,/tabIndex=\{0\}/);assert.match(source,/ResizeObserver/);assert.match(source,/prefers-reduced-motion: reduce/);assert.match(source,/event.key==="Home"/);assert.match(css,/scroll-snap-type:x mandatory/);assert.match(css,/prefers-reduced-motion:reduce/);assert.ok(!source.includes('"wheel"')&&!source.includes('"touchmove"'));
+});
+test("every demo explicitly distinguishes setup scope from paid additions",async()=>{
+ assert.equal(websiteExamples.filter(item=>item.offer.kind==="zero").length,4);
+ assert.equal(websiteExamples.filter(item=>item.offer.kind!=="zero").length,4);
+ for(const example of websiteExamples){
+  const slug=example.url.split("/").at(-1),html=await read(`.next/server/app/demo/${slug}.html`);
+  assert.match(html,new RegExp(`data-demo-price-guide="${slug}"`));
+  assert.match(html,/id="production-scope"/);assert.match(html,/追加制作費が必要なこと/);
+  assert.match(html,/月額運用費/);assert.match(html,/最低契約期間3ヶ月/);
+  for(const text of example.offer.included)assert.ok(html.includes(text),`${slug}: ${text}`);
+  for(const text of example.offer.additional)assert.ok(html.includes(text),`${slug}: ${text}`);
+  if(example.offer.kind==="zero")assert.equal(example.offer.initialFrom,0);
+ }
+ const english=websiteExamples.find(item=>item.url==="/demo/michiru");
+ assert.equal(english.offer.kind,"custom");assert.equal(english.offer.initialFrom,55000);
+ assert.equal(english.offer.breakdown.reduce((sum,item)=>sum+item.amount,0),55000);
+ assert.match(english.offer.note,/初期0円の対象外/);
+ const html=await read(".next/server/app/index.html");
+ assert.match(html,/制作初期費用で見本を絞り込む/);assert.match(html,/初期0円の制作例/);assert.match(html,/追加制作費のある例/);
+ assert.equal((html.match(/data-offer-kind="zero"/g)||[]).length,4);
+ assert.equal((html.match(/data-offer-kind="(?:custom|system)"/g)||[]).length,4);
+ assert.match(await read("components/pricing/WebsiteExamples.tsx"),/<details className=\{styles.scopeDetails\}>/);
 });

@@ -60,7 +60,7 @@ export function isBusinessLineLink(href: string, businessUrl: string): boolean {
   }
 }
 
-const locations = ["hero", "header", "cta", "contact", "floating", "pricing_intro", "pricing", "column", "not_found"];
+const locations = ["hero", "header", "cta", "contact", "floating", "pricing_intro", "pricing", "column", "not_found", "demo_scope"];
 export function lineClickParameters(location: string | undefined, pathname: string, businessUrl: string) {
   return {
     contact_method: "line",

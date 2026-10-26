@@ -1,10 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
-import ts from "typescript";
+import {loadSiteConfig} from "./load-site-config.mjs";
 const read = path => readFile(new URL(`../${path}`, import.meta.url), "utf8");
-const source = ts.transpileModule(await read("site.config.ts"), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 } }).outputText;
-const { siteConfig } = await import(`data:text/javascript;base64,${Buffer.from(source).toString("base64")}`);
+const { siteConfig } = await loadSiteConfig();
 
 test("first screen leads with service benefits and real, server-rendered consultation links", async () => {
   const html = await read(".next/server/app/index.html");

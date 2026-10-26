@@ -61,7 +61,27 @@ test("each demo contains its purpose-specific content and controls",async()=>{
  const a=await read(".next/server/app/demo/sekka.html"),b=await read(".next/server/app/demo/nagi.html"),c=await read(".next/server/app/demo/michiru.html");
  assert.equal((a.match(/role="tab"/g)||[]).length,3); assert.match(a,/品質への姿勢/);assert.match(a,/実際の製造・納入実績/);
  assert.equal((b.match(/role="tab"/g)||[]).length,3);assert.match(b,/温泉・泉質・効能を示すものではありません/);assert.match(b,/href="https:\/\/travel\.rakuten\.co\.jp\/" target="_blank" rel="noopener noreferrer"/);
- assert.equal((c.match(/role="tab"/g)||[]).length,6);assert.equal((c.match(/<details>/g)||[]).length,4);assert.match(c,/実在の講師・資格・経歴を示すものではありません/);
+ const course=await read(".next/server/app/demo/michiru/courses.html");
+ assert.equal((course.match(/role="tab"/g)||[]).length,6);assert.equal((c.match(/<details>/g)||[]).length,4);assert.match(c,/実在の講師・資格・経歴を示すものではありません/);
+ assert.match(c,/href="\/demo\/michiru\/courses"/);assert.match(c,/href="\/demo\/michiru\/contact"/);
+});
+test("English school has three real noindex pages and a strictly non-sending demo form",async()=>{
+ const home=await read(".next/server/app/demo/michiru.html");
+ for(const page of ["courses","contact"]){
+  const html=await read(`.next/server/app/demo/michiru/${page}.html`);
+  assert.match(html,/name="robots" content="noindex/);assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1);
+  assert.match(html,new RegExp(`rel="canonical" href="https://machinowebs.com/demo/michiru/${page}"`));
+  const text=html.replaceAll("<!-- -->","");
+  assert.match(text,/55,000円〜/);assert.match(text,/月額運用費/);assert.match(text,/33,000円/);assert.match(text,/22,000円/);
+  for(const route of ["/demo/michiru","/demo/michiru/courses","/demo/michiru/contact"])assert.ok(html.includes(`href="${route}"`));
+ }
+ const html=await read(".next/server/app/demo/michiru/contact.html"),source=await read("components/demo/michiru/MichiruContactPage.tsx");
+ assert.match(home,/初期0円の対象外/);assert.match(html,/<form[^>]*data-demo-contact-form/);
+ assert.match(html,/送信されない、フォームの操作見本です/);assert.match(html,/個人情報は入力しないでください/);
+ assert.equal((html.match(/readOnly=""/g)||[]).length,3);assert.match(html,/data-clarity-mask="true"/);
+ assert.match(source,/event.preventDefault\(\)/);assert.match(source,/setStep\("confirm"\)/);assert.match(source,/setStep\("complete"\)/);
+ assert.doesNotMatch(source,/fetch\(|localStorage|sessionStorage|sendBeacon|mailto:|\/api\//);
+ const sitemap=await read(".next/server/app/sitemap.xml.body");assert.ok(!sitemap.includes("/demo/"));
 });
 test("inn photo film is local, lightweight, and only mounted on demand",async()=>{
  const file=await stat(new URL("../public/demo/nagi/photo-film.mp4",import.meta.url));assert.ok(file.size>100000&&file.size<4000000);
