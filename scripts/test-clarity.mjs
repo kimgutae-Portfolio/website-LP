@@ -71,7 +71,7 @@ test("withdrawal stops cookieless recording too; regrant reuses the existing tag
 test("Clarity shares the production-host consent gate and prompts old GA-only visitors again", async () => {
   const component = await read("components/analytics/GoogleMeasurement.tsx");
   const clarity = await read("components/analytics/ClarityMeasurement.tsx");
-  assert.match(component, /if \(!enabled\) return null/);
+  assert.match(component, /if \(!analyticsConfig\.cookieMeasurementEnabled \|\| !enabled\) return null/);
   assert.match(component, /<ClarityMeasurement active=\{consent === "granted"\}/);
   assert.match(component, /Microsoft Clarity/);
   assert.match(component, /ヒートマップや画面再生/);

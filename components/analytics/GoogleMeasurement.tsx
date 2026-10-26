@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Script from "next/script";
 import Link from "next/link";
 import { ClarityMeasurement } from "./ClarityMeasurement";
+import { stopClarity } from "@/lib/clarity";
 import { analyticsConfig } from "@/analytics.config";
 import { siteConfig } from "@/site.config";
 import {
@@ -32,7 +33,7 @@ const denied = {
 function clearMeasurementCookies() {
   for (const part of document.cookie.split(";")) {
     const name = part.trim().split("=")[0];
-    if (!/^(_ga(?:_|$)|_gid$|_gat(?:_|$)|_clck$|_clsk$)/.test(name)) continue;
+    if (!/^(_ga(?:_|$)|_gid$|_gat(?:_|$)|_gcl(?:_|$)|_clck$|_clsk$)/.test(name)) continue;
     const hostname = window.location.hostname;
     const parent = new URL(siteConfig.meta.url).hostname;
     for (const domain of ["", `; domain=${hostname}`, `; domain=.${hostname}`, `; domain=.${parent}`]) {
@@ -51,6 +52,19 @@ export function GoogleMeasurement() {
   const previousUrl = useRef<string | null>(null);
 
   useEffect(() => {
+    if (!analyticsConfig.cookieMeasurementEnabled) {
+      // Never touch cookies belonging to another localhost / preview project.
+      if (!measurementHost(window.location.hostname, new URL(siteConfig.meta.url).hostname, analyticsConfig.debugLocal)) return;
+      if (id) window[`ga-disable-${id}`] = true;
+      window.gtag?.("consent", "update", denied);
+      stopClarity();
+      clearMeasurementCookies();
+      try {
+        localStorage.removeItem(CONSENT_STORAGE_KEY);
+        localStorage.removeItem("machinowebs:measurement-consent:v1");
+      } catch { /* Tracking stays disabled even when browser storage is blocked. */ }
+      return;
+    }
     if (!id || !measurementHost(window.location.hostname, new URL(siteConfig.meta.url).hostname, analyticsConfig.debugLocal)) return;
     setEnabled(true);
     try {
@@ -148,7 +162,7 @@ export function GoogleMeasurement() {
     setShowPreferences(false);
   }
 
-  if (!enabled) return null;
+  if (!analyticsConfig.cookieMeasurementEnabled || !enabled) return null;
   return <>
     <ClarityMeasurement active={consent === "granted"} />
     {consent === "granted" && id && <Script id="google-measurement" strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${id}`} />}
@@ -162,8 +176,8 @@ export function GoogleMeasurement() {
 export function MeasurementPreferencesButton() {
   const [enabled, setEnabled] = useState(false);
   useEffect(() => {
-    setEnabled(Boolean(id) && measurementHost(window.location.hostname, new URL(siteConfig.meta.url).hostname, analyticsConfig.debugLocal));
+    setEnabled(analyticsConfig.cookieMeasurementEnabled && Boolean(id) && measurementHost(window.location.hostname, new URL(siteConfig.meta.url).hostname, analyticsConfig.debugLocal));
   }, []);
-  if (!enabled) return null;
+  if (!analyticsConfig.cookieMeasurementEnabled || !enabled) return null;
   return <button type="button" className="underline underline-offset-4 transition hover:text-white" onClick={() => window.dispatchEvent(new Event(PREFERENCES_EVENT))}>アクセス解析の設定</button>;
 }

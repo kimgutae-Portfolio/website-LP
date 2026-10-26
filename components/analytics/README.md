@@ -1,5 +1,20 @@
 # 訪問・LINEクリックの無料計測
 
+## 現在の公開設定：同意画面なし・Cookieを用いる計測は停止
+
+2026-10-26、初回の同意画面による離脱を避けたいという依頼に合わせ、
+`analytics.config.ts` の `cookieMeasurementEnabled: false` でGoogle / Clarityを停止。
+同意画面だけを隠して許可扱いにする実装ではない。
+
+- 初回の案内とフッターの「アクセス解析の設定」を非表示。
+- 過去の保存済み許可も使用せず、v1 / v2の選択を削除。削除可能なGoogle / Clarity / Google広告用の解析Cookieを期限切れにする。
+- Google / Clarityタグ、ページビュー・LINEクリックのイベント、ヒートマップ・録画を読み込み／送信しない。
+- Cookie不要のVercel Web Analytics、LINEへの遷移、お問い合わせフォーム、Stripeの案内は維持。
+- Google広告アカウント・キャンペーン・予算は変更しない。広告クリックの課金は継続するが、サイトからGA4へ `line_click` が送信されないため新しいLINEクリックの補助コンバージョンは記録されない。
+- 再開する場合は、利用目的・プライバシー表示・同意UIを再確認してからフラグを変更する。IDや環境変数を設定するだけでは再開しない。
+
+以下は停止中の、同意取得型測定を再開する場合の仕様。
+
 GA4: `まちのWeb | machinowebs.com` / stream `まちのWeb ウェブサイト`。
 公開測定IDは `analytics.config.ts` の `G-JVS5FTTQLJ`。
 必要な場合のみ `NEXT_PUBLIC_GA_MEASUREMENT_ID` で上書きする（秘密鍵ではない）。
