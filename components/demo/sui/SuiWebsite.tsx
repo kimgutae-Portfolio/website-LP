@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { DemoPriceGuide } from "@/components/pricing/DemoPriceGuide";
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Reveal } from "@/components/Reveal";
@@ -112,7 +111,7 @@ export function SuiWebsite({ map }: { map: ReactNode }) {
     <noscript><style>{"[data-sui-curtain]{display:none!important}"}</style></noscript>
     <div className={styles.opening} data-sui-curtain aria-hidden="true"><div className={styles.openingPanel}/><div className={styles.openingPanel}/><div className={styles.openingIdentity}><Brand large/><span className={styles.openingRule}/><p>A LITTLE CHANGE. A NEW YOU.</p></div><span className={styles.openingFoot}>SUI HAIR ATELIER / SAKAI, OSAKA</span></div>
     <div inert={menuOpen || undefined}>
-      <div className={styles.demoBar}><a href="#production-scope">初期0円でできる範囲を見る</a><Link href="/#demo">まちのWebへ戻る <Arrow external/></Link></div>
+      <div className={styles.demoBar}><span>SUI HAIR ATELIER</span><Link href="/#demo">まちのWebへ戻る <Arrow external/></Link></div>
       <header className={styles.header}>
         <a href="#sui-top" aria-label="sui hair atelier トップへ"><Brand/></a>
         <nav aria-label="メインメニュー">{navigation.map(([href,label]) => <a href={href} key={href}>{label}</a>)}</nav>
@@ -159,7 +158,7 @@ export function SuiWebsite({ map }: { map: ReactNode }) {
         <section id="sui-reservation" className={styles.reservation} aria-labelledby="sui-reservation-heading"><div className={styles.container} data-sui-reveal><p className={styles.eyebrow}>MAKE ROOM FOR A NEW YOU.</p><h2 id="sui-reservation-heading"><TextLines lines={["次の髪を、", "話すところから。"]}/></h2><div className={styles.bookingLinks}><Reserve className={styles.reservationLink}><span>予約サイトはこちら<small>WEB RESERVATION</small></span></Reserve><LineLink className={styles.lineLink}/></div><p className={styles.linkNote}>{salon.linkNote}</p></div></section>
       </main>
 
-      <footer className={styles.footer}><div className={styles.container}><div className={styles.footerTop}><a href="#sui-top" aria-label="sui hair atelier トップへ"><Brand large/></a><nav aria-label="フッターメニュー">{navigation.map(([href,label]) => <a href={href} key={href}>{label}</a>)}<a href="#sui-first">FIRST VISIT</a><a href="#sui-journal">JOURNAL</a></nav><a className={styles.topLink} href="#sui-top">BACK TO TOP ↑</a></div><div className={styles.footerBottom}><p>架空のヘアサロンのホームページ制作見本です。<br/>店名・料金・営業情報・写真はデモ用です。モデル画像は実際のお客様・施術実績ではありません。</p><Link href="/#demo">DESIGN BY まちのWeb<Arrow external/></Link><small>© SUI HAIR ATELIER / DESIGN SAMPLE</small></div><DemoPriceGuide slug="sui"/></div></footer>
+      <footer className={styles.footer}><div className={styles.container}><div className={styles.footerTop}><a href="#sui-top" aria-label="sui hair atelier トップへ"><Brand large/></a><nav aria-label="フッターメニュー">{navigation.map(([href,label]) => <a href={href} key={href}>{label}</a>)}<a href="#sui-first">FIRST VISIT</a><a href="#sui-journal">JOURNAL</a></nav><a className={styles.topLink} href="#sui-top">BACK TO TOP ↑</a></div><div className={styles.footerBottom}><p>架空のヘアサロンのホームページ制作見本です。<br/>店名・料金・営業情報・写真はデモ用です。モデル画像は実際のお客様・施術実績ではありません。</p><Link href="/#demo">DESIGN BY まちのWeb<Arrow external/></Link><small>© SUI HAIR ATELIER / DESIGN SAMPLE</small></div></div></footer>
       <div className={styles.mobileBooking}><Reserve>WEB予約</Reserve><LineLink/></div>
     </div>
 

@@ -71,12 +71,11 @@ test("English school has three real noindex pages and a strictly non-sending dem
   const html=await read(`.next/server/app/demo/michiru/${page}.html`);
   assert.match(html,/name="robots" content="noindex/);assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1);
   assert.match(html,new RegExp(`rel="canonical" href="https://machinowebs.com/demo/michiru/${page}"`));
-  const text=html.replaceAll("<!-- -->","");
-  assert.match(text,/55,000円〜/);assert.match(text,/月額運用費/);assert.match(text,/33,000円/);assert.match(text,/22,000円/);
+  assert.doesNotMatch(html,/data-demo-price-guide|production-scope|55,000円〜|この見本でできること、/);
   for(const route of ["/demo/michiru","/demo/michiru/courses","/demo/michiru/contact"])assert.ok(html.includes(`href="${route}"`));
  }
  const html=await read(".next/server/app/demo/michiru/contact.html"),source=await read("components/demo/michiru/MichiruContactPage.tsx");
- assert.match(home,/初期0円の対象外/);assert.match(html,/<form[^>]*data-demo-contact-form/);
+ assert.doesNotMatch(home,/data-demo-price-guide|production-scope/);assert.match(html,/<form[^>]*data-demo-contact-form/);
  assert.match(html,/送信されない、フォームの操作見本です/);assert.match(html,/個人情報は入力しないでください/);
  assert.equal((html.match(/readOnly=""/g)||[]).length,3);assert.match(html,/data-clarity-mask="true"/);
  assert.match(source,/event.preventDefault\(\)/);assert.match(source,/setStep\("confirm"\)/);assert.match(source,/setStep\("complete"\)/);

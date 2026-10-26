@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {DemoNotice,DemoShell} from "../shared/PremiumDemo";
-import {DemoPriceGuide} from "@/components/pricing/DemoPriceGuide";
 import {kasaneProjects} from "./content";
 import {projectStories} from "./project-stories";
 import styles from "./project-page.module.css";
@@ -12,7 +11,7 @@ export function KasaneProjectPage({slug}:{slug:keyof typeof projectStories}) {
   const story=projectStories[slug];
   const next=kasaneProjects.find(item=>item.id!==slug)!;
   return <DemoShell className={styles.site}>
-    <div className={styles.demoBar}><a href="#production-scope">詳細ページを含む追加制作の見本</a><Link href="/#demo">まちのWebへ戻る</Link></div>
+    <div className={styles.demoBar}><span>KASANE / PROJECT STORIES</span><Link href="/#demo">まちのWebへ戻る</Link></div>
     <header className={styles.header}><Link href="/demo/kasane" className={styles.brand}>KASANE<small>株式会社かさね</small></Link><Link href="/demo/kasane#kasane-projects">プロジェクト一覧</Link><Link href="/demo/kasane#kasane-contact">空間のご相談</Link></header>
     <main><nav className={styles.breadcrumbs} aria-label="パンくずリスト"><Link href="/demo/kasane">TOP</Link><span>/</span><Link href="/demo/kasane#kasane-projects">PROJECTS</Link><span>/</span><span aria-current="page">{project.name}</span></nav>
       <section className={styles.title}><div><p>PROJECT STORY / {project.number}</p><h1>{project.title}</h1><span>{project.name}</span></div><div><p>{project.category}</p><p>{project.scope}</p><small>FICTIONAL DESIGN PROPOSAL / {project.year}</small></div></section>
@@ -23,6 +22,6 @@ export function KasaneProjectPage({slug}:{slug:keyof typeof projectStories}) {
       <section className={styles.materials} aria-label="素材のパレット"><p>MATERIAL NOTES</p>{story.materials.map(item=><div key={item.name}><span style={{background:item.color}}/><div><strong>{item.name}</strong><small>{item.japanese}</small></div></div>)}</section>
       <section className={styles.next}><div><p>NEXT PROJECT</p><h2>{next.title}</h2><Link href={`/demo/kasane/projects/${next.id}`}>{next.name} のストーリーを読む</Link></div><Link href={`/demo/kasane/projects/${next.id}`} aria-label={`${next.name}の詳細を見る`}><Image src={next.image} alt={next.alt} fill sizes="(max-width:700px) 100vw,50vw"/></Link></section>
       <div className={styles.consult}><p>つくりたい場所のことから。</p><Link href="/demo/kasane#kasane-contact">KASANEに相談する</Link><small>制作見本のため、実際の設計相談は受け付けていません。</small></div>
-    </main><footer className={styles.footer}><Link href="/demo/kasane">KASANE / TOP</Link><DemoPriceGuide slug="kasane"/><DemoNotice/></footer>
+    </main><footer className={styles.footer}><Link href="/demo/kasane">KASANE / TOP</Link><DemoNotice/></footer>
   </DemoShell>;
 }

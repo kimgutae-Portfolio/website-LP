@@ -6,8 +6,6 @@ import { Arrow, DemoDialog, DemoNotice, DemoShell } from "../shared/PremiumDemo"
 import { courses, faqs, news } from "./content";
 import { MichiruBrand as Brand } from "./MichiruBrand";
 import { michiruNavigation as navigation } from "./navigation";
-import { DemoPriceGuide } from "@/components/pricing/DemoPriceGuide";
-import { exampleOffers, formatInitialPrice } from "@/lib/example-offers";
 import pages from "./michiru-pages.module.css";
 import styles from "./michiru.module.css";
 
@@ -18,7 +16,7 @@ export function MichiruWebsite({map}:{map:ReactNode}) {
  const [modal,setModal] = useState<Modal>(null);
  return <DemoShell className={styles.site} paused={menuOpen||!!modal}>
   <div className={styles.opening} data-demo-opening aria-hidden="true"><p>SMALL WORDS. BIG WORLDS.</p><div className={styles.openingWord}>{"Hello!".split("").map((letter,index)=><span key={index}>{letter}</span>)}</div><Brand/></div>
-  <div className={styles.demoBar}><a href="#production-scope">3ページ＋フォーム / 初期{formatInitialPrice(exampleOffers.michiru)}（税込）</a><Link href="/#demo">まちのWebへ戻る</Link></div>
+  <div className={styles.demoBar}><span>SMALL WORDS. BIG WORLDS.</span><Link href="/#demo">まちのWebへ戻る</Link></div>
   <header className={styles.header}><a href="#michiru-top" aria-label="みちる英語教室 トップへ"><Brand/></a><nav aria-label="メインメニュー">{navigation.map(([href,label])=><a href={href} key={href}>{label}</a>)}</nav><Link className={styles.headerTrial} href="/demo/michiru/contact">体験・お問い合わせ<Arrow/></Link><button type="button" className={styles.menuTrigger} onClick={()=>setMenuOpen(true)} aria-label="メニューを開く"><span/><span/></button></header>
   <main>
    <section id="michiru-top" className={styles.hero} aria-labelledby="michiru-hero-heading"><div className={styles.heroCopy}><p className={styles.eyebrow}>SMALL WORDS. BIG WORLDS.</p><h1 id="michiru-hero-heading"><span>「話してみたい」が、</span><strong>はじまり。</strong></h1><p>まちがえても、立ち止まっても。<br/>あなたの言葉が、世界をひらく。</p><a href="#michiru-about" className={styles.heroLink}>みちるって、どんな教室？<Arrow/></a><div className={styles.heroSignature}><span>Hello, new me.</span><small>自分の声で。自分のペースで。</small></div></div><div className={styles.heroVisual}><div className={styles.heroPhoto}><Image src="/demo/michiru/hero-no-people.webp" alt="絵カードと色鉛筆、青い椅子を並べた、レッスン前の明るい英語教室のイメージ" fill sizes="(max-width:700px) 100vw,85vw" priority data-hero-image/></div><span className={styles.heroGreeting} aria-hidden="true">Hello!</span><div className={styles.heroCaption}><span>LET’S FIND YOUR WORDS.</span><span>LESSON IMAGE / DESIGN SAMPLE</span></div></div></section>
@@ -32,7 +30,7 @@ export function MichiruWebsite({map}:{map:ReactNode}) {
    <section id="michiru-access" className={styles.access} aria-labelledby="michiru-access-heading"><div className={`${styles.accessLayout} ${styles.container}`}><div data-demo-reveal><p className={styles.eyebrow}>SEE YOU AT MICHIRU.</p><h2 id="michiru-access-heading">いつもの街に、<br/>新しい世界を。</h2><dl><div><dt>教室名</dt><dd>みちる英語教室（架空の教室）</dd></div><div><dt>エリア</dt><dd>大阪府堺市周辺（デモ設定）</dd></div><div><dt>対象</dt><dd>年長〜中学生のクラスを想定</dd></div></dl><p>地図は地域の表示例です。<br/>実在する教室の所在地ではありません。</p><a href="https://www.google.com/maps/search/?api=1&query=%E5%A0%BA%E5%B8%82" target="_blank" rel="noopener noreferrer">Googleマップで地域を見る<Arrow diagonal/></a></div><div className={styles.mapFrame}>{map}</div></div></section>
    <section id="michiru-trial" className={styles.trial}><div className={styles.container}><div data-demo-reveal><p className={styles.eyebrow}>YOUR FIRST HELLO.</p><h2>はじめのひとことを、<br/>みちるで。</h2><p>教室の空気を知るところから。<br/>まずは、体験レッスンのご案内へ。</p></div><Link href="/demo/michiru/contact" className={pages.homeTrialLink}><span>体験・お問い合わせ<small>LET’S SAY HELLO.</small></span><Arrow/></Link></div></section>
   </main>
-  <footer className={`${styles.footer} ${styles.container}`}><div><a href="#michiru-top" aria-label="みちる英語教室 トップへ"><Brand/></a><a href="#michiru-top">BACK TO TOP ↑</a></div><nav aria-label="フッターメニュー">{navigation.map(([href,label])=><a href={href} key={href}>{label}</a>)}<Link href="/#demo">まちのWebへ戻る ↗</Link></nav><DemoPriceGuide slug="michiru"/><DemoNotice/><small>© MICHIRU ENGLISH CLASS / DESIGN SAMPLE</small></footer>
+  <footer className={`${styles.footer} ${styles.container}`}><div><a href="#michiru-top" aria-label="みちる英語教室 トップへ"><Brand/></a><a href="#michiru-top">BACK TO TOP ↑</a></div><nav aria-label="フッターメニュー">{navigation.map(([href,label])=><a href={href} key={href}>{label}</a>)}<Link href="/#demo">まちのWebへ戻る ↗</Link></nav><DemoNotice/><small>© MICHIRU ENGLISH CLASS / DESIGN SAMPLE</small></footer>
   <div className={styles.mobileTrial}><Link href="/demo/michiru/courses">コース・月謝</Link><Link href="/demo/michiru/contact">体験・お問い合わせ<Arrow/></Link></div>
   <DemoDialog open={menuOpen} onClose={()=>setMenuOpen(false)} label="みちる MENU" className={styles.menuDialog}><nav>{navigation.map(([href,label])=><a href={href} key={href} onClick={()=>setMenuOpen(false)}>{label}<Arrow/></a>)}<a href="#michiru-faq" onClick={()=>setMenuOpen(false)}>よくある質問<Arrow/></a></nav></DemoDialog>
   <DemoDialog open={!!modal} onClose={()=>setModal(null)} label="教室からのおたより">

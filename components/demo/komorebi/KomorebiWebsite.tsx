@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { DemoPriceGuide } from "@/components/pricing/DemoPriceGuide";
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Reveal } from "@/components/Reveal";
@@ -107,7 +106,7 @@ export function KomorebiWebsite({ map }: { map: ReactNode }) {
 
   return <div className={styles.site} data-ready={ready}>
     <div inert={menuOpen || undefined}>
-    <div className={styles.demoBar}><a href="#production-scope">架空の小児科サイト・制作費の範囲</a><Link href="/#demo">まちのWebへ戻る <Arrow external /></Link></div>
+    <div className={styles.demoBar}><span>架空の小児科サイト・制作見本</span><Link href="/#demo">まちのWebへ戻る <Arrow external /></Link></div>
     <header className={styles.header}>
       <a href="#komorebi-top" aria-label="こもれび こどもクリニック トップへ"><Brand /></a>
       <nav aria-label="メインメニュー">{nav.map(([href, label]) => <a href={href} key={href}>{label}</a>)}</nav>
@@ -178,7 +177,7 @@ export function KomorebiWebsite({ map }: { map: ReactNode }) {
       <section className={styles.goodbye} aria-label="こもれびからのメッセージ"><Reveal><Leaf/><p>こどもと、家族と、一歩ずつ。</p><h2>きょうの小さな安心が、<br/>あしたの笑顔に、つながる。</h2><a href="#komorebi-top" className={styles.textLink}>森のともだちのところへ <span aria-hidden="true">↑</span></a></Reveal></section>
     </main>
 
-    <footer className={styles.footer}><div className={styles.container}><div className={styles.footerTop}><a href="#komorebi-top" aria-label="こもれび こどもクリニック トップへ"><Brand /></a><nav aria-label="フッターメニュー">{nav.map(([href, label]) => <a href={href} key={href}>{label}</a>)}<a href="#komorebi-news">お知らせ</a><a href="#komorebi-faq">よくあるご質問</a></nav></div><div className={styles.footerBottom}><p>架空のクリニックのホームページ制作見本です。<br/>名称・診療内容・診療時間・設備・画像はデモ用です。診断・診療・予約受付は行っていません。</p><Link href="/#demo">DESIGN BY まちのWeb <Arrow external /></Link><small>© KOMOREBI KIDS CLINIC / DESIGN SAMPLE</small></div><DemoPriceGuide slug="komorebi"/></div></footer>
+    <footer className={styles.footer}><div className={styles.container}><div className={styles.footerTop}><a href="#komorebi-top" aria-label="こもれび こどもクリニック トップへ"><Brand /></a><nav aria-label="フッターメニュー">{nav.map(([href, label]) => <a href={href} key={href}>{label}</a>)}<a href="#komorebi-news">お知らせ</a><a href="#komorebi-faq">よくあるご質問</a></nav></div><div className={styles.footerBottom}><p>架空のクリニックのホームページ制作見本です。<br/>名称・診療内容・診療時間・設備・画像はデモ用です。診断・診療・予約受付は行っていません。</p><Link href="/#demo">DESIGN BY まちのWeb <Arrow external /></Link><small>© KOMOREBI KIDS CLINIC / DESIGN SAMPLE</small></div></div></footer>
     <div className={styles.mobileBar}><a href="#komorebi-access"><CareIcon kind="clock"/><span>診療時間・アクセス</span></a><button type="button" onClick={book}><span aria-hidden="true">▦</span>WEB予約<Arrow external /></button></div>
 
     </div>

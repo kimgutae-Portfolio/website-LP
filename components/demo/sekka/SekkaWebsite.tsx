@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { DemoPriceGuide } from "@/components/pricing/DemoPriceGuide";
 import Link from "next/link";
 import { useState } from "react";
 import { Arrow, DemoDialog, DemoNotice, DemoShell } from "../shared/PremiumDemo";
@@ -20,7 +19,7 @@ export function SekkaWebsite() {
  const contact = () => setModal({ kind: "contact" });
  return <DemoShell className={styles.site} paused={menuOpen || !!modal} revision={String(process)}>
   <div className={styles.opening} data-demo-opening aria-hidden="true"><div className={styles.openingGrid}/><span className={styles.openingTarget}/><div><Brand/><p>THE DETAIL DEFINES THE WHOLE.</p></div><small>SEKKA / DESIGN SAMPLE</small></div>
-  <div className={styles.demoBar}><a href="#production-scope">初期0円でできる範囲を見る</a><Link href="/#demo">まちのWebへ戻る ↗</Link></div>
+  <div className={styles.demoBar}><span>SEKKA PRECISION INDUSTRIES</span><Link href="/#demo">まちのWebへ戻る ↗</Link></div>
   <header className={styles.header}><a href="#sekka-top" aria-label="SEKKA トップへ"><Brand/></a><nav aria-label="メインメニュー">{navigation.map(([href,label])=><a href={href} key={href}>{label}</a>)}</nav><button type="button" className={styles.headerContact} onClick={contact}>お問い合わせ<Arrow diagonal/></button><button type="button" className={styles.menuTrigger} onClick={()=>setMenuOpen(true)} aria-label="メニューを開く"><span/><span/></button></header>
   <main>
    <section id="sekka-top" className={styles.hero} aria-labelledby="sekka-hero-heading">
@@ -42,7 +41,7 @@ export function SekkaWebsite() {
    <section id="sekka-news" className={`${styles.news} ${styles.container}`} aria-labelledby="sekka-news-heading"><div className={styles.sectionHeading}><div><p className={styles.eyebrow}>LATEST NOTES</p><h2 id="sekka-news-heading">お知らせ</h2></div></div><div>{news.map((item,index)=><button type="button" key={item.date} onClick={()=>setModal({kind:"news",index})}><time>{item.date}</time><small>{item.category}</small><span>{item.title}</span><Arrow/></button>)}</div></section>
    <section id="sekka-contact" className={styles.contact}><div className={styles.container}><div data-demo-reveal><p className={styles.eyebrow}>LET’S MAKE IT REAL.</p><h2>その図面の先を、<br/>一緒に考える。</h2></div><button type="button" onClick={contact}>加工のご相談について<Arrow diagonal/></button></div></section>
   </main>
-  <footer className={`${styles.footer} ${styles.container}`}><div><a href="#sekka-top" aria-label="SEKKA トップへ"><Brand/></a><a href="#sekka-top">BACK TO TOP ↑</a></div><nav aria-label="フッターメニュー">{navigation.map(([href,label])=><a href={href} key={href}>{label}</a>)}<Link href="/#demo">まちのWebへ戻る ↗</Link></nav><DemoPriceGuide slug="sekka"/><DemoNotice/><small>© SEKKA PRECISION INDUSTRIES / DESIGN SAMPLE</small></footer>
+  <footer className={`${styles.footer} ${styles.container}`}><div><a href="#sekka-top" aria-label="SEKKA トップへ"><Brand/></a><a href="#sekka-top">BACK TO TOP ↑</a></div><nav aria-label="フッターメニュー">{navigation.map(([href,label])=><a href={href} key={href}>{label}</a>)}<Link href="/#demo">まちのWebへ戻る ↗</Link></nav><DemoNotice/><small>© SEKKA PRECISION INDUSTRIES / DESIGN SAMPLE</small></footer>
   <div className={styles.mobileContact}><a href="#sekka-technology">加工内容を見る</a><button type="button" onClick={contact}>ご相談について<Arrow diagonal/></button></div>
   <DemoDialog open={menuOpen} onClose={()=>setMenuOpen(false)} label="SEKKA MENU" className={styles.menuDialog}><nav>{navigation.map(([href,label])=><a key={href} href={href} onClick={()=>setMenuOpen(false)}>{label}<Arrow/></a>)}<a href="#sekka-news" onClick={()=>setMenuOpen(false)}>お知らせ<Arrow/></a></nav></DemoDialog>
   <DemoDialog open={!!modal} onClose={()=>setModal(null)} label={modal?.kind==="product"?"PRODUCT SAMPLE":modal?.kind==="news"?"NEWS":"CONTACT / DESIGN SAMPLE"}>

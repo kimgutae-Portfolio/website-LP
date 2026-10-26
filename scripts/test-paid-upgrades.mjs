@@ -19,7 +19,7 @@ test("only the four paid examples receive upgrades, without changing their price
  for(const item of paid.filter(item=>item.url!=="/demo/michiru"))assert.equal(item.offer.initialFrom,null);
 });
 test("new paid pages are complete noindex documents, with no live personal-data forms",async()=>{
- for(const path of paths){const html=await read(`.next/server/app/demo/${path}.html`);assert.match(html,/name="robots" content="noindex/);assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1,path);assert.match(html,new RegExp(`rel="canonical" href="https://machinowebs.com/demo/${path}"`));assert.match(html,/data-demo-price-guide/);assert.doesNotMatch(html,/<form(?:\s|>)/);assert.doesNotMatch(html,/<input[^>]+type="(?:text|email|password|tel)"/);}
+ for(const path of paths){const html=await read(`.next/server/app/demo/${path}.html`);assert.match(html,/name="robots" content="noindex/);assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1,path);assert.match(html,new RegExp(`rel="canonical" href="https://machinowebs.com/demo/${path}"`));assert.doesNotMatch(html,/data-demo-price-guide|production-scope|この見本でできること、/);assert.match(html,/架空/);assert.doesNotMatch(html,/<form(?:\s|>)/);assert.doesNotMatch(html,/<input[^>]+type="(?:text|email|password|tel)"/);}
  const sitemap=await read(".next/server/app/sitemap.xml.body");assert.doesNotMatch(sitemap,/\/demo\//);
 });
 test("main gallery exposes a direct interaction link for every paid example only",async()=>{

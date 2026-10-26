@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { DemoPriceGuide } from "@/components/pricing/DemoPriceGuide";
 import Link from "next/link";
 import { useRef, useState, type ReactNode } from "react";
 import { Arrow, DemoDialog, DemoNotice, DemoShell } from "../shared/PremiumDemo";
@@ -22,7 +21,7 @@ export function NagiWebsite({map}:{map:ReactNode}) {
  const selected = moments[moment];
  return <DemoShell className={styles.site} paused={menuOpen||!!modal} revision={String(moment)}>
   <div className={styles.opening} data-demo-opening aria-hidden="true"><Brand large/><span/><p>庭と、静かな時間。</p></div>
-  <div className={styles.demoBar}><a href="#production-scope">この見本の制作費・対応範囲</a><Link href="/#demo">まちのWebへ戻る ↗</Link></div>
+  <div className={styles.demoBar}><span>NAGI / A QUIETER DAY</span><Link href="/#demo">まちのWebへ戻る ↗</Link></div>
   <header className={styles.header}><a href="#nagi-top" aria-label="旅宿 凪 トップへ"><Brand/></a><nav aria-label="メインメニュー">{navigation.map(([href,label])=><a href={href} key={href}>{label}</a>)}</nav><Booking className={styles.headerBooking}/><button type="button" className={styles.menuTrigger} aria-label="メニューを開く" onClick={()=>setMenuOpen(true)}><span/><span/></button></header>
   <main>
    <section id="nagi-top" className={styles.hero} aria-labelledby="nagi-hero-heading"><div className={styles.heroPhoto} data-demo-scene><Image src="/demo/nagi/hero.webp" alt="木の縁側から眺める、苔と楓の小さな日本庭園のイメージ" fill sizes="(max-width:700px) 200vw,110vw" priority data-hero-image/><div/></div><div className={styles.heroCopy}><p>A SMALL INN. A QUIETER DAY.</p><h1 id="nagi-hero-heading"><span>旅の音が、</span><span>静かになる。</span></h1><span className={styles.heroRule}/></div><div className={styles.heroBottom}><span>GARDEN / ROOM / TIME</span><a href="#nagi-intro">余白の旅へ<span aria-hidden="true">↓</span></a><small>架空の宿のイメージです。</small></div></section>
@@ -39,7 +38,7 @@ export function NagiWebsite({map}:{map:ReactNode}) {
    <section id="nagi-access" className={styles.access} aria-labelledby="nagi-access-heading"><div className={`${styles.accessLayout} ${styles.container}`}><div data-demo-reveal><p className={styles.eyebrow}>FIND YOUR WAY HERE.</p><h2 id="nagi-access-heading">凪への、道。</h2><dl><div><dt>宿名</dt><dd>旅宿 凪（架空の宿）</dd></div><div><dt>エリア</dt><dd>大阪府堺市周辺（デモ設定）</dd></div><div><dt>滞在時間</dt><dd>IN 15:00 / OUT 11:00</dd></div></dl><p>地図は地域の表示例です。<br/>実在する宿の所在地ではありません。</p><a href="https://www.google.com/maps/search/?api=1&query=%E5%A0%BA%E5%B8%82" target="_blank" rel="noopener noreferrer">Googleマップで地域を見る<Arrow diagonal/></a></div><div className={styles.mapFrame}>{map}</div></div></section>
    <section className={styles.lastInvitation}><div data-demo-reveal><Brand large/><p>少し、余白のある旅を。</p><Booking className={styles.lastBooking}>空室・ご予約はこちら</Booking><small>外部予約サービスのトップページへ移動します。<br/>実際の施設の予約受付は行っていません。</small></div></section>
   </main>
-  <footer className={`${styles.footer} ${styles.container}`}><nav aria-label="フッターメニュー">{navigation.map(([href,label])=><a href={href} key={href}>{label}</a>)}<a href="#nagi-top">上へ戻る ↑</a></nav><DemoPriceGuide slug="nagi"/><DemoNotice/><div><Link href="/#demo">DESIGN BY まちのWeb ↗</Link><small>© NAGI / DESIGN SAMPLE</small></div></footer>
+  <footer className={`${styles.footer} ${styles.container}`}><nav aria-label="フッターメニュー">{navigation.map(([href,label])=><a href={href} key={href}>{label}</a>)}<a href="#nagi-top">上へ戻る ↑</a></nav><DemoNotice/><div><Link href="/#demo">DESIGN BY まちのWeb ↗</Link><small>© NAGI / DESIGN SAMPLE</small></div></footer>
   <div className={styles.mobileBooking}><a href="#nagi-stay">宿泊のご案内</a><Booking>空室・ご予約</Booking></div>
   <DemoDialog open={menuOpen} onClose={()=>setMenuOpen(false)} label="旅宿 凪 — MENU" className={styles.menuDialog}><nav>{navigation.map(([href,label])=><a href={href} key={href} onClick={()=>setMenuOpen(false)}>{label}<Arrow/></a>)}</nav><Booking className={styles.dialogBooking}/></DemoDialog>
   <DemoDialog open={!!modal} onClose={()=>setModal(null)} label={modal?.kind==="film"?"NAGI / PHOTO FILM":modal?.kind==="gallery"?"館内の風景":"宿からのお便り"} className={modal?.kind==="film"?styles.filmDialog:""}>

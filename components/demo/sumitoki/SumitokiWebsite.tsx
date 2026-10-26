@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { DemoPriceGuide } from "@/components/pricing/DemoPriceGuide";
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Reveal } from "@/components/Reveal";
@@ -178,7 +177,7 @@ export function SumitokiWebsite({ map }: { map: ReactNode }) {
 
     <div inert={opening === "playing" || menuOpen}>
       <div id="sumitoki-top" />
-      <div className={styles.demoBar}><a href="#production-scope">初期0円でできる範囲を見る</a><Link href="/#demo">まちのWebへ戻る <span aria-hidden="true">↗</span></Link></div>
+      <div className={styles.demoBar}><span>SUMITOKI / SEASONAL DINING</span><Link href="/#demo">まちのWebへ戻る <span aria-hidden="true">↗</span></Link></div>
       <header className={`${styles.header} ${scrolled ? styles.headerSolid : ""}`}>
         <a href="#sumitoki-top" aria-label="炭と季 トップページ"><Brand /></a>
         <nav className={styles.desktopNav} aria-label="メインメニュー">{nav.map(([href, label]) => <a href={href} key={href}>{label}</a>)}</nav>
@@ -237,7 +236,7 @@ export function SumitokiWebsite({ map }: { map: ReactNode }) {
         <section className={styles.reservation} aria-labelledby="sumitoki-reservation-heading"><Reveal className={styles.reservationInner}><CoalMark /><p className={styles.eyebrow}>A TABLE FOR YOUR EVENING</p><h2 id="sumitoki-reservation-heading">おいしい夜を、<br />ご一緒に。</h2><p>ご予約は、ご利用中の予約サイトへ。<br />このホームページ内での予約入力はありません。</p><ReservationLink className={styles.reservationLink}><span>外部サイトで予約する<small>RESERVATION</small></span></ReservationLink><small className={styles.reservationNote}>{restaurant.reservationNote}</small></Reveal></section>
       </main>
 
-      <footer className={styles.footer}><div className={styles.container}><div className={styles.footerTop}><a href="#sumitoki-top" aria-label="炭と季 トップへ"><Brand large /></a><nav aria-label="フッターメニュー">{nav.map(([href, label]) => <a href={href} key={href}>{label}</a>)}</nav><a href="#sumitoki-top" className={styles.topLink}>TOP ↑</a></div><div className={styles.footerBottom}><span>© SUMITOKI — DESIGN SAMPLE</span><p>架空の飲食店の制作見本です。<br />店名・料理・価格・営業情報・写真はデモ用です。</p><Link href="/#demo">DESIGN BY まちのWeb ↗</Link></div><DemoPriceGuide slug="sumitoki"/></div></footer>
+      <footer className={styles.footer}><div className={styles.container}><div className={styles.footerTop}><a href="#sumitoki-top" aria-label="炭と季 トップへ"><Brand large /></a><nav aria-label="フッターメニュー">{nav.map(([href, label]) => <a href={href} key={href}>{label}</a>)}</nav><a href="#sumitoki-top" className={styles.topLink}>TOP ↑</a></div><div className={styles.footerBottom}><span>© SUMITOKI — DESIGN SAMPLE</span><p>架空の飲食店の制作見本です。<br />店名・料理・価格・営業情報・写真はデモ用です。</p><Link href="/#demo">DESIGN BY まちのWeb ↗</Link></div></div></footer>
       <div className={styles.mobileReservation}><ReservationLink><span><small>RESERVATION</small>ご予約は、こちらから</span><em>外部予約サイトへ</em></ReservationLink></div>
     </div>
 

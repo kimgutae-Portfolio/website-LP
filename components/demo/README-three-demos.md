@@ -92,8 +92,9 @@ FAQ expansion, menu closing, news dialogs, the photo film and external destinati
 - This is not an initial-zero offer: initial ¥55,000+ tax-inclusive, comprising two subpages
   ¥33,000 and a standard form/email implementation ¥22,000. Actual form transmission belongs
   to client implementation, not the public demo. Monthly operation ¥5,500+ is separate.
-- All eight demos now expose a website-creation price/scope panel, clearly separated from the
-  fictional business's lesson, room, menu or subscription prices. Source: `lib/example-offers.ts`.
+- Website-creation price/scope comparisons are maintained on the main site's gallery only
+  (`lib/example-offers.ts`). As of 2026-10-27, the large in-demo sales panels and their anchors
+  are removed to preserve each brand's atmosphere; small fictional-business / non-sending notices remain.
 
 ## Paid-example experience upgrades (2026-10-26)
 

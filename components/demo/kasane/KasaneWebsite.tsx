@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { DemoPriceGuide } from "@/components/pricing/DemoPriceGuide";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal";
@@ -174,7 +173,7 @@ export function KasaneWebsite({ className }: { className?: string }) {
       <div className={styles.pageContent} inert={opening === "playing"}>
       <div id="kasane-top" />
       <div className={styles.demoBar} data-kasane-banner>
-        <a href="#production-scope">この見本の制作費・対応範囲</a>
+        <span>KASANE / SPACE DESIGN & CONSTRUCTION</span>
         <Link href="/#demo">まちのWebへ戻る <span aria-hidden="true">↗</span></Link>
       </div>
 
@@ -285,7 +284,7 @@ export function KasaneWebsite({ className }: { className?: string }) {
         <section id="kasane-contact" className={styles.contact} aria-labelledby="kasane-contact-heading"><div className={styles.container}><Reveal className={styles.contactLayout}><div><p className={styles.eyebrow}>CONTACT</p><h2 id="kasane-contact-heading" className={styles.contactHeading}>その想いを、<br className={styles.mobileBreak} />お聞かせください。</h2></div><button type="button" className={styles.contactLink} onClick={openContact}>お問い合わせフォームへ <Arrow /></button></Reveal></div></section>
       </main>
 
-      <footer id="kasane-footer" className={styles.footer}><div className={styles.container}><div className={styles.footerTop}><a href="#kasane-top" aria-label="KASANE トップへ"><Brand footer /></a><div><p>株式会社かさね</p><span>SPACE DESIGN & CONSTRUCTION<br />OSAKA, JAPAN</span></div><a href="#kasane-top" className={styles.backToTop}>BACK TO TOP <span>↑</span></a></div><div className={styles.footerBottom}><span>© KASANE Inc.</span><p>本サイトは架空の企業のデザインデモです。<br className={styles.mobileBreak} />掲載情報・写真・映像はすべて見本です。</p><Link href="/">DESIGN BY まちのWeb ↗</Link></div><DemoPriceGuide slug="kasane"/></div></footer>
+      <footer id="kasane-footer" className={styles.footer}><div className={styles.container}><div className={styles.footerTop}><a href="#kasane-top" aria-label="KASANE トップへ"><Brand footer /></a><div><p>株式会社かさね</p><span>SPACE DESIGN & CONSTRUCTION<br />OSAKA, JAPAN</span></div><a href="#kasane-top" className={styles.backToTop}>BACK TO TOP <span>↑</span></a></div><div className={styles.footerBottom}><span>© KASANE Inc.</span><p>本サイトは架空の企業のデザインデモです。<br className={styles.mobileBreak} />掲載情報・写真・映像はすべて見本です。</p><Link href="/">DESIGN BY まちのWeb ↗</Link></div></div></footer>
 
       <dialog ref={dialog} className={styles.dialog} onClose={() => { if (!dialog.current?.open) setModal(null); }} onClick={event => { if (event.target === event.currentTarget) setModal(null); }} aria-labelledby="kasane-dialog-title">
         {modal && <div className={`${styles.dialogInner} ${modal.kind === "film" ? styles.filmDialog : ""}`}><button type="button" className={styles.closeButton} aria-label="閉じる" onClick={() => setModal(null)}><CloseLabel /></button>
