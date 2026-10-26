@@ -68,13 +68,14 @@ test("withdrawal stops cookieless recording too; regrant reuses the existing tag
   ]);
 });
 
-test("Clarity shares the production-host consent gate and prompts old GA-only visitors again", async () => {
+test("Clarity shares the Japanese-region gate and never auto-opens preferences", async () => {
   const component = await read("components/analytics/GoogleMeasurement.tsx");
   const clarity = await read("components/analytics/ClarityMeasurement.tsx");
-  assert.match(component, /if \(!analyticsConfig\.cookieMeasurementEnabled \|\| !enabled\) return null/);
-  assert.match(component, /<ClarityMeasurement active=\{consent === "granted"\}/);
+  assert.match(component, /if \(!enabled \|\| !analyticsConfig\.cookieMeasurementEnabled\) return null/);
+  assert.match(component, /<ClarityMeasurement active=\{active\}/);
   assert.match(component, /Microsoft Clarity/);
-  assert.match(component, /ヒートマップや画面再生/);
+  assert.match(component, /useState\(false\)/);
+  assert.equal((component.match(/setShowPreferences\(true\)/g) ?? []).length, 1);
   assert.match(component, /_clck\$\|_clsk\$/);
   assert.match(clarity, /if \(!active \|\| !id\) return/);
   assert.match(clarity, /return \(\) => stopClarity\(\)/);
@@ -87,5 +88,5 @@ test("contact masking and session-replay disclosures are present", async () => {
   assert.match(privacy, /Microsoft Clarity/);
   assert.match(privacy, /ヒートマップとセッション再生/);
   assert.match(privacy, /privacy\.microsoft\.com\/ja-jp\/privacystatement/);
-  assert.match(privacy, /GoogleとClarityの測定タグは許可前には読み込みません/);
+  assert.match(privacy, /日本国外のアクセス、地域を確認できないアクセス/);
 });

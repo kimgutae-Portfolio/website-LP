@@ -35,7 +35,7 @@ const sections: { heading: string; body: string[] }[] = [
   {
     heading: "第三者への提供",
     body: [
-      "法令に基づく場合を除き、ご本人の同意なく個人情報を第三者に提供することはありません。",
+      "お問い合わせ・ご契約でお預かりする個人情報は、法令に基づく場合やサービス提供に必要な業務委託を除き、ご本人の同意なく第三者に提供しません。アクセス解析に伴う外部サービスへの情報送信については、下記「アクセス解析・広告の効果測定」に記載します。",
     ],
   },
   {
@@ -87,10 +87,13 @@ export default function PrivacyPage() {
         <section id="measurement" className="mt-8 scroll-mt-24 space-y-3">
           <h2 className="text-lg font-bold text-slate-900">アクセス解析・広告の効果測定</h2>
           {analyticsConfig.cookieMeasurementEnabled ? <>
-          <p className="leading-relaxed text-slate-700">当サイトでは、同意いただいた場合に限り、Google LLCのGoogle アナリティクスを利用します。Cookieなどを通じて閲覧ページ、参照元、広告のキャンペーン情報、端末情報、LINEボタンのクリックを収集し、サイト改善および広告効果の確認に利用します。Googleによって国外のサーバーで処理される場合があります。</p>
+          <p className="leading-relaxed text-slate-700">当サイトでは、接続元の国が日本と判定されたアクセスに限り、サイト改善と広告からの導線確認を目的にGoogle LLCのGoogle アナリティクスおよびMicrosoft CorporationのMicrosoft Clarityを利用します。初回にCookieの同意画面は表示しません。日本国外のアクセス、地域を確認できないアクセス、計測を停止したブラウザでは、これらの測定タグを読み込みません。</p>
+          <p className="leading-relaxed text-slate-700">接続国はホスティング・配信サービスのIPアドレスに基づく国情報で判定します。GPSやブラウザの言語・タイムゾーンは使用しません。地域判定APIはIPアドレスや詳細な所在地を保存・返却しません。IPによる判定は実際の所在地と一致しないことがあります。</p>
+          <p className="leading-relaxed text-slate-700">Google アナリティクスでは、Cookie等を通じて閲覧ページ、参照元、広告のキャンペーン情報、端末情報、LINEボタンのクリックを収集します。解析Cookieの有効期間は90日とし、広告のパーソナライズ、リマーケティング、Google シグナル、広告用ストレージ・広告用ユーザーデータの利用は無効にしています。データはGoogleに送信され、国外のサーバーで処理される場合があります。</p>
           <p className="leading-relaxed text-slate-700">LINEボタンのクリックは、友だち追加や実際の相談の完了を意味しません。お名前、メールアドレス、お問い合わせ内容、LINEでの会話内容を、この測定イベントに送信することはありません。広告のパーソナライズおよびGoogle シグナルによるデータ収集は無効にしています。</p>
-          <p className="leading-relaxed text-slate-700">また、同意いただいた場合に限り、Microsoft CorporationのMicrosoft Clarityを利用します。閲覧ページ、端末情報、クリック・スクロールなどの操作情報、画面の構成を収集し、ヒートマップとセッション再生により使いやすさや広告からの導線を改善します。Cookieなどを利用し、データはMicrosoftに送信され、国外で処理される場合があります。入力欄の内容はマスキングし、お問い合わせフォーム全体にもマスキングを設定しています。個人を識別するカスタムIDは送信せず、Clarityの広告用ストレージへの同意は許可しません。Microsoftによる情報の取り扱いは、下記のプライバシーに関する声明をご確認ください。</p>
-          <p className="leading-relaxed text-slate-700">GoogleとClarityの測定タグは許可前には読み込みません。許可・拒否の選択はこのブラウザに90日間保存し、ページ下部の「アクセス解析の設定」からいつでも変更できます。許可を取り消すと以降の計測を停止し、当サイトで削除できる解析Cookieを削除します。拒否しても、LINEやお問い合わせフォームなどは利用できます。ブラウザの設定や広告ブロックにより計測されない場合があるため、計測数は実際の利用数と一致しないことがあります。</p>
+          <p className="leading-relaxed text-slate-700">Clarityでは、閲覧ページ、端末情報、クリック・スクロールなどの操作情報、画面の構成を収集し、ヒートマップとセッション再生で使いやすさを確認します。Cookie等を利用し、データはMicrosoftに送信され、国外で処理される場合があります。入力欄の内容はマスキングし、お問い合わせフォーム全体にもマスキングを設定しています。個人を識別するカスタムIDは送信せず、Clarityの広告用ストレージは無効にしています。</p>
+          <p className="leading-relaxed text-slate-700">ページ下部の「アクセス解析の設定」から、このブラウザでのGoogle・Clarityの計測をいつでも停止・再開できます。停止すると以降のイベント送信とClarityの記録を止め、当サイトから削除できる解析Cookieを削除します。停止の設定はブラウザ内に保存し、自動では期限切れにしません。ブラウザのデータを削除した場合や別のブラウザには引き継がれません。ブラウザがGlobal Privacy Controlの信号を送る場合も計測しません。保存機能を利用できない場合は、初期状態で計測を停止します。停止してもLINE・お問い合わせフォームなどの機能は利用できます。</p>
+          <p className="leading-relaxed text-slate-700">LINEクリックは友だち追加・相談完了・売上ではありません。広告用データの利用制限、地域判定、ブラウザ設定や広告ブロック等により、GA4のクリック集計やGoogle広告の補助コンバージョンは実際の利用数と一致せず、広告側に反映されない場合があります。実際の相談件数は別途確認します。</p>
           </> : <>
           <p className="leading-relaxed text-slate-700">当サイトでは現在、Cookieを用いるGoogle アナリティクスとMicrosoft Clarityの測定を停止しています。これらの測定タグは読み込まず、LINEボタンのクリック測定、ヒートマップ、セッション再生も行いません。Cookieの許可を求める画面は表示しません。</p>
           <p className="leading-relaxed text-slate-700">過去に保存された解析の許可は利用せず、以前の選択と当サイトから削除できるGoogle・Clarityの解析Cookieを削除します。LINEでのご相談、お問い合わせフォームなどはそのままご利用いただけます。</p>

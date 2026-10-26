@@ -10,8 +10,9 @@ export function clarityProjectId(value: string | undefined): string | null {
   return value && /^[a-z0-9]{6,20}$/.test(value) ? value : null;
 }
 
-// Equivalent to Microsoft's async tag, but inserted into <head> only after
-// opt-in. A single script survives App Router navigation and repeat opt-ins.
+// Inserted only after the server verifies Japanese traffic, and never after an
+// opt-out. This analytics-only regional default is not an explicit-consent log.
+// A single script survives App Router navigation and preference changes.
 export function startClarity(projectId: string) {
   if (!clarityProjectId(projectId)) return;
   window.clarity ??= function (...args: unknown[]) {

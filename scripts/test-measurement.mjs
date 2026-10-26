@@ -46,9 +46,10 @@ test("LINE event payload is limited to public location / destination data", () =
   assert.equal(analytics.lineClickParameters("private or arbitrary text", "/", line).cta_location, "cta");
 });
 
-test("the tag is consent-gated, route changes deduplicate, and navigation is never blocked", async () => {
+test("the tag is region / opt-out gated, route changes deduplicate, and navigation is never blocked", async () => {
   const source = await read("components/analytics/GoogleMeasurement.tsx");
-  assert.match(source, /consent === "granted" && id && <Script/);
+  assert.match(source, /active && id && <Script/);
+  assert.match(source, /region.path === pathname && measurementAllowed/);
   assert.match(source, /send_page_view: false/);
   assert.match(source, /lastPage\.current === pathname/);
   assert.match(source, /allow_google_signals: false/);
@@ -73,5 +74,5 @@ test("all business LINE controls expose their placement and privacy settings are
   const privacy = await read("app/privacy/page.tsx");
   assert.match(privacy, /id="measurement"/);
   assert.match(privacy, /LINEでの会話内容/);
-  assert.match(privacy, /90日間/);
+  assert.match(privacy, /自動では期限切れにしません/);
 });

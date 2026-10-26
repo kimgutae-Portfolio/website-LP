@@ -1,10 +1,14 @@
-.notice{position:fixed;z-index:80;bottom:20px;left:20px;right:104px;max-width:590px;padding:22px 24px;background:#fffdf7;color:#263d35;border:1px solid #d6dfd6;box-shadow:0 8px 30px #17392c18;font-family:var(--font-noto-sans-jp),sans-serif}
-.notice h2{margin:0 0 9px;font-size:14px;font-weight:700;letter-spacing:.03em;line-height:1.7}
-.notice p{margin:0;font-size:12px;line-height:1.9;color:#526158}
+.notice{position:fixed;inset:0;margin:auto;width:min(590px,calc(100% - 32px));max-height:calc(100dvh - 48px);overflow-y:auto;padding:25px;background:#fffdf7;color:#263d35;border:1px solid #d6dfd6;box-shadow:0 8px 30px #17392c18;font-family:var(--font-noto-sans-jp),sans-serif}
+.notice::backdrop{background:#102b2866}
+.notice h2{margin:0 0 12px;font-size:16px;font-weight:700;line-height:1.7}
+.notice p{margin:0;font-size:12px;line-height:1.95;color:#526158}
 .notice p a{margin-left:.6em;text-decoration:underline;text-underline-offset:3px}
-.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px}
-.actions button{min-height:42px;min-width:112px;border:1px solid #385647;background:transparent;padding:8px 16px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
-.actions button:last-child{background:#263f32;color:white}
-.actions button:hover{outline:1px solid currentColor;outline-offset:2px}
+.notice .status{padding:13px;margin-top:18px;background:#edf1e7;font-weight:700;color:#284d3d}
+.notice .storageNote{margin-top:10px;font-size:11px;color:#7b5a36}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.actions button{min-height:44px;flex:1;border:1px solid #385647;background:transparent;padding:9px 13px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.actions button:first-child{background:#263f32;color:white}
+.actions button:disabled{opacity:.45;cursor:default}
+.actions button:not(:disabled):hover{outline:1px solid currentColor;outline-offset:2px}
 .notice a:focus-visible,.actions button:focus-visible{outline:3px solid #b78a38;outline-offset:3px}
-@media(max-width:600px){.notice{bottom:calc(100px + env(safe-area-inset-bottom,0px));left:12px;right:12px;padding:18px;max-width:none}.notice h2{font-size:13px}.notice p{font-size:11px}.actions{justify-content:stretch}.actions button{flex:1;min-height:44px}}
+@media(max-width:600px){.notice{padding:22px 19px}.notice h2{font-size:15px}.notice p{font-size:11px}.actions{gap:8px}.actions button{flex-basis:calc(50% - 4px);font-size:11px}.actions button:last-child{flex-basis:100%}}

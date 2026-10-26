@@ -1,71 +1,70 @@
-# 訪問・LINEクリックの無料計測
+# 日本限定・初回ポップアップなしのアクセス解析
 
-## 現在の公開設定：同意画面なし・Cookieを用いる計測は停止
+2026-10-26。プライバシーポリシーでの告知とブラウザ単位のオプトアウトを提供し、
+サーバーが接続国を日本と判定したアクセスだけGA4・Clarityを動かす。
+「明示的な同意を取得した」とする記録は作らない。
 
-2026-10-26、初回の同意画面による離脱を避けたいという依頼に合わせ、
-`analytics.config.ts` の `cookieMeasurementEnabled: false` でGoogle / Clarityを停止。
-同意画面だけを隠して許可扱いにする実装ではない。
+## 読み込み条件
 
-- 初回の案内とフッターの「アクセス解析の設定」を非表示。
-- 過去の保存済み許可も使用せず、v1 / v2の選択を削除。削除可能なGoogle / Clarity / Google広告用の解析Cookieを期限切れにする。
-- Google / Clarityタグ、ページビュー・LINEクリックのイベント、ヒートマップ・録画を読み込み／送信しない。
-- Cookie不要のVercel Web Analytics、LINEへの遷移、お問い合わせフォーム、Stripeの案内は維持。
-- Google広告アカウント・キャンペーン・予算は変更しない。広告クリックの課金は継続するが、サイトからGA4へ `line_click` が送信されないため新しいLINEクリックの補助コンバージョンは記録されない。
-- 再開する場合は、利用目的・プライバシー表示・同意UIを再確認してからフラグを変更する。IDや環境変数を設定するだけでは再開しない。
+- `analytics.config.ts`: `cookieMeasurementEnabled: true`、GA4 `G-JVS5FTTQLJ`、Clarity `z3m9xda0mq`。
+- `GET /api/measurement-region`: Vercel本番・正規ドメインだけで判定。ローカル、プレビュー、海外、国情報なし、検証不能なプロキシは不許可。
+- 国判定が成功する前、通信失敗・8秒タイムアウト、別パスの判定中、オプトアウト、GPC有効時、設定保存へのアクセス失敗ではタグ・イベントを開始しない。
+- ブラウザ言語・タイムゾーン・URLパラメータを国判定に使わない。APIはIP・都市・座標を保存せず返さない。
+- APIは `private, no-store`、CDNも `no-store`。国別結果を他の訪問者に配信しない。
+- SPAのパス変更、表示復帰、接続復帰、表示中5分ごとに再確認。非許可になれば停止。IP推定なので実所在地を保証しない。
+- 本番ホスト以外は通常無効。`debugLocal: true` でもAPIは日本扱いにせず、実データは送らない。JP/海外の分岐はモックを使う単体テストで検証。
 
-以下は停止中の、同意取得型測定を再開する場合の仕様。
+## CDN・プロキシ
 
-GA4: `まちのWeb | machinowebs.com` / stream `まちのWeb ウェブサイト`。
-公開測定IDは `analytics.config.ts` の `G-JVS5FTTQLJ`。
-必要な場合のみ `NEXT_PUBLIC_GA_MEASUREMENT_ID` で上書きする（秘密鍵ではない）。
+通常はVercelの `x-vercel-ip-country` を利用。Cloudflareを前段に置く場合、そのままでは
+VercelがCloudflareサーバーの所在地を返すため使わない。
+Vercelの `x-vercel-forwarded-for` がCloudflare公式公開CIDRに含まれる場合だけ
+`CF-IPCountry` を使用する。Cloudflareらしいヘッダーだけの偽装、複数IP、
+不明な国、`XX`、Torの`T1`は不許可。Cloudflare経由で国ヘッダーがない場合も不許可。
+CIDRは `lib/measurement-region.ts`、2026-10-26に公式IPv4/IPv6一覧を確認。
+将来の範囲変更や他のプロキシを導入した際は必ず再確認する。
+Cloudflare IP Geolocation設定やDNS・ネットワーク設定はこの実装では変更しない。
 
-## 何を記録するか
+## 収集と制限
 
-- `page_view`: 最初の表示とApp Routerによるパス変更。ハッシュ移動では重複計測しない。
-- `line_click`: 設定済みの実際の事業用LINEリンクのみ。デモの `https://line.me/` は対象外。
-- `cta_location`: `hero`, `header`, `pricing_intro`, `pricing`, `contact`, `floating`, `column`, `not_found`, `cta`。
-- `contact_method: line`, `page_path`, `link_url`。フォーム入力値や会話内容は送らない。
-- 自動フォーム収集・スクロール・外部リンク等はGA4ストリームの拡張計測をOFFにしている。
+- GA4 `page_view`: 初回とパス変更。ハッシュ移動・地域再確認だけでは重複させない。
+- `line_click`: `https://lin.ee/Ny9tbUX` の実際の事業用ボタンのみ。デモLINEは対象外。
+- `contact_method: line`, `cta_location`, `page_path`, `link_url`。フォーム入力・名前・メール・LINE会話は送らない。
+- URLはキャンペーン項目等の許可リストで絞り、参照URLのクエリも除去。
+- Google シグナル、広告個人化、広告用ストレージ、広告用ユーザーデータはOFF。広告データ削除設定ON。拡張計測もGA4管理側でOFFのまま。
+- Clarityは統計解析用ストレージだけ許可し、広告用はdenied。GCMも同じ設定なのでMicrosoft広告用の許可に広がらない。
+- 入力欄の標準マスキングと問い合わせフォーム全体の `data-clarity-mask="true"` を維持。個人を識別するカスタムIDなし。
+- CookieなしのVercel Web Analyticsは別に継続。Stripeの個別決済案内・LINE遷移・フォーム処理も独立。
 
-## 同意・検証
+## オプトアウト
 
-同意前はGoogle・Clarityスクリプトを読み込まない基本同意モード。許可・拒否はブラウザに90日保存。
-Clarity追加時に同意キーをv2へ変更し、以前のGAのみの許可を流用せず再確認する。
-拒否するとイベント送信とClarityのレコーダーを止め、当サイトのGoogle・Clarity解析Cookieを削除する。フッターから変更可能。
-Google シグナル、広告パーソナライズは無効。許可時のみ解析・広告効果測定の同意を更新する。
-個人情報を送る拡張コンバージョンやリマーケティングは実装しない。
-既存のCookie不要のVercel Analyticsは変更しない。
+初回には何も表示しない。フッターの「アクセス解析の設定」を押した時だけ設定ダイアログを開く。
+「計測を停止する」で直ちにGoogle送信無効化、Clarityの記録停止、削除可能な解析Cookieを削除。
+SDKがすでに読み込まれていても記録を止め、次のページ読み込みではタグを読み込まない。
+ブラウザ内 `machinowebs:measurement-opt-out:v1` に保存し、自動期限切れなし。
+旧v2の明示拒否は尊重する。古い許可は明示同意の証跡として再利用しない。
+複数タブにも反映し、保存不可なら初期状態を停止にする。手動変更はそのページだけに適用。
 
-## Microsoft Clarity
+## 広告・運用
 
-公開プロジェクトID: `z3m9xda0mq`（`analytics.config.ts`）。
-許可後にだけ `https://www.clarity.ms/tag/z3m9xda0mq` を非同期でheadへ追加する。
-`consentv2` は `analytics_Storage: granted` / `ad_Storage: denied`。
-拒否時は `consentv2` を両方deniedにし、Cookieなしの記録も続けないよう `stop` も呼ぶ。
-再許可時は同じタグを再利用して `start` する。App Routerで二重挿入しない。
-入力欄の標準マスキングに加え、問い合わせフォーム全体に `data-clarity-mask="true"` を指定。
-ヒートマップ・セッション再生の利用は同意案内とプライバシーポリシーに明記する。
+GA4 account `413281492` / property `560546854`、専用Google広告 `777-651-0768`。
+`line_click` は補助コンバージョンのままで、実際の友だち追加・会話・契約ではない。
+広告用データを制限しているため、GA4でのイベント集計とGoogle広告での属性付与・
+補助コンバージョンへの反映は同じではなく、反映されない場合もある。実相談件数は別途確認する。
+広告予算・入札・キャンペーン・請求設定は変更しない。
 
-通常は `machinowebs.com` / `www.machinowebs.com` のみ。localhost・Vercelプレビューは計測しない。
-明示的なQA時のみ `NEXT_PUBLIC_ANALYTICS_DEBUG=true npm run dev -- --port 3001` でlocalhostから
-DebugView用イベントを送る。終了後、通常の環境でビルドする。
+検証: `npm run build` 後に `node --test scripts/test-*.mjs`。
+JP/海外/不明/偽装CDN/キャッシュ/失敗/拒否・再開/再訪問/GPCをテスト。
+本番では `/api/measurement-region` の判定、初回ダイアログなし、手動設定、タグ、停止後の再読み込みを確認する。
+ダッシュボード受信と広告由来の実際のコンバージョンは別確認で、コード検証だけで完了扱いにしない。
 
-GA4（account `413281492` / property `560546854`）の
-「レポート → リアルタイム」で `page_view` / `line_click` を確認できる。
-通常レポートへの反映には時間がかかる。ブラウザ拒否・広告ブロックによる欠損はある。
-LINEの実際の友だち追加・会話開始はこのタグでは分からない。チャット管理で別途確認する。
+## 一次資料
 
-## Google広告で使う前に
-
-広告アカウントの初期・決済設定とGA4のリンクは別の作業。未完了の状態で広告計測完了とは扱わない。
-広告キャンペーンの最終URLはホームページにする（LINEへ直接飛ばさない）。
-自動タグ設定を有効にし、このGA4の `line_click` をインポートする場合は **補助コンバージョン** として扱う。
-クリックを実際の問い合わせ・売上とみなしたり、広告の最適化をクリックだけで行ったりしない。
-同じイベントをGoogle広告タグとGA4インポートの両方で二重登録しない。
-実際の相談人数・見積依頼・成約数は別に記録し、問い合わせ単価を比較する。
-
-## 参考
-
-- https://developers.google.com/analytics/devguides/collection/ga4/views
-- https://developers.google.com/tag-platform/security/guides/consent
-- https://support.google.com/google-ads/answer/11461796
+- https://vercel.com/docs/headers/request-headers
+- https://vercel.com/kb/guide/geo-ip-headers-geolocation-vercel-functions
+- https://developers.cloudflare.com/network/ip-geolocation/
+- https://www.cloudflare.com/ips-v4
+- https://www.cloudflare.com/ips-v6
+- https://developers.google.com/tag-platform/security/concepts/consent-mode
+- https://learn.microsoft.com/en-us/clarity/setup-and-installation/cookie-gcm
+- https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-consent-api-v2
