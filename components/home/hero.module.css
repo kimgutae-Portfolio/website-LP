@@ -6,8 +6,19 @@
   color: #faf7e9;
 }
 .brandScene { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.brandScene::after { content: ""; position: absolute; inset: 0; background: #071f1a; opacity: 0; }
 .brandScene svg { width: 100%; height: 100%; }
 .brandScene .mobileScene { display: none; }
+.sceneCamera { --camera-x: -22%; --camera-y: 9%; --camera-scale: .58; transform-box: view-box; transform-origin: 75% 76%; }
+.sunrise { --sun-rise: 200px; transform-box: view-box; }
+.doorway { opacity: .45; }
+.doorLeft, .doorRight { transform-box: fill-box; opacity: 0; }
+.doorLeft { transform-origin: left center; }
+.doorRight { transform-origin: right center; }
+.entryThreshold { position: absolute; inset: 0; z-index: 2; opacity: 0; visibility: hidden; pointer-events: none; }
+.entryThreshold span { position: absolute; top: -8%; bottom: -8%; width: 34%; background: #133f34; border: 1px solid #527a5d; }
+.entryThreshold span:first-child { left: 0; clip-path: polygon(0 0, 100% 14%, 100% 86%, 0 100%); }
+.entryThreshold span:last-child { right: 0; clip-path: polygon(0 14%, 100% 0, 100% 100%, 0 86%); }
 .inner { position: relative; max-width: 1440px; margin: auto; padding: 0 clamp(24px, 4.5vw, 72px); }
 .entryLine { position: absolute; top: 26px; left: clamp(24px, 4.5vw, 72px); width: 46px; height: 2px; background: #e6b86b; transform-origin: left; }
 .main {
@@ -59,12 +70,41 @@
 .strength h2 { font-size: 18px; line-height: 1.8; font-weight: 500; letter-spacing: -.025em; margin-top: 7px; }
 .strength > p:last-child { font-size: 12px; line-height: 2; color: #65765f; margin-top: 8px; max-width: 350px; }
 @keyframes ruleArrival { from { transform: scaleX(.05); } to { transform: scaleX(1); } }
-@keyframes wordsArrival { from { opacity: 0; transform: translateY(13px); } to { opacity: 1; transform: none; } }
-@keyframes sceneArrival { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: none; } }
-.hero[data-entry="playing"] .entryLine { animation: ruleArrival .8s ease both; }
-.hero[data-entry="playing"] [data-hero-copy] { animation: wordsArrival .65s .1s ease both; }
-.hero[data-entry="playing"] .offer { animation-delay: .18s; }
-.hero[data-entry="playing"] .brandScene { animation: sceneArrival 1s ease both; }
+@keyframes wordsArrival { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes cameraEntry {
+  0%, 30% { transform: translate(var(--camera-x), var(--camera-y)) scale(var(--camera-scale)); }
+  100% { transform: none; }
+}
+@keyframes sunRise {
+  0% { opacity: 0; transform: translateY(var(--sun-rise)); }
+  12% { opacity: 1; }
+  38%, 100% { opacity: 1; transform: none; }
+}
+@keyframes doorOpening {
+  0%, 30% { opacity: 1; transform: scaleX(1); }
+  78%, 100% { opacity: 0; transform: scaleX(.035); }
+}
+@keyframes doorwayArrival { 0%, 42% { opacity: 1; } 100% { opacity: .45; } }
+@keyframes thresholdLeft {
+  0%, 30% { opacity: 1; transform: translateX(0); }
+  86%, 100% { opacity: 0; transform: translateX(-112%); }
+}
+@keyframes thresholdRight {
+  0%, 30% { opacity: 1; transform: translateX(0); }
+  86%, 100% { opacity: 0; transform: translateX(112%); }
+}
+@keyframes dawnLight { 0% { opacity: .5; } 40% { opacity: .16; } 100% { opacity: 0; } }
+.hero[data-entry="playing"] .entryLine { animation: ruleArrival .7s 1.3s ease both; }
+.hero[data-entry="playing"] [data-hero-copy] { animation: wordsArrival .85s 1.25s cubic-bezier(.2,.65,.25,1) both; }
+.hero[data-entry="playing"] .offer { animation-delay: 1.45s; }
+.hero[data-entry="playing"] .sceneCamera { animation: cameraEntry 2.6s cubic-bezier(.22,.61,.24,1) both; will-change: transform; }
+.hero[data-entry="playing"] .sunrise { animation: sunRise 2.6s cubic-bezier(.22,.61,.24,1) both; }
+.hero[data-entry="playing"] :is(.doorLeft,.doorRight) { animation: doorOpening 2.6s cubic-bezier(.22,.61,.24,1) both; }
+.hero[data-entry="playing"] .doorway { animation: doorwayArrival 2.6s ease both; }
+.hero[data-entry="playing"] .brandScene::after { animation: dawnLight 2.6s ease both; }
+.hero[data-entry="playing"] .entryThreshold { opacity: 1; visibility: visible; }
+.hero[data-entry="playing"] .entryThreshold span:first-child { animation: thresholdLeft 2.6s cubic-bezier(.22,.61,.24,1) both; }
+.hero[data-entry="playing"] .entryThreshold span:last-child { animation: thresholdRight 2.6s cubic-bezier(.22,.61,.24,1) both; }
 @media (max-width: 1100px) {
   .main { gap: 35px; grid-template-columns: minmax(0, 1.25fr) minmax(320px, 1fr); }
   .copy h1 { font-size: 4.8vw; }
@@ -98,6 +138,8 @@
   .main { min-height: calc(100svh - 64px); padding: 37px 0 27px; gap: 23px; align-content: center; }
   .brandScene .desktopScene { display: none; }
   .brandScene .mobileScene { display: block; width: 100%; margin: 0; }
+  .mobileScene .sceneCamera { --camera-x: -22%; --camera-y: 4%; --camera-scale: .62; transform-origin: 78% 76%; }
+  .mobileScene .sunrise { --sun-rise: 90px; }
   .eyebrow { font-size: 10px; letter-spacing: .035em; }
   .copy h1 { font-size: clamp(29px, 8.9vw, 45px); line-height: 1.4; margin-top: 13px; letter-spacing: -.06em; }
   .statement { font-size: 12px; line-height: 1.8; margin-top: 16px; white-space: nowrap; }
@@ -150,6 +192,8 @@
 }
 @media (max-height: 720px) and (min-width: 801px) { .main { padding-block: 45px; } }
 @media(prefers-reduced-motion:reduce) {
-  .hero[data-entry="playing"] :is(.entryLine, [data-hero-copy], .brandScene) { animation: none; }
+  .hero[data-entry="playing"] :is(.entryLine, [data-hero-copy], .sceneCamera, .sunrise, .doorway, .doorLeft, .doorRight, .entryThreshold span),
+  .hero[data-entry="playing"] .brandScene::after { animation: none; }
+  .hero[data-entry="playing"] .entryThreshold { display: none; }
   .lineAction { transition: none; }
 }

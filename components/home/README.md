@@ -16,8 +16,13 @@ complete security is claimed. WordPress comparisons are not used in sales copy.
   monthly fee from 5,500 yen, adjacent scope / extra-estimate / minimum-term conditions.
   Primary CTA is the real business LINE link (`cta_location: hero`).
   LINE actions in hero/header/pricing/journal use the shared LINE green token.
-- `HeroExperience.tsx` / `hero.module.css`: brief scene/rule/text reveal, no loading gate,
-  scroll lock, autoplaying video, stock images, or fake project presentation.
+- `HeroExperience.tsx` / `hero.module.css`: continuous 2.6s sunrise → camera approach
+  → sliding doorway → live hero. The actual SVG background is the opening scene,
+  not a separate film or loading screen. Mobile has its own camera geometry.
+  Completion comes from the camera animation plus a 2.9s safety timeout. Scrolling,
+  pointer/focus, Escape/Tab or a deep hash finish immediately; reduced motion skips
+  the sequence. Content is server-rendered, and CSS alone finishes without JS.
+  No scroll lock, autoplaying video, remote media or continuous motion is used.
 - `home.module.css`: shared header, customer concerns and ongoing-support styles.
 - `MobileNavigation.tsx` / `FloatingLineAfterHero.tsx`: retain native mobile navigation
   and floating LINE after the hero.

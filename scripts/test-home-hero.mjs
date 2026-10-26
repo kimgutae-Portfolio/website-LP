@@ -21,9 +21,9 @@ test("first screen leads with service benefits and real, server-rendered consult
   for (const match of html.matchAll(/href="#([^\"]+)"/g)) assert.ok(html.includes(`id="${match[1]}"`), match[1]);
 });
 
-test("short text opening has finite fallback and respects motion preferences and user intent", async () => {
+test("continuous sunrise / doorway opening has a finite fallback and respects user intent", async () => {
   const component = await read("components/home/HeroExperience.tsx"), css = await read("components/home/hero.module.css");
-  assert.match(component, /1100/);
+  assert.match(component, /2900/);
   assert.match(component, /event\.key === "Escape"/);
   assert.match(component, /event\.key === "Tab"/);
   assert.match(component, /onFocusCapture=\{finish\}/);
@@ -32,6 +32,15 @@ test("short text opening has finite fallback and respects motion preferences and
   assert.match(component, /preference\.addEventListener\("change", update\)/);
   assert.match(css, /prefers-reduced-motion:reduce/);
   assert.match(css, /@keyframes ruleArrival/);
+  for (const name of ["cameraEntry", "sunRise", "doorOpening", "thresholdLeft", "thresholdRight", "dawnLight"]) assert.ok(css.includes(`@keyframes ${name}`), name);
+  assert.equal((component.match(/data-entry-camera/g) ?? []).length, 2);
+  assert.equal((component.match(/data-entry-sun/g) ?? []).length, 2);
+  assert.equal((component.match(/data-entry-doorway/g) ?? []).length, 2);
+  assert.match(component, /event\.target === event\.currentTarget/);
+  assert.match(component, /addEventListener\("hashchange", onHash\)/);
+  assert.match(css, /\.entryThreshold\s*\{[^}]*pointer-events: none/);
+  assert.match(css, /cameraEntry 2\.6s/);
+  assert.match(css, /\.mobileScene \.sceneCamera/);
   assert.doesNotMatch(css, /animation[^;}]*infinite/);
   assert.doesNotMatch(component, /preventDefault|style\.overflow|"wheel"|"touchmove"|<video/);
 });
