@@ -15,7 +15,16 @@ const startingPrices = {
   priceTaxNote: "税込",
 } as const;
 
+// 金額は相談後に確定するため、共通の即時決済リンクは設置しない。
+const payments = {
+  methods: "クレジットカード（Stripe）・銀行振込",
+  guidance: "お見積り・ご契約後、確定した金額に合わせて個別にお支払いをご案内します。",
+  cardNote: "カード決済は、ご案内するStripeの決済ページでお手続きいただけます。カード番号・セキュリティコードを当サイトで入力・保存することはありません。",
+  timing: "初期費用がある場合の支払期日と、月額費用の決済日・請求周期は、ご契約前にご案内します。銀行振込は、請求書に記載の期日までにお支払いください。",
+} as const;
+
 export const siteConfig = {
+  payments,
   /* ---------------------------------------------------------
    * 기본 정보 / SEO
    * ------------------------------------------------------- */
@@ -314,6 +323,10 @@ export const siteConfig = {
     {
       q: "費用はどのように決まりますか？",
       a: `基本構成の制作初期費用は${startingPrices.initialCost}円から、月額運用費は${startingPrices.monthlyFrom}円からです（いずれも${startingPrices.priceTaxNote}）。追加ページ・独自のデザインや演出・フォーム・システム連携などをご希望の場合は、内容に応じて初期費用をお見積りします。月額費用も更新・運用の範囲により異なります。相談・お見積りは無料です。内容と金額にご納得いただいてから進めます。`,
+    },
+    {
+      q: "支払い方法は何がありますか？",
+      a: `${payments.methods}に対応しています。${payments.guidance}${payments.cardNote}${payments.timing}`,
     },
     {
       q: "セキュリティ面の対応はありますか？",

@@ -27,6 +27,7 @@ const sections: { heading: string; body: string[] }[] = [
       "取得した個人情報は、次の目的にのみ利用します。",
       "・お問い合わせ・ご相談への回答、ご連絡のため",
       "・サービスのご提供、お見積り・ご契約手続きのため",
+      "・請求・お支払いの確認および契約管理のため",
       "・サービスに関する重要なお知らせのため",
     ],
   },
@@ -77,6 +78,11 @@ export default function PrivacyPage() {
             </section>
           ))}
         </div>
+        <section className="mt-8 space-y-3">
+          <h2 className="text-lg font-bold text-slate-900">クレジットカード決済について</h2>
+          <p className="leading-relaxed text-slate-700">クレジットカード決済にはStripeを利用します。お見積り・ご契約後に個別にご案内するStripeの決済ページでお手続きいただきます。カード番号・セキュリティコードを当サイトで入力・保存することはありません。当方は、請求・入金確認などの契約管理に必要な情報を利用します。</p>
+          <p className="leading-relaxed text-slate-700">決済に関する情報の取り扱いについては、<a href="https://stripe.com/jp/privacy" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Stripeのプライバシーポリシー</a>をご確認ください。</p>
+        </section>
         <section id="measurement" className="mt-8 scroll-mt-24 space-y-3">
           <h2 className="text-lg font-bold text-slate-900">アクセス解析・広告の効果測定</h2>
           <p className="leading-relaxed text-slate-700">当サイトでは、同意いただいた場合に限り、Google LLCのGoogle アナリティクスを利用します。Cookieなどを通じて閲覧ページ、参照元、広告のキャンペーン情報、端末情報、LINEボタンのクリックを収集し、サイト改善および広告効果の確認に利用します。Googleによって国外のサーバーで処理される場合があります。</p>

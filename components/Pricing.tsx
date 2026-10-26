@@ -4,7 +4,7 @@ import { CheckIcon, LineIcon } from "./icons";
 import styles from "./pricing/pricing.module.css";
 
 export function Pricing() {
-  const { pricing } = siteConfig;
+  const { pricing, payments } = siteConfig;
   return (
     <section id="price" className={styles.priceSection} aria-labelledby="price-heading">
       <div className="mx-auto max-w-5xl px-5">
@@ -19,6 +19,10 @@ export function Pricing() {
             <div className={styles.costBlock}><p>公開後も、育てていく</p><h3>月額運用費</h3><p className={styles.priceValue}><strong>{pricing.monthlyFrom}</strong><span>円〜<small>（{pricing.priceTaxNote}）</small></span></p><p>更新・管理・日々のご相談まで</p></div>
           </div>
           <div className={styles.quoteNote}><span>お見積りについて</span><p>{pricing.estimateNote}</p></div>
+          <div className={styles.paymentNote}>
+            <h3>お支払い方法</h3>
+            <div><p>{payments.methods}</p><p>{payments.guidance}</p></div>
+          </div>
           <div className={styles.quickConsult}><p>お店のことも、ご予算のことも。<br className="sm:hidden"/>まずは気軽にお話しください。</p><a href={siteConfig.line.addFriendUrl} data-line-placement="pricing_intro" target="_blank" rel="noopener noreferrer">LINEで無料相談</a></div>
           <div className={styles.serviceColumns}>
             <div><p className={styles.eyebrow}>WEBSITE CREATION</p><h3>伝わるための、土台づくり。</h3><ul>{pricing.creationFeatures.map(feature=><li key={feature}><CheckIcon/><span>{feature}</span></li>)}</ul></div>

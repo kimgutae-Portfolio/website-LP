@@ -19,7 +19,7 @@ const rows: [string, string][] = [
   ["商品代金以外の必要料金", "インターネット接続にかかる通信費はお客様のご負担となります。外部サービス利用料が必要な場合は、お見積り時にご案内します。"],
   [
     "支払方法・支払時期",
-    "銀行振込。請求書を発行しますので、記載の期日までにお支払いください。",
+    `${siteConfig.payments.methods}。${siteConfig.payments.guidance}${siteConfig.payments.cardNote}${siteConfig.payments.timing}`,
   ],
   ["サービスの提供時期", "ご契約後、ヒアリング・原稿・デザインの確認を経て公開します。公開時期は制作内容に応じて事前にご案内します。"],
   [

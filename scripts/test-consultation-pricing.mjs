@@ -11,6 +11,16 @@ test("one consultation-based offer uses both starting prices and retains the con
  assert.equal(p.initialCost,"0");assert.equal(p.monthlyFrom,"5,500");assert.equal(p.priceTaxNote,"税込");assert.match(p.conditions,/3ヶ月/);
  assert.ok(!("mainPlan" in p)&&!("secondPlan" in p));assert.match(p.estimateNote,/基本構成の場合の開始価格/);assert.match(p.estimateNote,/ご納得いただいてから/);assert.match(p.optionalFeatures,/お問い合わせフォーム/);assert.match(p.basicScope,/初期費用0円/);
 });
+test("customer-specific Stripe payments preserve bank transfer and quote-first terms",async()=>{
+ const {payments}=siteConfig;
+ assert.match(payments.methods,/クレジットカード（Stripe）/);assert.match(payments.methods,/銀行振込/);
+ assert.match(payments.guidance,/ご契約後/);assert.match(payments.guidance,/確定した金額/);assert.match(payments.timing,/ご契約前/);
+ assert.match(payments.cardNote,/当サイトで入力・保存することはありません/);
+ const faq=siteConfig.faq.find(item=>item.q==="支払い方法は何がありますか？");assert.ok(faq);assert.ok(faq.a.includes(payments.methods));
+ const html=await read(".next/server/app/index.html"),legal=await read(".next/server/app/tokushoho.html"),privacy=await read(".next/server/app/privacy.html");
+ for(const output of [html,legal]){assert.ok(output.includes(payments.methods));assert.ok(output.includes(payments.guidance));assert.doesNotMatch(output,/href="https:\/\/(?:buy|invoice)\.stripe\.com/);}
+ assert.match(privacy,/https:\/\/stripe\.com\/jp\/privacy/);assert.match(privacy,/カード番号・セキュリティコードを当サイトで入力・保存することはありません/);
+});
 test("eight recent demos use unique valid links and current local cover assets",async()=>{
  const expected=["kasane","sumitoki","sui","komorebi","sekka","nagi","michiru","niwato"];
  assert.equal(websiteExamples.length,8);assert.equal(new Set(websiteExamples.map(x=>x.url)).size,8);
