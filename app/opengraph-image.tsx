@@ -11,13 +11,13 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = siteConfig.meta.siteName;
 
-const BADGE = "お店の「らしさ」が伝わるホームページを。";
+const BADGE = "「こうしたい」を、自由につくる。";
 const PRICE_LABEL_1 = "制作初期費用";
 const PRICE_VALUE_1 = `${siteConfig.pricing.initialCost}円〜`;
 const PRICE_LABEL_2 = "月額運用費";
 const PRICE_VALUE_2 = `${siteConfig.pricing.monthlyFrom}円〜`;
 const PRICE_TAX = `（${siteConfig.pricing.priceTaxNote}）`;
-const SUB = "堺市を拠点に。制作も、公開後のことも、ご相談ください。";
+const SUB = "初期0円は基本構成の場合。追加ページ・演出・機能は別途お見積り。";
 const SITE_NAME = "まちのWeb";
 const DOMAIN = "machinowebs.com";
 

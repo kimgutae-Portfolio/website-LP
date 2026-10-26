@@ -41,6 +41,7 @@ test("only the actual business LINE destination is counted, not demo / hostile l
 });
 
 test("LINE event payload is limited to public location / destination data", () => {
+  assert.equal(analytics.lineClickParameters("hero", "/", line).cta_location, "hero");
   assert.deepEqual(analytics.lineClickParameters("pricing", "/", line), { contact_method: "line", cta_location: "pricing", page_path: "/", link_url: line });
   assert.equal(analytics.lineClickParameters("private or arbitrary text", "/", line).cta_location, "cta");
 });

@@ -8,7 +8,7 @@ GA4: `まちのWeb | machinowebs.com` / stream `まちのWeb ウェブサイト`
 
 - `page_view`: 最初の表示とApp Routerによるパス変更。ハッシュ移動では重複計測しない。
 - `line_click`: 設定済みの実際の事業用LINEリンクのみ。デモの `https://line.me/` は対象外。
-- `cta_location`: `header`, `pricing_intro`, `pricing`, `contact`, `floating`, `column`, `not_found`, `cta`。
+- `cta_location`: `hero`, `header`, `pricing_intro`, `pricing`, `contact`, `floating`, `column`, `not_found`, `cta`。
 - `contact_method: line`, `page_path`, `link_url`。フォーム入力値や会話内容は送らない。
 - 自動フォーム収集・スクロール・外部リンク等はGA4ストリームの拡張計測をOFFにしている。
 

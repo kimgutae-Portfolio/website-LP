@@ -8,15 +8,14 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-// 계약은 대면(방문)으로 체결하므로 통신판매 표기 의무는 없을 가능성이 높지만,
-// 영업처의 신뢰 확인용으로 페이지는 유지. 所在地・電話는 청구 시 개시 방식(개인사업자 통례).
+// 相談方法にかかわらず、公開する料金と取引条件をサイト設定と一致させる。
 const rows: [string, string][] = [
   ["販売事業者名", siteConfig.footer.operator],
   ["運営責任者", siteConfig.footer.operator],
   ["所在地", "個人事業のため省略します（請求があった場合、遅滞なく開示します）"],
   ["電話番号", "個人事業のため省略します（請求があった場合、遅滞なく開示します）"],
   ["メールアドレス", siteConfig.contact.email],
-  ["販売価格", `制作初期費用${siteConfig.pricing.initialCost}円〜・月額運用費${siteConfig.pricing.monthlyFrom}円〜（${siteConfig.pricing.priceTaxNote}）。制作・運用の内容に応じて事前にお見積りします。`],
+  ["販売価格", `制作初期費用${siteConfig.pricing.initialCost}円〜・月額運用費${siteConfig.pricing.monthlyFrom}円〜（${siteConfig.pricing.priceTaxNote}）。${siteConfig.pricing.basicScope}追加ページ・独自のデザインや演出・フォーム・機能開発などは別途お見積りします。月額費用も運用範囲に応じて事前にお見積りし、合意後に制作します。`],
   ["商品代金以外の必要料金", "インターネット接続にかかる通信費はお客様のご負担となります。外部サービス利用料が必要な場合は、お見積り時にご案内します。"],
   [
     "支払方法・支払時期",

@@ -8,8 +8,8 @@ const {siteConfig,websiteExamples}=await moduleAt("site.config.ts");
 const {exampleScrollTarget}=await moduleAt("components/pricing/example-scroll.ts");
 test("one consultation-based offer uses both starting prices and retains the contract",()=>{
  const p=siteConfig.pricing;
- assert.equal(p.initialCost,"30,000");assert.equal(p.monthlyFrom,"5,500");assert.equal(p.priceTaxNote,"税込");assert.match(p.conditions,/3ヶ月/);
- assert.ok(!("mainPlan" in p)&&!("secondPlan" in p));assert.match(p.estimateNote,/最低料金/);assert.match(p.estimateNote,/事前にお見積り/);assert.match(p.optionalFeatures,/お問い合わせフォーム/);
+ assert.equal(p.initialCost,"0");assert.equal(p.monthlyFrom,"5,500");assert.equal(p.priceTaxNote,"税込");assert.match(p.conditions,/3ヶ月/);
+ assert.ok(!("mainPlan" in p)&&!("secondPlan" in p));assert.match(p.estimateNote,/基本構成の場合の開始価格/);assert.match(p.estimateNote,/ご納得いただいてから/);assert.match(p.optionalFeatures,/お問い合わせフォーム/);assert.match(p.basicScope,/初期費用0円/);
 });
 test("eight recent demos use unique valid links and current local cover assets",async()=>{
  const expected=["kasane","sumitoki","sui","komorebi","sekka","nagi","michiru","niwato"];
@@ -34,12 +34,12 @@ test("main gallery promotes the eight recent sites, not the old templates",async
  assert.equal((demo.match(/class="[^"]*exampleCard[^\"]*"/g)||[]).length,8);assert.match(demo,/target="_blank" rel="noopener noreferrer"/);assert.match(demo,/href="#price"/);
  for(const name of ["nozomi","luce","maruta"])assert.ok(!html.includes(`href="/demo/${name}"`));
 });
-test("public prices, metadata, schema and legal text are consistent, without the old zero-cost promise",async()=>{
+test("zero-start pricing is consistent and qualified across public prices, metadata, schema and legal text",async()=>{
  const html=await read(".next/server/app/index.html"),legal=await read(".next/server/app/tokushoho.html");
- for(const source of [html,legal]){assert.match(source,/30,000/);assert.match(source,/5,500/);assert.ok(!/初期費用\s*0円|基本プラン|カスタムプラン|最短3日/.test(source));}
- assert.match(html,/制作初期費用30,000円〜・月額運用費5,500円〜/);assert.match(html,/制作内容と費用を<br\/>LINEで相談する/);
+ for(const source of [html,legal]){assert.doesNotMatch(source,/30,000/);assert.match(source,/5,500/);assert.match(source,/初期費用0円/);assert.match(source,/基本構成/);assert.match(source,/別途お見積り/);assert.ok(!/基本プラン|カスタムプラン|最短3日/.test(source));}
+ assert.match(html,/制作初期費用0円〜・月額運用費5,500円〜/);assert.match(html,/制作内容と費用を<br\/>LINEで相談する/);
  const price=html.slice(html.indexOf('id="price"'),html.indexOf('id="flow"'));
- assert.match(price,/表示価格は最低料金/);assert.match(price,/追加機能は別途お見積り/);assert.match(price,/href="https:\/\/lin\.ee\/Ny9tbUX"/);assert.match(price,/href="#contact"/);
+ assert.match(price,/初期費用0円は基本構成の場合の開始価格/);assert.match(price,/追加機能は別途お見積り/);assert.match(price,/href="https:\/\/lin\.ee\/Ny9tbUX"/);assert.match(price,/href="#contact"/);
  const og=await read("app/opengraph-image.tsx");assert.match(og,/siteConfig.pricing.initialCost/);assert.match(og,/siteConfig.pricing.monthlyFrom/);
 });
 test("gallery is native scrolling, keyboard accessible and reduced-motion aware",async()=>{

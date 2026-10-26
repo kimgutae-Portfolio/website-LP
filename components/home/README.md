@@ -1,28 +1,27 @@
-# まちのWeb — connected opening and homepage
+# まちのWeb — service-first homepage
 
-The opening and hero use the **same media frame**: the existing house mark sits over a small window, the window expands into the main design reel, and the headline arrives alongside it. It is not a separate loading screen. Desktop uses an editorial paper/film split; mobile uses a darkened film with readable foreground copy.
+2026-10-26: the first screen now presents the service, not fictional demo footage.
+「こうしたい」を、自由につくる。 + WordPress-free custom development,
+search-friendly structure, and security-conscious scope / maintenance.
+No blanket security advantage over WordPress or guaranteed search ranking is claimed.
 
-- `Hero.tsx`: server-rendered copy, demo references and prices from `site.config.ts`.
-- `HeroExperience.tsx`: finite opening, native video, playback controls and visibility/preferences handling.
-- `reel.ts`: caption timing for the three fictional demo scenes.
-- `MobileNavigation.tsx` / `FloatingLineAfterHero.tsx`: small, isolated interactions. The shared header, brand, prices and service configuration stay server-rendered so column and legacy demo pages do not inherit the homepage film or a large configuration payload.
-- `home.module.css`: shared paper/green visual direction, header, hero, service introduction. No CSS animation is infinite.
-- `scripts/prepare-home-reel.mjs`: builds two silent H.264 reels from existing people-free demo photographs. Original source photographs and demo films are not overwritten.
+- `Hero.tsx`: server-rendered headline, three strengths, basic initial fee 0 yen,
+  monthly fee from 5,500 yen, adjacent scope / extra-estimate / minimum-term conditions.
+  Primary CTA is the real business LINE link (`cta_location: hero`).
+- `HeroExperience.tsx` / `hero.module.css`: brief rule-and-text reveal, no loading gate,
+  scroll lock, autoplaying video, stock images, or fake project presentation.
+- `home.module.css`: shared header, customer concerns and ongoing-support styles.
+- `MobileNavigation.tsx` / `FloatingLineAfterHero.tsx`: retain native mobile navigation
+  and floating LINE after the hero.
 
-## Media provenance
+The old people-free reels and preparation script remain as reusable assets, but
+the homepage no longer loads them. Demos remain available in the next section.
+Visits are optional: initial contact may be LINE / email, with nearby in-person
+consultation offered when requested.
 
-1. KASANE: `public/demo/kasane/hero-no-people.webp`
-2. SUMITOKI: `public/demo/sumitoki/hero-no-people.webp`
-3. NAGI: `public/demo/nagi/hero.webp`
+Prices / metadata / structured data / share image / legal copy share `site.config.ts`.
+Additional pages, bespoke design / animation and feature development are quoted
+before work. Minimum term and monthly support conditions remain unchanged.
 
-These are **illustrative fictional demo sites**, not completed client work or footage of まちのWeb’s office. The visible film caption makes this distinction clear.
-
-## Progressive enhancement
-
-The poster, headline, links and prices are present in server HTML. The opening completes through finite CSS even without JavaScript; its default styles are the final visible state. It never locks scrolling or traps focus. Tab, Escape, pointer interaction, scrolling and deep links finish it immediately. `prefers-reduced-motion` removes the opening before hydration.
-
-No video source is mounted until the opening has finished and the hero is visible. Reduced motion, data saver and very slow connections keep the still poster until the visitor explicitly requests playback. A rejected autoplay request leaves a usable play button. The film pauses offscreen and when the document is hidden; a visitor’s pause choice is preserved. Mobile and desktop load separate encodes. The floating LINE control appears after leaving the hero so it does not cover the film caption or primary actions.
-
-Homepage sequence: hero → recent design collection → customer concerns → ongoing support → starting prices → flow → columns → FAQ/contact. Existing prices and service conditions remain unchanged.
-
-Verification: production build, `scripts/test-home-hero.mjs`, existing regression tests, and real browser checks at 320/390px plus desktop. Check menu close behavior, links, pause/resume, chapter captions and layout overflow. Do not submit real contact messages while testing.
+Verify with build, all `scripts/test-*.mjs`, and 320/390px plus desktop browser QA.
+No real contact forms should be submitted in QA.

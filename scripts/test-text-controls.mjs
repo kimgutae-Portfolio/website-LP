@@ -12,7 +12,7 @@ test("marketing and journal controls no longer use decorative arrow glyphs", asy
     "components/Pricing.tsx", "components/Columns.tsx",
     "components/pricing/WebsiteExamples.tsx", "components/column/ColumnCard.tsx",
     "app/column/page.tsx", "app/column/[slug]/page.tsx",
-    "app/privacy/page.tsx", "app/tokushoho/page.tsx",
+    "app/privacy/page.tsx", "app/tokushoho/page.tsx", "components/home/hero.module.css",
   ]) assert.doesNotMatch(await read(path), arrows, path);
   for (const path of ["components/home/home.module.css", "components/pricing/pricing.module.css", "components/column/column.module.css"])
     assert.doesNotMatch(await read(path), arrows, path);
@@ -35,13 +35,12 @@ test("gallery uses custom bold arrows while preserving labels and keyboard suppo
 
 test("text-first links remain explicit and retain meaningful functional icons", async () => {
   const hero = await read("components/Hero.tsx"), experience = await read("components/home/HeroExperience.tsx");
-  assert.match(hero, /href="#demo"[^>]*>制作見本を見てみる<\/a>/);
-  assert.match(hero, /href="#contact"[^>]*>まずは、話してみる<\/a>/);
-  assert.match(hero, /費用の目安を見る/);
-  assert.match(experience, /reelView\}>制作見本を見る/);
-  assert.match(experience, /新しいタブで開きます/);
-  assert.match(experience, /映像を一時停止/);
-  assert.match(experience, /映像を再生/);
+  assert.match(hero, /href="#demo"[^>]*>制作見本を見る<\/a>/);
+  assert.match(hero, /data-line-placement="hero"/);
+  assert.match(hero, /LINEで無料相談/);
+  assert.match(hero, /費用・対応内容を見る/);
+  assert.match(experience, /data-home-hero/);
+  assert.doesNotMatch(experience, /<video/);
   assert.match(await read("components/Pricing.tsx"), /<LineIcon\/>/);
   assert.doesNotMatch(await read("components/pricing/pricing.module.css"), /\.consultButton>span:last-child/);
 });

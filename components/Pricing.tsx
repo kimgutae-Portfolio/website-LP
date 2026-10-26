@@ -15,7 +15,7 @@ export function Pricing() {
         </Reveal>
         <Reveal className={styles.priceCard}>
           <div className={styles.priceSummary}>
-            <div className={styles.costBlock}><p>ホームページを、つくる</p><h3>制作初期費用</h3><p className={styles.priceValue}><strong>{pricing.initialCost}</strong><span>円〜<small>（{pricing.priceTaxNote}）</small></span></p><p>デザイン・ページ構成・必要な機能に合わせて</p></div>
+            <div className={styles.costBlock}><p>基本構成で、小さくはじめる</p><h3>制作初期費用</h3><p className={styles.priceValue}><strong>{pricing.initialCost}</strong><span>円〜<small>（{pricing.priceTaxNote}）</small></span></p><p>{pricing.basicScope}<br/>追加ページ・演出・機能は事前お見積り</p></div>
             <div className={styles.costBlock}><p>公開後も、育てていく</p><h3>月額運用費</h3><p className={styles.priceValue}><strong>{pricing.monthlyFrom}</strong><span>円〜<small>（{pricing.priceTaxNote}）</small></span></p><p>更新・管理・日々のご相談まで</p></div>
           </div>
           <div className={styles.quoteNote}><span>お見積りについて</span><p>{pricing.estimateNote}</p></div>

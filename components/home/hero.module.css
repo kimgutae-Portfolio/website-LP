@@ -1,0 +1,49 @@
+.hero{background:#f5f3ea;color:#193e34;position:relative;overflow:hidden}
+.inner{max-width:1440px;margin:auto;padding:31px clamp(22px,4.5vw,74px) 44px}
+.signature{display:flex;align-items:center;justify-content:flex-end;gap:13px;color:#557367;font-size:10px;letter-spacing:.08em}
+.signature svg{width:29px;height:29px;flex-shrink:0}
+.entryLine{height:1px;background:#a8b9a6;margin-top:20px;transform-origin:left}
+.main{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(290px,1fr);gap:clamp(35px,6vw,94px);padding:51px 0 49px;align-items:center}
+.copy{min-width:0}
+.eyebrow{font-size:12px;line-height:1.9;letter-spacing:.075em;color:#607b6c}
+.copy h1{font-size:clamp(40px,5.5vw,76px);line-height:1.53;font-weight:500;letter-spacing:-.06em;margin:19px 0 0}
+.copy h1 span{display:block;white-space:nowrap}
+.copy h1 span:last-child{color:#0f6d5c}
+.statement{font-size:clamp(14px,1.3vw,18px);font-weight:700;line-height:1.95;margin-top:25px;letter-spacing:-.015em}
+.lead{font-size:13px;line-height:2.2;color:#5c7164;max-width:490px;margin-top:12px}
+.local{font-size:10px;line-height:1.9;color:#6b7f6e;margin-top:22px}
+.offer{border-left:1px solid #c3ceba;padding-left:clamp(26px,3vw,44px);min-width:0}
+.offerIntro{font-size:12px;line-height:1.9;color:#617b68;margin-bottom:18px}
+.prices>div>p{font-size:11px;line-height:1.8;letter-spacing:.07em}
+.prices>div>div{display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.initialPrice strong{font-size:104px;font-weight:500;line-height:1.1;letter-spacing:-.08em;font-variant-numeric:tabular-nums}
+.initialPrice>div>span{font-size:22px}
+.prices small{font-size:10px;margin-left:4px}
+.monthlyPrice{margin-top:21px}
+.monthlyPrice strong{font-size:34px;line-height:1.6;font-weight:500;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.monthlyPrice>div>span{font-size:14px}
+.priceNote{font-size:10px;line-height:1.95;color:#617367;margin-top:14px;max-width:360px}
+.lineAction{display:flex;align-items:center;justify-content:center;gap:13px;background:#194e40;color:#fffdf3;min-height:54px;padding:14px 20px;margin-top:22px;font-size:13px;font-weight:500;transition:background .2s}
+.lineAction svg{width:21px;height:21px}
+.lineAction:hover{background:#0f6d5c}
+.secondaryActions{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:12px}
+.secondaryActions a{display:flex;align-items:center;min-height:44px;font-size:10px;text-decoration:underline;text-underline-offset:5px;line-height:1.8}
+.secondaryActions a:hover{color:#087357}
+.conditions{font-size:9px;line-height:1.9;color:#6f7e6b;margin-top:1px}
+.strengths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #a8b9a6;padding-top:26px;gap:clamp(25px,4vw,64px)}
+.strength>p:first-child{font-size:10px;line-height:1.8;letter-spacing:.05em;color:#67816e}
+.strength h2{font-size:17px;font-weight:500;line-height:1.9;letter-spacing:-.025em;margin-top:8px}
+.strength>p:last-child{font-size:11px;line-height:2;color:#687a68;margin-top:8px;max-width:340px}
+.hero a:focus-visible{outline:3px solid #a9853d;outline-offset:5px}
+@keyframes ruleArrival{from{transform:scaleX(.05)}to{transform:scaleX(1)}}
+@keyframes wordsArrival{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero[data-entry="playing"] .entryLine{animation:ruleArrival .85s cubic-bezier(.22,.61,.24,1) both}
+.hero[data-entry="playing"] [data-hero-copy]{animation:wordsArrival .65s .12s ease both}
+.hero[data-entry="playing"] .offer{animation-delay:.22s}
+.hero[data-entry="playing"] .strengths{animation-delay:.3s}
+@media(min-width:1500px){.main{padding-block:62px}.inner{padding-bottom:52px}}
+@media(max-width:1050px){.main{gap:35px;grid-template-columns:minmax(0,1.5fr) minmax(270px,1fr)}.inner{padding-inline:34px}.offer{padding-left:26px}.copy h1{font-size:5.45vw}.lead{font-size:12px}.statement{font-size:14px}.strength h2{font-size:15px}.strength>p:last-child{font-size:10px}.prices small{display:block;margin-left:0}}
+@media(max-width:800px){.main{grid-template-columns:1fr;padding-top:35px;gap:33px}.copy h1{font-size:clamp(38px,7.7vw,60px)}.lead{max-width:540px;font-size:13px}.offer{border-left:0;border-top:1px solid #c3ceba;padding:22px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:0 32px}.offerIntro{grid-column:1/-1;margin-bottom:14px}.prices{grid-row:2/5}.monthlyPrice{margin-top:15px}.priceNote{margin-top:0;align-self:end}.lineAction{margin-top:15px;align-self:end}.secondaryActions{margin-top:7px;gap:10px}.conditions{grid-column:1/-1;margin-top:12px}.initialPrice strong{font-size:90px}.strengths{gap:26px}.strength h2{font-size:15px}}
+@media(max-width:540px){.inner{padding:20px 24px 30px}.signature{font-size:9px;gap:9px}.signature svg{width:23px;height:23px}.entryLine{margin-top:15px}.main{padding:30px 0;gap:27px}.eyebrow{font-size:10px}.copy h1{font-size:clamp(30px,9.2vw,46px);line-height:1.65;margin-top:17px;letter-spacing:-.055em}.statement{font-size:12px;margin-top:19px;line-height:1.9}.lead{font-size:11px;line-height:2.1;margin-top:10px}.local{font-size:9px;margin-top:14px;max-width:285px}.offer{display:block;padding-top:21px}.offerIntro{font-size:10px;margin-bottom:14px}.prices{display:grid;grid-template-columns:.9fr 1.1fr;gap:17px;align-items:center}.prices>div>p{font-size:10px}.initialPrice strong{font-size:76px}.initialPrice>div>span{font-size:17px}.monthlyPrice{margin-top:0;border-left:1px solid #c3ceba;padding-left:21px}.monthlyPrice strong{font-size:30px;line-height:1.7}.monthlyPrice>div>span{font-size:11px}.prices small{font-size:9px;display:block;margin:0}.prices>div>div{gap:5px}.priceNote{font-size:10px;line-height:1.9;max-width:100%;margin-top:17px}.lineAction{min-height:52px;font-size:12px;margin-top:18px}.secondaryActions{justify-content:flex-start;gap:26px;margin-top:7px}.secondaryActions a{font-size:10px}.conditions{font-size:9px;margin-top:1px}.strengths{grid-template-columns:1fr;padding-top:0;gap:0;border-top:0}.strength{border-top:1px solid #bdcbb6;padding:20px 0;display:grid;grid-template-columns:1fr;gap:0}.strength:last-child{padding-bottom:0}.strength h2{font-size:17px;margin-top:5px}.strength>p:first-child{font-size:9px}.strength>p:last-child{font-size:11px;margin-top:6px;max-width:100%}}
+@media(max-width:360px){.inner{padding-inline:22px}.copy h1{font-size:30px}.prices{gap:12px;grid-template-columns:.8fr 1.2fr}.monthlyPrice{padding-left:16px}.monthlyPrice strong{font-size:28px}.initialPrice strong{font-size:68px}.statement{font-size:11px}.prices small{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.hero[data-entry="playing"] :is(.entryLine,[data-hero-copy]){animation:none}.lineAction{transition:none}}
