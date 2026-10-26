@@ -21,7 +21,7 @@ export default function NotFound() {
         >
           トップページへ戻る
         </Link>
-        <LineCta label="LINEで相談する" />
+        <LineCta label="LINEで相談する" placement="not_found" />
       </div>
     </main>
   );

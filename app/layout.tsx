@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleMeasurement } from "@/components/analytics/GoogleMeasurement";
 import { siteConfig } from "@/site.config";
 import "./globals.css";
 
@@ -68,6 +69,7 @@ export default function RootLayout({
           <style>{`.reveal{opacity:1 !important;transform:none !important}`}</style>
         </noscript>
         {children}
+        <GoogleMeasurement />
         <Analytics />
       </body>
     </html>

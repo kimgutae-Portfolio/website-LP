@@ -11,6 +11,12 @@ npm run dev    # http://localhost:3000
 npm run build  # 프로덕션 빌드 (Vercel 배포 전 확인용)
 ```
 
+## 방문·LINE 버튼 클릭 측정
+
+무료 GA4 전용 속성과 `line_click` 이벤트를 사용합니다. LINE 이동은 그대로 유지하며
+측정 허용 여부는 방문자가 선택할 수 있습니다. 이름·이메일·대화 내용은 이벤트에 보내지 않습니다.
+측정 ID, 확인 방법, 광고 연결 전 남은 작업은 [측정 안내](./components/analytics/README.md)를 참조하세요.
+
 ## 커스터마이즈 — `site.config.ts` 하나만 수정
 
 상호 / 가격 / 카피 / 테마 색 / 데모 링크를

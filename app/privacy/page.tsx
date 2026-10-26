@@ -77,7 +77,20 @@ export default function PrivacyPage() {
             </section>
           ))}
         </div>
+        <section id="measurement" className="mt-8 scroll-mt-24 space-y-3">
+          <h2 className="text-lg font-bold text-slate-900">アクセス解析・広告の効果測定</h2>
+          <p className="leading-relaxed text-slate-700">当サイトでは、同意いただいた場合に限り、Google LLCのGoogle アナリティクスを利用します。Cookieなどを通じて閲覧ページ、参照元、広告のキャンペーン情報、端末情報、LINEボタンのクリックを収集し、サイト改善および広告効果の確認に利用します。Googleによって国外のサーバーで処理される場合があります。</p>
+          <p className="leading-relaxed text-slate-700">LINEボタンのクリックは、友だち追加や実際の相談の完了を意味しません。お名前、メールアドレス、お問い合わせ内容、LINEでの会話内容を、この測定イベントに送信することはありません。広告のパーソナライズおよびGoogle シグナルによるデータ収集は無効にしています。</p>
+          <p className="leading-relaxed text-slate-700">Googleの測定タグは許可前には読み込みません。許可・拒否の選択はこのブラウザに90日間保存し、ページ下部の「アクセス解析の設定」からいつでも変更できます。拒否しても、LINEやお問い合わせフォームなどは利用できます。ブラウザの設定や広告ブロックにより計測されない場合があるため、計測数は実際の利用数と一致しないことがあります。</p>
+          <p className="leading-relaxed text-slate-700">このほか、サイトの基本的な利用状況の把握にVercel Web Analyticsを利用しています。同サービスはCookieを使用せず、上記Googleの測定設定とは別に動作します。</p>
+          <ul className="space-y-2 text-sm text-slate-700">
+            <li><a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Googleが収集した情報を使用する仕組み</a></li>
+            <li><a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Google プライバシー ポリシー</a></li>
+            <li><a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Vercel Web Analyticsのプライバシーについて</a></li>
+          </ul>
+        </section>
         <p className="mt-10 text-sm text-slate-500">制定日: 2026年7月9日</p>
+        <p className="mt-2 text-sm text-slate-500">改定日: 2026年10月26日</p>
         <p className="mt-8">
           <Link href="/" className="font-bold text-primary underline underline-offset-4">
             トップページへ戻る

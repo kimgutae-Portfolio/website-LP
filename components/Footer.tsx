@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
 import { Logo } from "./Logo";
+import { MeasurementPreferencesButton } from "./analytics/GoogleMeasurement";
 
 export function Footer() {
   return (
@@ -30,6 +31,7 @@ export function Footer() {
           <Link href="/privacy" className="underline underline-offset-4 transition hover:text-white">
             プライバシーポリシー
           </Link>
+          <MeasurementPreferencesButton />
           <a
             href={siteConfig.owner.portfolioUrl}
             target="_blank"

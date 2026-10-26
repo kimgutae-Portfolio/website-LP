@@ -5,9 +5,11 @@ import { LineIcon } from "./icons";
 export function LineCta({
   label = siteConfig.hero.ctaLabel,
   size = "lg",
+  placement = "cta",
 }: {
   label?: string;
   size?: "md" | "lg";
+  placement?: "cta" | "contact" | "not_found";
 }) {
   const sizeClass =
     size === "lg"
@@ -17,6 +19,7 @@ export function LineCta({
   return (
     <a
       href={siteConfig.line.addFriendUrl}
+      data-line-placement={placement}
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-flex items-center justify-center gap-2.5 rounded-full bg-line font-bold text-white shadow-md transition hover:bg-line-dark hover:shadow-lg active:scale-[0.98] ${sizeClass}`}

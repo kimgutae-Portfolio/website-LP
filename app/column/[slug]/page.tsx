@@ -53,7 +53,7 @@ export default async function ColumnArticlePage({params}:Props) {
         </div>
       </article>
       <section className={styles.related} aria-labelledby="related-heading"><div className={styles.relatedHeading}><p className={styles.eyebrow}>READ NEXT</p><h2 id="related-heading">あわせて読みたいこと。</h2></div><div>{article.relatedSlugs.map(slug=>{const related=getColumn(slug);return related?<ColumnCard key={slug} article={related} compact/>:null;})}</div></section>
-      <section className={styles.articleConsult} aria-labelledby="article-consult-heading"><div><p className={styles.eyebrow}>LET’S TALK</p><h2 id="article-consult-heading">あなたのお店なら、<br/>どんなかたちがいいだろう。</h2><p>まだ作るか決まっていなくても大丈夫。<br/>気になることから、お聞かせください。</p></div><div><a href={siteConfig.line.addFriendUrl} target="_blank" rel="noopener noreferrer">LINEで無料相談</a><Link href="/#contact">フォームから相談する</Link><Link href="/#price">制作・運用の費用を見る</Link></div></section>
+      <section className={styles.articleConsult} aria-labelledby="article-consult-heading"><div><p className={styles.eyebrow}>LET’S TALK</p><h2 id="article-consult-heading">あなたのお店なら、<br/>どんなかたちがいいだろう。</h2><p>まだ作るか決まっていなくても大丈夫。<br/>気になることから、お聞かせください。</p></div><div><a href={siteConfig.line.addFriendUrl} data-line-placement="column" target="_blank" rel="noopener noreferrer">LINEで無料相談</a><Link href="/#contact">フォームから相談する</Link><Link href="/#price">制作・運用の費用を見る</Link></div></section>
     </div>
   </main><Footer/></>;
 }

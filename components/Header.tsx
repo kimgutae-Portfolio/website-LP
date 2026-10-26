@@ -32,6 +32,7 @@ export function Header({homeHref=""}:{homeHref?:string}) {
           </nav>
           <a
             href={siteConfig.line.addFriendUrl}
+            data-line-placement="header"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.headerAction}

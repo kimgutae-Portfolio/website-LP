@@ -16,6 +16,7 @@ export function FloatingLine({afterHero=false}:{afterHero?:boolean}) {
       />
       <a
         href={siteConfig.line.addFriendUrl}
+        data-line-placement="floating"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LINEで友だち追加して相談する"

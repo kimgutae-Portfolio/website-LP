@@ -43,7 +43,7 @@ export function Cta() {
                 準備中
               </div>
             )}
-            <LineCta label="LINEで友だち追加" />
+            <LineCta label="LINEで友だち追加" placement="contact" />
           </Reveal>
 
           {/* 문의 폼 카드 */}
