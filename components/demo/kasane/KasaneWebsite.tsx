@@ -10,7 +10,6 @@ import {
   kasaneNews,
   kasaneProjects,
   type KasaneNews,
-  type KasaneProject,
 } from "./content";
 import styles from "./kasane.module.css";
 
@@ -37,7 +36,7 @@ function Brand({ footer = false }: { footer?: boolean }) {
   );
 }
 
-type ModalContent = { kind: "contact" | "film" | "recruit" } | { kind: "project"; project: KasaneProject } | { kind: "news"; news: KasaneNews };
+type ModalContent = { kind: "contact" | "film" | "recruit" } | { kind: "news"; news: KasaneNews };
 type OpeningState = "pending" | "playing" | "complete" | "skipped";
 
 const navigation = [
@@ -254,10 +253,10 @@ export function KasaneWebsite({ className }: { className?: string }) {
           <Reveal className={styles.projectsHeading}><h2 id="kasane-projects-heading" className={styles.japaneseHeading}>想いが息づく、<br className={styles.mobileBreak} />場所を。</h2><div className={styles.filters} role="group" aria-label="プロジェクトの絞り込み">{[["all", "すべて"], ["office", "オフィス"], ["store", "店舗"]].map(([value, label]) => <button key={value} type="button" aria-pressed={filter === value} onClick={() => setFilter(value)}>{label}</button>)}</div></Reveal>
           <div className={styles.projectGrid}>
             {kasaneProjects.filter(project => filter === "all" || project.type === filter).map(project => <article className={styles.project} key={project.id}>
-              <button type="button" onClick={() => setModal({ kind: "project", project })} aria-label={`${project.name}の詳細を見る`}>
+              <Link href={`/demo/kasane/projects/${project.id}`} aria-label={`${project.name}の詳細を見る`}>
                 <div className={styles.projectImage}><Image src={project.image} alt={project.alt} width={project.width} height={project.height} sizes="(max-width: 700px) 90vw, 46vw" /><span className={styles.projectNumber}>{project.number}</span></div>
                 <div className={styles.projectMeta}><span>{project.category}</span><span>{project.location}</span></div><h3>{project.title}</h3><p className={styles.projectName}>{project.name}</p><span className={styles.projectMore}>詳しく見る <Arrow /></span>
-              </button>
+              </Link>
             </article>)}
           </div>
           <p className={styles.projectNote}>※ デザイン見本として制作した架空のプロジェクトです。</p>
@@ -291,7 +290,6 @@ export function KasaneWebsite({ className }: { className?: string }) {
       <dialog ref={dialog} className={styles.dialog} onClose={() => { if (!dialog.current?.open) setModal(null); }} onClick={event => { if (event.target === event.currentTarget) setModal(null); }} aria-labelledby="kasane-dialog-title">
         {modal && <div className={`${styles.dialogInner} ${modal.kind === "film" ? styles.filmDialog : ""}`}><button type="button" className={styles.closeButton} aria-label="閉じる" onClick={() => setModal(null)}><CloseLabel /></button>
           {modal.kind === "film" && <><h2 id="kasane-dialog-title" className={styles.dialogEyebrow}>KASANE / BRAND FILM</h2><video ref={film} controls autoPlay playsInline preload="metadata" poster="/demo/kasane/hero-no-people.webp" aria-label="かさねの空間づくりのイメージフィルム"><source src="/demo/kasane/brand-film-no-people.mp4" type="video/mp4" />お使いのブラウザは動画再生に対応していません。</video><p>想いを重ね、街の、その先へ。<small>デモ用に制作した写真によるモーションフィルムです。</small></p></>}
-          {modal.kind === "project" && <><p className={styles.dialogEyebrow}>{modal.project.category} / {modal.project.year}</p><h2 id="kasane-dialog-title">{modal.project.title}</h2><p className={styles.projectName}>{modal.project.name}</p><Image src={modal.project.image} alt={modal.project.alt} width={modal.project.width} height={modal.project.height} sizes="(max-width: 700px) 90vw, 740px" className={styles.dialogPhoto} /><p className={styles.dialogBody}>{modal.project.description}</p><dl className={styles.projectFacts}><div><dt>LOCATION</dt><dd>{modal.project.location}</dd></div><div><dt>SCOPE</dt><dd>{modal.project.scope}</dd></div></dl><p className={styles.projectNote}>架空のプロジェクトの制作見本です。</p></>}
           {modal.kind === "news" && <><p className={styles.dialogEyebrow}>{modal.news.date} / {modal.news.category}</p><h2 id="kasane-dialog-title">{modal.news.title}</h2><p className={styles.dialogBody}>{modal.news.text}</p><p className={styles.projectNote}>デザインデモ用のお知らせです。</p></>}
           {modal.kind === "recruit" && <><p className={styles.dialogEyebrow}>RECRUIT / JOIN OUR TEAM</p><h2 id="kasane-dialog-title">想いを、ともに<br />かたちにする仲間へ。</h2><p className={styles.dialogBody}>対話を楽しみ、素材に触れ、チームで考える。そんな空間づくりに関心のある方のための、採用情報ページの見本です。</p><dl className={styles.projectFacts}><div><dt>募集職種</dt><dd>空間設計 / 施工ディレクション</dd></div><div><dt>働く場所</dt><dd>大阪府堺市を拠点としたプロジェクト</dd></div></dl><p className={styles.projectNote}>※ 実際の募集ではありません。採用条件の掲載・エントリーへの導線を想定しています。</p><button type="button" className={styles.solidButton} onClick={openContact}>エントリーフォームを見る <Arrow /></button></>}
           {modal.kind === "contact" && <><p className={styles.dialogEyebrow}>CONTACT / START A CONVERSATION</p><h2 id="kasane-dialog-title">その想いから、<br />はじめましょう。</h2>{sent ? <div className={styles.formSuccess} role="status"><span>✓</span><h3>入力のデモが完了しました。</h3><p>このフォームは制作見本のため、<br />内容は送信・保存されていません。</p><button type="button" className={styles.textLink} onClick={() => setModal(null)}>サイトに戻る <Arrow /></button></div> : <form className={styles.form} onSubmit={event => { event.preventDefault(); setSent(true); }}><p>こちらはデモ用フォームです。送信・保存は行われません。</p><label htmlFor="kasane-name">お名前 <small>必須</small></label><input id="kasane-name" name="name" required autoComplete="name" placeholder="山田 太郎" maxLength={100} /><label htmlFor="kasane-email">メールアドレス <small>必須</small></label><input id="kasane-email" name="email" type="email" required autoComplete="email" placeholder="example@company.jp" maxLength={254} /><label htmlFor="kasane-company-input">会社名</label><input id="kasane-company-input" name="company" autoComplete="organization" placeholder="株式会社〇〇" maxLength={100} /><label htmlFor="kasane-message">ご相談内容 <small>必須</small></label><textarea id="kasane-message" name="message" required rows={4} maxLength={3000} placeholder="新しいオフィスのこと、今の場所のこと。お気軽にお聞かせください。" /><button type="submit" className={styles.solidButton}>入力を確認する（デモ） <Arrow /></button></form>}</>}

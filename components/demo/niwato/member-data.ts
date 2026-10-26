@@ -1,0 +1,2 @@
+export const visitDates=[{id:"12",label:"11月12日（木）",day:"12",weekday:"THU"},{id:"14",label:"11月14日（土）",day:"14",weekday:"SAT"},{id:"19",label:"11月19日（木）",day:"19",weekday:"THU"}] as const;
+export const careHistory=[{date:"2026.10.15",title:"秋の庭を、すっきりと。",image:"after",alt:"芝の際まで整えた、作業後の庭のイメージ",tasks:["芝の高さを調整","際の仕上げ・集草","落ち葉の清掃"],note:"芝の伸びが落ち着いてきたため、高さを残して仕上げた設定です。次回は落ち葉の様子も確認します。"},{date:"2026.09.17",title:"庭の輪郭を、丁寧に。",image:"hero",alt:"緑の芝生とテラスのある庭のイメージ",tasks:["芝刈り","花壇まわりの仕上げ","刈り草の回収"],note:"アプローチと花壇まわりを整え、気持ちよく歩ける庭を想定したレポートです。"}] as const;

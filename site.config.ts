@@ -148,7 +148,7 @@ export const siteConfig = {
       name: "KASANE｜株式会社かさね",
       title: "企業の「らしさ」まで、伝わるサイトへ。",
       description:
-        "写真と映像、余白と文字でブランドの世界観をつくる、企業サイトの制作見本。スマートフォンでも、細部までお確かめください。",
+        "写真と映像で伝えるブランドの世界観に、独立したプロジェクト詳細ページを追加。課題・提案・素材の選び方まで、ひとつの事例を深く伝える企業サイトの制作見本です。",
       label: "ホームページの制作イメージ",
       image: "/demo/kasane/hero-no-people.webp",
       imageAlt: "木の温もりと自然光が印象的な、KASANEの企業サイト制作見本",
@@ -198,7 +198,7 @@ export const siteConfig = {
       {
         name: "旅宿 凪｜NAGI",
         title: "泊まる前から、旅がはじまる。",
-        description: "庭に向かう視線、朝から夜への光の移ろい、静かなフォトフィルム。客室・食事・宿泊案内から外部予約へつながる、小さな宿の制作見本です。",
+        description: "静かな写真の世界観に、過ごし方を選ぶ別ページの滞在プランナーを追加。泊数に連動する参考料金と旅程のイメージから、外部予約へつなぐ制作見本です。実際の空室照会・予約は行いません。",
         category: "RYOKAN WEBSITE",
         image: "/demo/nagi/hero.webp",
         imageAlt: "縁側と日本庭園が静かに広がる、旅宿 凪の宿泊施設サイト制作見本",
@@ -208,7 +208,7 @@ export const siteConfig = {
       {
         name: "みちる英語教室｜MICHIRU",
         title: "教室の楽しさを、信頼できるかたちに。",
-        description: `教室紹介・コース／月謝・体験／お問い合わせを分けた3ページ構成。フォームの確認・完了まで体験できる、初期制作費${formatInitialPrice(exampleOffers.michiru)}（税込）の制作例です。フォームは送信されません。`,
+        description: `教室紹介・コース／月謝・体験／お問い合わせの3ページに、学年・経験・希望からコースを案内する簡易ガイドを追加。初期制作費${formatInitialPrice(exampleOffers.michiru)}（税込）の制作例です。選んだコースでフォームへ進めますが、送信は行いません。`,
         category: "ENGLISH SCHOOL WEBSITE",
         image: "/demo/michiru/hero-no-people.webp",
         imageAlt: "青い椅子と絵カードが並ぶ明るい教室を描いた、みちる英語教室のサイト制作見本",
@@ -218,7 +218,7 @@ export const siteConfig = {
       {
         name: "NIWATO｜庭と、暮らしの定期便。",
         title: "サービスの魅力から、月額のお申し込みまで。",
-        description: "芝生のお手入れを月額サービスに。管理前後の写真比較、面積別のプラン選択、カードによる月額決済のデモまで体験できる、サービス販売サイトの制作見本です。実際の課金はありません。",
+        description: "月額の申込体験に加え、ご契約者マイページを追加。訪問日変更・作業レポート・プラン変更・明細・休止の操作まで見られる、サービス販売サイトの制作見本です。実際の手続き・保存・課金はありません。",
         category: "SUBSCRIPTION SERVICE WEBSITE",
         image: "/demo/niwato/hero.webp",
         imageAlt: "明るい芝生の庭が広がる、NIWATOの月額サービス販売サイト制作見本",
@@ -427,11 +427,11 @@ export const websiteExamples: readonly WebsiteExample[] = [
   { ...siteConfig.demos.restaurantShowcase, category: "飲食店", detail: "お品書きから、外部予約へ。", offer: exampleOffers.sumitoki },
   { ...siteConfig.demos.salonShowcase, category: "美容室", detail: "スタイルの見せ方と、予約の導線。", position: "70% center", offer: exampleOffers.sui },
   { ...siteConfig.demos.clinicShowcase, category: "こどもクリニック", detail: "やさしいキャラクターと診療案内。", imageMode: "contain", background: "#e7edda", offer: exampleOffers.komorebi },
-  { ...siteConfig.demos.corporateShowcase, category: "企業・会社", detail: "写真・映像と、ブランドの世界観。", offer: exampleOffers.kasane },
+  { ...siteConfig.demos.corporateShowcase, category: "企業・会社", detail: "プロジェクトを深く伝える、独立した詳細ページ。", offer: exampleOffers.kasane },
   ...siteConfig.demos.additionalShowcases.map((example, index) => ({
     ...example,
     category: ["製造業", "旅館・宿泊施設", "英語教室", "月額サービス販売"][index],
-    detail: ["製品と加工内容を、わかりやすく。", "空気感が伝わる写真と、滞在案内。", "3ページ＋体験・お問い合わせフォーム。", "サービス紹介から、申込体験へ。決済はデモです。"][index],
+    detail: ["製品と加工内容を、わかりやすく。", "過ごし方と泊数で変わる、滞在プランナー。", "3ページ・コース選び・お問い合わせフォーム。", "申込後のマイページまで。決済はデモです。"][index],
     offer: [exampleOffers.sekka, exampleOffers.nagi, exampleOffers.michiru, exampleOffers.niwato][index],
   })),
 ] satisfies readonly WebsiteExample[];

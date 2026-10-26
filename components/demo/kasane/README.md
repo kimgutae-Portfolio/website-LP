@@ -25,7 +25,8 @@ The media can be reproduced from the original PNGs using
 ## Interactions
 
 - Keyboard-accessible mobile navigation with focus management.
-- Project filters and project detail dialogs.
+- Project filters and independent project-story pages at `/demo/kasane/projects/workplace`
+  and `/demo/kasane/projects/atelier`, with narrative, material palettes and related-project links.
 - News detail dialogs and a recruitment sample.
 - Native video controls in the brand film dialog.
 - A validated demo contact form. It does not send or persist entered data.

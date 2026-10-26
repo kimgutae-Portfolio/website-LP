@@ -13,6 +13,7 @@ export function MichiruContactPage() {
   const [agreed,setAgreed]=useState(false);
   const stage=useRef<HTMLDivElement>(null);
   const previousStep=useRef(step);
+  useEffect(()=>{const requested=new URLSearchParams(window.location.search).get("course");if(courses.some(item=>item.id===requested))setCourse(requested!);},[]);
   useEffect(()=>{
     if(previousStep.current!==step){
       stage.current?.focus({preventScroll:true});

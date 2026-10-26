@@ -5,6 +5,7 @@ import {useState} from "react";
 import {Arrow} from "../shared/PremiumDemo";
 import {MichiruSubpageFrame} from "./MichiruSubpageFrame";
 import {courses,phrases} from "./content";
+import {MichiruCourseFinder} from "./MichiruCourseFinder";
 import styles from "./michiru.module.css";
 import pages from "./michiru-pages.module.css";
 
@@ -14,6 +15,7 @@ export function MichiruCoursesPage() {
   const selected=courses[course];
   return <MichiruSubpageFrame current="courses" revision={`${course}-${phrase}`}>
     <section id="michiru-page-top" className={`${pages.pageHeading} ${styles.container}`}><div><p className={styles.eyebrow}>FIND YOUR CLASS.</p><h1>いまのあなたに、<br/><span>ちょうどいい学びを。</span></h1><p>はじめてのひとことも、もう一歩先の会話も。<br/>年齢や経験に合わせて、一緒に見つけよう。</p></div><div className={pages.headingPhoto}><Image src="/demo/michiru/activity-no-people.webp" alt="色鉛筆と英語の絵カードが並ぶレッスン準備のイメージ" fill sizes="(max-width:700px) 85vw,45vw" priority data-hero-image/><span>COURSES & TUITION / SAMPLE</span></div></section>
+    <MichiruCourseFinder/>
     <section id="michiru-courses" className={`${styles.courses} ${styles.container}`} aria-labelledby="michiru-courses-heading"><div className={styles.sectionHeading} data-demo-reveal><div><p className={styles.eyebrow}>A LITTLE MORE ABOUT YOUR CLASS.</p><h2 id="michiru-courses-heading">コースと、月謝。</h2></div><p>気になるクラスを選んで、<br/>レッスンの内容をご覧ください。</p></div>
       <div className={styles.courseTabs} role="tablist" aria-label="英語のコース" onKeyDown={event=>{const next=event.key==="ArrowRight"?(course+1)%3:event.key==="ArrowLeft"?(course+2)%3:event.key==="Home"?0:event.key==="End"?2:null;if(next===null)return;event.preventDefault();setCourse(next);document.getElementById(`michiru-course-${next}`)?.focus();}}>{courses.map((item,index)=><button type="button" role="tab" key={item.id} id={`michiru-course-${index}`} aria-selected={course===index} aria-controls="michiru-course-panel" tabIndex={course===index?0:-1} onClick={()=>setCourse(index)}><span>{item.age}</span>{item.name}<small>{item.english}</small></button>)}</div>
       <div className={styles.coursePanel} role="tabpanel" id="michiru-course-panel" aria-labelledby={`michiru-course-${course}`}><div className={styles.courseDescription} key={selected.id}><p>{selected.english}</p><h3>{selected.name}</h3><p>{selected.description}</p><ul>{selected.points.map(point=><li key={point}><span aria-hidden="true">・</span>{point}</li>)}</ul></div><div className={styles.courseInformation}><div><span>レッスン時間</span><strong>{selected.time}</strong></div><div><span>時間割の例</span><p>{selected.day}</p></div><div className={styles.fee}><span>月謝（税込）</span><p><strong>¥{selected.fee}</strong><small>/ 月</small></p></div><Link href="/demo/michiru/contact" className={pages.courseContact}>このコースの体験について<Arrow/></Link></div></div>

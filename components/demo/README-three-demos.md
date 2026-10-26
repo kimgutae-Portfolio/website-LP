@@ -94,3 +94,12 @@ FAQ expansion, menu closing, news dialogs, the photo film and external destinati
   to client implementation, not the public demo. Monthly operation ¥5,500+ is separate.
 - All eight demos now expose a website-creation price/scope panel, clearly separated from the
   fictional business's lesson, room, menu or subscription prices. Source: `lib/example-offers.ts`.
+
+## Paid-example experience upgrades (2026-10-26)
+
+NAGI now links to `/demo/nagi/stay`: a two-person, one/two-night sample planner, with two
+stay styles, derived reference totals and an itinerary that changes with the selections.
+It is not an availability search or booking system; the external reservation service is unchanged.
+MICHIRU's course page now includes a simple age/experience/interest guide, with an explicitly
+non-diagnostic course suggestion and a course-ID-only link into the inquiry demo. No personal data
+is requested, stored or sent. SEKKA, SUMITOKI, SUI and KOMOREBI retain their existing free-setup scope.

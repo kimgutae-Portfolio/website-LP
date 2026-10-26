@@ -1,0 +1,15 @@
+"use client";
+import Link from "next/link";
+import {useRef,useState} from "react";
+import {courses} from "./content";
+import {guideAges,guideExperiences,guideGoals,recommendCourse} from "./course-guide";
+import styles from "./course-finder.module.css";
+export function MichiruCourseFinder(){
+  const [age,setAge]=useState("first"),[experience,setExperience]=useState(0),[goal,setGoal]=useState(0),[show,setShow]=useState(false);
+  const result=useRef<HTMLDivElement>(null);
+  const recommendation=recommendCourse(age,experience,goal),course=courses.find(item=>item.id===recommendation.id)!;
+  const reveal=()=>{setShow(true);requestAnimationFrame(()=>{result.current?.focus({preventScroll:true});result.current?.scrollIntoView({block:"nearest",behavior:"auto"});});};
+  return <section id="michiru-course-guide" className={styles.finder} aria-labelledby="michiru-guide-heading" data-course-finder><div className={styles.intro}><p>LET’S FIND YOUR FIRST HELLO.</p><h2 id="michiru-guide-heading">どのクラスから、<br/>はじめよう？</h2><p>年齢だけでは、決めきれないから。<br/>いまの気持ちを選んで、<br/>学びの入口を見つけてみよう。</p><div className={styles.mark} aria-hidden="true"><span>Hello,<br/>new me.</span><i/><b/></div><small>コース選びを助ける、簡易ガイドの見本です。<br/>正式なクラス分けは、教室とのご相談で決める想定です。</small></div>
+    <div className={styles.paper}>{!show?<div><p className={styles.paperLabel}>YOUR LITTLE PROFILE / SAMPLE</p><fieldset><legend>いまの学年は？</legend><div className={styles.ageChoices}>{guideAges.map(item=><label key={item.id}><input type="radio" name="michiru-guide-age" checked={age===item.id} onChange={()=>setAge(item.id)}/><span>{item.label}</span></label>)}</div></fieldset><fieldset><legend>英語と出会ったことは？</legend><div className={styles.choices}>{guideExperiences.map((text,i)=><label key={text}><input type="radio" name="michiru-guide-experience" checked={experience===i} onChange={()=>setExperience(i)}/><span>{text}</span></label>)}</div></fieldset><fieldset><legend>いちばん近い気持ちは？</legend><div className={styles.choices}>{guideGoals.map((text,i)=><label key={text}><input type="radio" name="michiru-guide-goal" checked={goal===i} onChange={()=>setGoal(i)}/><span>{text}</span></label>)}</div></fieldset><button type="button" className={styles.submit} onClick={reveal}>おすすめの入口を見る</button><small className={styles.noSave}>名前や連絡先の入力はありません。選択内容は送信・保存しません。</small></div>:<div ref={result} tabIndex={-1} className={styles.result} aria-live="polite"><p>YOUR FIRST CLASS, MAYBE.</p><span className={styles.resultAge}>{course.age}</span><h3>{course.name}</h3><span className={styles.english}>{course.english}</span><p className={styles.reason}>{recommendation.reason}</p><dl><div><dt>レッスン</dt><dd>{course.time}</dd></div><div><dt>参考月謝（税込）</dt><dd>¥{course.fee}<small> / 月</small></dd></div></dl><Link className={styles.submit} href={`/demo/michiru/contact?course=${course.id}`}>このクラスの体験について相談する</Link><button type="button" className={styles.reset} onClick={()=>setShow(false)}>選び直す</button><small className={styles.noSave}>コースは年齢をもとにした参考案内です。学習診断・入会受付ではありません。掲載月謝は架空の設定です。</small></div>}</div>
+  </section>;
+}

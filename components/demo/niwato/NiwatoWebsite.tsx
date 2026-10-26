@@ -6,10 +6,11 @@ import { useState } from "react";
 import { Arrow, DemoDialog, DemoNotice, DemoShell } from "../shared/PremiumDemo";
 import { BeforeAfter } from "./BeforeAfter";
 import { Checkout } from "./Checkout";
+import { NiwatoMemberPreview } from "./NiwatoMemberPreview";
 import { areas, faqs, getQuote, plans, seasons, yen, type CarePlan, type LawnArea } from "./content";
 import styles from "./niwato.module.css";
 
-const navigation=[["#niwato-care","お手入れのこと"],["#niwato-plans","月額プラン"],["#niwato-season","季節のケア"],["#niwato-faq","よくある質問"]] as const;
+const navigation=[["#niwato-care","お手入れのこと"],["#niwato-plans","月額プラン"],["#niwato-season","季節のケア"],["/demo/niwato/member","マイページ体験"]] as const;
 function Brand(){return <span className={styles.brand}><svg viewBox="0 0 35 36" fill="none" aria-hidden="true"><path d="M3 31V8l14 23V3m0 28L31 8v23" stroke="currentColor" strokeWidth="3.4"/></svg><span>NIWATO<small>庭と、暮らしの定期便。</small></span></span>;}
 function Check(){return <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-9" stroke="currentColor" strokeWidth="1.5"/></svg>;}
 
@@ -49,6 +50,7 @@ export function NiwatoWebsite(){
      <section className={`${styles.area} ${styles.container}`} aria-labelledby="niwato-area-heading"><div data-demo-reveal><p className={styles.eyebrow}>CLOSE TO YOUR GARDEN.</p><h2 id="niwato-area-heading">いつもの庭の、<br/>顔なじみに。</h2><p>道具を積んで、定期的に。<br/>お庭の小さな変化にも気づける関係を。</p></div><div className={styles.areaDetails} data-demo-reveal><h3>訪問エリアのご案内</h3><p>大阪・堺を起点に、近隣エリアへ。<br/>移動距離やお庭の条件を、開始前に確認する設定です。</p><div><span>DEMO SERVICE AREA</span><strong>堺市 / 大阪市南部 / 高石市 / 和泉市</strong></div><small>実際に提供されているサービスではありません。<br/>エリア・訪問内容は制作見本の架空設定です。</small></div></section>
      <section className={`${styles.faq} ${styles.container}`} id="niwato-faq" aria-labelledby="niwato-faq-heading"><div><p className={styles.eyebrow}>BEFORE WE GET STARTED.</p><h2 id="niwato-faq-heading">気になること。</h2></div><div>{faqs.map(([question,answer])=><details key={question}><summary>{question}<span aria-hidden="true">＋</span></summary><p>{answer}</p></details>)}</div></section>
      <section className={styles.lastCall}><div className={styles.lastPhoto}><Image src="/demo/niwato/hero.webp" alt="日差しの中に広がる緑の芝生の庭" fill sizes="100vw"/></div><div className={styles.lastCopy} data-demo-reveal><p className={styles.eyebrow}>YOUR WEEKEND IS YOURS AGAIN.</p><h2>次の休日、<br/>庭で何しよう。</h2><a href="#niwato-plans" className={styles.solidButton}>わが家の定期便を選ぶ<Arrow/></a></div></section>
+     <NiwatoMemberPreview/>
    </main>
    <footer className={`${styles.footer} ${styles.container}`}><div className={styles.footerTop}><a href="#niwato-top" aria-label="NIWATO トップへ"><Brand/></a><nav aria-label="フッターメニュー">{navigation.map(([href,label])=><a key={href} href={href}>{label}</a>)}</nav><a href="#niwato-top" className={styles.backTop}>TOP ↑</a></div><p className={styles.footerDemo}>このサイトは架空の月額サービスの販売デモです。実際のお申し込み・カード決済・訪問サービスは受け付けていません。</p><DemoPriceGuide slug="niwato"/><DemoNotice/><div className={styles.footerBottom}><Link href="/#demo">DESIGN BY まちのWeb ↗</Link><span>© NIWATO / DESIGN SAMPLE</span></div><div className={styles.footerWord} aria-hidden="true">NIWATO.</div></footer>
    <div className={styles.mobileCta}><div><span>芝生{area}㎡ / 月{quote.visits}回</span><strong>¥{yen(quote.total)}<small>/ 月</small></strong></div><a href="#niwato-plans">プランを選ぶ<Arrow/></a></div>

@@ -198,7 +198,7 @@
 .projectGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; }
 .project { min-width: 0; animation: heroText .5s ease both; }
 .project:nth-child(2) { margin-top: 86px; }
-.project > button { display: block; width: 100%; text-align: left; }
+.project > :is(button,a) { display: block; width: 100%; text-align: left; }
 .projectImage { overflow: hidden; position: relative; background: #e0ded4; }
 .projectImage > img { width: 100%; height: auto; aspect-ratio: 1.3; object-fit: cover; transition: transform .8s cubic-bezier(.22,1,.36,1); }
 .project button:hover img { transform: scale(1.04); }
