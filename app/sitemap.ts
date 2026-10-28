@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: siteConfig.meta.url,
+      lastModified: siteConfig.localService.updatedAt,
     },
     {url:`${siteConfig.meta.url}/column`},
     ...columnArticles.map(article=>({url:`${siteConfig.meta.url}/column/${article.slug}`,lastModified:article.publishedAt})),

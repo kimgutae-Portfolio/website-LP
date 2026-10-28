@@ -32,6 +32,16 @@ the homepage no longer loads them. Demos remain available in the next section.
 Visits are optional: initial contact may be LINE / email, with nearby in-person
 consultation offered when requested.
 
+2026-10-28: `ServiceStrengths.tsx` is now a server-rendered, locally relevant
+service guide (`services.module.css`). It explains the information needed by
+restaurants, salons, schools and companies, links to clearly labelled fictional
+examples, and distinguishes the basic one-page scope from extra pages / forms /
+integrations. The guide covers Sakai-based optional visits without disclosing a
+home address or implying a storefront. No actual customer results or ranking
+guarantees are invented. Metadata and local FAQ share the public service scope.
+`siteConfig.localService.updatedAt` records this substantive homepage update and
+is used for its sitemap lastmod; update it only when homepage content changes.
+
 Prices / metadata / structured data / share image / legal copy share `site.config.ts`.
 Additional pages, bespoke design / animation and feature development are quoted
 before work. Minimum term and monthly support conditions remain unchanged.

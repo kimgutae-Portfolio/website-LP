@@ -6,6 +6,7 @@ import { MobileNavigation } from "./home/MobileNavigation";
 
 const navItems = [
   { href: "#demo", label: "制作見本" },
+  { href: "#home-strengths", label: "サービス内容" },
   { href: "#price", label: "費用の目安" },
   { href: "#flow", label: "制作の流れ" },
   { href: "#column", label: "コラム" },
