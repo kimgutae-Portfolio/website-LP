@@ -6,7 +6,7 @@ export function Flow() {
   return (
     <section id="flow" className={styles.flow} aria-labelledby="flow-heading">
       <div className={styles.container}>
-        <Reveal className={styles.flowIntro}>
+        <Reveal variant="slide-right" className={styles.flowIntro}>
           <p className={styles.eyebrow}>まずは、お話を聞かせてください。</p>
           <h2 id="flow-heading">まだ、まとまって<br />いなくても大丈夫。</h2>
           <p>「こんなお店です」「ここに困っています」。<br />そのお話から、ホームページの形を考えます。</p>
@@ -16,7 +16,8 @@ export function Flow() {
             <Reveal
               as="li"
               key={step.title}
-              delay={i * 120}
+              variant="slide-left"
+              delay={i * 90}
               className={styles.flowStep}
             >
               <span className={styles.flowIndex} aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>

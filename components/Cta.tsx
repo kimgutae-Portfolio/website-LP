@@ -10,18 +10,18 @@ export function Cta() {
   return (
     <section id="contact" className={styles.contact} aria-labelledby="contact-heading">
       <div className={styles.container}>
-        <div className={styles.contactIntro}>
+        <Reveal variant="wipe" className={styles.contactIntro}>
           <div><p className={styles.eyebrow}>あなたの事業の、次の一歩を。</p><h2 id="contact-heading">
             {contact.heading}
           </h2></div>
           <p>
             {contact.sub}
           </p>
-        </div>
+        </Reveal>
 
         <div className={styles.contactGrid}>
           {/* LINE 상담 카드 (주요 CTA) */}
-          <Reveal className={styles.lineCard}>
+          <Reveal variant="settle" className={styles.lineCard}>
             <span className={styles.cardLabel}>いつものLINEで</span><h3>
               {contact.lineCardTitle}
             </h3>
@@ -48,7 +48,7 @@ export function Cta() {
           </Reveal>
 
           {/* 문의 폼 카드 */}
-          <Reveal delay={120} className={styles.formCard}>
+          <Reveal variant="fade" delay={120} className={styles.formCard}>
             <span className={styles.cardLabel}>文章で、ゆっくり相談</span><h3>
               {contact.formTitle}
             </h3>

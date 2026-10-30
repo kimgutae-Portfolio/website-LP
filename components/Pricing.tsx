@@ -8,12 +8,12 @@ export function Pricing() {
   return (
     <section id="price" className={styles.priceSection} aria-labelledby="price-heading">
       <div className="mx-auto max-w-5xl px-5">
-        <Reveal className={styles.priceIntro}>
+        <Reveal variant="fade" className={styles.priceIntro}>
           <p className={styles.eyebrow}>PRICE & CONSULTATION</p>
           <h2 id="price-heading">{pricing.headline}</h2>
           <p>{pricing.description}</p>
         </Reveal>
-        <Reveal className={styles.priceCard}>
+        <Reveal variant="settle" className={styles.priceCard}>
           <div className={styles.priceSummary}>
             <div className={styles.costBlock}><p>基本構成で、小さくはじめる</p><h3>制作初期費用</h3><p className={styles.priceValue}><strong>{pricing.initialCost}</strong><span>円〜<small>（{pricing.priceTaxNote}）</small></span></p><p>{pricing.basicScope}<br/>追加ページ・演出・機能は事前お見積り</p></div>
             <div className={styles.costBlock}><p>公開後も、育てていく</p><h3>月額運用費</h3><p className={styles.priceValue}><strong>{pricing.monthlyFrom}</strong><span>円〜<small>（{pricing.priceTaxNote}）</small></span></p><p>更新・管理・日々のご相談まで</p></div>

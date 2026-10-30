@@ -88,6 +88,7 @@ details > summary::-webkit-details-marker {
 }
 
 .reveal {
+  --reveal-progress: 0;
   opacity: 0;
   transform: translateY(24px);
   transition:
@@ -95,8 +96,67 @@ details > summary::-webkit-details-marker {
     transform 0.7s ease;
 }
 .reveal-visible {
+  --reveal-progress: 1;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Main-page motion is opt-in; demos keep their own choreography. */
+.reveal[data-reveal] {
+  --reveal-distance: 32px;
+  transition-timing-function: cubic-bezier(.22, 1, .36, 1);
+  transition-duration: .8s;
+}
+.reveal[data-reveal="fade"] { transform: none; transition-duration: .65s; }
+.reveal[data-reveal="slide-left"] { transform: translateX(var(--reveal-distance)); }
+.reveal[data-reveal="slide-right"] { transform: translateX(calc(-1 * var(--reveal-distance))); }
+.reveal[data-reveal="settle"] { transform: translateY(12px) scale(.965); transform-origin: 50% 30%; }
+.reveal[data-reveal="wipe"] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+/* Keep the observed box unclipped: only its contents use a mask. */
+.reveal[data-reveal="wipe"] > * {
+  transform: translateY(6px);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path .9s cubic-bezier(.22, 1, .36, 1), transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+.reveal[data-reveal="wipe"] > :nth-child(2) { transition-delay: 90ms; }
+.reveal.reveal-visible[data-reveal] { opacity: 1; transform: none; }
+.reveal.reveal-visible[data-reveal="wipe"] > * { clip-path: inset(0); transform: none; }
+
+/* The gallery stays in place; cards fan in with bounded delays. */
+.reveal[data-reveal="gallery"] { opacity: 1; transform: none; transition: none; }
+.reveal[data-reveal="gallery"] [data-gallery-card] > * {
+  opacity: 0;
+  transform: translateX(38px);
+  transition: opacity .65s ease, transform .85s cubic-bezier(.22, 1, .36, 1);
+  transition-delay: calc(var(--gallery-step, 0) * 75ms);
+}
+.reveal[data-reveal="gallery"] [data-gallery-card]:nth-child(2) { --gallery-step: 1; }
+.reveal[data-reveal="gallery"] [data-gallery-card]:nth-child(3) { --gallery-step: 2; }
+.reveal[data-reveal="gallery"] [data-gallery-card]:nth-child(n + 4) { --gallery-step: 3; }
+.reveal.reveal-visible[data-reveal="gallery"] [data-gallery-card] > * { opacity: 1; transform: none; }
+
+/* Keyboard navigation must never wait for a reveal. */
+.reveal:focus-within,
+.reveal[data-reveal="wipe"]:focus-within > *,
+.reveal[data-reveal="gallery"]:focus-within [data-gallery-card] > * {
+  --reveal-progress: 1;
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+  transition: none !important;
+}
+@media (max-width: 700px) {
+  .reveal[data-reveal] { --reveal-distance: 14px; transition-duration: .6s; transition-delay: 0ms !important; }
+  .reveal[data-reveal="settle"] { transform: translateY(8px) scale(.985); }
+  .reveal[data-reveal="wipe"] > * { clip-path: inset(0 0 100% 0); transition-duration: .7s; transition-delay: 0ms; }
+  .reveal.reveal-visible[data-reveal] { transform: none; }
+  .reveal.reveal-visible[data-reveal="wipe"] > * { clip-path: inset(0); }
+  .reveal[data-reveal="gallery"] [data-gallery-card] > * { transform: translateX(18px); transition-duration: .55s; transition-delay: calc(var(--gallery-step, 0) * 45ms); }
+  .reveal.reveal-visible[data-reveal="gallery"] [data-gallery-card] > * { transform: none; }
 }
 
 /* 움직임 최소화 설정 사용자는 전부 정지 상태로 */
@@ -106,10 +166,15 @@ details > summary::-webkit-details-marker {
   .animate-ping-soft {
     animation: none;
   }
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .reveal,
+  .reveal[data-reveal],
+  .reveal[data-reveal="wipe"] > *,
+  .reveal[data-reveal="gallery"] [data-gallery-card] > * {
+    --reveal-progress: 1;
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
   }
   html {
     scroll-behavior: auto;

@@ -66,7 +66,7 @@ export default function RootLayout({
       <body className={`${notoSansJP.className} ${notoSansJP.variable} bg-white text-slate-800 antialiased`}>
         {/* JS 미작동 환경에서 스크롤 리빌 요소가 숨겨진 채 남지 않도록 하는 폴백 */}
         <noscript>
-          <style>{`.reveal{opacity:1 !important;transform:none !important}`}</style>
+          <style>{`.reveal,.reveal[data-reveal="wipe"]>*,.reveal [data-gallery-card]>*{--reveal-progress:1!important;opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}`}</style>
         </noscript>
         {children}
         <GoogleMeasurement />

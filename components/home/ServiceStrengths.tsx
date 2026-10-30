@@ -10,7 +10,7 @@ export function ServiceStrengths() {
   return (
     <section id="home-strengths" className={styles.section} aria-labelledby="local-service-heading">
       <div className={styles.container}>
-        <Reveal className={styles.intro}>
+        <Reveal variant="fade" className={styles.intro}>
           <div>
             <p className={styles.eyebrow}>{service.eyebrow}</p>
             <h2 id="local-service-heading">{service.title}</h2>
@@ -23,7 +23,7 @@ export function ServiceStrengths() {
 
         <div className={styles.strengths}>
           {hero.strengths.map((item, index) => (
-            <Reveal key={item.label} delay={index * 60} className={styles.strength}>
+            <Reveal key={item.label} variant="settle" delay={index * 110} className={styles.strength}>
               <div className={styles.strengthArt}><ServiceVisual kind={index===0?1:index===1?0:2}/></div>
               <div className={styles.strengthCopy}><p className={styles.eyebrow}>{item.label}</p><h3>{item.title}</h3><p>{item.text}</p></div>
             </Reveal>
@@ -31,13 +31,13 @@ export function ServiceStrengths() {
         </div>
 
         <div className={styles.industrySection}>
-          <Reveal className={styles.industryHeading}>
+          <Reveal variant="wipe" className={styles.industryHeading}>
             <h3>{service.industriesTitle}</h3>
             <p>{service.industriesLead}</p>
           </Reveal>
           <div className={styles.industryGrid}>
             {service.industries.map((industry, index) => (
-              <Reveal key={industry.category} delay={(index % 2) * 70} className={styles.industry}>
+              <Reveal key={industry.category} variant={index % 2 === 0 ? "slide-right" : "slide-left"} delay={(index % 2) * 80} className={styles.industry}>
                 <article>
                   <p className={styles.category}>{industry.category}</p>
                   <h4>{industry.title}</h4>
@@ -57,7 +57,7 @@ export function ServiceStrengths() {
           <p className={styles.examplesNote}>{service.examplesNote}</p>
         </div>
 
-        <Reveal><details className={styles.scopeBand}><summary>初期0円の基本構成と、追加制作のこと</summary><div className={styles.scopeContent}>
+        <Reveal variant="fade"><details className={styles.scopeBand}><summary>初期0円の基本構成と、追加制作のこと</summary><div className={styles.scopeContent}>
           <div>
             <p className={styles.eyebrow}>基本構成で始める</p>
             <h3>{service.basicTitle}</h3>
@@ -76,7 +76,7 @@ export function ServiceStrengths() {
           </div>
         </div></details></Reveal>
 
-        <Reveal className={styles.localConsultation}>
+        <Reveal variant="settle" className={styles.localConsultation}>
           <div className={styles.areaHeading}>
             <p className={styles.eyebrow}>堺市中区を拠点に</p>
             <h3>{service.areaTitle}</h3>
