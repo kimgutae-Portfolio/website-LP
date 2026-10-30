@@ -1,35 +1,37 @@
 import { siteConfig } from "@/site.config";
 import { Reveal } from "./Reveal";
-import { SectionHeading } from "./SectionHeading";
+import styles from "./home/details.module.css";
 
 export function Flow() {
   return (
-    <section id="flow" className="bg-slate-50 py-16 sm:py-24">
-      <div className="mx-auto max-w-5xl px-5">
-        <SectionHeading label="制作の流れ" title="公開まで、かんたん3ステップ" />
-        <ol className="grid gap-6 sm:grid-cols-3">
+    <section id="flow" className={styles.flow} aria-labelledby="flow-heading">
+      <div className={styles.container}>
+        <Reveal className={styles.flowIntro}>
+          <p className={styles.eyebrow}>まずは、お話を聞かせてください。</p>
+          <h2 id="flow-heading">まだ、まとまって<br />いなくても大丈夫。</h2>
+          <p>「こんなお店です」「ここに困っています」。<br />そのお話から、ホームページの形を考えます。</p>
+        </Reveal>
+        <ol className={styles.flowList}>
           {siteConfig.flow.map((step, i) => (
             <Reveal
               as="li"
               key={step.title}
               delay={i * 120}
-              className="relative rounded-2xl border border-slate-200 bg-white p-7 pt-9 shadow-sm"
+              className={styles.flowStep}
             >
-              <span className="absolute -top-5 left-7 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-lg font-black text-white shadow-md">
-                {i + 1}
-              </span>
-              <h3 className="mb-2 text-lg font-bold text-slate-900">
+              <span className={styles.flowIndex} aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <div><h3>
                 {step.title}
               </h3>
               {step.highlight && (
                 // 지역 밀착 차별화 포인트 강조
-                <p className="mb-2 inline-block rounded-md bg-accent/10 px-2.5 py-1 text-sm font-bold text-accent">
+                <p className={styles.highlight}>
                   {step.highlight}
                 </p>
               )}
-              <p className="text-[15px] leading-relaxed text-slate-600">
+              <p className={styles.stepText}>
                 {step.text}
-              </p>
+              </p></div>
             </Reveal>
           ))}
         </ol>

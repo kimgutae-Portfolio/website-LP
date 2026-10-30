@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/site.config";
 import { Reveal } from "@/components/Reveal";
+import { ServiceVisual } from "./ServiceVisual";
 import styles from "./services.module.css";
 
 export function ServiceStrengths() {
@@ -20,6 +21,15 @@ export function ServiceStrengths() {
           </div>
         </Reveal>
 
+        <div className={styles.strengths}>
+          {hero.strengths.map((item, index) => (
+            <Reveal key={item.label} delay={index * 60} className={styles.strength}>
+              <div className={styles.strengthArt}><ServiceVisual kind={index===0?1:index===1?0:2}/></div>
+              <div className={styles.strengthCopy}><p className={styles.eyebrow}>{item.label}</p><h3>{item.title}</h3><p>{item.text}</p></div>
+            </Reveal>
+          ))}
+        </div>
+
         <div className={styles.industrySection}>
           <Reveal className={styles.industryHeading}>
             <h3>{service.industriesTitle}</h3>
@@ -32,10 +42,11 @@ export function ServiceStrengths() {
                   <p className={styles.category}>{industry.category}</p>
                   <h4>{industry.title}</h4>
                   <p className={styles.description}>{industry.description}</p>
-                  <ul className={styles.information}>
+                  <details className={styles.industryDetails}><summary>掲載する内容と、制作の範囲</summary><ul className={styles.information}>
                     {industry.details.map(detail => <li key={detail}>{detail}</li>)}
                   </ul>
                   <p className={styles.scope}>{industry.scope}</p>
+                  </details>
                   <Link href={industry.exampleHref} className={styles.textLink}>
                     {industry.exampleLabel}
                   </Link>
@@ -46,7 +57,7 @@ export function ServiceStrengths() {
           <p className={styles.examplesNote}>{service.examplesNote}</p>
         </div>
 
-        <Reveal className={styles.scopeBand}>
+        <Reveal><details className={styles.scopeBand}><summary>初期0円の基本構成と、追加制作のこと</summary><div className={styles.scopeContent}>
           <div>
             <p className={styles.eyebrow}>基本構成で始める</p>
             <h3>{service.basicTitle}</h3>
@@ -63,17 +74,7 @@ export function ServiceStrengths() {
             <p>{service.additionalText}</p>
             <a href="#price" className={styles.textLink}>基本範囲・追加費用・運用条件を見る</a>
           </div>
-        </Reveal>
-
-        <div className={styles.strengths}>
-          {hero.strengths.map((item, index) => (
-            <Reveal key={item.label} delay={index * 60} className={styles.strength}>
-              <p className={styles.eyebrow}>{item.label}</p>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </Reveal>
-          ))}
-        </div>
+        </div></details></Reveal>
 
         <Reveal className={styles.localConsultation}>
           <div className={styles.areaHeading}>

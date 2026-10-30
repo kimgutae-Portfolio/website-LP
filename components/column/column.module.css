@@ -133,3 +133,11 @@
   .sectionHeading h2 { font-size: 27px; }.art { padding: 18px; height: 215px; grid-template-columns: 1.35fr 1fr; gap: 2px; }.artCopy p { font-size: 16px; }.card h3 { font-size: 20px; }.compactCard { grid-template-columns: 72px minmax(0, 1fr); gap: 13px; }.compactArt { height: 85px; padding: 2px; }.compactCard h3 { font-size: 13px; }.compactCard .cardMeta { font-size: 8px; }.articleHeader h1 { font-size: 24px; }.articleHeader .art { padding: 18px; }.articleHeader .artCopy p { font-size: 16px; }.bodySection h2 { font-size: 21px; }.articleConsult { padding-inline: 20px; }.articleConsult h2 { font-size: 20px; }.indexHeading h1 { font-size: 28px; }
 }
 @media (prefers-reduced-motion: reduce) { .illustration, .contents li > a { transition: none; }.card:hover .illustration { transform: none; } }
+.homeSection { padding: 95px 0; background: #fbf8ee; color: #1d493c; }
+.homeSection > .container { max-width: 1180px; padding-inline: 32px; }
+.homeSection .eyebrow { font-weight: 700; font-size: 12px; letter-spacing: .04em; color: #61775a; }
+.homeSection .sectionHeading h2 { font-size: 44px; font-weight: 900; line-height: 1.6; letter-spacing: -.05em; }
+.homeSection .sectionHeading > div:last-child > p { font-size: 14px; }.homeSection .sectionHeading > div:last-child > a { font-size: 12px; font-weight: 700; }
+.homeSection .art { border-radius: 5px; border: 1px solid #aebda6; }.homeSection .artCopy p { font-weight: 700; }.homeSection .card h3 { font-weight: 900; }.homeSection .compactCard h3 { font-size: 16px; }
+@media (max-width: 700px) { .homeSection { padding: 62px 0; }.homeSection > .container { padding-inline: 22px; }.homeSection .eyebrow { font-size: 10px; }.homeSection .sectionHeading h2 { font-size: 33px; }.homeSection .sectionHeading > div:last-child > p { font-size: 12px; }.homeSection .compactCard h3 { font-size: 14px; } }
+@media (max-width: 360px) { .homeSection > .container { padding-inline: 18px; }.homeSection .sectionHeading h2 { font-size: 30px; }.homeSection .compactCard h3 { font-size: 13px; } }

@@ -91,7 +91,7 @@ test("shared motion is progressive enhancement, finite and respects live reduced
  assert.match(source,/prefers-reduced-motion: reduce/);assert.match(source,/preference\.addEventListener\("change", configure\)/);assert.match(source,/paused \|\| document\.hidden \|\| preference\.matches/);assert.match(source,/rootMargin: "100px"/);assert.ok(!source.includes('"wheel"')&&!source.includes('"touchmove"'));assert.match(css,/prefers-reduced-motion:reduce/);assert.match(source,/\[data-demo-opening\]\{display:none!important\}/);
  for(const name of ["sekka","nagi","michiru"])assert.ok(!(await read(`components/demo/${name}/${name}.module.css`)).includes("infinite"));
 });
-test("main showcase links all three demos and their original cover photographs",async()=>{
+test("main showcase links all three demos and previews their actual first screens",async()=>{
  const html=await read(".next/server/app/index.html");
- for(const name of ["sekka","nagi","michiru"]) {assert.match(html,new RegExp(`href="/demo/${name}"`));assert.ok(html.includes(encodeURIComponent(`/demo/${name}/hero${name==="michiru"?"-no-people":""}.webp`)));assert.match(await read(`app/demo/${name}/icon.svg`),/<svg/);}
+ for(const name of ["sekka","nagi","michiru"]) {assert.match(html,new RegExp(`href="/demo/${name}"`));assert.ok(html.includes(encodeURIComponent(`/demo/previews/${name}.webp`)));assert.match(await read(`app/demo/${name}/icon.svg`),/<svg/);}
 });

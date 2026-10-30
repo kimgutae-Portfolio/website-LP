@@ -14,7 +14,7 @@ test("marketing and journal controls no longer use decorative arrow glyphs", asy
     "app/column/page.tsx", "app/column/[slug]/page.tsx",
     "app/privacy/page.tsx", "app/tokushoho/page.tsx", "components/home/hero.module.css",
   ]) assert.doesNotMatch(await read(path), arrows, path);
-  for (const path of ["components/home/home.module.css", "components/pricing/pricing.module.css", "components/column/column.module.css"])
+  for (const path of ["components/home/home.module.css", "components/home/details.module.css", "components/pricing/pricing.module.css", "components/pricing/gallery.module.css", "components/column/column.module.css"])
     assert.doesNotMatch(await read(path), arrows, path);
 });
 
@@ -30,7 +30,7 @@ test("gallery uses custom bold arrows while preserving labels and keyboard suppo
   assert.doesNotMatch(source, /ExternalIcon/);
   assert.match(source, /制作見本を見る/);
   assert.match(source, /見本は新しいタブで開きます/);
-  assert.match(await read("components/pricing/pricing.module.css"), /\.railButtons>button\{[^}]*min-width:54px;[^}]*height:48px/);
+  assert.match(await read("components/pricing/gallery.module.css"), /\.railButtons>button\{[^}]*min-width:54px;[^}]*height:48px/);
 });
 
 test("text-first links remain explicit and retain meaningful functional icons", async () => {

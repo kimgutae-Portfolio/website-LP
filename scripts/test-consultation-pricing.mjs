@@ -12,14 +12,16 @@ test("one consultation-based offer uses both starting prices and retains the con
  assert.equal(p.initialCost,"0");assert.equal(p.monthlyFrom,"5,500");assert.equal(p.priceTaxNote,"税込");assert.match(p.conditions,/3ヶ月/);
  assert.ok(!("mainPlan" in p)&&!("secondPlan" in p));assert.match(p.estimateNote,/基本構成の場合の開始価格/);assert.match(p.estimateNote,/ご納得いただいてから/);assert.match(p.optionalFeatures,/お問い合わせフォーム/);assert.match(p.basicScope,/初期費用0円/);
 });
-test("customer-specific Stripe payments preserve bank transfer and quote-first terms",async()=>{
+test("payment methods stay out of the homepage while legal and privacy disclosures are preserved",async()=>{
  const {payments}=siteConfig;
  assert.match(payments.methods,/クレジットカード（Stripe）/);assert.match(payments.methods,/銀行振込/);
  assert.match(payments.guidance,/ご契約後/);assert.match(payments.guidance,/確定した金額/);assert.match(payments.timing,/ご契約前/);
  assert.match(payments.cardNote,/当サイトで入力・保存することはありません/);
- const faq=siteConfig.faq.find(item=>item.q==="支払い方法は何がありますか？");assert.ok(faq);assert.ok(faq.a.includes(payments.methods));
+ assert.ok(!siteConfig.faq.some(item=>item.q.includes("支払い方法")));
  const html=await read(".next/server/app/index.html"),legal=await read(".next/server/app/tokushoho.html"),privacy=await read(".next/server/app/privacy.html");
- for(const output of [html,legal]){assert.ok(output.includes(payments.methods));assert.ok(output.includes(payments.guidance));assert.doesNotMatch(output,/href="https:\/\/(?:buy|invoice)\.stripe\.com/);}
+ for(const text of [payments.methods,payments.guidance,"お支払い方法","お支払いについて"])assert.ok(!html.includes(text),text);
+ assert.ok(legal.includes(payments.methods));assert.ok(legal.includes(payments.guidance));
+ for(const output of [html,legal])assert.doesNotMatch(output,/href="https:\/\/(?:buy|invoice)\.stripe\.com/);
  assert.match(privacy,/https:\/\/stripe\.com\/jp\/privacy/);assert.match(privacy,/カード番号・セキュリティコードを当サイトで入力・保存することはありません/);
 });
 test("eight recent demos use unique valid links and current local cover assets",async()=>{
@@ -41,7 +43,7 @@ test("desktop stepping clamps duplicate last targets and exposes the last three 
 test("main gallery promotes the eight recent sites, not the old templates",async()=>{
  const html=await read(".next/server/app/index.html"),demo=html.slice(html.indexOf('id="demo"'),html.indexOf('id="price"'));
  assert.match(demo,/id="website-examples"/);
- for(const example of websiteExamples){assert.ok(demo.includes(`href="${example.url}"`));assert.ok(demo.includes(encodeURIComponent(example.image)));}
+ for(const example of websiteExamples){assert.ok(demo.includes(`href="${example.url}"`));assert.ok(demo.includes(encodeURIComponent(example.previewImage??example.image)));}
  assert.equal((demo.match(/class="[^"]*exampleCard[^\"]*"/g)||[]).length,8);assert.match(demo,/target="_blank" rel="noopener noreferrer"/);assert.match(demo,/href="#price"/);
  for(const name of ["nozomi","luce","maruta"])assert.ok(!html.includes(`href="/demo/${name}"`));
 });
@@ -54,7 +56,7 @@ test("zero-start pricing is consistent and qualified across public prices, metad
  const og=await read("app/opengraph-image.tsx");assert.match(og,/siteConfig.pricing.initialCost/);assert.match(og,/siteConfig.pricing.monthlyFrom/);
 });
 test("gallery is native scrolling, keyboard accessible and reduced-motion aware",async()=>{
- const source=await read("components/pricing/WebsiteExamples.tsx"),css=await read("components/pricing/pricing.module.css");
+ const source=await read("components/pricing/WebsiteExamples.tsx"),css=await read("components/pricing/gallery.module.css");
  assert.match(source,/tabIndex=\{0\}/);assert.match(source,/ResizeObserver/);assert.match(source,/prefers-reduced-motion: reduce/);assert.match(source,/event.key==="Home"/);assert.match(css,/scroll-snap-type:x mandatory/);assert.match(css,/prefers-reduced-motion:reduce/);assert.ok(!source.includes('"wheel"')&&!source.includes('"touchmove"'));
 });
 test("main gallery keeps price scopes while demo pages stay free of sales panels",async()=>{

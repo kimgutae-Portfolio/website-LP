@@ -6,7 +6,7 @@ export function Pain() {
   return (
     <section className={styles.problemSection} aria-labelledby="home-problem-heading">
       <div className={`${styles.contentContainer} ${styles.problemLayout}`}>
-        <Reveal><p className={styles.sectionEyebrow}>FOR YOUR BUSINESS</p><h2 id="home-problem-heading">ホームページのこと、<br/>ひとりで悩まなくて<br/>大丈夫です。</h2><p>{siteConfig.painsClosing}</p></Reveal>
+        <Reveal><p className={styles.sectionEyebrow}>こんなときに、頼ってください。</p><h2 id="home-problem-heading">困ったときの、<br/>Webの相談相手に。</h2><p>{siteConfig.painsClosing}</p></Reveal>
         <ul className={styles.problemList}>
           {siteConfig.pains.map((pain, i) => (
             <Reveal

@@ -89,7 +89,7 @@ export const siteConfig = {
 
   /* 地域の事業者向けサービス案内。見本・料金の条件と合わせて更新する。 */
   localService: {
-    updatedAt: "2026-10-28",
+    updatedAt: "2026-10-30",
     eyebrow: "堺市のホームページ制作・リニューアル",
     title: "堺市のお店と会社に、\n伝わるホームページを。",
     introduction: "はじめてのお客様が気になるのは、「何を頼めるか」「いくらかかるか」「どう行けばいいか」。お店や会社ごとに必要な情報を整理して、来店・予約・お問い合わせへつなぐ一枚をつくります。新規開業も、今あるサイトの見直しもご相談ください。",
@@ -160,8 +160,8 @@ export const siteConfig = {
       text: "Googleで探しても自分のお店が見つからず、新しいお客様につながらない。",
     },
     {
-      title: "毎月の手作業をなくしたい",
-      text: "予約の管理やエクセルへの入力など、手間のかかる作業を減らしたい。",
+      title: "何を載せたらいいか分からない",
+      text: "写真も文章も、まだ準備ができていない。何から始めればいいか相談したい。",
     },
   ],
   painsClosing:
@@ -186,8 +186,8 @@ export const siteConfig = {
       },
       {
         icon: "bolt",
-        title: "予約・システムまで相談できる",
-        text: "予約管理、LINEの活用、エクセル業務の自動化まで。ホームページの先も、お店の「IT担当」としてお手伝いします。",
+        title: "相談も更新も、ひとつの窓口で",
+        text: "制作中のことも、公開後のちょっとした変更も。LINEやメールで、いつもの窓口へ。困ったときに相談できる関係を大切にします。",
       },
     ],
   },
@@ -198,7 +198,7 @@ export const siteConfig = {
   demos: {
     note: "※架空の店舗・企業のデモサイトです。",
     intro:
-      "初期0円で始められる例と、ページ・機能を追加する例。8つの見本で、できることと費用の違いをご確認ください。",
+      "飲食店、美容室、教室、会社。それぞれの雰囲気に合わせた8つの制作見本です。気になるデザインを、実際に触ってご覧ください。",
     examplesNote: "初期0円は、対象の制作見本を活用した1ページの基本構成の場合です。月額運用費5,500円〜（税込）は別途必要です。追加ページ・新しい演出・フォーム・システム連携は作業前にお見積りします。",
     corporateShowcase: {
       name: "KASANE｜株式会社かさね",
@@ -396,10 +396,6 @@ export const siteConfig = {
       a: `基本構成の制作初期費用は${startingPrices.initialCost}円から、月額運用費は${startingPrices.monthlyFrom}円からです（いずれも${startingPrices.priceTaxNote}）。追加ページ・独自のデザインや演出・フォーム・システム連携などをご希望の場合は、内容に応じて初期費用をお見積りします。月額費用も更新・運用の範囲により異なります。相談・お見積りは無料です。内容と金額にご納得いただいてから進めます。`,
     },
     {
-      q: "支払い方法は何がありますか？",
-      a: `${payments.methods}に対応しています。${payments.guidance}${payments.cardNote}${payments.timing}`,
-    },
-    {
       q: "セキュリティ面の対応はありますか？",
       a: "はい。通信を暗号化するSSLの設定や、公開後の更新管理に対応します。必要のない管理画面や機能を増やさず、お店に必要な構成を整えます。安全性を完全に保証するものではありませんが、公開後も継続して管理します。",
     },
@@ -475,9 +471,13 @@ export type SiteConfig = typeof siteConfig;
 
 export interface WebsiteExample {
   name: string;
+  /** Short brand name for the gallery; full name remains in link descriptions. */
+  displayName?: string;
   category: string;
   detail: string;
   image: string;
+  /** Captured first screen of the actual demo, not just its hero photo. */
+  previewImage?: string;
   imageAlt: string;
   url: string;
   imageMode?: "cover" | "contain";
@@ -488,14 +488,16 @@ export interface WebsiteExample {
 
 // 現行の制作見本。画像・リンクはデモ設定を共有し、差し替え漏れを防ぐ。
 export const websiteExamples: readonly WebsiteExample[] = [
-  { ...siteConfig.demos.restaurantShowcase, category: "飲食店", detail: "お品書きから、外部予約へ。", offer: exampleOffers.sumitoki },
-  { ...siteConfig.demos.salonShowcase, category: "美容室", detail: "スタイルの見せ方と、予約の導線。", position: "70% center", offer: exampleOffers.sui },
-  { ...siteConfig.demos.clinicShowcase, category: "こどもクリニック", detail: "やさしいキャラクターと診療案内。", imageMode: "contain", background: "#e7edda", offer: exampleOffers.komorebi },
-  { ...siteConfig.demos.corporateShowcase, category: "企業・会社", detail: "プロジェクトを深く伝える、独立した詳細ページ。", offer: exampleOffers.kasane },
+  { ...siteConfig.demos.restaurantShowcase, displayName: "炭と季", previewImage: "/demo/previews/sumitoki.webp", category: "飲食店", detail: "お品書きから、外部予約へ。", offer: exampleOffers.sumitoki },
+  { ...siteConfig.demos.salonShowcase, displayName: "sui hair atelier", previewImage: "/demo/previews/sui.webp", category: "美容室", detail: "スタイルの見せ方と、予約の導線。", position: "70% center", offer: exampleOffers.sui },
+  { ...siteConfig.demos.clinicShowcase, displayName: "こもれび", previewImage: "/demo/previews/komorebi.webp", category: "こどもクリニック", detail: "やさしいキャラクターと診療案内。", imageMode: "contain", background: "#e7edda", offer: exampleOffers.komorebi },
+  { ...siteConfig.demos.corporateShowcase, displayName: "KASANE", previewImage: "/demo/previews/kasane.webp", category: "企業・会社", detail: "実績を深く伝える、企業のサイト。", offer: exampleOffers.kasane },
   ...siteConfig.demos.additionalShowcases.map((example, index) => ({
     ...example,
+    displayName: ["SEKKA", "旅宿 凪", "みちる英語教室", "NIWATO"][index],
+    previewImage: `/demo/previews/${example.url.split("/").at(-1)}.webp`,
     category: ["製造業", "旅館・宿泊施設", "英語教室", "月額サービス販売"][index],
-    detail: ["製品と加工内容を、わかりやすく。", "過ごし方と泊数で変わる、滞在プランナー。", "3ページ・コース選び・お問い合わせフォーム。", "申込後のマイページまで。決済はデモです。"][index],
+    detail: ["製品と加工内容を、わかりやすく。", "滞在プランまで選べる、宿のサイト。", "コース選びから、体験のお問い合わせへ。", "申込後の体験まで。決済はデモです。"][index],
     offer: [exampleOffers.sekka, exampleOffers.nagi, exampleOffers.michiru, exampleOffers.niwato][index],
   })),
 ] satisfies readonly WebsiteExample[];

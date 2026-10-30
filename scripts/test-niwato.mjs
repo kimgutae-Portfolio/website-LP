@@ -45,6 +45,6 @@ test("rendered page is noindex, has one H1, clear demo pricing and working ancho
  assert.ok(!/<input[^>]+type="(?:text|email|number|password)"/.test(html));
 });
 test("demo is linked from the main portfolio and respects reduced motion",async()=>{
- const main=await read(".next/server/app/index.html");assert.match(main,/href="\/demo\/niwato"/);assert.ok(main.includes(encodeURIComponent("/demo/niwato/hero.webp")));
+ const main=await read(".next/server/app/index.html");assert.match(main,/href="\/demo\/niwato"/);assert.ok(main.includes(encodeURIComponent("/demo/previews/niwato.webp")));
  const css=await read("components/demo/niwato/niwato.module.css");assert.match(css,/prefers-reduced-motion:reduce/);assert.ok(!css.includes("infinite"));assert.match(await read("app/demo/niwato/icon.svg"),/<svg/);
 });

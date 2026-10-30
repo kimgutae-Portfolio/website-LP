@@ -11,6 +11,18 @@ npm run dev    # http://localhost:3000
 npm run build  # 프로덕션 빌드 (Vercel 배포 전 확인용)
 ```
 
+## 메인 디자인 (2026-10-30)
+
+기존 Next.js 프로젝트와 배포처를 유지하면서, 동네 상점과 해돋이를 중심으로 메인 브랜드를 정리했습니다.
+Noto Sans JP, 짙은 초록·크림·황토색을 사용하며, 첫 화면의 0엔·5,500엔 가격과 LINE 상담은 서버 렌더링됩니다.
+오프닝은 짧은 SVG 애니메이션이고, 스크롤·키보드·모션 감소 설정을 방해하지 않습니다.
+
+- `components/home/TownScene.tsx`: 상점 일러스트와 문이 열리는 연출
+- `components/pricing/gallery.module.css`: 두 번째 섹션의 큰 제작 견본 갤러리
+- `public/demo/previews/`: 실제 데모 첫 화면을 캡처한 WebP 8종 (데모 디자인 수정 시 갱신)
+- 제작 범위·운용 안내는 네이티브 펼침 메뉴에 유지되며, 가격·계약 조건 자체는 변경하지 않았습니다. 결제방법은 메인에서 제외하고 기존 법적 고지·개인정보처리방침에만 남깁니다.
+- 검증: `npm run build` 후 `node --test scripts/test-*.mjs`
+
 ## 방문·LINE 버튼 클릭 측정
 
 무료 GA4 전용 속성과 `line_click` 이벤트를 사용합니다. LINE 이동은 그대로 유지하며
@@ -44,14 +56,14 @@ app/
   layout.tsx            ← 폰트(Noto Sans JP)·메타·테마 색 주입
   page.tsx              ← 섹션 조립
   tokushoho/page.tsx    ← 特定商取引法に基づく表記 (placeholder)
-  api/contact/route.ts  ← 문의 폼 stub (TODO: Resend / Supabase / LINE 알림)
+  api/contact/route.ts  ← 문의 폼 메일 전송 (Resend)
 components/
   Hero, Pain, Demo, Pricing, Flow, Owner, Faq, Cta   ← 섹션 컴포넌트
   FloatingLine          ← 플로팅 LINE 버튼 (고객 템플릿에도 기본 탑재)
   Header, Footer, LineCta, ContactForm, SectionHeading, icons
 ```
 
-## 폼 전송 확장 (추후)
+## 문의 폼 메일 전송
 
-`app/api/contact/route.ts` 는 현재 서버 로그로만 기록하는 stub.
-Resend 메일 전송 → Supabase 저장 → LINE 알림 순으로 확장 예정 (spec §6 참고).
+`app/api/contact/route.ts` 는 Resend를 사용합니다. `RESEND_API_KEY`와 `CONTACT_TO_EMAIL` 설정이 필요하며,
+인증된 발신 도메인은 `CONTACT_FROM_EMAIL`에 지정합니다. 이번 디자인 검증에서는 실제 문의를 발송하지 않습니다.

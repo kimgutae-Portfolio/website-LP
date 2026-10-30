@@ -21,7 +21,7 @@ test("first screen leads with service benefits and real, server-rendered consult
 });
 
 test("continuous sunrise / doorway opening has a finite fallback and respects user intent", async () => {
-  const component = await read("components/home/HeroExperience.tsx"), css = await read("components/home/hero.module.css");
+  const component = await read("components/home/HeroExperience.tsx"), scene = await read("components/home/TownScene.tsx"), css = await read("components/home/hero.module.css");
   assert.match(component, /2900/);
   assert.match(component, /event\.key === "Escape"/);
   assert.match(component, /event\.key === "Tab"/);
@@ -30,16 +30,13 @@ test("continuous sunrise / doorway opening has a finite fallback and respects us
   assert.match(component, /passive: true/);
   assert.match(component, /preference\.addEventListener\("change", update\)/);
   assert.match(css, /prefers-reduced-motion:reduce/);
-  assert.match(css, /@keyframes ruleArrival/);
-  for (const name of ["cameraEntry", "sunRise", "doorOpening", "thresholdLeft", "thresholdRight", "dawnLight"]) assert.ok(css.includes(`@keyframes ${name}`), name);
-  assert.equal((component.match(/data-entry-camera/g) ?? []).length, 2);
-  assert.equal((component.match(/data-entry-sun/g) ?? []).length, 2);
-  assert.equal((component.match(/data-entry-doorway/g) ?? []).length, 2);
-  assert.match(component, /event\.target === event\.currentTarget/);
+  for (const name of ["cameraEntry", "sunRise", "doorOpening", "wordsArrival"]) assert.ok(css.includes(`@keyframes ${name}`), name);
+  for (const hook of ["data-entry-camera", "data-entry-sun", "data-entry-doorway"]) assert.equal((scene.match(new RegExp(hook,"g")) ?? []).length, 1);
+  assert.match(scene, /event\.target === event\.currentTarget/);
   assert.match(component, /addEventListener\("hashchange", onHash\)/);
-  assert.match(css, /\.entryThreshold\s*\{[^}]*pointer-events: none/);
+  assert.match(css, /\.brandScene\s*\{[^}]*pointer-events: none/);
   assert.match(css, /cameraEntry 2\.6s/);
-  assert.match(css, /\.mobileScene \.sceneCamera/);
+  assert.match(component, /<TownScene onEntryEnd=\{finish\}/);
   assert.doesNotMatch(css, /animation[^;}]*infinite/);
   assert.doesNotMatch(component, /preventDefault|style\.overflow|"wheel"|"touchmove"|<video/);
 });
@@ -62,7 +59,7 @@ test("mobile first screen is concise, prices stay side-by-side, and long explana
   for (const keyword of siteConfig.hero.keywords) assert.ok(opening.includes(keyword));
   assert.match(css, /grid-template-columns:\s*\.8fr 1\.2fr/);
   assert.match(css, /100svh - 64px/);
-  assert.match(opening, /viewBox="0 0 1400 900"/);
+  assert.match(opening, /viewBox="0 0 900 620"/);
   assert.match(opening, /aria-hidden="true"/);
 });
 

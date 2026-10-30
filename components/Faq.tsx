@@ -1,33 +1,33 @@
 import { siteConfig } from "@/site.config";
 import { Reveal } from "./Reveal";
-import { SectionHeading } from "./SectionHeading";
+import styles from "./home/details.module.css";
 
 export function Faq() {
   return (
-    <section id="faq" className="bg-slate-50 py-16 sm:py-24">
-      <div className="mx-auto max-w-3xl px-5">
-        <SectionHeading label="FAQ" title="よくある質問" />
-        <Reveal className="space-y-3">
+    <section id="faq" className={styles.faq} aria-labelledby="faq-heading">
+      <div className={styles.container}>
+        <Reveal className={styles.faqIntro}><p className={styles.eyebrow}>気になること、先にお答えします。</p><h2 id="faq-heading">よくあるご質問。</h2></Reveal>
+        <Reveal className={styles.questions}>
           {siteConfig.faq.map((item) => (
             <details
               key={item.q}
-              className="group rounded-2xl border border-slate-200 bg-white shadow-sm open:shadow-md"
+              className={styles.question}
             >
-              <summary className="flex cursor-pointer items-center justify-between gap-4 p-5 font-bold text-slate-900 sm:p-6">
-                <span className="flex gap-3">
-                  <span className="shrink-0 text-primary">Q.</span>
+              <summary>
+                <span>
+                  <span className={styles.questionMark} aria-hidden="true">Q</span>
                   {item.q}
                 </span>
                 <span
                   aria-hidden="true"
-                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-light text-lg font-bold text-primary transition-transform group-open:rotate-45"
+                  className={styles.questionToggle}
                 >
                   ＋
                 </span>
               </summary>
-              <div className="flex gap-3 px-5 pb-5 sm:px-6 sm:pb-6">
-                <span className="shrink-0 font-bold text-accent">A.</span>
-                <p className="leading-relaxed text-slate-700">{item.a}</p>
+              <div className={styles.answer}>
+                <span aria-hidden="true">A</span>
+                <p>{item.a}</p>
               </div>
             </details>
           ))}

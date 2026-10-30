@@ -3,28 +3,29 @@ import { siteConfig } from "@/site.config";
 import { ContactForm } from "./ContactForm";
 import { LineCta } from "./LineCta";
 import { Reveal } from "./Reveal";
+import styles from "./home/details.module.css";
 
 export function Cta() {
   const { contact, line } = siteConfig;
   return (
-    <section id="contact" className="bg-primary py-16 sm:py-24">
-      <div className="mx-auto max-w-5xl px-5">
-        <div className="mb-10 text-center sm:mb-14">
-          <h2 className="text-2xl font-bold leading-snug text-white sm:text-3xl">
+    <section id="contact" className={styles.contact} aria-labelledby="contact-heading">
+      <div className={styles.container}>
+        <div className={styles.contactIntro}>
+          <div><p className={styles.eyebrow}>あなたの事業の、次の一歩を。</p><h2 id="contact-heading">
             {contact.heading}
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-white/85">
+          </h2></div>
+          <p>
             {contact.sub}
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className={styles.contactGrid}>
           {/* LINE 상담 카드 (주요 CTA) */}
-          <Reveal className="flex flex-col items-center justify-center rounded-3xl bg-white p-8 text-center shadow-lg sm:p-10">
-            <h3 className="mb-2 text-lg font-bold text-slate-900">
+          <Reveal className={styles.lineCard}>
+            <span className={styles.cardLabel}>いつものLINEで</span><h3>
               {contact.lineCardTitle}
             </h3>
-            <p className="mb-6 text-sm leading-relaxed text-slate-600">
+            <p>
               {contact.lineCardText}
             </p>
             {/* QR: config에 이미지 지정 시 표시, 없으면 placeholder */}
@@ -34,7 +35,7 @@ export function Cta() {
                 alt="LINE友だち追加QRコード"
                 width={160}
                 height={160}
-                className="mb-6 h-40 w-40 rounded-xl border border-slate-200"
+                className={styles.qrCode}
               />
             ) : (
               <div className="mb-6 flex h-40 w-40 items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 text-sm font-bold text-slate-400">
@@ -47,15 +48,15 @@ export function Cta() {
           </Reveal>
 
           {/* 문의 폼 카드 */}
-          <Reveal delay={120} className="rounded-3xl bg-white p-8 shadow-lg sm:p-10">
-            <h3 className="mb-6 text-center text-lg font-bold text-slate-900">
+          <Reveal delay={120} className={styles.formCard}>
+            <span className={styles.cardLabel}>文章で、ゆっくり相談</span><h3>
               {contact.formTitle}
             </h3>
             <ContactForm />
           </Reveal>
         </div>
 
-        <p className="mt-8 text-center text-sm text-white/80">
+        <p className={styles.contactEmail}>
           メールでのご相談も受け付けています：{" "}
           <a
             href={`mailto:${contact.email}`}

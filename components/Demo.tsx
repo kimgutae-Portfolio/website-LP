@@ -1,14 +1,14 @@
 import { siteConfig, websiteExamples } from "@/site.config";
 import { Reveal } from "./Reveal";
 import { WebsiteExamples } from "./pricing/WebsiteExamples";
-import styles from "./pricing/pricing.module.css";
+import styles from "./pricing/gallery.module.css";
 
 export function Demo() {
   return (
     <section id="demo" className={styles.demoSection} aria-labelledby="demo-heading">
-      <div className="mx-auto max-w-5xl px-5">
+      <div className={styles.container}>
         <Reveal className={styles.demoIntro}>
-          <div><p className={styles.eyebrow}>DESIGN COLLECTION</p><h2 id="demo-heading">こんなホームページを、<br/>あなたのお店にも。</h2></div>
+          <div><p className={styles.eyebrow}>つくれる、いろんな「らしさ」。</p><h2 id="demo-heading">「うちのお店なら？」を、<br/>想像してみてください。</h2></div>
           <p>{siteConfig.demos.intro}</p>
         </Reveal>
         <Reveal><WebsiteExamples examples={websiteExamples} note={siteConfig.demos.examplesNote}/></Reveal>

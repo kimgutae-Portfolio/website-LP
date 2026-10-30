@@ -4,7 +4,7 @@ import { CheckIcon, LineIcon } from "./icons";
 import styles from "./pricing/pricing.module.css";
 
 export function Pricing() {
-  const { pricing, payments } = siteConfig;
+  const { pricing } = siteConfig;
   return (
     <section id="price" className={styles.priceSection} aria-labelledby="price-heading">
       <div className="mx-auto max-w-5xl px-5">
@@ -18,17 +18,15 @@ export function Pricing() {
             <div className={styles.costBlock}><p>基本構成で、小さくはじめる</p><h3>制作初期費用</h3><p className={styles.priceValue}><strong>{pricing.initialCost}</strong><span>円〜<small>（{pricing.priceTaxNote}）</small></span></p><p>{pricing.basicScope}<br/>追加ページ・演出・機能は事前お見積り</p></div>
             <div className={styles.costBlock}><p>公開後も、育てていく</p><h3>月額運用費</h3><p className={styles.priceValue}><strong>{pricing.monthlyFrom}</strong><span>円〜<small>（{pricing.priceTaxNote}）</small></span></p><p>更新・管理・日々のご相談まで</p></div>
           </div>
-          <div className={styles.quoteNote}><span>お見積りについて</span><p>{pricing.estimateNote}</p></div>
-          <div className={styles.paymentNote}>
-            <h3>お支払い方法</h3>
-            <div><p>{payments.methods}</p><p>{payments.guidance}</p></div>
-          </div>
           <div className={styles.quickConsult}><p>お店のことも、ご予算のことも。<br className="sm:hidden"/>まずは気軽にお話しください。</p><a href={siteConfig.line.addFriendUrl} data-line-placement="pricing_intro" target="_blank" rel="noopener noreferrer">LINEで無料相談</a></div>
+          <details className={styles.pricingDetails}><summary>基本の制作範囲・運用内容について</summary>
+          <div className={styles.quoteNote}><span>お見積りについて</span><p>{pricing.estimateNote}</p></div>
           <div className={styles.serviceColumns}>
             <div><p className={styles.eyebrow}>WEBSITE CREATION</p><h3>伝わるための、土台づくり。</h3><ul>{pricing.creationFeatures.map(feature=><li key={feature}><CheckIcon/><span>{feature}</span></li>)}</ul></div>
             <div><p className={styles.eyebrow}>ONGOING SUPPORT</p><h3>作ったあとも、そばに。</h3><ul>{pricing.operationFeatures.map(feature=><li key={feature}><CheckIcon/><span>{feature}</span></li>)}</ul></div>
           </div>
           <div className={styles.optional}><h3>もう少し、こんなことも。</h3><p>{pricing.optionalFeatures}</p><span>追加機能は別途お見積り。必要なものだけをご提案します。</span></div>
+          </details>
           <div className={styles.consultation}>
             <div><p className={styles.eyebrow}>LET’S TALK</p><h3>まずは、お店のことを<br/>聞かせてください。</h3><p>気になる見本、ご予算、困っていること。<br/>まだイメージが固まっていなくても大丈夫です。</p><span>相談・お見積り無料 ／ ご相談だけでも歓迎です</span></div>
             <div><a href={siteConfig.line.addFriendUrl} data-line-placement="pricing" target="_blank" rel="noopener noreferrer" className={styles.consultButton}><LineIcon/><span>制作内容と費用を<br/>LINEで相談する</span></a><a href="#contact" className={styles.formLink}>フォームから相談する</a><a href="#demo" className={styles.examplesLink}>制作見本をもう一度見る</a></div>

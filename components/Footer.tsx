@@ -5,7 +5,7 @@ import { MeasurementPreferencesButton } from "./analytics/GoogleMeasurement";
 
 export function Footer() {
   return (
-    <footer className="bg-slate-900 py-10 text-slate-300">
+    <footer className="bg-[#153a2d] py-12 text-[#d5dec8]">
       <div className="mx-auto max-w-5xl px-5 text-center">
         <div className="mb-5 flex justify-center">
           <Logo variant="light" />
@@ -41,7 +41,7 @@ export function Footer() {
             {siteConfig.footer.portfolioLabel}
           </a>
         </nav>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-[#a3b59a]">
           &copy; {new Date().getFullYear()} machinowebs.com
         </p>
       </div>

@@ -1,0 +1,37 @@
+.container { width: min(1180px, 100%); padding-inline: 32px; margin-inline: auto; }
+.eyebrow { font-size: 12px; line-height: 1.9; font-weight: 700; letter-spacing: .04em; }
+.flow { padding: 100px 0; background: #fbf8ee; color: #1d493c; }
+.flow > .container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 90px; }
+.flowIntro h2 { margin-top: 19px; font-size: 43px; font-weight: 900; line-height: 1.6; letter-spacing: -.055em; }
+.flowIntro > p:last-child { margin-top: 24px; font-size: 14px; line-height: 2.15; color: #62725f; }
+.flowList { list-style: none; padding: 0; margin: 0; border-top: 1.5px solid #294f3f; }
+.flowStep { display: grid; grid-template-columns: 54px 1fr; gap: 23px; padding: 29px 0; border-bottom: 1px solid #c3cbb9; }
+.flowIndex { font-size: 31px; font-weight: 900; line-height: 1.4; letter-spacing: -.07em; color: #b87651; }
+.flowStep h3 { font-size: 21px; font-weight: 900; line-height: 1.8; }
+.highlight { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 700; border-bottom: 3px solid #efc65e; line-height: 1.8; }
+.stepText { margin-top: 9px; font-size: 13px; color: #64725f; line-height: 2.1; }
+.faq { padding: 90px 0 100px; background: #edf0e5; color: #1d493c; }
+.faq > .container { display: grid; grid-template-columns: .8fr 1.5fr; gap: 75px; }
+.faqIntro h2 { margin-top: 20px; font-size: 36px; font-weight: 900; line-height: 1.7; letter-spacing: -.05em; }
+.questions { border-top: 1.5px solid #315341; }
+.question { border-bottom: 1px solid #becab7; }
+.question summary { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 23px 0; min-height: 70px; cursor: pointer; font-size: 14px; font-weight: 700; line-height: 1.9; list-style: none; }
+.question summary::-webkit-details-marker { display: none; }.question summary > span:first-child { display: flex; align-items: baseline; gap: 19px; }
+.questionMark { flex-shrink: 0; font-size: 21px; font-weight: 900; }.questionToggle { flex-shrink: 0; font-size: 23px; font-weight: 400; transition: transform .2s; }.question[open] .questionToggle { transform: rotate(45deg); }
+.answer { display: flex; align-items: baseline; gap: 20px; padding: 0 34px 24px 1px; }.answer > span { flex-shrink: 0; font-size: 19px; font-weight: 900; color: #a76e49; }.answer > p { color: #596e59; font-size: 14px; line-height: 2.1; }
+.question summary:focus-visible, .contact a:focus-visible { outline: 3px solid #c99835; outline-offset: 5px; }
+.contact { position: relative; padding: 90px 0 70px; background: #204d3e; color: #fff9e9; }
+.contactIntro { display: grid; grid-template-columns: 1.2fr 1fr; gap: 70px; align-items: end; margin-bottom: 44px; }.contactIntro .eyebrow { color: #efca6b; }.contactIntro h2 { font-size: 38px; font-weight: 900; line-height: 1.75; letter-spacing: -.045em; margin-top: 17px; }.contactIntro > p { font-size: 14px; line-height: 2.2; color: #dae2ce; }
+.contactGrid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 24px; align-items: start; }
+.lineCard, .formCard { padding: 35px 38px; background: #fffdf5; color: #244e3e; border-radius: 6px; box-shadow: 5px 5px 0 #14392d; }.cardLabel { display: block; font-size: 11px; font-weight: 700; color: #7c8066; margin-bottom: 7px; }.lineCard h3, .formCard h3 { font-size: 22px; font-weight: 900; line-height: 1.8; }.lineCard { text-align: center; padding-block: 44px; }.lineCard > p { margin-top: 13px; color: #6a7562; font-size: 13px; line-height: 2; }.qrCode { display: block; width: 160px; height: 160px; margin: 27px auto 25px; border: 1px solid #d5dcca; }
+.lineCard > a { border-radius: 4px; box-shadow: none; font-size: 15px; min-height: 54px; width: 100%; padding: 14px 16px; }.formCard h3 { margin-bottom: 22px; }.formCard :is(input, textarea) { border-radius: 4px; border-color: #bbc9b4; font-size: 16px; }.formCard button { border-radius: 4px; background: #244e3e; box-shadow: none; font-size: 15px; min-height: 54px; }.formCard button:hover { background: #163d2f; }
+.contactEmail { text-align: center; margin-top: 32px; font-size: 12px; color: #d3dfc9; line-height: 2; }.contactEmail a { white-space: nowrap; }
+@media (max-width: 1000px) { .flow > .container, .faq > .container { gap: 40px; }.flowIntro h2 { font-size: 35px; }.faqIntro h2 { font-size: 30px; }.contactIntro { gap: 35px; }.contactIntro h2 { font-size: 32px; }.lineCard, .formCard { padding: 29px; } }
+@media (max-width: 700px) {
+  .container { padding-inline: 22px; }.eyebrow { font-size: 10px; }.flow, .faq { padding: 62px 0; }.flow > .container, .faq > .container { grid-template-columns: 1fr; gap: 29px; }.flowIntro h2 { font-size: 32px; line-height: 1.65; margin-top: 14px; }.flowIntro > p:last-child { margin-top: 17px; font-size: 12px; }.flowStep { padding-block: 23px; gap: 17px; grid-template-columns: 43px 1fr; }.flowIndex { font-size: 27px; }.flowStep h3 { font-size: 20px; }.stepText { font-size: 12px; }.highlight { font-size: 10px; }
+  .faqIntro h2 { margin-top: 12px; font-size: 31px; }.question summary { padding-block: 19px; font-size: 13px; gap: 16px; }.question summary > span:first-child { gap: 13px; }.questionMark { font-size: 20px; }.answer { gap: 14px; padding-right: 20px; }.answer > p { font-size: 13px; }
+  .contact { padding: 60px 0 45px; }.contactIntro { grid-template-columns: 1fr; gap: 16px; margin-bottom: 27px; }.contactIntro h2 { font-size: 30px; margin-top: 12px; line-height: 1.75; }.contactIntro > p { font-size: 12px; }.contactGrid { grid-template-columns: 1fr; gap: 22px; }.lineCard, .formCard { padding: 29px 23px; }.lineCard h3, .formCard h3 { font-size: 20px; }.lineCard .qrCode { display: none; }.lineCard > a { margin-top: 22px; }.contactEmail { font-size: 11px; margin-top: 26px; }.formCard label { font-size: 12px; }.formCard :is(input, textarea) { padding-inline: 12px; }
+}
+@media (max-width: 360px) { .container { padding-inline: 18px; }.flowIntro h2 { font-size: 29px; }.contactIntro h2 { font-size: 26px; }.lineCard, .formCard { padding-inline: 20px; } }
+@media (prefers-reduced-motion: reduce) { .questionToggle { transition: none; } }
+.contactIntro h2 { text-wrap: balance; }

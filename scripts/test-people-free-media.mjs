@@ -3,6 +3,7 @@ import test from "node:test";
 import {readFile,stat} from "node:fs/promises";
 import {createHash} from "node:crypto";
 import sharp from "sharp";
+import {loadSiteConfig} from "./load-site-config.mjs";
 const read=p=>readFile(new URL(`../${p}`,import.meta.url),"utf8");
 const manifest=JSON.parse(await read("scripts/demo-people-free-assets.json"));
 test("eight replacement photographs retain their image dimensions and are optimized",async()=>{
@@ -28,9 +29,16 @@ test("no affected production page references an original people photograph",asyn
  const routes=[...new Set(manifest.assets.map(a=>a.asset.split("/")[0]))];
  for(const route of routes){const html=await read(`.next/server/app/demo/${route}.html`);for(const asset of manifest.assets){const old=`/demo/${asset.asset}.webp`;assert.ok(!html.includes(encodeURIComponent(old)),`${route}: stale image ${old}`);assert.ok(!html.includes(`src="${old}"`));}}
 });
-test("main portfolio thumbnails use the edited hero images too",async()=>{
+test("main portfolio previews come from demos retaining their people-free hero sources",async()=>{
  const html=await read(".next/server/app/index.html");
- for(const route of ["kasane","sumitoki","michiru"]){assert.ok(html.includes(encodeURIComponent(`/demo/${route}/hero-no-people.webp`)));assert.ok(!html.includes(encodeURIComponent(`/demo/${route}/hero.webp`)));}
+ const {websiteExamples}=await loadSiteConfig();
+ for(const route of ["kasane","sumitoki","michiru"]){
+  const example=websiteExamples.find(x=>x.url===`/demo/${route}`);
+  assert.equal(example.image,`/demo/${route}/hero-no-people.webp`);
+  assert.equal(example.previewImage,`/demo/previews/${route}.webp`);
+  assert.ok(html.includes(encodeURIComponent(example.previewImage)));
+  assert.ok(!html.includes(encodeURIComponent(`/demo/${route}/hero.webp`)));
+ }
 });
 test("descriptions match objects and rooms rather than removed people",async()=>{
  const michiru=await read(".next/server/app/demo/michiru.html"),niwato=await read(".next/server/app/demo/niwato.html");
