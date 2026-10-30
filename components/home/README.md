@@ -16,12 +16,24 @@ complete security is claimed. WordPress comparisons are not used in sales copy.
   monthly fee from 5,500 yen, adjacent scope / extra-estimate / minimum-term conditions.
   Primary CTA is the real business LINE link (`cta_location: hero`).
   LINE actions in hero/header/pricing/journal use the shared LINE green token.
-- `HeroExperience.tsx` / `hero.module.css`: continuous 2.6s sunrise → camera approach
-  → sliding doorway → live hero. The actual SVG background is the opening scene,
-  not a separate film or loading screen. Mobile has its own camera geometry.
-  Completion comes from the camera animation plus a 2.9s safety timeout. Scrolling,
-  pointer/focus, Escape/Tab or a deep hash finish immediately; reduced motion skips
-  the sequence. Content is server-rendered, and CSS alone finishes without JS.
+- `HeroExperience.tsx` / `HeroOpening.tsx` / `hero.module.css`: a 3.2s spatial entrance.
+  A large sun rises between full-viewport doors, the doors slide apart, and the sun
+  lands exactly on the live SVG background. The page approaches behind the opening;
+  the screen itself never fades out. Sun coordinates use untransformed layout
+  geometry. Hydration measures the destination before playback; two preparation
+  frames let the browser paint and promote the moving surfaces first. The scene
+  and copy approach as one layer instead of several nested animations. Layout
+  reads are grouped and cached: native scrolling only adjusts cached coordinates,
+  resize invalidates them, and event updates are coalesced to one animation frame.
+  Temporary compositor hints are removed when the entrance completes. There is no
+  continuous JavaScript animation loop. A separate CSS safety hides the initial
+  doors without JavaScript, leaving the underlying page in its normal static pose.
+  Completion comes from the stage animation plus a 3.6s safety timeout. Deep links
+  keep their scroll position and defer an unseen opening until the headline appears.
+  Small scrolls and non-interactive touches do not cancel it; actionable clicks,
+  focus, Escape/Tab or leaving the hero can finish immediately. Reduced motion skips
+  the stage. It is decorative, pointer-transparent, and CSS alone dismisses it
+  without JS. The real headline, prices and links remain server-rendered underneath.
   No scroll lock, autoplaying video, remote media or continuous motion is used.
 - `home.module.css`: shared header, customer concerns and ongoing-support styles.
 - `MobileNavigation.tsx` / `FloatingLineAfterHero.tsx`: retain native mobile navigation

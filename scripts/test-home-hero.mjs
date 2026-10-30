@@ -21,8 +21,8 @@ test("first screen leads with service benefits and real, server-rendered consult
 });
 
 test("continuous sunrise / doorway opening has a finite fallback and respects user intent", async () => {
-  const component = await read("components/home/HeroExperience.tsx"), scene = await read("components/home/TownScene.tsx"), css = await read("components/home/hero.module.css");
-  assert.match(component, /2900/);
+  const component = await read("components/home/HeroExperience.tsx"), scene = await read("components/home/TownScene.tsx"), opening = await read("components/home/HeroOpening.tsx"), css = await read("components/home/hero.module.css");
+  assert.match(component, /3600/);
   assert.match(component, /event\.key === "Escape"/);
   assert.match(component, /event\.key === "Tab"/);
   assert.match(component, /onFocusCapture=\{finish\}/);
@@ -30,15 +30,68 @@ test("continuous sunrise / doorway opening has a finite fallback and respects us
   assert.match(component, /passive: true/);
   assert.match(component, /preference\.addEventListener\("change", update\)/);
   assert.match(css, /prefers-reduced-motion:reduce/);
-  for (const name of ["cameraEntry", "sunRise", "doorOpening", "wordsArrival"]) assert.ok(css.includes(`@keyframes ${name}`), name);
+  for (const name of ["mainApproach", "sunRise", "doorOpening"]) assert.ok(css.includes(`@keyframes ${name}`), name);
   for (const hook of ["data-entry-camera", "data-entry-sun", "data-entry-doorway"]) assert.equal((scene.match(new RegExp(hook,"g")) ?? []).length, 1);
-  assert.match(scene, /event\.target === event\.currentTarget/);
+  assert.match(opening, /event\.target === event\.currentTarget/);
   assert.match(component, /addEventListener\("hashchange", onHash\)/);
   assert.match(css, /\.brandScene\s*\{[^}]*pointer-events: none/);
-  assert.match(css, /cameraEntry 2\.6s/);
-  assert.match(component, /<TownScene onEntryEnd=\{finish\}/);
+  assert.match(css, /mainApproach 3\.2s/);
+  assert.match(component, /<HeroOpening active=\{entry === "preparing" \|\| entry === "playing"\} scene=\{scene\} onReady=\{play\} onComplete=\{finish\}/);
   assert.doesNotMatch(css, /animation[^;}]*infinite/);
   assert.doesNotMatch(component, /preventDefault|style\.overflow|"wheel"|"touchmove"|<video/);
+});
+
+test("an unseen hero opening waits for the headline and does not end on a tiny scroll", async () => {
+  const component = await read("components/home/HeroExperience.tsx");
+  assert.match(component, /"waiting" \| "preparing" \| "playing" \| "complete"/);
+  assert.match(component, /observer\.current\.observe\(heading\)/);
+  assert.match(component, /if \(item\.isIntersecting\) begin\(\)/);
+  assert.match(component, /getBoundingClientRect\(\)\.bottom <= 0/);
+  assert.doesNotMatch(component, /const onScroll = [^\n]*scrollY > 32/);
+  assert.match(component, /if \(hasPlayed\.current \|\| preference\.matches\) return/);
+  assert.match(component, /window\.setTimeout\(finish, 3600\)/);
+  assert.match(component, /event\?\.type === "pointerdown"/);
+  assert.match(component, /target\.closest\("a, button, input, textarea, select, summary"\)/);
+});
+
+test("full-viewport doors reveal the live page and hand off the sun without a screen fade", async () => {
+  const source = await read("components/home/HeroOpening.tsx"), css = await read("components/home/hero.module.css");
+  assert.match(source, /data-entry-stage aria-hidden="true"/);
+  assert.match(source, /data-entry-leaf="left"/);
+  assert.match(source, /data-entry-leaf="right"/);
+  assert.match(source, /data-opening-sun/);
+  assert.match(source, /while \(parent\)/);
+  assert.match(source, /element\.clientWidth \/ 2/);
+  assert.match(source, /element\.clientHeight \/ 2/);
+  for (const property of ["--opening-sun-x", "--opening-sun-y", "--opening-sun-scale"]) assert.ok(source.includes(property));
+  assert.match(css, /\.opening\s*\{[^}]*position: fixed;[^}]*inset: 0;[^}]*z-index: 100;[^}]*pointer-events: none/);
+  assert.match(css, /openingFinish 3\.2s step-end both/);
+  assert.match(css, /@keyframes openingFinish[^\n]*visibility: hidden/);
+  assert.match(css, /translateX\(-104%\) rotateY/);
+  assert.match(css, /translateX\(104%\) rotateY/);
+  const openingFrames = css.slice(css.indexOf("@keyframes openingLeft"), css.indexOf("@keyframes mainApproach"));
+  assert.doesNotMatch(openingFrames, /opacity:/);
+  assert.match(css, /prefers-reduced-motion:reduce[^\n]*\.opening \{ display: none!important/);
+  assert.doesNotMatch(source, /preventDefault|style\.overflow|<video|<img|fetch\(/);
+});
+
+test("opening prepares its geometry before playback and batches only event-driven updates", async () => {
+  const source = await read("components/home/HeroOpening.tsx"), component = await read("components/home/HeroExperience.tsx"), css = await read("components/home/hero.module.css");
+  assert.match(component, /\("preparing"\)/);
+  assert.match(component, /current === "preparing" \? "playing" : current/);
+  assert.match(source, /if \(!geometry\)/);
+  assert.match(source, /if \(!frame\) frame = window\.requestAnimationFrame\(placeSun\)/);
+  assert.match(source, /geometry = null; schedule\(\)/);
+  assert.match(source, /if \(!geometry\) placeSun\(\)/);
+  assert.match(source, /if \(geometry\) onReady\(\)/);
+  assert.match(source, /else onComplete\(\)/);
+  assert.match(source, /cancelAnimationFrame\(frame\)/);
+  assert.match(source, /cancelAnimationFrame\(warmup\)/);
+  const writes = source.slice(source.indexOf('element.style.setProperty'), source.indexOf('const schedule'));
+  assert.doesNotMatch(writes, /offsetWidth|clientWidth|clientHeight|offsetTop|offsetLeft/);
+  assert.match(css, /openingSafety 3\.6s/);
+  assert.match(css, /will-change: transform/);
+  assert.doesNotMatch(css, /cameraEntry|wordsArrival|offerArrival/);
 });
 
 test("responsive offer keeps real links, clear conditions and generous tap areas", async () => {

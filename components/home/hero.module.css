@@ -1,4 +1,4 @@
-.hero { position: relative; isolation: isolate; overflow: hidden; background: #f7f4e9; color: #1d493c; }
+.hero { position: relative; overflow: hidden; background: #f7f4e9; color: #1d493c; }
 .inner { position: relative; max-width: 1440px; margin: auto; padding: 0 clamp(24px, 4.7vw, 76px); }
 .main { position: relative; display: grid; grid-template-columns: 1fr; padding: 61px 0 36px; min-height: min(790px, calc(100svh - 76px)); align-content: space-between; }
 .copy { position: relative; z-index: 1; width: 57%; padding: 13px 0 54px; }
@@ -27,11 +27,57 @@
 .lineAction { display: flex; align-items: center; justify-content: center; gap: 10px; min-height:52px; padding: 12px 15px; background: var(--color-line, #06c755); border-radius: 4px; color: white; font-size: 14px; font-weight: 900; transition: background .2s; }.lineAction svg { width: 22px; height: 22px; }.lineAction:hover { background: var(--color-line-dark, #05b04b); }
 .secondaryActions { display: flex; justify-content: space-between; gap: 12px; }.secondaryActions a { display: flex; align-items: center; min-height: 44px; font-size: 10px; font-weight: 700; text-decoration: underline; text-underline-offset: 5px; }.secondaryActions a:hover { text-decoration-thickness: 2px; }
 .conditions { font-size: 9px; line-height: 1.9; color: #64735d; }.heroFoot { display: flex; justify-content: space-around; align-items: center; gap: 25px; padding: 16px 24px; border-top: 1px solid #b8c7b1; font-size: 12px; font-weight: 700; }.heroFoot > span:nth-child(2) { font-size: 10px; letter-spacing: .15em; color: #72816a; }.hero a:focus-visible { outline: 3px solid #ac742a; outline-offset: 5px; }
-@keyframes cameraEntry { from { transform: translateY(35px) scale(.94); opacity: .4; } to { transform: none; opacity: 1; } }
-@keyframes sunRise { from { opacity: 0; transform: translateY(110px); } to { opacity: 1; transform: none; } }
-@keyframes doorOpening { 0%, 30% { transform: scaleX(1); } 100% { transform: scaleX(.14); } }
-@keyframes wordsArrival { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-.hero[data-entry="playing"] .sceneCamera { animation: cameraEntry 2.6s cubic-bezier(.2,.7,.2,1) both; }.hero[data-entry="playing"] .sunrise { animation: sunRise 1.6s cubic-bezier(.2,.7,.2,1) both; }.hero[data-entry="playing"] :is(.doorLeft,.doorRight) { animation: doorOpening 2.6s cubic-bezier(.2,.7,.2,1) both; }.hero[data-entry="complete"] :is(.doorLeft,.doorRight) { transform: scaleX(.14); }.hero[data-entry="playing"] [data-hero-copy] { animation: wordsArrival .7s .15s ease both; }.hero[data-entry="playing"] .offer { animation-delay: .3s; }
+/* A spatial entrance, not an opaque fade: doors open, the sun lands in the SVG. */
+.opening { display: none; position: fixed; inset: 0; z-index: 100; overflow: hidden; pointer-events: none; color: #214e42; contain: layout paint; }
+.openingDoors { position: absolute; inset: 0; perspective: 1400px; }
+.openingLeft,.openingRight { position: absolute; top: 0; bottom: 0; width: 50.2%; background: #f7f4e9; backface-visibility: hidden; }
+.openingLeft { left: 0; border-right: 1px solid #a4b49e; transform-origin: left center; }
+.openingRight { right: 0; border-left: 1px solid #a4b49e; transform-origin: right center; }
+.openingLeft::before,.openingRight::before { content: ""; position: absolute; inset: clamp(18px,3vw,46px); border: 1px solid #b7c4ac; }
+.openingLeft::after,.openingRight::after { content: ""; position: absolute; width: 5px; height: 76px; top: calc(50% - 38px); border: 1px solid #506e56; background: #d7dfcb; }
+.openingLeft::after { right: 25px; }.openingRight::after { left: 25px; }
+.openingSun { position: absolute; z-index: 2; left: 50%; top: 50%; width: min(70vmin,620px); aspect-ratio: 1; border-radius: 50%; background: #f4bd4f; transform: translate(-50%,-50%); }
+.openingIdentity { position: absolute; z-index: 3; left: 50%; top: 50%; width: max-content; max-width: calc(100% - 40px); text-align: center; transform: translate(-50%,-50%); }
+.openingIdentity > p { font-size: clamp(12px,1.2vw,17px); font-weight: 700; letter-spacing: .06em; }
+.openingIdentity > strong { display: block; margin-top: 15px; font-size: clamp(42px,6.8vw,90px); font-weight: 900; letter-spacing: -.07em; line-height: 1.35; }
+.openingIdentity > strong > span { margin-left: 5px; }
+.openingHorizon { position: absolute; z-index: 1; top: 76%; left: 0; right: 0; height: 1px; background: #a4b49e; transform-origin: center; }
+.openingFoot { position: absolute; z-index: 3; left: 0; right: 0; bottom: 7%; font-size: 11px; font-weight: 700; text-align: center; letter-spacing: .08em; }
+@keyframes openingFinish { 0%,99.9% { visibility: visible; } 100% { visibility: hidden; } }
+@keyframes openingSafety { 0%,99.9% { visibility: visible; } 100% { visibility: hidden; } }
+@keyframes openingLeft { 0%,34% { transform: none; } 79%,100% { transform: translateX(-104%) rotateY(10deg); } }
+@keyframes openingRight { 0%,34% { transform: none; } 79%,100% { transform: translateX(104%) rotateY(-10deg); } }
+@keyframes openingSun {
+  0% { transform: translate(-50%,-50%) translateY(65svh) scale(.75); }
+  26%,38% { transform: translate(-50%,-50%); }
+  100% { transform: translate(-50%,-50%) translate(var(--opening-sun-x,25vw),var(--opening-sun-y,-20vh)) scale(var(--opening-sun-scale,.4)); }
+}
+@keyframes openingIdentity {
+  0% { clip-path: inset(100% 0 0); transform: translate(-50%,calc(-50% + 35px)); }
+  20%,36% { clip-path: inset(0); transform: translate(-50%,-50%); }
+  57%,100% { clip-path: inset(0 0 100%); transform: translate(-50%,calc(-50% - 45px)); }
+}
+@keyframes openingHorizon { 0% { transform: scaleX(0); } 24%,38% { transform: scaleX(1); } 65%,100% { transform: scaleX(0); } }
+@keyframes openingFoot { 0%,36% { transform: none; } 62%,100% { transform: translateY(18svh); } }
+@keyframes mainApproach { 0%,28% { transform: translateY(48px) scale(.91); } 100% { transform: none; } }
+@keyframes sunRise { 0%,99% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes doorOpening { 0%,40% { transform: scaleX(1); } 92%,100% { transform: scaleX(.14); } }
+.hero[data-entry="preparing"] .opening { display: block; animation: openingSafety 3.6s step-end both; }
+.hero[data-entry="preparing"] .openingSun { transform: translate(-50%,-50%) translateY(65svh) scale(.75); }
+.hero[data-entry="preparing"] .openingIdentity { visibility: hidden; }
+/* Promote only the large moving surfaces, and release them after the entrance. */
+.hero:is([data-entry="preparing"],[data-entry="playing"]) :is(.openingLeft,.openingRight,.openingSun,.inner) { will-change: transform; }
+.hero[data-entry="playing"] .opening { display: block; animation: openingFinish 3.2s step-end both; }
+.hero[data-entry="playing"] .openingLeft { animation: openingLeft 3.2s cubic-bezier(.76,0,.24,1) both; }
+.hero[data-entry="playing"] .openingRight { animation: openingRight 3.2s cubic-bezier(.76,0,.24,1) both; }
+.hero[data-entry="playing"] .openingSun { animation: openingSun 3.2s cubic-bezier(.45,0,.2,1) both; }
+.hero[data-entry="playing"] .openingIdentity { animation: openingIdentity 3.2s cubic-bezier(.22,1,.36,1) both; }
+.hero[data-entry="playing"] .openingHorizon { animation: openingHorizon 3.2s ease both; }
+.hero[data-entry="playing"] .openingFoot { animation: openingFoot 3.2s cubic-bezier(.76,0,.24,1) both; }
+.hero[data-entry="playing"] .inner { animation: mainApproach 3.2s cubic-bezier(.22,1,.36,1) both; transform-origin: 50% 30%; }
+.hero[data-entry="playing"] .sunrise { animation: sunRise 3.2s step-end both; }
+.hero[data-entry="playing"] :is(.doorLeft,.doorRight) { animation: doorOpening 3.2s cubic-bezier(.22,1,.36,1) both; }
+.hero[data-entry="complete"] :is(.doorLeft,.doorRight) { transform: scaleX(.14); }
 @media (max-width: 1100px) {
   .main { padding-top: 38px; }.copy { padding-bottom: 38px; }.copy h1 { font-size: 5.05vw; }.brandScene { top: 12px; width: 62%; }.offer { padding: 22px 24px; gap: 22px; grid-template-columns: .66fr 1.35fr 1fr; }.offerLabel > p { font-size: 18px; }.monthlyPrice strong { font-size: 40px; }.initialPrice strong { font-size: 58px; }.monthlyPrice { padding-left: 12px; }.prices { gap: 12px; }.lineAction { font-size: 12px; }
 }
@@ -45,6 +91,7 @@
   .inner { padding-inline: 18px; }.main { padding-top: 22px; }.copy { padding-bottom: 128px; }.copy h1 { font-size: 28px; }.eyebrow { font-size: 9px; }.statement { font-size: 11px; margin-top: 9px; }.keywords { margin-top: 6px; gap: 7px 10px; }.keywords li { font-size: 8px; }.brandScene { top: 145px; }.offer { padding: 13px 14px 10px; }.initialPrice strong { font-size: 48px; }.monthlyPrice strong { font-size: 32px; }.monthlyPrice { padding-left: 13px; }.prices { gap: 12px; }.priceNote { font-size: 8px; }.lineAction { margin-top: 8px; min-height: 46px; }.secondaryActions a { min-height: 35px; font-size: 9px; }.conditions { font-size: 7px; }.heroFoot { font-size: 8px; }
 }
 @media (max-height: 720px) and (min-width: 801px) { .main { padding-top: 25px; padding-bottom: 25px; }.copy { padding-top: 0; padding-bottom: 30px; }.copy h1 { margin-top: 18px; }.brandScene { top: -17px; width: 57%; }.offer { padding-block: 19px; } }
-@media(prefers-reduced-motion:reduce) { .hero[data-entry="playing"] :is(.sceneCamera,.sunrise,.doorLeft,.doorRight,[data-hero-copy]) { animation: none; }.hero :is(.doorLeft,.doorRight) { transform: scaleX(.14); }.lineAction { transition: none; } }
+@media(max-width:540px) { .openingLeft::after { right: 14px; }.openingRight::after { left: 14px; }.openingLeft::before,.openingRight::before { inset: 17px 12px; }.openingIdentity > strong { font-size: clamp(43px,13vw,66px); margin-top: 13px; }.openingIdentity > p { font-size: 11px; }.openingFoot { font-size: 9px; }.openingSun { width: 76vmin; } }
+@media(prefers-reduced-motion:reduce) { .opening { display: none!important; }.hero[data-entry="playing"] :is(.inner,.sunrise,.doorLeft,.doorRight) { animation: none!important; }.hero:is([data-entry="preparing"],[data-entry="playing"]) :is(.openingLeft,.openingRight,.openingSun,.inner) { will-change: auto; }.hero :is(.doorLeft,.doorRight) { transform: scaleX(.14); }.lineAction { transition: none; } }
 @media(max-width:540px) { .brandScene { top: 185px; }.secondaryActions a { min-height: 44px; }.conditions { font-size: 9px; }.priceNote { font-size: 10px; } }
 @media(max-width:360px) { .copy { padding-bottom: 188px; }.brandScene { top: 190px; width: 93%; right: -3%; }.secondaryActions a { min-height: 44px; }.priceNote { font-size: 9px; }.conditions { font-size: 9px; } }

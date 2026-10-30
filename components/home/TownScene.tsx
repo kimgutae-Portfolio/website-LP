@@ -1,9 +1,9 @@
 import styles from "./hero.module.css";
 
 /** Code-native brand illustration; storefronts are decorative, not client work. */
-export function TownScene({ onEntryEnd }: { onEntryEnd?: () => void }) {
+export function TownScene() {
   return <svg viewBox="0 0 900 620" fill="none" aria-hidden="true" focusable="false">
-    <g className={styles.sceneCamera} data-entry-camera onAnimationEnd={event => { if (event.target === event.currentTarget) onEntryEnd?.(); }}>
+    <g className={styles.sceneCamera} data-entry-camera>
       <g className={styles.sunrise} data-entry-sun>
         <circle cx="642" cy="164" r="112" fill="#F4BD4F" />
         <path d="M642 27V9M740 67L754 53M781 164H800M543 67L529 53M505 164H486" stroke="#DDA33C" strokeWidth="3" strokeLinecap="round" />
