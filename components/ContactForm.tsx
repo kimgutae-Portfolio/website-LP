@@ -73,7 +73,7 @@ export function ContactForm() {
           id="message"
           name="message"
           rows={4}
-          placeholder="例）お店のホームページを新しく作りたい"
+          placeholder="例）○○店です。新しく作る場合の内容と費用を相談したいです。今のサイトのURLだけでも大丈夫です。"
           className={inputClass}
         />
       </div>

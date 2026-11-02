@@ -3,6 +3,7 @@ import { Noto_Sans_JP } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleMeasurement } from "@/components/analytics/GoogleMeasurement";
 import { siteConfig } from "@/site.config";
+import { homeEntryBootstrap } from "@/lib/home-entry";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -62,7 +63,10 @@ export default function RootLayout({
   } as React.CSSProperties;
 
   return (
-    <html lang="ja" style={themeVars}>
+    <html lang="ja" style={themeVars} suppressHydrationWarning>
+      <head>
+        <script id="home-entry-mode" dangerouslySetInnerHTML={{ __html: homeEntryBootstrap }} />
+      </head>
       <body className={`${notoSansJP.className} ${notoSansJP.variable} bg-white text-slate-800 antialiased`}>
         {/* JS 미작동 환경에서 스크롤 리빌 요소가 숨겨진 채 남지 않도록 하는 폴백 */}
         <noscript>

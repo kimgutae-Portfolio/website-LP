@@ -1,5 +1,6 @@
 "use client";
-import { useCallback, useEffect, useRef, useState, type ReactNode, type SyntheticEvent } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode, type SyntheticEvent } from "react";
+import { isPaidLanding } from "@/lib/home-entry";
 import { TownScene } from "./TownScene";
 import { HeroOpening } from "./HeroOpening";
 import styles from "./hero.module.css";
@@ -25,7 +26,15 @@ export function HeroExperience({ children }: { children: ReactNode }) {
     observer.current?.disconnect();
     if (fallback.current !== null) window.clearTimeout(fallback.current);
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // The head bootstrap also suppresses the opening before hydration, so paid
+    // visitors see the real offer immediately rather than a flash of doors.
+    if (isPaidLanding(window.location.search)) {
+      document.documentElement.setAttribute("data-home-entry", "direct");
+      finish();
+      return;
+    }
+    document.documentElement.removeAttribute("data-home-entry");
     const element = hero.current;
     const heading = element?.querySelector("h1");
     if (!element || !heading) return;

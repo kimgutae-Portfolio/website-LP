@@ -37,7 +37,7 @@ test("text-first links remain explicit and retain meaningful functional icons", 
   const hero = await read("components/Hero.tsx"), experience = await read("components/home/HeroExperience.tsx");
   assert.match(hero, /href="#demo"[^>]*>制作見本を見る<\/a>/);
   assert.match(hero, /data-line-placement="hero"/);
-  assert.match(hero, /LINEで無料相談/);
+  assert.match(hero, /LINEで内容・費用を相談/);
   assert.match(hero, /費用・対応内容を見る/);
   assert.match(experience, /data-home-hero/);
   assert.doesNotMatch(experience, /<video/);

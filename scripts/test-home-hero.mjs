@@ -9,7 +9,7 @@ test("first screen leads with service benefits and real, server-rendered consult
   const html = await read(".next/server/app/index.html");
   const hero = html.slice(html.indexOf('id="top"'), html.indexOf('id="demo"'));
   assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1);
-  for (const text of ["お店の魅力を、", "新しいお客様へ。", "見つけてもらう。選んでもらう。", "制作初期費用", "月額運用費", "初期0円は基本構成の場合。", "追加ページ", "LINEで無料相談"]) assert.ok(hero.includes(text), text);
+  for (const text of ["お店の魅力を、", "新しいお客様へ。", "見つけてもらう。選んでもらう。", "制作初期費用", "月額運用費", "初期0円は基本構成の場合。", "追加ページ", "LINEで内容・費用を相談"]) assert.ok(hero.includes(text), text);
   assert.doesNotMatch(html, /WordPress/);
   assert.match(hero, /data-line-placement="hero"/);
   assert.match(hero, /href="https:\/\/lin\.ee\/Ny9tbUX"/);

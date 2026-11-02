@@ -13,7 +13,7 @@ export function Hero() {
       <ul className={styles.keywords} aria-label="サービスの特徴">{hero.keywords.map(keyword=><li key={keyword}>{keyword}</li>)}</ul>
     </div>
     <aside className={styles.offer} aria-label="制作と運用の費用の目安" data-hero-copy>
-      <div className={styles.offerLabel}><span>まちのWebではじめる</span><p>はじめの一歩を、<br/>もっと軽く。</p></div>
+      <div className={styles.offerLabel}><span>相談・お見積り無料</span><p>何を載せる？から、<br/>一緒に考えます。</p></div>
       <div className={styles.priceGroup}>
         <div className={styles.prices}>
           <div className={styles.initialPrice}><p>制作初期費用</p><div><strong>{pricing.initialCost}</strong><span>円〜</span></div></div>
@@ -22,7 +22,8 @@ export function Hero() {
         <p className={styles.priceNote}>初期0円は基本構成の場合。追加ページ・演出・機能は別途お見積り。<span>（{pricing.priceTaxNote}）</span></p>
       </div>
       <div className={styles.offerActions}>
-        <a className={styles.lineAction} href={line.addFriendUrl} data-line-placement="hero" target="_blank" rel="noopener noreferrer"><LineIcon/><span>LINEで無料相談</span></a>
+        <a className={styles.lineAction} href={line.addFriendUrl} data-line-placement="hero" target="_blank" rel="noopener noreferrer"><LineIcon/><span>LINEで内容・費用を相談</span></a>
+        <p className={styles.consultationHint}>店名と「作りたい」の一言から。</p>
         <div className={styles.secondaryActions}><a href="#demo">制作見本を見る</a><a href="#price">費用・対応内容を見る</a></div>
         <p className={styles.conditions}>最低契約期間3ヶ月 ／ 相談・お見積り無料</p>
       </div>

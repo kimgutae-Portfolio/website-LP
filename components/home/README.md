@@ -60,3 +60,14 @@ before work. Minimum term and monthly support conditions remain unchanged.
 
 Verify with build, all `scripts/test-*.mjs`, and 320/390px plus desktop browser QA.
 No real contact forms should be submitted in QA.
+
+2026-11-02: explicit paid landings (gclid/dclid/gbraid/wbraid or a paid
+utm_medium) bypass the opening. A tiny, homepage-only head bootstrap sets a fixed
+presentation flag before first paint; HeroExperience completes before paint on
+hydration. The static homepage, canonical, real prices and ordinary-visit opening
+remain unchanged. No identifiers are persisted or sent, and this flag does not
+grant measurement consent. Consultation copy now states what a customer gets:
+help sorting the content and estimated cost, with a concrete first-message example.
+LINE remains primary, with the existing form/email alternatives and price limits.
+The floating LINE action is hidden while the contact section is visible, so it
+does not cover the section's own LINE button or form on mobile.

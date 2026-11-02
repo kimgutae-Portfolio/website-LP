@@ -36,4 +36,7 @@
 @media (max-width: 360px) { .container { padding-inline: 18px; }.flowIntro h2 { font-size: 29px; }.contactIntro h2 { font-size: 26px; }.lineCard, .formCard { padding-inline: 20px; } }
 @media (max-width: 700px) { .flowStep::after { transition-duration: .6s; transition-delay: 80ms; } }
 @media (prefers-reduced-motion: reduce) { .questionToggle, .flowStep::after { transition: none; } }
-.contactIntro h2 { text-wrap: balance; }
+.contactIntro h2 { text-wrap: balance; white-space: pre-line; }
+.messageExample { margin-top: 22px; padding: 15px 17px; border-left: 2px solid #c5cfb9; background: #f0f1e6; text-align: left; }
+.messageExample > span { font-size: 10px; font-weight: 700; color: #67735e; }
+.messageExample > p { margin-top: 7px; font-size: 13px; line-height: 1.9; }

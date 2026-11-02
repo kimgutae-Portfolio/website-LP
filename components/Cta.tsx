@@ -28,6 +28,10 @@ export function Cta() {
             <p>
               {contact.lineCardText}
             </p>
+            <div className={styles.messageExample}>
+              <span>たとえば、こんなメッセージで。</span>
+              <p>〇〇店です。ホームページの内容と費用を相談したいです。</p>
+            </div>
             {/* QR: config에 이미지 지정 시 표시, 없으면 placeholder */}
             {line.qrImage ? (
               <img
@@ -44,7 +48,7 @@ export function Cta() {
                 準備中
               </div>
             )}
-            <LineCta label="LINEで友だち追加" placement="contact" />
+            <LineCta label="LINEを開いて相談する" placement="contact" />
           </Reveal>
 
           {/* 문의 폼 카드 */}

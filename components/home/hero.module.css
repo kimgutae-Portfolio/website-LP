@@ -25,6 +25,7 @@
 .prices strong { font-weight: 900; line-height: 1.15; letter-spacing: -.07em; font-variant-numeric: tabular-nums; }.initialPrice strong { font-size: 69px; }.monthlyPrice { border-left: 1px solid #cad0bf; padding-left: 20px; }.monthlyPrice strong { font-size: 49px; }.prices > div > div > span { font-size: 14px; font-weight: 700; }
 .priceNote { max-width: 460px; margin-top: 8px; color: #5d6c59; font-size: 10px; line-height: 1.8; }.priceNote > span { white-space: nowrap; }
 .lineAction { display: flex; align-items: center; justify-content: center; gap: 10px; min-height:52px; padding: 12px 15px; background: var(--color-line, #06c755); border-radius: 4px; color: white; font-size: 14px; font-weight: 900; transition: background .2s; }.lineAction svg { width: 22px; height: 22px; }.lineAction:hover { background: var(--color-line-dark, #05b04b); }
+.consultationHint { margin-top: 8px; text-align: center; color: #52664f; font-size: 10px; line-height: 1.7; }
 .secondaryActions { display: flex; justify-content: space-between; gap: 12px; }.secondaryActions a { display: flex; align-items: center; min-height: 44px; font-size: 10px; font-weight: 700; text-decoration: underline; text-underline-offset: 5px; }.secondaryActions a:hover { text-decoration-thickness: 2px; }
 .conditions { font-size: 9px; line-height: 1.9; color: #64735d; }.heroFoot { display: flex; justify-content: space-around; align-items: center; gap: 25px; padding: 16px 24px; border-top: 1px solid #b8c7b1; font-size: 12px; font-weight: 700; }.heroFoot > span:nth-child(2) { font-size: 10px; letter-spacing: .15em; color: #72816a; }.hero a:focus-visible { outline: 3px solid #ac742a; outline-offset: 5px; }
 /* A spatial entrance, not an opaque fade: doors open, the sun lands in the SVG. */
@@ -78,6 +79,11 @@
 .hero[data-entry="playing"] .sunrise { animation: sunRise 3.2s step-end both; }
 .hero[data-entry="playing"] :is(.doorLeft,.doorRight) { animation: doorOpening 3.2s cubic-bezier(.22,1,.36,1) both; }
 .hero[data-entry="complete"] :is(.doorLeft,.doorRight) { transform: scaleX(.14); }
+/* Paid landings must not wait for hydration or the decorative opening. */
+:global(html[data-home-entry="direct"]) .opening { display: none!important; }
+:global(html[data-home-entry="direct"]) .hero :is(.inner,.sunrise,.doorLeft,.doorRight) { animation: none!important; will-change: auto!important; }
+:global(html[data-home-entry="direct"]) .hero .sunrise { opacity: 1; }
+:global(html[data-home-entry="direct"]) .hero :is(.doorLeft,.doorRight) { transform: scaleX(.14); }
 @media (max-width: 1100px) {
   .main { padding-top: 38px; }.copy { padding-bottom: 38px; }.copy h1 { font-size: 5.05vw; }.brandScene { top: 12px; width: 62%; }.offer { padding: 22px 24px; gap: 22px; grid-template-columns: .66fr 1.35fr 1fr; }.offerLabel > p { font-size: 18px; }.monthlyPrice strong { font-size: 40px; }.initialPrice strong { font-size: 58px; }.monthlyPrice { padding-left: 12px; }.prices { gap: 12px; }.lineAction { font-size: 12px; }
 }
