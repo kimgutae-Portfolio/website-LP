@@ -30,6 +30,25 @@ export function ServiceStrengths() {
           ))}
         </div>
 
+        <Reveal variant="settle">
+          <aside id="website-maintenance" className={styles.maintenance} aria-labelledby="maintenance-heading">
+            <div className={styles.maintenanceHeading}>
+              <p className={styles.eyebrow}>{service.maintenance.eyebrow}</p>
+              <h3 id="maintenance-heading">{service.maintenance.title}</h3>
+              <span className={styles.maintenanceSeal} aria-hidden="true">更新・保守</span>
+            </div>
+            <div className={styles.maintenanceCopy}>
+              <p>{service.maintenance.introduction}</p>
+              <ul className={styles.maintenanceExamples} aria-label="ご相談いただける更新・保守の例">
+                {service.maintenance.examples.map(example => <li key={example}>{example}</li>)}
+              </ul>
+              <p className={styles.maintenanceNote}>{service.maintenance.note}</p>
+              <a href="#contact" className={styles.consultLink}>{service.maintenance.cta}</a>
+              <p className={styles.consultNote}>{service.maintenance.hint}</p>
+            </div>
+          </aside>
+        </Reveal>
+
         <div className={styles.industrySection}>
           <Reveal variant="wipe" className={styles.industryHeading}>
             <h3>{service.industriesTitle}</h3>

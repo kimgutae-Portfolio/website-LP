@@ -62,3 +62,30 @@ test("metadata and sitemap reflect the substantive homepage update without index
   assert.doesNotMatch(sitemap, /\/demo\//);
   assert.match(await read("components/Header.tsx"), /href: "#home-strengths", label: "サービス内容"/);
 });
+
+test("existing sites can request maintenance only with clear feasibility and pricing boundaries", async () => {
+  const { maintenance } = siteConfig.localService;
+  const html = await read(".next/server/app/index.html");
+  const panel = html.slice(html.indexOf('<aside id="website-maintenance"'), html.indexOf('</aside>', html.indexOf('<aside id="website-maintenance"')));
+  assert.match(panel, /aria-labelledby="maintenance-heading"/);
+  assert.ok(panel.includes(maintenance.title));
+  assert.ok(panel.includes(maintenance.introduction));
+  assert.match(maintenance.introduction, /他社で制作/);
+  assert.equal(maintenance.examples.length, 3);
+  for (const example of maintenance.examples) assert.ok(panel.includes(example));
+  assert.ok(panel.includes(maintenance.note));
+  assert.match(maintenance.note, /ご契約・管理権限/);
+  assert.match(maintenance.note, /対応可否/);
+  assert.match(maintenance.note, /個別にお見積り/);
+  assert.match(panel, /href="#contact"/);
+  assert.ok(panel.includes(maintenance.cta));
+  assert.doesNotMatch(panel, /<details|0円|5,500|必ず|すべて対応/);
+  const answer = siteConfig.faq.find(item => item.q.includes("保守・更新だけ"));
+  assert.ok(answer);
+  assert.match(answer.a, /新しく制作するご予定がなくても/);
+  assert.match(answer.a, /対応できない場合/);
+  assert.match(answer.a, /費用を個別/);
+  assert.ok(html.includes(answer.q) && html.includes(answer.a));
+  const hero = html.slice(html.indexOf('data-home-hero'), html.indexOf('id="demo"'));
+  assert.doesNotMatch(hero, /website-maintenance|更新・保守だけ/);
+});

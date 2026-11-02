@@ -69,6 +69,14 @@ guarantees are invented. Metadata and local FAQ share the public service scope.
 `siteConfig.localService.updatedAt` records this substantive homepage update and
 is used for its sitemap lastmod; update it only when homepage content changes.
 
+2026-11-02: below the service strengths, `#website-maintenance` explicitly invites
+maintenance-only consultations for existing sites, including sites made elsewhere.
+Three concise examples and a contact link are visible without opening a disclosure.
+The section and FAQ require checking the build environment, contracts and management
+rights before accepting work; feasibility and maintenance-only pricing are quoted
+individually. They do not extend the new-site 0 yen / 5,500 yen scope to every
+existing site. The hero and its first-screen copy remain unchanged.
+
 Prices / metadata / structured data / share image / legal copy share `site.config.ts`.
 Additional pages, bespoke design / animation and feature development are quoted
 before work. Minimum term and monthly support conditions remain unchanged.
