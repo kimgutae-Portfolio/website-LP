@@ -5,22 +5,29 @@ import {loadSiteConfig} from "./load-site-config.mjs";
 const read = path => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 const { siteConfig } = await loadSiteConfig();
 
-test("first screen leads with service benefits and real, server-rendered consultation links", async () => {
+test("first screen explicitly names homepage production and shows real, linked examples", async () => {
   const html = await read(".next/server/app/index.html");
   const hero = html.slice(html.indexOf('id="top"'), html.indexOf('id="demo"'));
   assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1);
-  for (const text of ["お店の魅力を、", "新しいお客様へ。", "見つけてもらう。選んでもらう。", "制作初期費用", "月額運用費", "初期0円は基本構成の場合。", "追加ページ", "LINEで内容・費用を相談"]) assert.ok(hero.includes(text), text);
+  for (const text of ["お店・会社の", "ホームページ制作。", "デザインから、公開後の更新まで。", "制作サイトの見本", "制作初期費用", "月額運用費", "初期0円は基本構成の場合。", "追加ページ", "LINEで内容・費用を相談"]) assert.ok(hero.includes(text), text);
+  assert.doesNotMatch(hero, /店名と「作りたい」の一言から。|費用・対応内容を見る|最低契約期間3ヶ月/);
+  assert.ok(html.includes("最低契約期間3ヶ月"));
   assert.doesNotMatch(html, /WordPress/);
   assert.match(hero, /data-line-placement="hero"/);
   assert.match(hero, /href="https:\/\/lin\.ee\/Ny9tbUX"/);
   assert.match(hero, /data-opening-mark/);
-  assert.doesNotMatch(hero, /<video\b|<img\b|DESIGN REEL|KASANE|SUMITOKI|NAGI|data-hero-media/);
+  assert.doesNotMatch(hero, /<video\b|DESIGN REEL|data-hero-media|まちの商店/);
+  assert.equal((hero.match(/data-hero-preview/g) ?? []).length, 4);
+  for (const slug of ["sumitoki", "sui", "kasane", "michiru"]) {
+    assert.ok(hero.includes(`href="/demo/${slug}"`));
+    assert.ok(hero.includes(encodeURIComponent(`/demo/previews/${slug}.webp`)));
+  }
   assert.match(hero, /<strong[^>]*>0<\/strong>/);
   assert.match(hero, /5,500/);
   for (const match of html.matchAll(/href="#([^\"]+)"/g)) assert.ok(html.includes(`id="${match[1]}"`), match[1]);
 });
 
-test("continuous sunrise / doorway opening has a finite fallback and respects user intent", async () => {
+test("the secondary brand entrance has a finite fallback and respects user intent", async () => {
   const component = await read("components/home/HeroExperience.tsx"), scene = await read("components/home/TownScene.tsx"), opening = await read("components/home/HeroOpening.tsx"), css = await read("components/home/hero.module.css");
   assert.match(component, /3600/);
   assert.match(component, /event\.key === "Escape"/);
@@ -30,7 +37,7 @@ test("continuous sunrise / doorway opening has a finite fallback and respects us
   assert.match(component, /passive: true/);
   assert.match(component, /preference\.addEventListener\("change", update\)/);
   assert.match(css, /prefers-reduced-motion:reduce/);
-  for (const name of ["mainApproach", "sunRise", "doorOpening"]) assert.ok(css.includes(`@keyframes ${name}`), name);
+  for (const name of ["mainApproach", "sunRise"]) assert.ok(css.includes(`@keyframes ${name}`), name);
   for (const hook of ["data-entry-camera", "data-entry-sun", "data-entry-doorway"]) assert.equal((scene.match(new RegExp(hook,"g")) ?? []).length, 1);
   assert.match(opening, /event\.target === event\.currentTarget/);
   assert.match(component, /addEventListener\("hashchange", onHash\)/);
@@ -54,7 +61,7 @@ test("an unseen hero opening waits for the headline and does not end on a tiny s
   assert.match(component, /target\.closest\("a, button, input, textarea, select, summary"\)/);
 });
 
-test("full-viewport doors reveal the live page and hand off the sun without a screen fade", async () => {
+test("full-viewport doors hand off to a small accent rather than a competing illustration", async () => {
   const source = await read("components/home/HeroOpening.tsx"), css = await read("components/home/hero.module.css");
   assert.match(source, /data-entry-stage aria-hidden="true"/);
   assert.match(source, /data-entry-leaf="left"/);
@@ -63,6 +70,8 @@ test("full-viewport doors reveal the live page and hand off the sun without a sc
   assert.match(source, /while \(parent\)/);
   assert.match(source, /element\.clientWidth \/ 2/);
   assert.match(source, /element\.clientHeight \/ 2/);
+  assert.match(source, /target\.clientHeight \/ 2/);
+  assert.match(source, /scale: width \/ diameter/);
   for (const property of ["--opening-sun-x", "--opening-sun-y", "--opening-sun-scale"]) assert.ok(source.includes(property));
   assert.match(css, /\.opening\s*\{[^}]*position: fixed;[^}]*inset: 0;[^}]*z-index: 100;[^}]*pointer-events: none/);
   assert.match(css, /openingFinish 3\.2s step-end both/);
@@ -100,7 +109,7 @@ test("responsive offer keeps real links, clear conditions and generous tap areas
   assert.match(css, /max-width:360px/);
   assert.match(css, /min-height:52px/);
   assert.match(hero, /初期0円は基本構成の場合/);
-  assert.match(hero, /最低契約期間3ヶ月/);
+  assert.doesNotMatch(hero, /最低契約期間3ヶ月/);
   assert.match(hero, /target="_blank" rel="noopener noreferrer"/);
 });
 
@@ -112,8 +121,34 @@ test("mobile first screen is concise, prices stay side-by-side, and long explana
   for (const keyword of siteConfig.hero.keywords) assert.ok(opening.includes(keyword));
   assert.match(css, /grid-template-columns:\s*\.8fr 1\.2fr/);
   assert.match(css, /100svh - 64px/);
-  assert.match(opening, /viewBox="0 0 900 620"/);
+  assert.doesNotMatch(opening, /viewBox="0 0 900 620"/);
+  assert.match(opening, /data-hero-showcase/);
   assert.match(opening, /aria-hidden="true"/);
+});
+
+test("hero preview auto-advances only when visible, while allowing pause and manual controls", async () => {
+  const source = await read("components/home/HeroShowcase.tsx"), css = await read("components/home/hero.module.css"), hero = await read("components/home/HeroExperience.tsx");
+  assert.doesNotMatch(hero, /import.*TownScene|<TownScene/);
+  assert.match(source, /priority=\{index === 0\}/);
+  assert.match(source, /passive: true/);
+  for (const key of ["ArrowLeft", "ArrowRight", "Home", "End"]) assert.ok(source.includes(`"${key}"`));
+  assert.match(source, /prefers-reduced-motion: reduce/);
+  assert.match(source, /aria-pressed=\{active === index\}/);
+  assert.match(source, /aria-controls="hero-preview-rail"/);
+  assert.match(source, /target="_blank" rel="noopener noreferrer"/);
+  assert.match(source, /架空の店舗・企業の制作見本です/);
+  assert.doesNotMatch(source, /setInterval|fetch\(/);
+  assert.match(source, /playing && motionAllowed && inView && entryReady && firstImageReady && pageVisible && !hovered/);
+  assert.match(source, /window\.setTimeout/);
+  assert.match(source, /5500/);
+  assert.match(source, /window\.clearTimeout\(timer\)/);
+  assert.match(source, /visibilitychange/);
+  assert.match(source, /attributeFilter: \["data-entry"\]/);
+  assert.match(source, /自動切替を停止/);
+  assert.match(source, /自動切替を再開/);
+  assert.match(source, /manualMove/);
+  assert.match(css, /scroll-snap-type: x mandatory/);
+  assert.match(css, /grid-template-areas: "copy" "showcase" "offer"/);
 });
 
 test("consultation is optional in-person and security / SEO claims are qualified", () => {

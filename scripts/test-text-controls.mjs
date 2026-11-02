@@ -7,7 +7,7 @@ const arrows = /[↗→↓↑←↔]/;
 
 test("marketing and journal controls no longer use decorative arrow glyphs", async () => {
   for (const path of [
-    "components/Hero.tsx", "components/home/HeroExperience.tsx",
+    "components/Hero.tsx", "components/home/HeroExperience.tsx", "components/home/HeroShowcase.tsx",
     "components/home/MobileNavigation.tsx", "components/Demo.tsx",
     "components/Pricing.tsx", "components/Columns.tsx",
     "components/pricing/WebsiteExamples.tsx", "components/column/ColumnCard.tsx",
@@ -35,10 +35,10 @@ test("gallery uses custom bold arrows while preserving labels and keyboard suppo
 
 test("text-first links remain explicit and retain meaningful functional icons", async () => {
   const hero = await read("components/Hero.tsx"), experience = await read("components/home/HeroExperience.tsx");
-  assert.match(hero, /href="#demo"[^>]*>制作見本を見る<\/a>/);
+  assert.match(await read("components/home/HeroShowcase.tsx"), /href="#demo">すべての制作見本を見る/);
   assert.match(hero, /data-line-placement="hero"/);
   assert.match(hero, /LINEで内容・費用を相談/);
-  assert.match(hero, /費用・対応内容を見る/);
+  assert.doesNotMatch(hero, /費用・対応内容を見る/);
   assert.match(experience, /data-home-hero/);
   assert.doesNotMatch(experience, /<video/);
   assert.match(await read("components/Pricing.tsx"), /<LineIcon\/>/);

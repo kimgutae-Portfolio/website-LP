@@ -1,7 +1,6 @@
 "use client";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode, type SyntheticEvent } from "react";
 import { isPaidLanding } from "@/lib/home-entry";
-import { TownScene } from "./TownScene";
 import { HeroOpening } from "./HeroOpening";
 import styles from "./hero.module.css";
 
@@ -98,7 +97,7 @@ export function HeroExperience({ children }: { children: ReactNode }) {
   }, [entry, finish]);
   return <section ref={hero} id="top" className={styles.hero} data-home-hero data-entry={entry} aria-labelledby="home-hero-heading" onFocusCapture={finish} onPointerDownCapture={finish}>
     <HeroOpening active={entry === "preparing" || entry === "playing"} scene={scene} onReady={play} onComplete={finish}/>
-    <div className={styles.inner}><div ref={scene} className={styles.brandScene} data-opening-mark><TownScene/></div>{children}</div>
-    <div className={styles.heroFoot} aria-hidden="true"><span>お店らしさを、まっすぐ届ける。</span><span>YOUR LOCAL WEB PARTNER</span><span>つくる前も、つくったあとも。</span></div>
+    <div className={styles.inner}><div ref={scene} className={`${styles.brandScene} ${styles.sunrise}`} data-opening-mark aria-hidden="true"/>{children}</div>
+    <div className={styles.heroFoot} aria-hidden="true"><span>新規制作・リニューアル</span><span>YOUR LOCAL WEB PARTNER</span><span>公開後の更新も、ひとつの窓口で。</span></div>
   </section>;
 }

@@ -3,7 +3,7 @@
 import { useLayoutEffect, useRef, type RefObject } from "react";
 import styles from "./hero.module.css";
 
-/** Full-viewport doors hand the same yellow sun to the live SVG background. */
+/** Full-viewport doors hand the sun to a small, secondary brand accent. */
 export function HeroOpening({ active, scene, onReady, onComplete }: {
   active: boolean;
   scene: RefObject<HTMLDivElement | null>;
@@ -38,9 +38,9 @@ export function HeroOpening({ active, scene, onReady, onComplete }: {
         }
         const width = target.clientWidth;
         geometry = {
-          x: left + width * 642 / 900 - element.clientWidth / 2,
-          y: top + width * 164 / 900 - element.clientHeight / 2,
-          scale: width * 224 / 900 / diameter,
+          x: left + width / 2 - element.clientWidth / 2,
+          y: top + target.clientHeight / 2 - element.clientHeight / 2,
+          scale: width / diameter,
         };
       }
       element.style.setProperty("--opening-sun-x", `${geometry.x - window.scrollX}px`);
@@ -80,7 +80,7 @@ export function HeroOpening({ active, scene, onReady, onComplete }: {
     <div className={styles.openingHorizon}/>
     <div ref={sun} className={styles.openingSun} data-opening-sun/>
     <div className={styles.openingIdentity}>
-      <p>まちに、Webの入口を。</p>
+      <p>ホームページ制作・リニューアル</p>
       <strong>まちの<span>Web</span></strong>
     </div>
     <span className={styles.openingFoot}>お店と会社の、次の一歩へ。</span>

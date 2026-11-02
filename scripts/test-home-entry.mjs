@@ -64,7 +64,7 @@ test("paid visitors see the offer before hydration while normal visitors retain 
 
 test("consultation explains the outcome and a first message without changing price boundaries", async () => {
   const html = await read(".next/server/app/index.html");
-  for (const text of ["LINEで内容・費用を相談", "店名と「作りたい」の一言から。", "必要な掲載内容と費用の目安", "無料で一緒に整理", "友だち追加後", "〇〇店です。ホームページの内容と費用を相談したいです。", "ご相談後に契約する必要はありません。", "最低契約期間3ヶ月", "追加ページ・演出・機能は別途お見積り。"]) assert.ok(html.includes(text), text);
+  for (const text of ["LINEで内容・費用を相談", "必要な掲載内容と費用の目安", "無料で一緒に整理", "友だち追加後", "〇〇店です。ホームページの内容と費用を相談したいです。", "ご相談後に契約する必要はありません。", "最低契約期間3ヶ月", "追加ページ・演出・機能は別途お見積り。"]) assert.ok(html.includes(text), text);
   assert.match(html, /data-line-placement="hero"/);
   assert.match(html, /data-line-placement="contact"/);
 });
