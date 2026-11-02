@@ -3,14 +3,14 @@
 2026-11-02: the first screen names the service before asking visitors to infer it:
 「お店・会社の ホームページ制作。」 is the main heading, followed by the concrete
 「デザインから、公開後の更新まで。」 and real, directly viewable examples.
-Actual screenshots of four existing demos replace the town illustration. This
-is a native swipe preview that changes every 5.5s when it is visible and ready.
+Actual screenshots of all eight existing demos replace the town illustration.
+Small cards circle left-to-right in a CSS 3D ring rather than one large slide.
 It waits for the opening and first image, respects reduced motion, and pauses on
 hover, keyboard focus, manual navigation or when the page is hidden. A visible
 pause/resume control is always available. The town
 SVG remains a reusable asset but is not loaded by the homepage. Warm paper pricing
 and side-by-side initial/monthly prices remain. On mobile the order is the explicit
-heading, swipeable screenshots, then pricing and consultation. Small screens must
+heading, pricing and consultation, then the compact orbit. Small screens must
 retain readable prices without horizontal overflow. The large examples button,
 first-message hint, price-details shortcut and minimum-term line have been removed
 from this first screen; full terms remain in the pricing section.
@@ -46,9 +46,10 @@ complete security is claimed. WordPress comparisons are not used in sales copy.
   without JS. The real headline, prices and links remain server-rendered underneath.
   No scroll lock, autoplaying video, remote media or frame-by-frame JS animation is used.
 - `home.module.css`: shared header, customer concerns and ongoing-support styles.
-- `HeroShowcase.tsx`: four real screenshot links, category selectors, pausable
-  automatic advance, native swipe/scroll, previous/next and Arrow/Home/End controls.
-  Only the first image is prioritised; there is no continuous JS animation loop,
+- `HeroShowcase.tsx`: eight small real screenshot links in a 42s CSS 3D orbit,
+  with pause/resume and Arrow/Home/End keyboard navigation. Focused links face
+  forward; reduced motion and no-JS use a static, horizontally scrollable row.
+  Only the first image is prioritised; there is no timer or JS animation loop,
   and these are explicitly fictional examples, not claimed customer work.
 - `MobileNavigation.tsx` / `FloatingLineAfterHero.tsx`: retain native mobile navigation
   and floating LINE after the hero.

@@ -6,10 +6,7 @@ import styles from "./home/hero.module.css";
 
 export function Hero() {
   const { hero, pricing, line } = siteConfig;
-  const examples = ["/demo/sumitoki", "/demo/sui", "/demo/kasane", "/demo/michiru"].map(href => {
-    const example = websiteExamples.find(item => item.url === href)!;
-    return { name: example.displayName ?? example.name, category: example.category, href: example.url, image: example.previewImage ?? example.image };
-  });
+  const examples = websiteExamples.map(example => ({ name: example.displayName ?? example.name, category: example.category, href: example.url, image: example.previewImage ?? example.image }));
   return <HeroExperience><div className={styles.main}>
     <div className={styles.copy} data-hero-copy>
       <p className={styles.eyebrow}><span/>堺市を拠点に、全国からのご相談も。</p>
@@ -17,9 +14,7 @@ export function Hero() {
       <p className={styles.statement}>{hero.statement}</p>
       <ul className={styles.keywords} aria-label="サービスの特徴">{hero.keywords.map(keyword=><li key={keyword}>{keyword}</li>)}</ul>
     </div>
-    <HeroShowcase examples={examples}/>
     <aside className={styles.offer} aria-label="制作と運用の費用の目安" data-hero-copy>
-      <div className={styles.offerLabel}><span>相談・お見積り無料</span><p>何を載せる？から、<br/>一緒に考えます。</p></div>
       <div className={styles.priceGroup}>
         <div className={styles.prices}>
           <div className={styles.initialPrice}><p>制作初期費用</p><div><strong>{pricing.initialCost}</strong><span>円〜</span></div></div>
@@ -31,5 +26,6 @@ export function Hero() {
         <a className={styles.lineAction} href={line.addFriendUrl} data-line-placement="hero" target="_blank" rel="noopener noreferrer"><LineIcon/><span>LINEで内容・費用を相談</span></a>
       </div>
     </aside>
+    <HeroShowcase examples={examples}/>
   </div></HeroExperience>;
 }

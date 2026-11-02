@@ -3,7 +3,7 @@ import test from "node:test";
 import { readFile } from "node:fs/promises";
 import {loadSiteConfig} from "./load-site-config.mjs";
 const read = path => readFile(new URL(`../${path}`, import.meta.url), "utf8");
-const { siteConfig } = await loadSiteConfig();
+const { siteConfig, websiteExamples } = await loadSiteConfig();
 
 test("first screen explicitly names homepage production and shows real, linked examples", async () => {
   const html = await read(".next/server/app/index.html");
@@ -17,8 +17,8 @@ test("first screen explicitly names homepage production and shows real, linked e
   assert.match(hero, /href="https:\/\/lin\.ee\/Ny9tbUX"/);
   assert.match(hero, /data-opening-mark/);
   assert.doesNotMatch(hero, /<video\b|DESIGN REEL|data-hero-media|まちの商店/);
-  assert.equal((hero.match(/data-hero-preview/g) ?? []).length, 4);
-  for (const slug of ["sumitoki", "sui", "kasane", "michiru"]) {
+  assert.equal((hero.match(/data-hero-preview/g) ?? []).length, websiteExamples.length);
+  for (const slug of websiteExamples.map(example => example.url.split("/").at(-1))) {
     assert.ok(hero.includes(`href="/demo/${slug}"`));
     assert.ok(hero.includes(encodeURIComponent(`/demo/previews/${slug}.webp`)));
   }
@@ -44,7 +44,7 @@ test("the secondary brand entrance has a finite fallback and respects user inten
   assert.match(css, /\.brandScene\s*\{[^}]*pointer-events: none/);
   assert.match(css, /mainApproach 3\.2s/);
   assert.match(component, /<HeroOpening active=\{entry === "preparing" \|\| entry === "playing"\} scene=\{scene\} onReady=\{play\} onComplete=\{finish\}/);
-  assert.doesNotMatch(css, /animation[^;}]*infinite/);
+  assert.doesNotMatch(css.match(/\.hero\[data-entry="playing"\] \.opening\s*\{[^}]*\}/)?.[0] ?? "", /infinite/);
   assert.doesNotMatch(component, /preventDefault|style\.overflow|"wheel"|"touchmove"|<video/);
 });
 
@@ -126,29 +126,31 @@ test("mobile first screen is concise, prices stay side-by-side, and long explana
   assert.match(opening, /aria-hidden="true"/);
 });
 
-test("hero preview auto-advances only when visible, while allowing pause and manual controls", async () => {
+test("compact example orbit runs only when visible, with pause, keyboard and reduced-motion fallbacks", async () => {
   const source = await read("components/home/HeroShowcase.tsx"), css = await read("components/home/hero.module.css"), hero = await read("components/home/HeroExperience.tsx");
   assert.doesNotMatch(hero, /import.*TownScene|<TownScene/);
   assert.match(source, /priority=\{index === 0\}/);
-  assert.match(source, /passive: true/);
   for (const key of ["ArrowLeft", "ArrowRight", "Home", "End"]) assert.ok(source.includes(`"${key}"`));
   assert.match(source, /prefers-reduced-motion: reduce/);
-  assert.match(source, /aria-pressed=\{active === index\}/);
-  assert.match(source, /aria-controls="hero-preview-rail"/);
+  assert.match(source, /aria-controls="hero-orbit-stage"/);
+  assert.match(source, /role="list"/);
   assert.match(source, /target="_blank" rel="noopener noreferrer"/);
   assert.match(source, /架空の店舗・企業の制作見本です/);
-  assert.doesNotMatch(source, /setInterval|fetch\(/);
+  assert.doesNotMatch(source, /setInterval|setTimeout|requestAnimationFrame|fetch\(/);
   assert.match(source, /playing && motionAllowed && inView && entryReady && firstImageReady && pageVisible && !hovered/);
-  assert.match(source, /window\.setTimeout/);
-  assert.match(source, /5500/);
-  assert.match(source, /window\.clearTimeout\(timer\)/);
   assert.match(source, /visibilitychange/);
   assert.match(source, /attributeFilter: \["data-entry"\]/);
-  assert.match(source, /自動切替を停止/);
-  assert.match(source, /自動切替を再開/);
-  assert.match(source, /manualMove/);
-  assert.match(css, /scroll-snap-type: x mandatory/);
-  assert.match(css, /grid-template-areas: "copy" "showcase" "offer"/);
+  assert.match(source, /自動回転を停止/);
+  assert.match(source, /自動回転を再開/);
+  assert.match(source, /showCard/);
+  assert.match(source, /<noscript>/);
+  assert.match(css, /animation: websiteOrbit 42s linear infinite; animation-play-state: paused/);
+  assert.match(css, /\.showcase\[data-auto-running="true"\] \.orbitRotor \{ animation-play-state: running/);
+  assert.match(css, /preserve-3d/);
+  assert.match(css, /grid-template-areas: "copy" "offer" "showcase"/);
+  assert.match(css, /\.orbitCard[^\n]+transform: none!important/);
+  const html = await read(".next/server/app/index.html");
+  assert.ok(html.indexOf('aria-label="制作と運用の費用の目安"') < html.indexOf('data-hero-showcase'));
 });
 
 test("consultation is optional in-person and security / SEO claims are qualified", () => {
