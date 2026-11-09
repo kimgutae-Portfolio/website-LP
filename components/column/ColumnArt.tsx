@@ -7,6 +7,27 @@ export function ColumnArt({ article, compact = false }: { article: ColumnArticle
     <div className={styles.artCopy}><span>まちのWebの読みもの</span><p>{article.coverCopy[0]}<br/>{article.coverCopy[1]}</p><span className={styles.artRule}/></div>
     <svg viewBox="0 0 320 240" fill="none" focusable="false" className={styles.illustration}>
       <g stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {article.theme === "system" && <>
+          <path d="M23 215H297M83 111V160H161M216 110V160H200"/>
+          <rect x="29" y="37" width="111" height="75" rx="4" fill="var(--art-paper)"/>
+          <path d="M29 55H140M40 46H42M51 46H53M44 70H119M44 83H108M44 96H94"/>
+          <rect x="184" y="37" width="105" height="75" rx="4" fill="var(--art-paper)"/>
+          <path d="M184 55H289M197 72H212V96H197ZM224 64H239V96H224ZM251 78H266V96H251Z" fill="var(--art-fill)"/>
+          <rect x="143" y="132" width="61" height="56" rx="4" fill="var(--art-fill)"/>
+          <path d="M156 147H191M156 158H191M156 170H178M83 182V196M74 215H92L98 196H68L74 215Z" fill="var(--art-paper)"/>
+          <path d="M204 160H256V196M245 208L251 214L263 200M155 37V24M167 40L177 30M145 27L138 18"/>
+          <circle cx="83" cy="160" r="5" fill="var(--art-paper)"/>
+          <circle cx="256" cy="208" r="19" fill="var(--art-paper)"/>
+          <path d="M246 208L252 214L266 200"/>
+        </>}
+        {article.theme === "partner" && <>
+          <path d="M24 215H297"/>
+          <rect x="35" y="43" width="180" height="132" rx="4" fill="var(--art-paper)"/>
+          <path d="M35 66H215M49 55H51M61 55H63M73 55H75M67 93L54 105L67 117M103 93L116 105L103 117M91 88L79 124M133 91H192M133 106H181M54 143H190M54 155H150M103 175V201M149 175V201M84 202H168"/>
+          <rect x="181" y="89" width="105" height="126" rx="4" fill="var(--art-fill)"/>
+          <path d="M197 108H268M197 128L202 133L212 121M222 128H268M197 151L202 156L212 144M222 151H260M197 174L202 179L212 167M222 174H268M197 196H243"/>
+          <path d="M235 71V44M248 74L261 60M221 73L210 61"/>
+        </>}
         {article.theme === "home" && <>
           <path d="M28 208H294M56 106V207H253V106"/><path d="M45 106L61 63H247L265 106H45Z" fill="var(--art-fill)"/>
           <path d="M88 64L80 106M123 64L119 106M158 64V106M194 64L198 106M228 64L237 106"/>

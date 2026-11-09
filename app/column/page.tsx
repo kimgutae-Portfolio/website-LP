@@ -7,8 +7,8 @@ import { Footer } from "@/components/Footer";
 import { ColumnCard } from "@/components/column/ColumnCard";
 import styles from "@/components/column/column.module.css";
 
-const title = "お役立ちコラム｜お店のホームページ制作・運用の読みもの";
-const description = "ホームページを作る理由、制作前の準備、費用、Google検索、公開後の運用。お店・会社のホームページを考える方へ、まちのWebが役立つ情報をお届けします。";
+const title = "お役立ちコラム｜ホームページ制作・システム開発・外注";
+const description = "ホームページ制作・費用・検索・運用から、コーディングや業務システム開発の外注まで。お店・会社の方にも、開発パートナーを探す企業・制作会社の方にも役立つ情報をお届けします。";
 export const metadata: Metadata = {
   title: `${title}｜${siteConfig.meta.siteName}`, description,
   alternates: { canonical: "/column" },

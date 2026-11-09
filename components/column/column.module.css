@@ -14,6 +14,8 @@
 .art[data-theme="cost"] { --art-fill: #ddcbae; --art-paper: #fffaf0; background: #eee5d5; color: #776248; }
 .art[data-theme="find"] { --art-fill: #b2cfc8; --art-paper: #f2f7eb; --art-line: #d2e4de; background: #ddeae3; color: #3f6c62; }
 .art[data-theme="care"] { --art-fill: #d4d6ab; --art-paper: #fcfcf2; background: #e9ead9; color: #657344; }
+.art[data-theme="partner"] { --art-fill: #d0c5b5; --art-paper: #fffaf2; background: #eae5dc; color: #665a4b; }
+.art[data-theme="system"] { --art-fill: #b5c8c7; --art-paper: #f7faf6; background: #e1e9e6; color: #426460; }
 .artCopy { position: relative; z-index: 1; min-width: 0; }
 .artCopy > span:first-child { font-size: 8px; letter-spacing: .04em; display: block; }
 .artCopy p { font-size: 19px; font-weight: 500; letter-spacing: -.03em; line-height: 1.95; margin-top: 17px; overflow-wrap: anywhere; }

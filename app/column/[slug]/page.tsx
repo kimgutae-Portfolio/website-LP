@@ -24,6 +24,29 @@ export async function generateMetadata({params}:Props):Promise<Metadata> {
 
 export default async function ColumnArticlePage({params}:Props) {
   const article=getColumn((await params).slug); if(!article)notFound();
+  const forPartners = article.audience === "partners";
+  const forSystems = article.audience === "systems";
+  const audienceLabel = forSystems
+    ? "業務システム開発の外注を検討される企業・制作会社の方"
+    : forPartners
+      ? "ホームページ制作の外注を検討される制作会社・デザイン事務所の方"
+      : "ホームページ制作を検討されるお店・事業者の方";
+  const consultation = forSystems ? {
+    heading: ["業務の困りごとから、", "相談しませんか。"],
+    description: ["仕様書がなくても、概要から。", "今の作業と、変えたいことをお聞かせください。"],
+    line: "LINEでシステム開発を相談",
+    form: "フォームでシステム開発を相談",
+  } : forPartners ? {
+    heading: ["外注したい作業を、", "一緒に整理しませんか。"],
+    description: ["コーディング・更新だけのご相談も。", "対象のURLと希望時期を、お聞かせください。"],
+    line: "LINEで外注の相談をする",
+    form: "フォームで外注の相談をする",
+  } : {
+    heading: ["あなたのお店なら、", "どんなかたちがいいだろう。"],
+    description: ["まだ作るか決まっていなくても大丈夫。", "気になることから、お聞かせください。"],
+    line: "LINEで無料相談",
+    form: "フォームから相談する",
+  };
   const url=`${siteConfig.meta.url}/column/${article.slug}`;
   const schema={"@context":"https://schema.org","@graph":[
     {"@type":"BlogPosting","@id":`${url}#article`,headline:article.title,description:article.description,datePublished:article.publishedAt,dateModified:article.publishedAt,inLanguage:"ja-JP",mainEntityOfPage:{"@type":"WebPage","@id":url},image:`${url}/opengraph-image`,author:{"@type":"Organization",name:siteConfig.meta.siteName,url:siteConfig.meta.url},publisher:{"@type":"Organization","@id":`${siteConfig.meta.url}/#organization`,name:siteConfig.meta.siteName,url:siteConfig.meta.url,logo:{"@type":"ImageObject",url:`${siteConfig.meta.url}/brand/machinowebs-icon-1024.png`}}},
@@ -48,12 +71,21 @@ export default async function ColumnArticlePage({params}:Props) {
               {section.note && <p className={styles.note}>{section.note}</p>}
               {section.sources && <div className={styles.sources}><span>参考・公式情報</span>{section.sources.map(source=><a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<span className="sr-only">（新しいタブで開きます）</span></a>)}</div>}
             </section>)}
-            <footer className={styles.articleEnd}><p>この記事は、{siteConfig.meta.siteName}がホームページ制作を検討されるお店・事業者の方向けにまとめたものです。外部サービスの仕様は変更される場合があります。最新の内容は各公式サイトでもご確認ください。</p><Link href="/column">コラム一覧へ戻る</Link></footer>
+            <footer className={styles.articleEnd}><p>この記事は、{siteConfig.meta.siteName}が{audienceLabel}向けにまとめたものです。外部サービスの仕様は変更される場合があります。最新の内容は各公式サイトでもご確認ください。</p><Link href="/column">コラム一覧へ戻る</Link></footer>
           </div>
         </div>
       </article>
       <section className={styles.related} aria-labelledby="related-heading"><div className={styles.relatedHeading}><p className={styles.eyebrow}>READ NEXT</p><h2 id="related-heading">あわせて読みたいこと。</h2></div><div>{article.relatedSlugs.map(slug=>{const related=getColumn(slug);return related?<ColumnCard key={slug} article={related} compact/>:null;})}</div></section>
-      <section className={styles.articleConsult} aria-labelledby="article-consult-heading"><div><p className={styles.eyebrow}>LET’S TALK</p><h2 id="article-consult-heading">あなたのお店なら、<br/>どんなかたちがいいだろう。</h2><p>まだ作るか決まっていなくても大丈夫。<br/>気になることから、お聞かせください。</p></div><div><a href={siteConfig.line.addFriendUrl} data-line-placement="column" target="_blank" rel="noopener noreferrer">LINEで無料相談</a><Link href="/#contact">フォームから相談する</Link><Link href="/#price">制作・運用の費用を見る</Link></div></section>
+      <section className={styles.articleConsult} aria-labelledby="article-consult-heading">
+        <div><p className={styles.eyebrow}>LET’S TALK</p><h2 id="article-consult-heading">{consultation.heading[0]}<br/>{consultation.heading[1]}</h2><p>{consultation.description[0]}<br/>{consultation.description[1]}</p></div>
+        <div>
+          <a href={siteConfig.line.addFriendUrl} data-line-placement="column" target="_blank" rel="noopener noreferrer">{consultation.line}</a>
+          <Link href="/#contact">{consultation.form}</Link>
+          {forSystems
+            ? <a href={siteConfig.owner.portfolioUrl} target="_blank" rel="noopener noreferrer">システム開発の実績を見る（gutae.dev）<span className="sr-only">（新しいタブで開きます）</span></a>
+            : <Link href={forPartners ? "/#demo" : "/#price"}>{forPartners ? "ホームページの制作見本を見る" : "制作・運用の費用を見る"}</Link>}
+        </div>
+      </section>
     </div>
   </main><Footer/></>;
 }
