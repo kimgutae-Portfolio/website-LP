@@ -3,7 +3,7 @@
 import { useEffect, type RefObject } from "react";
 import { sceneMotion, type SuiScene } from "./motion";
 
-export function useSuiMotion(root: RefObject<HTMLDivElement | null>, paused: boolean, revision: string) {
+export function useSuiMotion(root: RefObject<HTMLDivElement | null>, paused: boolean) {
   useEffect(() => {
     const site = root.current;
     if (!site || !window.IntersectionObserver) return;
@@ -72,5 +72,5 @@ export function useSuiMotion(root: RefObject<HTMLDivElement | null>, paused: boo
       preference.removeEventListener("change", configure);
       delete site.dataset.motion;
     };
-  }, [root, paused, revision]);
+  }, [root, paused]);
 }

@@ -19,7 +19,8 @@ test("town brand is a lightweight decorative SVG, not an external video dependen
 test("all eight gallery previews are optimized captures of their actual demo pages", async () => {
   assert.equal(new Set(websiteExamples.map(x=>x.previewImage)).size, 8);
   for (const example of websiteExamples) {
-    assert.equal(example.previewImage, `/demo/previews/${example.url.split("/").at(-1)}.webp`);
+    const slug = example.url.split("/").at(-1);
+    assert.equal(example.previewImage, `/demo/previews/${slug === "sui" ? "sui-salon" : slug}.webp`);
     const asset = await stat(new URL(`../public${example.previewImage}`, import.meta.url));
     assert.ok(asset.size > 10000 && asset.size < 180000, example.previewImage);
   }

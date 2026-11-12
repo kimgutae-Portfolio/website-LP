@@ -79,34 +79,8 @@
       ]
     }
   ],
-  "protectedSalonAssets": [
-    {
-      "path": "public/demo/sui/bob.webp",
-      "sha256": "55f51caa449437742d131c6a51aad29924267385bc7d678e91c46ad892eb6848"
-    },
-    {
-      "path": "public/demo/sui/craft.webp",
-      "sha256": "6864b5dd95641a8706fbcde97f0f98ae73b998148cc8ef722dfa8c338bf66376"
-    },
-    {
-      "path": "public/demo/sui/hero.webp",
-      "sha256": "b96cfd979fef8dd7ef78ca445e84ead8d0c67daaa0519bfc9f6edb3475cd74cd"
-    },
-    {
-      "path": "public/demo/sui/interior.webp",
-      "sha256": "c1230364cb873f8fc34bd51c83b681de1eef68ee1948fa2f34239fe6e249eaa3"
-    },
-    {
-      "path": "public/demo/sui/photo-film.mp4",
-      "sha256": "e8baefa00551d17f4d5ab16098ee885fa25bbf1bd75974504e00e0438f1c961e"
-    },
-    {
-      "path": "public/demo/sui/short.webp",
-      "sha256": "ac7e51a6b957f0557a94a4d81b66197dce40f05ec3c3ce7affc41c31e25905a0"
-    },
-    {
-      "path": "public/demo/sui/wave.webp",
-      "sha256": "66a4d65aac897bb2f50bfbf671334e8b34efdf3910ac36665f77733913c7c848"
-    }
-  ]
+  "retainedSalonInterior": {
+    "path": "public/demo/sui/interior.webp",
+    "sha256": "c1230364cb873f8fc34bd51c83b681de1eef68ee1948fa2f34239fe6e249eaa3"
+  }
 }

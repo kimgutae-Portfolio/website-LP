@@ -15,9 +15,10 @@ test("eight replacement photographs retain their image dimensions and are optimi
   assert.match(asset.prompt,/precise-object-edit/);assert.ok(asset.source&&asset.reference&&asset.prompt);
  }
 });
-test("salon photographs and video are byte-for-byte unchanged",async()=>{
- assert.equal(manifest.protectedSalonAssets.length,7);
- for(const file of manifest.protectedSalonAssets){const bytes=await readFile(new URL(`../${file.path}`,import.meta.url));assert.equal(createHash("sha256").update(bytes).digest("hex"),file.sha256,file.path);}
+test("salon refresh retains its existing people-free interior source",async()=>{
+ const {path,sha256}=manifest.retainedSalonInterior;
+ const bytes=await readFile(new URL(`../${path}`,import.meta.url));
+ assert.equal(createHash("sha256").update(bytes).digest("hex"),sha256,path);
 });
 test("both affected photo films are rebuilt from people-free sources",async()=>{
  assert.equal(manifest.films.length,2);
@@ -32,10 +33,10 @@ test("no affected production page references an original people photograph",asyn
 test("main portfolio previews come from demos retaining their people-free hero sources",async()=>{
  const html=await read(".next/server/app/index.html");
  const {websiteExamples}=await loadSiteConfig();
- for(const route of ["kasane","sumitoki","michiru"]){
+ for(const route of ["kasane","sumitoki","michiru","sui"]){
   const example=websiteExamples.find(x=>x.url===`/demo/${route}`);
-  assert.equal(example.image,`/demo/${route}/hero-no-people.webp`);
-  assert.equal(example.previewImage,`/demo/previews/${route}.webp`);
+  assert.equal(example.image,route==="sui"?"/demo/sui/interior.webp":`/demo/${route}/hero-no-people.webp`);
+  assert.equal(example.previewImage,`/demo/previews/${route==="sui"?"sui-salon":route}.webp`);
   assert.ok(html.includes(encodeURIComponent(example.previewImage)));
   assert.ok(!html.includes(encodeURIComponent(`/demo/${route}/hero.webp`)));
  }

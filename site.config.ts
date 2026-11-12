@@ -243,10 +243,10 @@ export const siteConfig = {
       name: "sui hair atelier",
       title: "感性と、丁寧さが伝わるサロンへ。",
       description:
-        "ヘアスタイルの写真、似合わせの考え方、明快なメニュー。編集された余白と静かな演出で、サロンの技術と空気感を伝えるオリジナルデザイン制作見本です。",
+        "自然光が入るサロンの空間と、髪のお悩みから選べるメニュー。相談の考え方や料金、予約先が伝わる美容室サイトの制作見本です。",
       label: "ホームページの制作イメージ",
-      image: "/demo/sui/hero.webp",
-      imageAlt: "自然なレイヤーヘアが印象的な、sui hair atelierのヘアサロンサイト制作見本",
+      image: "/demo/sui/interior.webp",
+      imageAlt: "自然光が入る店内と黒いチェアを見せる、sui hair atelierの美容室サイト制作見本",
       url: "/demo/sui",
     },
     additionalShowcases: [
@@ -502,7 +502,7 @@ export interface WebsiteExample {
 // 現行の制作見本。画像・リンクはデモ設定を共有し、差し替え漏れを防ぐ。
 export const websiteExamples: readonly WebsiteExample[] = [
   { ...siteConfig.demos.restaurantShowcase, displayName: "炭と季", previewImage: "/demo/previews/sumitoki.webp", category: "飲食店", detail: "お品書きから、外部予約へ。", offer: exampleOffers.sumitoki },
-  { ...siteConfig.demos.salonShowcase, displayName: "sui hair atelier", previewImage: "/demo/previews/sui.webp", category: "美容室", detail: "スタイルの見せ方と、予約の導線。", position: "70% center", offer: exampleOffers.sui },
+  { ...siteConfig.demos.salonShowcase, displayName: "sui hair atelier", previewImage: "/demo/previews/sui-salon.webp", category: "美容室", detail: "髪の悩みから、メニューと予約へ。", offer: exampleOffers.sui },
   { ...siteConfig.demos.clinicShowcase, displayName: "こもれび", previewImage: "/demo/previews/komorebi.webp", category: "こどもクリニック", detail: "やさしいキャラクターと診療案内。", imageMode: "contain", background: "#e7edda", offer: exampleOffers.komorebi },
   { ...siteConfig.demos.corporateShowcase, displayName: "KASANE", previewImage: "/demo/previews/kasane.webp", category: "企業・会社", detail: "実績を深く伝える、企業のサイト。", offer: exampleOffers.kasane },
   ...siteConfig.demos.additionalShowcases.map((example, index) => ({

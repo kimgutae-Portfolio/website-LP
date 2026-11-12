@@ -18,9 +18,9 @@ test("first screen explicitly names homepage production and shows real, linked e
   assert.match(hero, /data-opening-mark/);
   assert.doesNotMatch(hero, /<video\b|DESIGN REEL|data-hero-media|まちの商店/);
   assert.equal((hero.match(/data-hero-preview/g) ?? []).length, websiteExamples.length);
-  for (const slug of websiteExamples.map(example => example.url.split("/").at(-1))) {
-    assert.ok(hero.includes(`href="/demo/${slug}"`));
-    assert.ok(hero.includes(encodeURIComponent(`/demo/previews/${slug}.webp`)));
+  for (const example of websiteExamples) {
+    assert.ok(hero.includes(`href="${example.url}"`));
+    assert.ok(hero.includes(encodeURIComponent(example.previewImage ?? example.image)));
   }
   assert.match(hero, /<strong[^>]*>0<\/strong>/);
   assert.match(hero, /5,500/);
