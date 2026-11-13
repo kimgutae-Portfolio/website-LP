@@ -12,8 +12,8 @@ test("town brand is a lightweight decorative SVG, not an external video dependen
   for (const text of ["まちの商店", "まちに、Webの入口を。", "data-entry-sun", "data-entry-doorway"]) assert.ok(scene.includes(text));
   assert.doesNotMatch(scene, /https?:|<video|<image|fetch\(/);
   const layout = await read("app/layout.tsx");
-  assert.match(layout, /Noto_Sans_JP/);
-  assert.match(layout, /900/);
+  assert.match(layout, /@fontsource-variable\/noto-sans-jp/);
+  assert.match(await read("app/globals.css"), /--font-noto-sans-jp: "Noto Sans JP Variable"/);
 });
 
 test("all eight gallery previews are optimized captures of their actual demo pages", async () => {

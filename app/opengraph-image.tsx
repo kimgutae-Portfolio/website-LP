@@ -1,10 +1,10 @@
 import { ImageResponse } from "next/og";
+import { loadOgFont } from "@/lib/og-font";
 import { siteConfig } from "@/site.config";
 
 /**
  * OG 이미지 (LINE·메일로 링크 공유 시 미리보기 카드)
- * 빌드 시 정적 생성됨. 일본어 글리프는 Google Fonts에서
- * 사용 문자만 서브셋으로 받아와 렌더링 (satori는 woff2 미지원 → UA 없이 fetch하면 ttf 반환)
+ * 빌드 시 정적 생성. 로컬 Noto Sans JP로 일본어를 렌더링한다.
  */
 
 export const size = { width: 1200, height: 630 };
@@ -21,20 +21,10 @@ const SUB = "初期0円は基本構成の場合。追加ページ・演出・機
 const SITE_NAME = "まちのWeb";
 const DOMAIN = "machinowebs.com";
 
-async function loadGoogleFont(weight: number, text: string) {
-  const url = `https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@${weight}&text=${encodeURIComponent(text)}`;
-  const css = await (await fetch(url)).text();
-  const match = css.match(/src: url\((.+?)\) format\('(opentype|truetype)'\)/);
-  if (!match) throw new Error("OG font load failed");
-  return (await fetch(match[1])).arrayBuffer();
-}
-
 export default async function OgImage() {
-  const allText =
-    BADGE + PRICE_LABEL_1 + PRICE_VALUE_1 + PRICE_LABEL_2 + PRICE_VALUE_2 + PRICE_TAX + SUB + SITE_NAME + DOMAIN;
   const [bold, black] = await Promise.all([
-    loadGoogleFont(700, allText),
-    loadGoogleFont(900, allText),
+    loadOgFont(700),
+    loadOgFont(900),
   ]);
 
   const { primary } = siteConfig.theme;

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif_JP } from "next/font/google";
+import "@fontsource-variable/noto-serif-jp";
 import {
   DemoCredit,
   DemoInstagramGrid,
@@ -30,12 +30,6 @@ export const metadata: Metadata = {
  * 明朝体（Noto Serif JP）×余白のエディトリアル型レイアウト。
  * 全面写真の上に名刺カードを重ねるヒーローで、他パターンと構造を変えている。
  */
-const serif = Noto_Serif_JP({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  display: "swap",
-});
-
 const news = [
   ["2026.07.05", "夏季休業のお知らせ：8月13日（木）〜15日（土）はお休みをいただきます。"],
   ["2026.06.20", "7月限定でヘッドスパが¥2,200に。ご予約時に「HPを見た」とお伝えください。"],
@@ -61,8 +55,8 @@ export default function LuceDemo() {
   return (
     <DemoShell>
       <div
-        className={`${serif.className} bg-[#faf7f2] text-stone-800`}
-        style={{ fontSize: "17px" }}
+        className="bg-[#faf7f2] text-stone-800"
+        style={{ fontFamily: '"Noto Serif JP Variable", Georgia, serif', fontSize: "17px" }}
       >
         {/* ヒーロー: 全面イラスト + 重なる名刺カード */}
         <section className="pb-14 sm:pb-16">

@@ -20,7 +20,12 @@ html {
   scroll-padding-top: 4.5rem;
 }
 
+:root {
+  --font-noto-sans-jp: "Noto Sans JP Variable";
+}
+
 body {
+  font-family: var(--font-noto-sans-jp), Arial, sans-serif;
   /* 40~60대 열람자 상정: 기본 글자를 한 단계 크게 */
   font-size: 17px;
   letter-spacing: 0.01em;

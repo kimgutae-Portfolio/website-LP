@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
+import "@fontsource-variable/noto-sans-jp";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleMeasurement } from "@/components/analytics/GoogleMeasurement";
 import { siteConfig } from "@/site.config";
 import { homeEntryBootstrap } from "@/lib/home-entry";
 import "./globals.css";
-
-const notoSansJP = Noto_Sans_JP({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
-  display: "swap",
-  variable: "--font-noto-sans-jp",
-});
 
 export const metadata: Metadata = {
   title: siteConfig.meta.title,
@@ -67,7 +60,7 @@ export default function RootLayout({
       <head>
         <script id="home-entry-mode" dangerouslySetInnerHTML={{ __html: homeEntryBootstrap }} />
       </head>
-      <body className={`${notoSansJP.className} ${notoSansJP.variable} bg-white text-slate-800 antialiased`}>
+      <body className="bg-white text-slate-800 antialiased">
         {/* JS 미작동 환경에서 스크롤 리빌 요소가 숨겨진 채 남지 않도록 하는 폴백 */}
         <noscript>
           <style>{`.reveal,.reveal[data-reveal="wipe"]>*,.reveal [data-gallery-card]>*{--reveal-progress:1!important;opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}`}</style>
